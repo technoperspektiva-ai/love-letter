@@ -1,0 +1,41 @@
+{
+  "name": "Love Letter — інтерактивні листи",
+  "short_name": "Love Letter",
+  "description": "Створюй приватні інтерактивні листи, портрети зі слів і маленькі романтичні історії.",
+  "lang": "uk",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
+  "orientation": "portrait-primary",
+  "background_color": "#180b16",
+  "theme_color": "#24101f",
+  "categories": [
+    "lifestyle",
+    "entertainment"
+  ],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

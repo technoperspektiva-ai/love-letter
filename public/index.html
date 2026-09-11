@@ -3,11 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#231224">
+<meta name="theme-color" content="#24101f">
+<meta name="application-name" content="Love Letter">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Love Letter">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
 <title>Love Letter — інтерактивна історія</title>
 <meta name="description" content="Безкоштовний сервіс інтерактивних романтичних листів.">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Marck+Script&display=swap');
 :root{
   --bg1:#1e0d1e; --bg2:#4b1938; --paper:#f6e5d9; --ink:#5f5060;
   --title:#fff4f5; --muted:#eecfe0; --rose:#ff7fa9; --rose2:#f6a2c0;
@@ -1322,6 +1328,116 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
   }
 }
 
+
+/* ================================================================
+   v24 — product design system / native PWA / local word portrait
+   ================================================================ */
+:root{
+  --font-ui:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --font-display:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;
+  --font-note:"Iowan Old Style","Palatino Linotype",Georgia,serif;
+  --surface:#fffaf7;
+  --surface-2:#f6ebe7;
+  --ink-strong:#34212e;
+  --ink-soft:#7e6b77;
+  --accent:#c95f85;
+  --accent-deep:#7d294d;
+  --hairline:rgba(78,42,61,.12);
+  font-family:var(--font-ui);
+}
+html{background:#180b16}
+body,button,input,textarea,select{font-family:var(--font-ui)}
+body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.app{background:radial-gradient(circle at 50% -5%,rgba(255,184,210,.16),transparent 28%),linear-gradient(180deg,#3b142d 0%,#24101f 45%,#160a14 100%)}
+.stars{opacity:.16}
+.glow::before{background:rgba(255,131,173,.10)}
+.glow::after{background:rgba(255,233,240,.07)}
+
+.brand{letter-spacing:-.01em}
+.seal{font-family:var(--font-display);box-shadow:inset 0 1px 0 rgba(255,255,255,.28),0 8px 22px rgba(0,0,0,.20)}
+.install-app-btn,.new-letter-btn{
+  min-height:38px;border-radius:999px;padding:8px 13px;border:1px solid rgba(255,255,255,.12);font-size:12px;font-weight:700;
+  transition:transform .18s ease,background .18s ease,border-color .18s ease;
+}
+.install-app-btn{background:#fff5f8;color:#4d1d34;box-shadow:0 7px 20px rgba(0,0,0,.12)}
+.install-app-btn:hover,.new-letter-btn:hover{transform:translateY(-1px)}
+.install-app-btn:active,.new-letter-btn:active{transform:scale(.98)}
+.new-letter-btn{background:rgba(255,255,255,.07);color:#fff}
+.badge{border-color:rgba(255,255,255,.09);background:rgba(255,255,255,.045);letter-spacing:.08em}
+
+.hero h1,.card h2,.light-title,.qmark,.choice-screen h4,.final-card .line1{font-family:var(--font-display)}
+.hero h1{font-weight:500;letter-spacing:-.035em;line-height:.94}
+.hero p{max-width:680px;font-size:17px;line-height:1.6;color:rgba(255,239,246,.76)}
+.eyebrow{font-family:var(--font-ui);letter-spacing:.18em;color:#f4cbdc}
+.demo-card,.panel,.preview{border-color:rgba(255,255,255,.10);box-shadow:0 26px 80px rgba(6,2,5,.24)}
+.demo-card{background:rgba(255,255,255,.065)}
+
+.card{background:linear-gradient(180deg,#fffaf7,#f8efea);border:1px solid rgba(255,255,255,.68);box-shadow:0 20px 50px rgba(22,8,17,.12)}
+.card h2{font-weight:500;letter-spacing:-.025em;color:var(--ink-strong)}
+.subtitle{color:var(--ink-soft);line-height:1.55}
+.step-kicker{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#b45679;margin-bottom:8px}
+label{color:#513d4a}
+input,textarea,select{border-color:#dfd1d8;background:#fff;color:#34222f;box-shadow:inset 0 1px 0 rgba(255,255,255,.8);transition:border-color .18s ease,box-shadow .18s ease}
+input:focus,textarea:focus,select:focus{border-color:#cc6d91;box-shadow:0 0 0 4px rgba(204,109,145,.11)}
+.btn{transition:transform .16s ease,filter .16s ease,background .16s ease}
+.btn:active,.big-button:active{transform:scale(.985)}
+.btn.primary{background:linear-gradient(180deg,#3a1d2d,#24111e);box-shadow:0 8px 18px rgba(30,9,21,.18)}
+.btn.ghost{background:#eee4e0;color:#3f2836}
+.big-button{background:linear-gradient(180deg,#ffd7e5,#f3a0bd);color:#521731;box-shadow:0 12px 34px rgba(210,89,135,.20);transition:transform .16s ease,filter .16s ease}
+
+.media-mode-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:16px 0 14px}
+.media-mode-card{position:relative;margin:0;padding:12px 10px;border:1px solid #e4d5dc;border-radius:17px;background:rgba(255,255,255,.72);display:flex;gap:9px;align-items:center;cursor:pointer;min-height:74px;transition:.18s ease}
+.media-mode-card:hover{border-color:#d6a4b8;transform:translateY(-1px)}
+.media-mode-card input{position:absolute;opacity:0;pointer-events:none}
+.media-mode-card:has(input:checked){border-color:#c66689;background:#fff6f9;box-shadow:0 0 0 3px rgba(198,102,137,.09)}
+.media-mode-icon{width:34px;height:34px;border-radius:10px;background:#f3e3e9;display:grid;place-items:center;color:#7d294d;font-weight:800;flex:0 0 auto}
+.media-mode-card b{display:block;font-size:12px;line-height:1.18;color:#4d3443}
+.media-mode-card small{display:block;margin-top:4px;font-size:10px;line-height:1.25;color:#927d89;font-weight:500}
+.privacy-note{display:flex;gap:10px;align-items:flex-start;margin-top:12px;padding:12px;border-radius:15px;background:#f3eee9;border:1px solid #e7ddd8;color:#4b3944}
+.privacy-note b{font-size:12px;display:block;margin-bottom:3px}
+.privacy-note small{font-size:11px;line-height:1.4;color:#806f79;display:block}
+.privacy-dot{width:9px;height:9px;border-radius:50%;background:#65a779;box-shadow:0 0 0 4px rgba(101,167,121,.12);margin:5px 2px 0 2px;flex:0 0 auto}
+.local-portrait-preview{margin-top:14px;padding:10px;border-radius:18px;background:#2b1323;border:1px solid rgba(255,255,255,.08)}
+.local-portrait-preview .field-note{color:#e8cad7;margin:9px 4px 2px}
+.word-portrait-canvas{display:block;width:100%;height:auto;aspect-ratio:4/5;border-radius:15px;background:#f4e4dc}
+.word-portrait-wrap{padding:0!important;overflow:hidden;background:#f2e1d9!important;border-color:rgba(116,66,90,.12)!important;transform:none!important}
+.word-portrait-wrap canvas{width:100%;height:auto;display:block}
+.letter-photo.word-portrait-wrap{max-width:240px;margin:18px auto 0;border:6px solid rgba(255,255,255,.84);box-shadow:0 13px 28px rgba(65,35,50,.13)}
+.final-photo.word-portrait-wrap{max-width:210px;aspect-ratio:4/5;border:1px solid rgba(255,255,255,.14);box-shadow:0 16px 40px rgba(0,0,0,.18)}
+
+/* Typography is local/system-first so installed PWA remains beautiful offline. */
+.paper .to,.paper .sign,.light-sub,.preview-note,.demo-caption{font-family:var(--font-note);font-style:italic}
+.paper .title,.paper .msg{font-family:var(--font-display)}
+.paper .msg{font-weight:400;letter-spacing:.002em}
+.paper .title{font-weight:600}
+
+.app-toast{position:fixed;z-index:200;left:50%;bottom:max(18px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(calc(100% - 28px),460px);padding:13px 16px;border-radius:16px;background:rgba(22,10,19,.90);color:#fff4f8;border:1px solid rgba(255,255,255,.10);box-shadow:0 18px 55px rgba(0,0,0,.34);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);font-size:13px;line-height:1.45;text-align:center}
+
+/* Installed mode: skip marketing and behave like a focused native utility. */
+@media (display-mode:standalone){
+  body{overscroll-behavior-y:none}
+  .hero{display:none!important}
+  #creatorView>.topbar{padding-top:max(12px,env(safe-area-inset-top))}
+  .builder{padding-top:12px}
+  .install-app-btn{display:none!important}
+  .topbar.shell{position:sticky;top:0;z-index:50;background:rgba(41,15,33,.76);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+}
+
+@media (max-width:900px){
+  .media-mode-grid{grid-template-columns:1fr}
+  .media-mode-card{min-height:62px}
+  .top-actions{gap:6px}
+  .install-app-btn,.new-letter-btn{padding:7px 10px;min-height:36px}
+  .card{border-radius:24px 24px 0 0}
+}
+
+@media (max-width:520px){
+  .topbar.shell{padding-left:10px;padding-right:10px;padding-top:max(9px,env(safe-area-inset-top))}
+  .install-app-btn,.new-letter-btn{font-size:11px}
+  .media-mode-card{padding:11px 12px}
+  .word-portrait-wrap.letter-photo{max-width:210px}
+}
+
 </style>
 </head>
 <body>
@@ -1332,16 +1448,17 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
     <header class="topbar shell">
       <div class="brand"><div class="seal">L</div><div>Love Letter</div></div>
       <div class="top-actions">
-        <button class="new-letter-btn" id="newLetterBtn" type="button">Створити новий лист</button>
-        <div class="badge">безкоштовний конструктор</div>
+        <button class="install-app-btn" id="installAppBtn" type="button">Встановити</button>
+        <button class="new-letter-btn" id="newLetterBtn" type="button">Новий лист</button>
+        <div class="badge">Love Letter</div>
       </div>
     </header>
 
     <section class="hero shell">
       <div>
         <div class="eyebrow">інтерактивний подарунок</div>
-        <h1>Не сайт. Історія для однієї людини.</h1>
-        <p>Створи маленьку історію: питання із секретним словом, вступ, конверт, лист, фото, вибір побачення та фінальний екран. Усе в одному посиланні, без реєстрації та платних тем.</p>
+        <h1>Лист, який відчувається як маленький застосунок.</h1>
+        <p>Створи приватну історію з конвертом, листом, портретом зі слів і фінальним запрошенням. Працює як PWA, зберігає чернетку локально й відкривається одним коротким посиланням.</p>
       </div>
       <div class="demo-card">
         <div class="demo-screen">
@@ -1394,21 +1511,57 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
             </div>
 
             <div class="step hidden" data-step="3">
-              <h2>Фото всередині листа</h2>
-              <p class="subtitle">Можна додати одне фото. Воно буде стиснуте для посилання.</p>
-              <label>Завантажити фото
-                <input type="file" id="photoInput" accept="image/*">
-              </label>
-              <div class="field-note">Фото стискається автоматично. Якщо посилання стане надто довгим для месенджера, просто вимкни фото.</div>
-              <div class="switch">
-                <input type="checkbox" id="showPhoto" checked>
-                <label for="showPhoto" style="margin:0">Показувати фото в листі</label>
+              <div class="step-kicker">Візуальний момент</div>
+              <h2>Портрет або фото</h2>
+              <p class="subtitle">Портрет зі слів створюється прямо у твоєму браузері. Оригінальне фото не завантажується в D1.</p>
+
+              <div class="media-mode-grid" role="radiogroup" aria-label="Тип зображення">
+                <label class="media-mode-card">
+                  <input type="radio" name="mediaMode" value="portrait" checked>
+                  <span class="media-mode-icon">Aa</span>
+                  <span><b>Портрет зі слів</b><small>≈ 1–3 КБ у листі</small></span>
+                </label>
+                <label class="media-mode-card">
+                  <input type="radio" name="mediaMode" value="photo">
+                  <span class="media-mode-icon">▧</span>
+                  <span><b>Звичайне фото</b><small>стискається локально</small></span>
+                </label>
+                <label class="media-mode-card">
+                  <input type="radio" name="mediaMode" value="none">
+                  <span class="media-mode-icon">—</span>
+                  <span><b>Без зображення</b><small>тільки лист</small></span>
+                </label>
               </div>
-              <button class="btn ghost slim add-top" type="button" id="removePhoto">Видалити фото</button>
+
+              <div id="mediaInputArea">
+                <label class="portrait-only">Слова для портрета
+                  <input id="portraitWords" maxlength="180" value="кохаю, разом, назавжди, ти, ми, тепло, усмішка, дім">
+                </label>
+                <div class="field-note portrait-only">Розділяй слова або короткі фрази комами. Вони сформують світло й тіні портрета.</div>
+
+                <label>Обрати зображення
+                  <input type="file" id="photoInput" accept="image/*">
+                </label>
+                <div class="privacy-note" id="mediaPrivacyNote">
+                  <span class="privacy-dot"></span>
+                  <div><b>Обробка на пристрої</b><small>Фото читається Canvas-ом локально. У режимі портрета оригінал нікуди не надсилається.</small></div>
+                </div>
+
+                <div class="local-portrait-preview hidden" id="localPortraitPreviewWrap">
+                  <canvas id="localPortraitPreview" class="word-portrait-canvas" aria-label="Попередній перегляд портрета зі слів"></canvas>
+                  <div class="field-note" id="portraitBuildStatus"></div>
+                </div>
+
+                <div class="switch">
+                  <input type="checkbox" id="showPhoto" checked>
+                  <label for="showPhoto" style="margin:0">Показувати зображення в листі</label>
+                </div>
+                <button class="btn ghost slim add-top" type="button" id="removePhoto">Очистити зображення</button>
+              </div>
             </div>
 
             <div class="step hidden" data-step="4">
-              <h2>Вибір для получателя</h2>
+              <h2>Вибір для отримувача</h2>
               <p class="subtitle">Після листа можна показати картки з варіантами, що робити далі.</p>
               <label>Заголовок блоку вибору<input id="choiceTitle" maxlength="80" value="Що будемо робити?"></label>
               <div class="choice-list">
@@ -1444,7 +1597,7 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
             </div>
 
             <div class="step hidden" data-step="5">
-              <h2>Фінальный экран</h2>
+              <h2>Фінальний екран</h2>
               <p class="subtitle">Після вибору покажемо підсумкову картку як маленьке запрошення.</p>
               <label>Фраза над карткою<input id="finalCaption" maxlength="120" value="думаю про тебе щодня"></label>
               <label>Заголовок картки<input id="finalTitle" maxlength="50" value="Виходимо"></label>
@@ -1526,6 +1679,7 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
   </div>
 
   <div id="storyView" class="hidden"></div>
+  <div id="appToast" class="app-toast hidden" role="status" aria-live="polite"></div>
 </div>
 
 <script>
@@ -1533,6 +1687,8 @@ const steps = ["Основне","Слово","Лист","Фото","Вибір",
 const state = {
   step: 0,
   photoData: "",
+  portraitData: null,
+  lastImageFile: null,
   storyStep: 0,
   storyPayload: null,
   editingId: "",
@@ -1569,6 +1725,174 @@ function getChoices(){
 
 function normalizeText(s){ return String(s || "").trim().replace(/\s+/g," ").toLowerCase(); }
 
+function getMediaMode(){
+  return document.querySelector('input[name="mediaMode"]:checked')?.value || "portrait";
+}
+
+function setMediaMode(mode){
+  const value = ["portrait","photo","none"].includes(mode) ? mode : "portrait";
+  const radio = document.querySelector(`input[name="mediaMode"][value="${value}"]`);
+  if(radio) radio.checked = true;
+  updateMediaModeUI();
+}
+
+function updateMediaModeUI(){
+  const mode = getMediaMode();
+  document.querySelectorAll(".portrait-only").forEach(el=>el.classList.toggle("hidden", mode !== "portrait"));
+  const input = $("#photoInput");
+  if(input) input.disabled = mode === "none";
+  const note = $("#mediaPrivacyNote");
+  if(note){
+    const small = note.querySelector("small");
+    if(small) small.textContent = mode === "portrait"
+      ? "Фото читається Canvas-ом локально. У D1 потрапляє лише компактна карта світла й тіней — не оригінал."
+      : mode === "photo"
+        ? "Фото стискається у браузері перед збереженням. На сервер йде лише зменшена копія."
+        : "Зображення не буде додане до листа.";
+  }
+  if(mode !== "portrait") $("#localPortraitPreviewWrap")?.classList.add("hidden");
+}
+
+function splitPortraitWords(value){
+  const raw = String(value || "").trim();
+  let words = raw.split(/[,;|\n•]+/).map(s=>s.trim()).filter(Boolean);
+  if(words.length < 2) words = raw.split(/\s+/).map(s=>s.trim()).filter(Boolean);
+  return (words.length ? words : ["кохаю","ти","ми","разом"]).slice(0,16).map(w=>w.slice(0,28));
+}
+
+function bytesToBase64(bytes){
+  let binary = "";
+  const chunk = 0x8000;
+  for(let i=0;i<bytes.length;i+=chunk){
+    binary += String.fromCharCode(...bytes.subarray(i, i+chunk));
+  }
+  return btoa(binary);
+}
+
+function base64ToBytes(value){
+  const binary = atob(value || "");
+  const bytes = new Uint8Array(binary.length);
+  for(let i=0;i<binary.length;i++) bytes[i] = binary.charCodeAt(i);
+  return bytes;
+}
+
+function packPortraitLevels(levels){
+  const bytes = new Uint8Array(Math.ceil(levels.length / 2));
+  for(let i=0;i<levels.length;i+=2){
+    bytes[i>>1] = ((levels[i] || 0) << 4) | (levels[i+1] || 0);
+  }
+  return bytesToBase64(bytes);
+}
+
+function unpackPortraitLevels(portrait){
+  const count = Math.max(1, Number(portrait?.w || 40) * Number(portrait?.h || 50));
+  const bytes = base64ToBytes(portrait?.tones || "");
+  const levels = new Uint8Array(count);
+  for(let i=0;i<count;i++){
+    const b = bytes[i>>1] || 0;
+    levels[i] = i % 2 === 0 ? (b >> 4) & 15 : b & 15;
+  }
+  return levels;
+}
+
+async function createWordPortrait(file, wordsText){
+  const img = new Image();
+  const url = URL.createObjectURL(file);
+  try{
+    img.src = url;
+    await img.decode();
+    const w = 40, h = 50;
+    const canvas = document.createElement("canvas");
+    canvas.width = w;
+    canvas.height = h;
+    const ctx = canvas.getContext("2d", {willReadFrequently:true});
+
+    const targetRatio = w / h;
+    const sourceRatio = img.naturalWidth / img.naturalHeight;
+    let sx=0, sy=0, sw=img.naturalWidth, sh=img.naturalHeight;
+    if(sourceRatio > targetRatio){
+      sw = img.naturalHeight * targetRatio;
+      sx = (img.naturalWidth - sw) / 2;
+    }else{
+      sh = img.naturalWidth / targetRatio;
+      sy = (img.naturalHeight - sh) / 2;
+    }
+    ctx.drawImage(img, sx, sy, sw, sh, 0, 0, w, h);
+
+    const rgba = ctx.getImageData(0,0,w,h).data;
+    const lums = new Float32Array(w*h);
+    for(let i=0;i<lums.length;i++){
+      const r=rgba[i*4], g=rgba[i*4+1], b=rgba[i*4+2];
+      lums[i] = 0.2126*r + 0.7152*g + 0.0722*b;
+    }
+    const sorted = Array.from(lums).sort((a,b)=>a-b);
+    const lo = sorted[Math.floor(sorted.length*.08)] ?? 0;
+    const hi = sorted[Math.floor(sorted.length*.92)] ?? 255;
+    const range = Math.max(32, hi-lo);
+    const levels = new Uint8Array(lums.length);
+    for(let i=0;i<lums.length;i++){
+      let n = (lums[i]-lo)/range;
+      n = Math.max(0,Math.min(1,n));
+      const darkness = Math.pow(1-n,.82);
+      levels[i] = Math.max(0,Math.min(15,Math.round(darkness*15)));
+    }
+    return {v:1,w,h,tones:packPortraitLevels(levels),words:splitPortraitWords(wordsText)};
+  }finally{
+    URL.revokeObjectURL(url);
+  }
+}
+
+function renderWordPortrait(canvas, portrait){
+  if(!canvas || !portrait?.tones) return;
+  const w = Number(portrait.w || 40), h = Number(portrait.h || 50);
+  const levels = unpackPortraitLevels(portrait);
+  const words = Array.isArray(portrait.words) && portrait.words.length ? portrait.words : ["кохаю","ти","ми","разом"];
+  const width=640, height=800;
+  canvas.width=width; canvas.height=height;
+  const ctx=canvas.getContext("2d");
+  const bg=ctx.createLinearGradient(0,0,0,height);
+  bg.addColorStop(0,"#fff9f4"); bg.addColorStop(1,"#efddd5");
+  ctx.fillStyle=bg; ctx.fillRect(0,0,width,height);
+  const cellW=width/w, cellH=height/h;
+  ctx.textAlign="center"; ctx.textBaseline="middle";
+  for(let y=0;y<h;y++){
+    for(let x=0;x<w;x++){
+      const level=levels[y*w+x]||0;
+      if(level<2) continue;
+      const word=words[(x*11+y*17)%words.length];
+      const strength=level/15;
+      const size=6.2+strength*5.5;
+      const alpha=.05+strength*.88;
+      const weight=level>11?700:level>7?600:500;
+      ctx.font=`${weight} ${size}px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif`;
+      ctx.fillStyle=`rgba(77,34,57,${alpha.toFixed(3)})`;
+      ctx.fillText(word,(x+.5)*cellW,(y+.5)*cellH,cellW*2.2);
+    }
+  }
+  const vignette=ctx.createRadialGradient(width/2,height*.42,width*.18,width/2,height*.45,width*.68);
+  vignette.addColorStop(0,"rgba(255,255,255,0)"); vignette.addColorStop(1,"rgba(83,32,56,.09)");
+  ctx.fillStyle=vignette; ctx.fillRect(0,0,width,height);
+}
+
+function hydrateWordPortraits(root, data){
+  if(!root || !data?.portraitData) return;
+  root.querySelectorAll("canvas.word-portrait-canvas").forEach(canvas=>renderWordPortrait(canvas,data.portraitData));
+}
+
+function mediaMarkup(d, context="letter"){
+  if(context === "letter" && !d.showPhoto) return "";
+  const mode=d.mediaMode || (d.portraitData?"portrait":d.photoData?"photo":"none");
+  if(mode==="portrait" && d.portraitData){
+    const cls=context==="final"?"final-photo word-portrait-wrap":"letter-photo word-portrait-wrap";
+    return `<div class="${cls}"><canvas class="word-portrait-canvas" aria-label="Портрет зі слів"></canvas></div>`;
+  }
+  if(mode==="photo" && d.photoData){
+    const cls=context==="final"?"final-photo":"letter-photo";
+    return `<div class="${cls}"><img src="${d.photoData}" alt="Фото"></div>`;
+  }
+  return "";
+}
+
 function gatherData(){
   const recipient = $("#recipient").value.trim();
   return {
@@ -1580,15 +1904,18 @@ function gatherData(){
     useSecret: $("#useSecret").checked,
     secretQuestion: $("#secretQuestion").value.trim(),
     secretAnswer: $("#secretAnswer").value.trim(),
-    letterTo: ($("#letterTo").value.trim() || `это тебе, ${recipient || 'тебе'}`),
+    letterTo: ($("#letterTo").value.trim() || `це тобі, ${recipient || 'тобі'}`),
     letterTitle: $("#letterTitle").value.trim() || "Для тебе",
     letterMessage: $("#letterMessage").value,
     letterSign: $("#letterSign").value.trim(),
     showPhoto: $("#showPhoto").checked,
-    photoData: state.photoData || "",
+    mediaMode: getMediaMode(),
+    portraitWords: $("#portraitWords")?.value.trim() || "",
+    portraitData: getMediaMode() === "portrait" ? state.portraitData : null,
+    photoData: getMediaMode() === "photo" ? (state.photoData || "") : "",
     choiceTitle: $("#choiceTitle").value.trim() || "Що будемо робити?",
     choices: getChoices(),
-    finalCaption: $("#finalCaption").value.trim() || "думаю о тебе каждый день",
+    finalCaption: $("#finalCaption").value.trim() || "думаю про тебе щодня",
     finalTitle: $("#finalTitle").value.trim() || "Виходимо",
     finalChoiceIndex: Math.min(3, Math.max(0, +$("#finalChoiceIndex").value || 0)),
     finalDate: $("#finalDate").value.trim() || "",
@@ -1665,7 +1992,7 @@ function previewLetter(d, animated = false){
         <div class="title">${escapeHtml(d.letterTitle)}</div>
         <div class="paper-divider"><span>♡</span></div>
         <div class="msg">${escapeHtml(d.letterMessage)}</div>
-        ${d.showPhoto && d.photoData ? `<div class="letter-photo"><img src="${d.photoData}" alt="Фото"></div>` : ``}
+        ${mediaMarkup(d, "letter")}
         ${d.letterSign ? `<div class="sign">${escapeHtml(d.letterSign)}</div>` : ``}
       </article>
     </div>
@@ -1697,7 +2024,7 @@ function previewFinal(d){
   const choice = (d.choices || [])[d.finalChoiceIndex] || {emoji:"❤", title:"Виходимо", subtitle:""};
   return `
     <div class="stage-center centered" style="justify-content:flex-start;padding-top:32px">
-      ${d.photoData ? `<div class="final-photo"><img src="${d.photoData}" alt="Фото"></div>` : ``}
+      ${mediaMarkup(d, "final")}
       <div style="font-family:'Marck Script';font-size:28px;color:#ffd6e4;max-width:320px">${escapeHtml(d.finalCaption)}</div>
       <div class="final-card">
         <div class="topline">
@@ -1726,6 +2053,7 @@ function renderPhonePreview(){
   else if(state.step === 5) html = previewFinal(d);
   else html = previewFinal(d);
   stage.innerHTML = html;
+  hydrateWordPortraits(stage, d);
 }
 
 function renderEditor(){
@@ -2007,7 +2335,17 @@ async function buildChoiceShareImage(d){
   ctx.lineWidth = 2;
   ctx.stroke();
 
-  if(d.photoData){
+  if(d.portraitData && (d.mediaMode === "portrait" || !d.mediaMode)){
+    try{
+      const portraitCanvas=document.createElement("canvas");
+      renderWordPortrait(portraitCanvas,d.portraitData);
+      const px=420, py=240, pw=240, ph=300, pr=28;
+      ctx.save(); roundRect(ctx,px,py,pw,ph,pr); ctx.clip();
+      ctx.drawImage(portraitCanvas,px,py,pw,ph); ctx.restore();
+      ctx.strokeStyle="rgba(255,255,255,.22)"; ctx.lineWidth=2;
+      roundRect(ctx,px,py,pw,ph,pr); ctx.stroke();
+    }catch{}
+  }else if(d.photoData){
     try{
       const img = await new Promise((resolve, reject)=>{
         const i = new Image();
@@ -2200,6 +2538,7 @@ function renderStory(){
           <button class="big-button" id="toChoicesBtn">${escapeHtml(d.choiceTitle || "Що будемо робити?")}</button>
         </div>
       </div>`;
+    hydrateWordPortraits(root, d);
     $("#toChoicesBtn").onclick = ()=>{ state.storyStep = 4; renderStory(); };
     return;
   }
@@ -2235,7 +2574,7 @@ function renderStory(){
     const choice = (d.choices || [])[d.finalChoiceIndex] || {emoji:"❤", title:"Виходимо", subtitle:""};
     root.innerHTML = `
       <div class="stage-center centered" style="justify-content:flex-start;padding-top:30px">
-        ${d.photoData ? `<div class="final-photo"><img src="${d.photoData}" alt="Фото"></div>` : ``}
+        ${mediaMarkup(d, "final")}
         <div style="font-family:'Marck Script';font-size:28px;color:#ffd6e4;max-width:320px">${escapeHtml(d.finalCaption)}</div>
         <div class="final-card">
           <div class="topline">
@@ -2251,6 +2590,7 @@ function renderStory(){
         <button class="btn ghost slim" id="restartBtn" style="margin-top:12px;background:rgba(255,255,255,.12);color:white">Переглянути ще раз</button>
       </div>`;
 
+    hydrateWordPortraits(root, d);
     $("#recipientShareBtn").onclick = async()=>{
       const btn = $("#recipientShareBtn");
       const status = $("#recipientShareStatus");
@@ -2304,6 +2644,7 @@ function getDraftPayload(){
   return {
     step: state.step,
     photoData: state.photoData || "",
+    portraitData: state.portraitData || null,
     fields: {
       recipient: $("#recipient")?.value || "",
       introMain: $("#introMain")?.value || "",
@@ -2317,6 +2658,8 @@ function getDraftPayload(){
       letterMessage: $("#letterMessage")?.value || "",
       letterSign: $("#letterSign")?.value || "",
       showPhoto: !!$("#showPhoto")?.checked,
+      mediaMode: getMediaMode(),
+      portraitWords: $("#portraitWords")?.value || "",
       choiceTitle: $("#choiceTitle")?.value || "",
       c1e: $("#c1e")?.value || "",
       c1t: $("#c1t")?.value || "",
@@ -2358,6 +2701,7 @@ function loadDraft(){
 
     state.step = Math.min(steps.length - 1, Math.max(0, Number(d.step || 0)));
     state.photoData = d.photoData || "";
+    state.portraitData = d.portraitData || null;
 
     const f = d.fields;
     for(const [id, value] of Object.entries(f)){
@@ -2371,8 +2715,14 @@ function loadDraft(){
       }
     }
 
-    if(state.photoData){
+    setMediaMode(f.mediaMode || (state.portraitData ? "portrait" : state.photoData ? "photo" : "portrait"));
+    if(state.photoData || state.portraitData){
       $("#showPhoto").checked = f.showPhoto !== false;
+    }
+    if(state.portraitData){
+      const wrap=$("#localPortraitPreviewWrap");
+      wrap?.classList.remove("hidden");
+      renderWordPortrait($("#localPortraitPreview"),state.portraitData);
     }
     return true;
   }catch(e){
@@ -2392,7 +2742,8 @@ function startNewLetter(){
   const hasContent =
     ($("#recipient")?.value || "").trim() ||
     ($("#letterMessage")?.value || "").trim() ||
-    state.photoData;
+    state.photoData ||
+    state.portraitData;
 
   if(hasDraft || hasContent){
     const ok = confirm("Створити новий лист? Поточна чернетка буде очищена.");
@@ -2402,6 +2753,8 @@ function startNewLetter(){
   clearDraft();
   state.step = 0;
   state.photoData = "";
+  state.portraitData = null;
+  state.lastImageFile = null;
   location.href = "/";
 }
 
@@ -2411,7 +2764,7 @@ function installDraftAutosave(){
   [
     "#recipient","#introMain","#introTop","#envelopeHint","#useSecret",
     "#secretQuestion","#secretAnswer","#letterTo","#letterTitle","#letterMessage",
-    "#letterSign","#showPhoto","#choiceTitle",
+    "#letterSign","#showPhoto","#portraitWords","#choiceTitle",
     "#c1e","#c1t","#c1s","#c2e","#c2t","#c2s","#c3e","#c3t","#c3s",
     "#c4e","#c4t","#c4s","#finalCaption","#finalTitle","#finalChoiceIndex",
     "#finalDate","#finalTime","#finalNote"
@@ -2421,6 +2774,8 @@ function installDraftAutosave(){
     el.addEventListener("input", save);
     el.addEventListener("change", save);
   });
+
+  document.querySelectorAll('input[name="mediaMode"]').forEach(el=>el.addEventListener("change", save));
 
   window.addEventListener("beforeunload", save);
   document.addEventListener("visibilitychange", ()=>{
@@ -2451,6 +2806,8 @@ function populateEditorFromPayload(d){
   set("letterMessage", d.letterMessage);
   set("letterSign", d.letterSign);
   set("showPhoto", d.showPhoto !== false);
+  set("portraitWords", d.portraitWords || d.portraitData?.words?.join(", ") || "кохаю, разом, назавжди, ти, ми");
+  setMediaMode(d.mediaMode || (d.portraitData ? "portrait" : d.photoData ? "photo" : "none"));
   set("choiceTitle", d.choiceTitle);
 
   (d.choices || []).slice(0,4).forEach((c, i)=>{
@@ -2468,6 +2825,11 @@ function populateEditorFromPayload(d){
   set("finalNote", d.finalNote);
 
   state.photoData = d.photoData || "";
+  state.portraitData = d.portraitData || null;
+  if(state.portraitData){
+    $("#localPortraitPreviewWrap")?.classList.remove("hidden");
+    renderWordPortrait($("#localPortraitPreview"),state.portraitData);
+  }
   state.step = 0;
 }
 
@@ -2665,7 +3027,7 @@ function attachListenersImpl(){
     }
   };
 
-  $$("#recipient, #introMain, #introTop, #envelopeHint, #secretQuestion, #secretAnswer, #letterTo, #letterTitle, #letterMessage, #letterSign, #choiceTitle, #finalCaption, #finalTitle, #finalDate, #finalTime, #finalNote, #finalChoiceIndex, #showPhoto, #useSecret, #c1e, #c1t, #c1s, #c2e, #c2t, #c2s, #c3e, #c3t, #c3s, #c4e, #c4t, #c4s").forEach(el=>{
+  $$("#recipient, #introMain, #introTop, #envelopeHint, #secretQuestion, #secretAnswer, #letterTo, #letterTitle, #letterMessage, #letterSign, #portraitWords, #choiceTitle, #finalCaption, #finalTitle, #finalDate, #finalTime, #finalNote, #finalChoiceIndex, #showPhoto, #useSecret, #c1e, #c1t, #c1s, #c2e, #c2t, #c2s, #c3e, #c3t, #c3s, #c4e, #c4t, #c4s").forEach(el=>{
     el.addEventListener("input", () => {
       if(el.id === "recipient" && !$("#letterTo").dataset.touched){
         $("#letterTo").value = `это тебе, ${$("#recipient").value.trim() || 'тебе'}`;
@@ -2676,22 +3038,139 @@ function attachListenersImpl(){
   });
   $("#letterTo").addEventListener("input", ()=>$("#letterTo").dataset.touched = "1");
 
-  $("#photoInput").addEventListener("change", async(e)=>{
-    const file = e.target.files?.[0];
-    if(!file) return;
-    const data = await compressImage(file);
-    state.photoData = data;
-    $("#showPhoto").checked = true;
-    saveDraft();
-    renderPhonePreview();
+  document.querySelectorAll('input[name="mediaMode"]').forEach(radio=>{
+    radio.addEventListener("change", async()=>{
+      updateMediaModeUI();
+      if(getMediaMode()==="portrait" && state.lastImageFile){
+        try{
+          state.portraitData=await createWordPortrait(state.lastImageFile,$("#portraitWords")?.value||"");
+          state.photoData="";
+          $("#localPortraitPreviewWrap")?.classList.remove("hidden");
+          renderWordPortrait($("#localPortraitPreview"),state.portraitData);
+        }catch(e){ showError("Не вдалося створити портрет зі слів."); }
+      }else if(getMediaMode()==="photo" && state.lastImageFile){
+        try{
+          state.photoData=await compressImage(state.lastImageFile);
+          state.portraitData=null;
+        }catch(e){ showError("Не вдалося обробити фото."); }
+      }
+      saveDraft();
+      renderPhonePreview();
+    });
   });
-  $("#removePhoto").onclick = ()=>{
-    state.photoData = "";
-    $("#photoInput").value = "";
-    saveDraft();
-    renderPhonePreview();
+
+  $("#portraitWords")?.addEventListener("change", async()=>{
+    if(getMediaMode()==="portrait" && state.lastImageFile){
+      try{
+        state.portraitData=await createWordPortrait(state.lastImageFile,$("#portraitWords").value);
+        renderWordPortrait($("#localPortraitPreview"),state.portraitData);
+        saveDraft(); renderPhonePreview();
+      }catch{}
+    }
+  });
+
+  $("#photoInput").addEventListener("change", async(e)=>{
+    const file=e.target.files?.[0];
+    if(!file) return;
+    state.lastImageFile=file;
+    $("#showPhoto").checked=true;
+    const status=$("#portraitBuildStatus");
+    try{
+      if(getMediaMode()==="portrait"){
+        if(status) status.textContent="Створюю портрет локально…";
+        state.portraitData=await createWordPortrait(file,$("#portraitWords")?.value||"");
+        state.photoData="";
+        $("#localPortraitPreviewWrap")?.classList.remove("hidden");
+        renderWordPortrait($("#localPortraitPreview"),state.portraitData);
+        const approx=new Blob([JSON.stringify(state.portraitData)]).size;
+        if(status) status.textContent=`Готово. Оригінал не завантажується. У листі ≈ ${(approx/1024).toFixed(1)} КБ даних.`;
+      }else if(getMediaMode()==="photo"){
+        state.photoData=await compressImage(file);
+        state.portraitData=null;
+      }
+      saveDraft(); renderPhonePreview(); showError("");
+    }catch(err){
+      showError("Не вдалося обробити зображення. Спробуй інше фото.");
+    }
+  });
+
+  $("#removePhoto").onclick=()=>{
+    state.photoData="";
+    state.portraitData=null;
+    state.lastImageFile=null;
+    $("#photoInput").value="";
+    $("#localPortraitPreviewWrap")?.classList.add("hidden");
+    if($("#portraitBuildStatus")) $("#portraitBuildStatus").textContent="";
+    saveDraft(); renderPhonePreview();
   };
+
+  updateMediaModeUI();
 }
+
+let deferredInstallPrompt=null;
+
+function isStandaloneApp(){
+  return window.matchMedia?.("(display-mode: standalone)")?.matches || window.navigator.standalone === true;
+}
+
+function showAppToast(message, timeout=4200){
+  const toast=$("#appToast");
+  if(!toast) return;
+  toast.textContent=message;
+  toast.classList.remove("hidden");
+  clearTimeout(showAppToast._timer);
+  showAppToast._timer=setTimeout(()=>toast.classList.add("hidden"),timeout);
+}
+
+function refreshInstallButton(){
+  const btn=$("#installAppBtn");
+  if(!btn) return;
+  if(isStandaloneApp()){
+    btn.classList.add("hidden");
+  }else{
+    btn.classList.remove("hidden");
+  }
+}
+
+async function initPWA(){
+  refreshInstallButton();
+
+  if("serviceWorker" in navigator){
+    try{ await navigator.serviceWorker.register("/sw.js",{scope:"/"}); }catch(err){ console.warn("SW registration failed",err); }
+  }
+
+  window.addEventListener("beforeinstallprompt",e=>{
+    e.preventDefault();
+    deferredInstallPrompt=e;
+    refreshInstallButton();
+  });
+
+  window.addEventListener("appinstalled",()=>{
+    deferredInstallPrompt=null;
+    refreshInstallButton();
+    showAppToast("Love Letter встановлено ✓");
+  });
+
+  $("#installAppBtn")?.addEventListener("click",async()=>{
+    if(deferredInstallPrompt){
+      deferredInstallPrompt.prompt();
+      try{ await deferredInstallPrompt.userChoice; }catch{}
+      deferredInstallPrompt=null;
+      refreshInstallButton();
+      return;
+    }
+    const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
+    showAppToast(isIOS
+      ? "Safari: Поділитися → На початковий екран"
+      : "У меню браузера вибери «Встановити застосунок» або «Додати на головний екран»."
+    ,6200);
+  });
+
+  window.addEventListener("offline",()=>showAppToast("Офлайн: редактор і чернетка працюють локально. Для створення нового URL потрібен інтернет."));
+  window.addEventListener("online",()=>showAppToast("З’єднання відновлено ✓",2200));
+}
+
+initPWA();
 
 (async function init(){
   const cleanPath = location.pathname.length > 1
