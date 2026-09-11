@@ -408,6 +408,131 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
  .light-title,.choice-screen h4,.qmark{font-size:42px}
  .preview-note,.light-sub{font-size:26px}
 }
+
+/* Recipient-link clarity */
+.recipient-link-label{
+ margin-top:16px;
+ font-size:11px;
+ font-weight:800;
+ letter-spacing:1.15px;
+ color:#7f5368;
+}
+.recipient-sharebox{
+ border:2px solid rgba(209,83,131,.30);
+ box-shadow:0 0 0 4px rgba(209,83,131,.06);
+}
+.private-edit-toggle{
+ margin-top:14px;
+ border:0;
+ background:transparent;
+ color:#8a6878;
+ text-decoration:underline;
+ font-size:12px;
+ cursor:pointer;
+}
+
+/* Tablet/mobile editor */
+@media (max-width: 900px){
+ .shell{width:min(100% - 20px,720px)}
+ .hero{grid-template-columns:1fr;gap:14px;padding:18px 0 24px}
+ .hero h1{font-size:clamp(42px,12vw,64px);letter-spacing:-1px}
+ .hero p{font-size:15px;line-height:1.55}
+ .demo-card{display:none}
+
+ .builder{padding-bottom:22px}
+ .layout{grid-template-columns:1fr;gap:14px}
+ .panel{padding:10px;border-radius:22px}
+ .preview{
+   position:static;
+   min-height:0;
+   padding:10px;
+   border-radius:22px;
+ }
+ .preview-head{padding:3px 4px}
+ .phone{
+   margin-top:10px;
+   border-radius:26px;
+   min-height:560px;
+ }
+ .phone-stage{min-height:520px;padding:14px}
+ .stage-center{min-height:490px}
+
+ .stepbar{
+   gap:6px;
+   padding:4px 2px 10px;
+   scroll-snap-type:x proximity;
+   -webkit-overflow-scrolling:touch;
+ }
+ .stepbar button{
+   padding:9px 11px;
+   font-size:12px;
+   scroll-snap-align:start;
+ }
+
+ .card{
+   padding:18px 14px;
+   border-radius:20px;
+ }
+ .card h2{font-size:34px}
+ .subtitle{font-size:14px;line-height:1.45}
+ label{font-size:13px;margin-top:13px}
+ input,textarea,select{
+   font-size:16px; /* prevents iOS zoom */
+   padding:13px 12px;
+   border-radius:14px;
+ }
+ textarea{min-height:105px}
+ .choice-item{grid-template-columns:48px minmax(0,1fr)}
+ .choice-item .emoji{padding:8px;font-size:24px;border-radius:14px}
+
+ .actions{
+   display:grid;
+   grid-template-columns:1fr 1fr;
+   gap:8px;
+   margin-top:16px;
+ }
+ .actions .btn{width:100%;padding:13px 10px}
+ .mini-actions{
+   display:grid;
+   grid-template-columns:1fr;
+   gap:8px;
+ }
+ .mini-actions .btn{width:100%}
+ .sharebox input{font-size:14px}
+ .url-control-box{padding:12px}
+}
+
+@media (max-width: 520px){
+ .shell{width:calc(100% - 12px)}
+ .topbar{padding:10px 2px;align-items:center}
+ .brand{font-size:14px}
+ .seal{width:34px;height:34px;font-size:21px}
+ .top-actions{max-width:65%;justify-content:flex-end}
+ .new-letter-btn{font-size:10px;padding:7px 9px}
+ .badge{display:none}
+
+ .hero{padding-top:10px}
+ .hero h1{font-size:43px;line-height:.94;margin:8px 0 12px}
+ .hero p{font-size:14px}
+
+ .panel,.preview{border-radius:18px}
+ .panel{padding:7px}
+ .card{padding:16px 12px}
+ .card h2{font-size:31px}
+ .grid2{grid-template-columns:1fr}
+
+ .actions{grid-template-columns:1fr}
+ .actions #nextBtn{order:-1}
+ .btn{min-height:46px}
+ .recipient-link-label{margin-top:14px}
+ .recipient-sharebox input{font-size:13px}
+
+ .phone{border-radius:22px;min-height:520px}
+ .phone-bar{padding:12px 14px}
+ .phone-stage{padding:10px;min-height:480px}
+ .stage-center{min-height:455px}
+}
+
 </style>
 </head>
 <body>
@@ -452,7 +577,7 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
               <label>Головний напис на першому екрані<input id="introMain" maxlength="80" value="тобі лист"></label>
               <label>Підпис над головною фразою<input id="introTop" maxlength="80" value=""></label>
               <label>Підказка під конвертом<input id="envelopeHint" maxlength="80" value="відкрий, це тобі"></label>
-              <div class="tip">Совет: сделай первый экран очень коротким. Лучше «тобі лист», чем длинная фраза на весь экран.</div>
+              <div class="tip">Порада: зроби перший екран коротким. Краще «тобі лист», ніж довга фраза на весь екран.</div>
             </div>
 
             <div class="step hidden" data-step="1">
@@ -550,18 +675,20 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
               <h2>Готово</h2>
               <p class="subtitle">Створи секретне посилання й відкрий історію як отримувач.</p>
               <button class="btn primary" type="button" id="generateLink">Створити коротке посилання</button>
-              <div class="sharebox">
-                <input id="shareLink" readonly placeholder="Здесь появится короткая ссылка вида /l/Ab3Xy9Qk">
+              <div class="recipient-link-label">ПОСИЛАННЯ ДЛЯ ОТРИМУВАЧА</div>
+              <div class="sharebox recipient-sharebox">
+                <input id="shareLink" readonly placeholder="Тут з’явиться посилання для отримувача: /l/Ab3Xy9Qk">
               </div>
               <div class="mini-actions">
                 <button class="btn ghost slim" type="button" id="copyLink">Копіювати</button>
-                <button class="btn ghost slim" type="button" id="openLink">Відкрити</button>
+                <button class="btn ghost slim" type="button" id="openLink">Перевірити як отримувач</button>
               </div>
-              <div class="edit-link-wrap hidden" style="margin-top:16px">
-                <div class="field-note">Посилання для редагування — збережи його тільки для себе:</div>
+              <button class="private-edit-toggle hidden" type="button" id="privateEditToggle">Показати приватне керування</button>
+              <div class="edit-link-wrap hidden" style="margin-top:10px">
+                <div class="field-note"><b>Приватне службове посилання.</b> Не надсилай його отримувачу:</div>
                 <div class="sharebox"><input id="editLinkBox" readonly></div>
                 <div class="mini-actions">
-                  <button class="btn ghost slim" type="button" id="copyEditLink">Копіювати edit-link</button>
+                  <button class="btn ghost slim" type="button" id="copyEditLink">Копіювати приватне посилання</button>
                   <button class="btn ghost slim" type="button" id="openEditLink">Редагувати зараз</button>
                 </div>
                 <div class="url-control-box">
@@ -573,7 +700,7 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
                   <div id="urlControlStatus" class="field-note"></div>
                 </div>
               </div>
-              <div class="muted" style="margin-top:12px">Лист сохраняется в бесплатной Cloudflare D1, а получатель получает короткую ссылку вида /l/Ab3Xy9Qk.</div>
+              <div class="muted" style="margin-top:12px">Лист зберігається у Cloudflare D1, а отримувач отримує коротке посилання виду /l/Ab3Xy9Qk.</div>
             </div>
 
             <div class="actions">
@@ -639,7 +766,7 @@ function showError(msg){
 function getChoices(){
   return [1,2,3,4].map(i=>({
     emoji: $(`#c${i}e`).value.trim() || "❤",
-    title: $(`#c${i}t`).value.trim() || `Вариант ${i}`,
+    title: $(`#c${i}t`).value.trim() || `Варіант ${i}`,
     subtitle: $(`#c${i}s`).value.trim() || ""
   }));
 }
@@ -1478,7 +1605,9 @@ function attachListeners(){
       const editBox = $("#editLinkBox");
       if(editBox){
         editBox.value = editLink;
-        editBox.closest(".edit-link-wrap")?.classList.toggle("hidden", !editLink);
+        const toggle = $("#privateEditToggle");
+        if(toggle) toggle.classList.toggle("hidden", !editLink);
+        editBox.closest(".edit-link-wrap")?.classList.add("hidden");
       }
       showError("");
       $("#generateLink").textContent = "Коротке посилання готове ✓";
@@ -1509,8 +1638,13 @@ function attachListeners(){
       if(!link){
         const result = await makeShareLink();
         link = result.link;
+        $("#shareLink").value = link;
       }
-      location.href = link;
+      const w = window.open(link, "_blank", "noopener,noreferrer");
+      if(!w){
+        // Якщо браузер заблокував pop-up, показуємо посилання, але не міняємо route редактора.
+        showError("Браузер заблокував нову вкладку. Скопіюй посилання кнопкою «Копіювати».");
+      }
     }catch(e){ showError(e.message || "Не вдалося створити посилання"); }
   };
   $("#copyEditLink").onclick = async()=>{
@@ -1523,6 +1657,16 @@ function attachListeners(){
   $("#openEditLink").onclick = ()=>{
     const link = $("#editLinkBox").value;
     if(link) location.href = link;
+  };
+
+  $("#privateEditToggle").onclick = ()=>{
+    const wrap = document.querySelector(".edit-link-wrap");
+    if(!wrap) return;
+    const willShow = wrap.classList.contains("hidden");
+    wrap.classList.toggle("hidden", !willShow);
+    $("#privateEditToggle").textContent = willShow
+      ? "Сховати приватне керування"
+      : "Показати приватне керування";
   };
 
   $("#regenerateUrlBtn").onclick = async()=>{
@@ -1560,9 +1704,10 @@ function attachListeners(){
 
       $("#shareLink").value = shortLink;
       $("#editLinkBox").value = editLink;
+      $("#privateEditToggle")?.classList.remove("hidden");
 
       status.textContent = "Новий URL готовий. Старе посилання більше не працює.";
-      history.replaceState(null, "", data.editPath);
+      // Не переводимо сторінку автора на /edit: recipient URL має лишатися окремим і очевидним.
     }catch(e){
       status.textContent = e.message || "Не вдалося перевипустити URL.";
     }finally{
@@ -1693,9 +1838,11 @@ function attachListeners(){
 
       const editWrap = document.querySelector(".edit-link-wrap");
       const editBox = $("#editLinkBox");
+      const editToggle = $("#privateEditToggle");
       if(editWrap && editBox){
-        editWrap.classList.remove("hidden");
+        editWrap.classList.add("hidden");
         editBox.value = `${location.origin}/edit/${id}#key=${key}`;
+        editToggle?.classList.remove("hidden");
       }
       const shareBox = $("#shareLink");
       if(shareBox) shareBox.value = `${location.origin}/l/${id}`;
