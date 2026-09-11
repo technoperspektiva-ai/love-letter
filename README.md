@@ -194,3 +194,19 @@ Deploy command: `npx wrangler deploy`
 - binding: `DB`
 - database_name: `love-letter-db`
 - database_id: `fbe0e91b-ca33-40cb-881c-a7f834c46cc8`
+
+
+## v18 — D1 schema parser fix
+
+Виправлено помилку:
+
+`D1_EXEC_ERROR: CREATE TABLE ... incomplete input`
+
+Причина була в multi-statement `env.DB.exec(...)`.
+Тепер `CREATE TABLE` та обидва `CREATE INDEX` виконуються окремими `prepare(...).run()` викликами.
+
+Після deploy перевір:
+`/api/health`
+
+Очікувано:
+`{"ok":true,"db":true,"stories":0}`

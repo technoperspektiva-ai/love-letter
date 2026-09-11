@@ -45,16 +45,24 @@ async function ensureSchema(env) {
     throw new Error("D1 binding DB is not available");
   }
 
-  await env.DB.exec(`
-    CREATE TABLE IF NOT EXISTS stories (
-      id TEXT PRIMARY KEY,
-      payload TEXT NOT NULL,
-      created_at INTEGER NOT NULL,
-      edit_token TEXT
-    );
-    CREATE INDEX IF NOT EXISTS idx_stories_created_at ON stories(created_at);
-    CREATE INDEX IF NOT EXISTS idx_stories_edit_token ON stories(edit_token);
-  `);
+  // Execute each statement separately. D1 can reject a multi-statement exec()
+  // with "incomplete input" depending on the runtime/parser.
+  await env.DB.prepare(
+    "CREATE TABLE IF NOT EXISTS stories (" +
+    "id TEXT PRIMARY KEY, " +
+    "payload TEXT NOT NULL, " +
+    "created_at INTEGER NOT NULL, " +
+    "edit_token TEXT" +
+    ")"
+  ).run();
+
+  await env.DB.prepare(
+    "CREATE INDEX IF NOT EXISTS idx_stories_created_at ON stories(created_at)"
+  ).run();
+
+  await env.DB.prepare(
+    "CREATE INDEX IF NOT EXISTS idx_stories_edit_token ON stories(edit_token)"
+  ).run();
 }
 
 async function health(env) {
