@@ -1,23 +1,14 @@
-# Love Letter 1.15 — Media Isolation + Recipient Layout
+# Love Letter 1.15.1 — Story Scroll Fix
 
-Виправлено три системні проблеми.
+Причина:
+базовий `.app` мав `overflow:hidden`, тому recipient story фізично обрізався по висоті viewport, навіть коли внутрішні екрани вже були переведені на `height:auto`.
 
-## 1. Фото / word portrait більше не переноситься між листами
-- новий лист за замовчуванням має `Без зображення`;
-- fresh create очищає photoData / portraitData / lastImageFile;
-- готовий сценарій з Ideas також очищає медіа попереднього листа;
-- payload додає portrait/photo тільки при явному виборі відповідного режиму;
-- showPhoto вимкнений за замовчуванням.
+Виправлення:
+- recipient mode отримує class `story-open`;
+- `.app`, `#storyView`, `.phone`, `.phone-stage`, letter/choice/final screens у story mode мають `height:auto` і `overflow:visible`;
+- body у story mode має нормальний `overflow-y:auto`;
+- touch scroll примусово дозволено через `touch-action:pan-y`;
+- scroll unlock запускається при вході в recipient route;
+- при поверненні в editor story-mode class прибирається.
 
-## 2. Recipient layout
-- усі не-листові екрани мають один UI font;
-- заголовки, підзаголовки, кнопки й поля вирівняні по одній ширині;
-- Secret / Intro / Envelope / Choice / Final отримали єдиний vertical rhythm;
-- choice cards більше не стрибають по ширині;
-- короткі iPhone екрани більше не обрізають content.
-
-## 3. Letter fonts
-Декоративний шрифт застосовується тільки до самого листа.
-Handwritten stack більше не використовує Comic Sans fallback.
-
-Також виправлено share PNG object URL calls.
+Cache: love-letter-1.15.1

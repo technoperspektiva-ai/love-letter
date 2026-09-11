@@ -6747,6 +6747,119 @@ body:not(.preview-scroll-lock){
   font-family:Baskerville,"Iowan Old Style",Georgia,serif !important;
 }
 
+
+/* ===============================================================
+   Love Letter 1.15.1 — recipient/story real page scrolling
+   =============================================================== */
+
+/* The original .app had overflow:hidden for the creator background.
+   In recipient mode that clipped the story to one viewport. */
+body.story-open,
+body.story-open .app,
+.app.story-open{
+  height:auto !important;
+  min-height:100dvh !important;
+  max-height:none !important;
+  overflow-x:hidden !important;
+  overflow-y:visible !important;
+}
+
+body.story-open{
+  overflow-y:auto !important;
+  -webkit-overflow-scrolling:touch !important;
+  overscroll-behavior-y:auto !important;
+  touch-action:pan-y !important;
+}
+
+.app.story-open{
+  position:relative !important;
+}
+
+.app.story-open #storyView,
+body.story-open #storyView{
+  display:block;
+  width:100%;
+  height:auto !important;
+  min-height:100dvh !important;
+  max-height:none !important;
+  overflow:visible !important;
+}
+
+body.story-open #storyView > .shell{
+  width:100% !important;
+  min-height:100dvh !important;
+  height:auto !important;
+  max-height:none !important;
+  overflow:visible !important;
+}
+
+body.story-open #storyView .phone{
+  width:100% !important;
+  height:auto !important;
+  min-height:calc(100dvh - 54px - env(safe-area-inset-top)) !important;
+  max-height:none !important;
+  overflow:visible !important;
+}
+
+body.story-open #storyView .phone-stage{
+  width:100% !important;
+  height:auto !important;
+  min-height:calc(100dvh - 54px - env(safe-area-inset-top)) !important;
+  max-height:none !important;
+  overflow:visible !important;
+  touch-action:pan-y !important;
+}
+
+body.story-open #storyView .letter-story-screen{
+  height:auto !important;
+  min-height:0 !important;
+  max-height:none !important;
+  overflow:visible !important;
+}
+
+body.story-open #storyView .letter-story-scroll{
+  height:auto !important;
+  min-height:0 !important;
+  max-height:none !important;
+  overflow:visible !important;
+}
+
+body.story-open #storyView .paper{
+  height:auto !important;
+  min-height:0 !important;
+  max-height:none !important;
+  overflow:visible !important;
+}
+
+/* Choice/final screens may exceed a short phone too. Let them naturally grow. */
+body.story-open #storyView .stage-center,
+body.story-open #storyView .recipient-choice-shell,
+body.story-open #storyView .recipient-final-shell{
+  height:auto !important;
+  min-height:calc(100dvh - 76px - env(safe-area-inset-top)) !important;
+  max-height:none !important;
+  overflow:visible !important;
+}
+
+/* Do not trap touch scroll inside recipient cards/media. */
+body.story-open #storyView .choice-card,
+body.story-open #storyView .final-card,
+body.story-open #storyView .paper,
+body.story-open #storyView canvas,
+body.story-open #storyView img{
+  touch-action:pan-y !important;
+}
+
+/* Mobile Safari can keep an old body lock after preview. Force recipient mode free. */
+@media (max-width:600px){
+  body.story-open.preview-scroll-lock{
+    overflow-y:auto !important;
+  }
+  body.story-open .app{
+    overflow:visible !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -9984,6 +10097,9 @@ function formatRecipientName(d){
 }
 
 function mountStory(payload){
+  document.body.classList.add("story-open");
+  document.querySelector(".app")?.classList.add("story-open");
+  restorePageScroll();
   state.storyPayload = payload;
   $("#creatorView").classList.add("hidden");
   const view = $("#storyView");
@@ -10065,6 +10181,9 @@ async function openHiddenEditor(storyId, editKey){
       localStorage.setItem(`love-letter-edit-${storyId}`, editKey);
     }catch{}
 
+    document.body.classList.remove("story-open");
+    document.querySelector(".app")?.classList.remove("story-open");
+    restorePageScroll();
     $("#storyView")?.classList.add("hidden");
     $("#creatorView")?.classList.remove("hidden");
 
@@ -10999,6 +11118,9 @@ initPWA();
       history.replaceState(null, "", cleanPath);
     }
 
+    document.body.classList.add("story-open");
+    document.querySelector(".app")?.classList.add("story-open");
+    restorePageScroll();
     document.getElementById("creatorView")?.classList.add("hidden");
     document.getElementById("storyView")?.classList.remove("hidden");
     document.getElementById("storyView").innerHTML = `
