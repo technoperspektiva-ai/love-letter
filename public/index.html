@@ -169,14 +169,62 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
 .preview-note{font-family:"Marck Script";font-size:31px;color:#ffd0df}
 
 .paper{
- max-width:100%;background:var(--paper);color:var(--ink);border-radius:24px;padding:24px 22px 24px;box-shadow:0 20px 60px rgba(0,0,0,.3);text-align:left
+ max-width:100%;
+ background:
+   linear-gradient(180deg,rgba(255,255,255,.18),rgba(255,255,255,0)),
+   var(--paper);
+ color:var(--ink);
+ border-radius:26px;
+ padding:34px 30px 36px;
+ box-shadow:0 24px 70px rgba(0,0,0,.28);
+ text-align:left;
+ border:1px solid rgba(255,255,255,.5);
 }
-.paper .to{font-family:"Marck Script";font-size:34px;color:#d06d8e}
-.paper .title{font-family:"Cormorant Garamond";font-size:44px;margin:12px 0 10px;color:#6b5769}
-.paper .msg{white-space:pre-wrap;font-family:"Marck Script";font-size:25px;line-height:1.55}
-.paper .sign{margin-top:12px;font-family:"Marck Script";font-size:29px;text-align:right}
+.paper .to{
+ font-family:"Marck Script";
+ font-size:24px;
+ line-height:1.15;
+ color:#cf6b8d;
+ margin:0 0 18px;
+ max-width:85%;
+}
+.paper .title{
+ font-family:"Cormorant Garamond";
+ font-size:38px;
+ line-height:1.08;
+ letter-spacing:-.4px;
+ margin:0 0 24px;
+ color:#6a5767;
+ max-width:92%;
+}
+.paper .msg{
+ white-space:pre-wrap;
+ font-family:"Marck Script";
+ font-size:21px;
+ line-height:1.62;
+ letter-spacing:.1px;
+ color:#5f5260;
+ max-width:100%;
+ overflow-wrap:anywhere;
+ hyphens:auto;
+}
+.paper .sign{
+ margin-top:30px;
+ padding-top:18px;
+ border-top:1px solid rgba(126,102,119,.14);
+ font-family:"Marck Script";
+ font-size:23px;
+ line-height:1.35;
+ text-align:right;
+ color:#8a6274;
+}
 .letter-photo{
- margin-top:18px;border-radius:18px;overflow:hidden;border:6px solid rgba(255,255,255,.45);box-shadow:0 16px 28px rgba(0,0,0,.16)
+ margin-top:28px;
+ border-radius:18px;
+ overflow:hidden;
+ border:8px solid rgba(255,255,255,.52);
+ box-shadow:0 18px 36px rgba(0,0,0,.15);
+ transform:rotate(-.4deg);
 }
 .choice-screen h4{font-family:"Cormorant Garamond";font-size:44px;margin:0 0 18px;text-shadow:0 0 18px rgba(255,238,243,.34)}
 .choice-card{
@@ -212,6 +260,27 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
 .centered{display:flex;flex-direction:column;align-items:center;text-align:center}
 .qmark{font-family:"Cormorant Garamond";font-size:52px;margin:0;text-shadow:0 0 20px rgba(255,239,244,.38)}
 
+
+.paper-divider{
+ display:flex;
+ align-items:center;
+ gap:12px;
+ margin:0 0 24px;
+ color:#d985a2;
+}
+.paper-divider::before,.paper-divider::after{
+ content:"";
+ height:1px;
+ flex:1;
+ background:linear-gradient(90deg,transparent,rgba(201,115,145,.28));
+}
+.paper-divider::after{background:linear-gradient(90deg,rgba(201,115,145,.28),transparent)}
+.paper-divider span{
+ font-family:"Cormorant Garamond";
+ font-size:18px;
+ line-height:1;
+}
+
 @media (max-width: 980px){
  .hero,.layout{grid-template-columns:1fr}
  .preview{position:relative;top:auto;min-height:0}
@@ -228,8 +297,12 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
  .phone{min-height:620px}
  .phone-stage{min-height:580px}
  .stage-center{min-height:540px}
- .paper .title{font-size:36px}
- .paper .msg{font-size:22px}
+ .paper{padding:28px 22px 32px;border-radius:22px}
+ .paper .to{font-size:22px;max-width:92%;margin-bottom:14px}
+ .paper .title{font-size:32px;line-height:1.08;margin-bottom:20px;max-width:100%}
+ .paper .msg{font-size:19px;line-height:1.58}
+ .paper .sign{font-size:21px}
+ .paper-divider{margin-bottom:20px}
  .light-title,.choice-screen h4,.qmark{font-size:42px}
  .preview-note,.light-sub{font-size:26px}
 }
@@ -292,7 +365,7 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
             <div class="step hidden" data-step="2">
               <h2>Само письмо</h2>
               <p class="subtitle">Это бумажный лист, который увидит получатель после открытия конверта.</p>
-              <label>Обращение вверху листа<input id="letterTo" maxlength="100" value="это тебе, Даша"></label>
+              <label>Обращение вверху листа<input id="letterTo" maxlength="100" value="цей лист адресовано, Настюші"></label>
               <label>Заголовок письма<input id="letterTitle" maxlength="120" value="Даша, с днём рождения!"></label>
               <label>Текст письма<textarea id="letterMessage" maxlength="2500" placeholder="Напиши письмо..."></textarea></label>
               <label>Подпись внизу<input id="letterSign" maxlength="80" placeholder="Люблю тебя."></label>
@@ -528,6 +601,7 @@ function previewLetter(d){
     <div class="paper">
       <div class="to">${escapeHtml(d.letterTo)}</div>
       <div class="title">${escapeHtml(d.letterTitle)}</div>
+      <div class="paper-divider"><span>♡</span></div>
       <div class="msg">${escapeHtml(d.letterMessage)}</div>
       ${d.showPhoto && d.photoData ? `<div class="letter-photo"><img src="${d.photoData}" alt="Фото"></div>` : ``}
       ${d.letterSign ? `<div class="sign">${escapeHtml(d.letterSign)}</div>` : ``}
@@ -560,7 +634,7 @@ function previewFinal(d){
   const choice = (d.choices || [])[d.finalChoiceIndex] || {emoji:"❤", title:"Выходим", subtitle:""};
   return `
     <div class="stage-center centered" style="justify-content:flex-start;padding-top:38px">
-      <div style="font-family:'Marck Script';font-size:28px;color:#ffd6e4;max-width:320px">${escapeHtml(d.finalCaption)} ${escapeHtml(d.recipient)}</div>
+      <div style="font-family:'Marck Script';font-size:28px;color:#ffd6e4;max-width:320px">${escapeHtml(d.finalCaption)}</div>
       <div class="final-card">
         <div class="line1">${escapeHtml(d.finalTitle)}</div>
         <div class="line2">${escapeHtml(choice.emoji)} ${escapeHtml(choice.title)}</div>
@@ -765,7 +839,7 @@ function renderStory(){
     root.innerHTML = `
       <div class="stage-center centered" style="justify-content:flex-start;padding-top:34px">
         ${d.showPhoto && d.photoData ? `<div style="width:100%;max-width:310px;margin-bottom:14px;border-radius:24px;overflow:hidden;box-shadow:0 18px 34px rgba(0,0,0,.24)"><img src="${d.photoData}" alt="Фото"></div>` : ``}
-        <div style="font-family:'Marck Script';font-size:28px;color:#ffd6e4;max-width:320px">${escapeHtml(d.finalCaption)} ${escapeHtml(d.recipient || "")}</div>
+        <div style="font-family:'Marck Script';font-size:28px;color:#ffd6e4;max-width:320px">${escapeHtml(d.finalCaption)}</div>
         <div class="final-card">
           <div class="line1">${escapeHtml(d.finalTitle || "Выходим")}</div>
           <div class="line2">${escapeHtml(choice.emoji)} ${escapeHtml(choice.title)}</div>
