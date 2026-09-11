@@ -379,3 +379,50 @@ Cloudflare Static Assets за замовчуванням канонізує `/in
 - Висота magic hero адаптується для коротких екранів.
 - Desktop stepper fix 1.0.1 збережено.
 - `/api/health` -> `version: "1.1"`.
+
+
+## 1.1.1 — Clean Home
+
+Головний екран спрощено:
+- прибрано дублюючий kicker / рекламний опис / велику promo-картку;
+- один hero message + одна головна дія;
+- чернетка показується окремим тихим рядком лише якщо вона реально є;
+- блок «Останні» існує тільки коли вже є листи;
+- empty-state на Home прибраний;
+- повна Library лишилася окремою вкладкою.
+
+
+# Love Letter 1.2 — Unified Ecosystem
+
+Mobile і desktop тепер є одним продуктом, а не двома різними інтерфейсами.
+
+## Shared product model
+- Одна Home.
+- Одна Library.
+- Один Letter Detail.
+- Одні Settings.
+- Один Create Wizard.
+- Одна локальна бібліотека і ті самі edit keys.
+- Одна D1 / recipient URL / PWA business logic.
+
+## Desktop composition
+Desktop більше не використовує legacy horizontal-pill constructor на `/`.
+
+- ліворуч — тихий app rail;
+- по центру — той самий story wizard;
+- праворуч — постійний cinematic live preview;
+- Library/Home/Settings мають desktop composition, але той самий visual language;
+- create flow використовує ті самі дані, кроки, magic moments та transitions,
+  що й mobile.
+
+## Mobile composition
+Залишається thumb-first:
+- bottom navigation;
+- fullscreen decisions;
+- modal/fullscreen preview;
+- safe-area + VisualViewport.
+
+Таким чином adaptive layout різний, але product language, state, navigation,
+business logic та visual system — спільні.
+
+`/api/health` -> `version: "1.2"`

@@ -2456,6 +2456,459 @@ input:focus,textarea:focus,select:focus{border-color:#cc6d91;box-shadow:0 0 0 4p
   }
 }
 
+
+/* Love Letter 1.1.1 — quieter home */
+@media (max-width:900px){
+  .ma-home-clean{
+    padding-top:18px;
+  }
+  .ma-home-intro{
+    padding:8px 0 10px;
+  }
+  .ma-home-intro .ma-hero-title{
+    max-width:320px;
+    font-size:clamp(34px,9.4vw,42px);
+    line-height:.98;
+  }
+  .ma-home-intro .ma-hero-copy{
+    max-width:300px;
+    margin-top:12px;
+  }
+  .ma-home-create{
+    width:100%;
+    min-height:54px;
+    margin-top:24px;
+    border:0;
+    border-radius:17px;
+    background:#4a2234;
+    color:#fff;
+    font:680 17px/1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+    box-shadow:0 10px 24px rgba(74,34,52,.11);
+    transition:transform .16s ease,background .16s ease;
+  }
+  .ma-home-create:active{transform:scale(.985);background:#3f1c2c}
+
+  .ma-draft-card{
+    width:100%;
+    margin-top:14px;
+    padding:14px 15px;
+    border:0;
+    border-radius:17px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+    text-align:left;
+    background:#efe8e5;
+    color:#4b3440;
+  }
+  .ma-draft-kicker{
+    color:#9a808c;
+    font:650 11px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+  }
+  .ma-draft-title{
+    margin-top:4px;
+    font:650 14px/1.25 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+  }
+  .ma-draft-card > span{
+    color:#9a808c;
+    font-size:22px;
+  }
+  .ma-home-recent-head{
+    margin-top:30px;
+  }
+}
+
+
+/* ===============================================================
+   Love Letter 1.2 — one ecosystem, desktop + mobile
+   =============================================================== */
+
+/* Root product shell replaces the legacy constructor on desktop too. */
+@media (min-width:901px){
+  #creatorView > .topbar,
+  #creatorView > .hero,
+  #creatorView > .builder{
+    display:none !important;
+  }
+
+  body{
+    background:#f8f4ef;
+  }
+
+  /* ---------- Desktop app shell ---------- */
+  .mobile-app{
+    display:flex;
+    min-height:100vh;
+    background:
+      radial-gradient(circle at 68% -12%,rgba(100,47,70,.05),transparent 28%),
+      linear-gradient(180deg,#fbf8f4 0%,#f7f2ed 100%);
+    color:#261b22;
+  }
+  .mobile-app.hidden{display:none!important}
+
+  .ma-topbar{
+    position:fixed;
+    z-index:70;
+    left:0;top:0;
+    width:236px;height:82px;
+    padding:22px 22px 16px;
+    display:grid;
+    grid-template-columns:42px 1fr 38px;
+    align-items:center;
+    gap:10px;
+    background:transparent;
+  }
+  .ma-avatar{
+    width:38px;height:38px;border:0;border-radius:50%;
+    display:grid;place-items:center;
+    color:#fff;background:#4a2234;
+    font:600 20px/1 Georgia,"Times New Roman",serif;
+    box-shadow:0 7px 18px rgba(74,34,52,.12);
+  }
+  .ma-top-title{
+    text-align:left;
+    color:#34242d;
+    font:650 15px/1.1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",sans-serif;
+    letter-spacing:-.01em;
+  }
+  .ma-icon-btn{
+    width:36px;height:36px;border:0;border-radius:12px;
+    display:grid;place-items:center;
+    background:transparent;color:#8d7882;
+    font-size:16px;font-weight:700;
+  }
+  .ma-icon-btn:hover{background:rgba(74,34,52,.05);color:#533144}
+
+  .ma-tabbar{
+    position:fixed;
+    z-index:60;
+    left:0;top:82px;bottom:0;
+    width:236px;
+    padding:14px 14px 24px;
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    gap:6px;
+    background:transparent;
+    border:0;
+    box-shadow:none;
+    backdrop-filter:none;
+  }
+  .ma-tab{
+    min-height:48px;
+    padding:0 12px;
+    border:0;border-radius:14px;
+    display:flex;
+    flex-direction:row;
+    justify-content:flex-start;
+    align-items:center;
+    gap:12px;
+    background:transparent;
+    color:#8f7a84;
+    font:600 14px/1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",sans-serif;
+    transition:background .17s ease,color .17s ease,transform .15s ease;
+  }
+  .ma-tab:hover{background:rgba(75,35,53,.045);color:#5a3446}
+  .ma-tab:active{transform:scale(.99)}
+  .ma-tab.is-active{
+    background:#eee5e7;
+    color:#4d293a;
+  }
+  .ma-tab-icon{font-size:19px}
+  .ma-tab-create{
+    order:3;
+    margin-top:10px;
+    min-height:50px;
+    background:#4a2234!important;
+    color:#fff!important;
+    justify-content:center;
+    box-shadow:0 8px 20px rgba(74,34,52,.10);
+  }
+  .ma-tab-create:after{
+    content:"Новий лист";
+    font:650 14px/1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",sans-serif;
+  }
+  .ma-plus{
+    width:auto;height:auto;border-radius:0;
+    background:transparent;color:inherit;
+    box-shadow:none;
+    font-size:22px;
+  }
+
+  .ma-screen{
+    flex:1;
+    min-height:100vh;
+    margin-left:236px;
+    padding:72px clamp(36px,5vw,84px) 70px;
+    overflow:auto;
+  }
+  .ma-screen > section,
+  .ma-ready{
+    width:min(100%,980px);
+    margin:0 auto;
+  }
+
+  .ma-home-clean{
+    padding-top:16px;
+    display:grid;
+    grid-template-columns:minmax(0,1.05fr) minmax(340px,.95fr);
+    column-gap:clamp(48px,6vw,92px);
+    align-items:start;
+  }
+  .ma-home-intro{
+    position:sticky;
+    top:76px;
+    padding-top:14px;
+  }
+  .ma-home-intro .ma-hero-title{
+    max-width:560px;
+    font-size:clamp(48px,5vw,72px);
+    line-height:.92;
+    letter-spacing:-.055em;
+  }
+  .ma-home-intro .ma-hero-copy{
+    max-width:480px;
+    margin-top:20px;
+    font-size:18px;
+    line-height:1.55;
+  }
+  .ma-home-create{
+    width:auto;
+    min-width:190px;
+    min-height:54px;
+    padding:0 22px;
+    margin-top:28px;
+    border:0;border-radius:16px;
+    background:#4a2234;color:#fff;
+    font:680 16px/1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",sans-serif;
+    box-shadow:0 10px 24px rgba(74,34,52,.11);
+  }
+
+  .ma-home-clean > .ma-draft-card,
+  .ma-home-clean > .ma-row-head,
+  .ma-home-clean > .ma-letter-list{
+    grid-column:2;
+  }
+  .ma-home-clean > .ma-draft-card{margin-top:18px}
+  .ma-home-clean > .ma-row-head{margin-top:12px}
+  .ma-home-clean > .ma-letter-list{display:grid;gap:10px}
+  .ma-letter-card{
+    padding:14px;
+    border-radius:18px;
+    background:rgba(255,255,255,.78);
+    box-shadow:inset 0 0 0 1px rgba(66,42,53,.055);
+  }
+  .ma-letter-card:hover{
+    background:#fff;
+    transform:translateY(-1px);
+  }
+
+  .ma-page-title{
+    font-size:44px;
+    letter-spacing:-.045em;
+  }
+  .ma-page-sub{
+    max-width:620px;
+    font-size:16px;
+  }
+  .ma-letter-list{
+    width:min(100%,760px);
+  }
+
+  .ma-detail-hero{
+    width:min(100%,720px);
+    margin:0 auto;
+    padding:30px 28px;
+    border-radius:30px;
+  }
+  .ma-action-list{
+    width:min(100%,720px);
+    margin:18px auto 0;
+  }
+
+  .ma-setting-list{
+    width:min(100%,760px);
+  }
+
+  /* ---------- Desktop create studio: same wizard, different composition ---------- */
+  .mobile-wizard{
+    display:block !important;
+    min-height:100vh;
+    color:#241922;
+    background:
+      radial-gradient(circle at 72% 8%,rgba(111,51,76,.045),transparent 25%),
+      linear-gradient(180deg,#fbf8f4,#f7f2ed);
+  }
+  .mobile-wizard.hidden{display:none!important}
+
+  .mw-top{
+    position:fixed;
+    z-index:80;
+    left:0;top:0;bottom:0;
+    width:236px;
+    min-height:100vh;
+    padding:24px 22px;
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    justify-content:flex-start;
+    gap:22px;
+    background:rgba(248,243,238,.84);
+    border-right:1px solid rgba(75,42,57,.05);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+  }
+  .mw-brand{
+    display:flex;align-items:center;gap:10px;
+  }
+  .mw-mark{
+    width:36px;height:36px;border-radius:50%;
+    display:grid;place-items:center;
+    background:#4a2234;color:white;
+    font:600 19px/1 Georgia,serif;
+  }
+  .mw-brandtext{
+    color:#33232c;
+    font:650 15px/1.1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",sans-serif;
+  }
+  .mw-preview-btn{
+    display:none;
+  }
+
+  .mw-main{
+    min-height:100vh;
+    margin-left:236px;
+    margin-right:40vw;
+    padding:64px clamp(42px,5vw,74px) 116px;
+  }
+  .mw-progress-wrap{
+    max-width:620px;
+    padding-bottom:24px;
+  }
+  .mw-title{
+    max-width:540px;
+    font-size:clamp(36px,3.2vw,48px);
+    line-height:1;
+  }
+  .mw-kicker,.mw-count{font-size:13px}
+  .mw-progress-track{
+    height:3px;
+    margin-top:18px;
+  }
+  .mw-magic{
+    max-width:620px;
+    min-height:150px;
+    margin:0 0 18px;
+  }
+  .mw-scene{
+    max-width:620px;
+  }
+  .mw-copy{
+    max-width:540px;
+    font-size:16px;
+  }
+  .mw-input,.mw-select{
+    height:54px;
+    font-size:17px;
+  }
+  .mw-textarea{
+    min-height:170px;
+    max-height:300px;
+  }
+
+  .mw-actionbar{
+    position:fixed;
+    z-index:85;
+    left:236px;
+    right:40vw;
+    bottom:0;
+    display:grid;
+    grid-template-columns:auto minmax(180px,260px);
+    justify-content:end;
+    gap:10px;
+    padding:12px clamp(42px,5vw,74px) 20px;
+    background:
+      linear-gradient(180deg,rgba(248,243,238,0),rgba(248,243,238,.92) 36%,#f8f3ee 70%);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+  }
+  .mw-back,.mw-next{
+    min-height:50px;
+    border-radius:15px;
+  }
+
+  /* persistent cinematic preview on desktop */
+  body:not(.mw-create-active) .mw-preview-sheet{display:none!important}
+  body.mw-create-active .mw-preview-sheet.hidden{
+    display:block!important;
+  }
+  body.mw-create-active .mw-preview-sheet{
+    position:fixed;
+    z-index:75;
+    right:0;top:0;bottom:0;
+    left:auto;
+    width:40vw;
+    padding:0;
+    background:
+      radial-gradient(circle at 50% 20%,rgba(255,185,208,.10),transparent 28%),
+      linear-gradient(180deg,#351528,#1a0c16);
+    color:#fff;
+  }
+  .mw-preview-head{
+    min-height:72px;
+    padding:18px 22px 12px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid rgba(255,255,255,.06);
+    background:rgba(27,11,22,.28);
+  }
+  .mw-preview-close{display:none}
+  .mw-preview-canvas{
+    height:calc(100vh - 72px);
+    overflow:auto;
+  }
+  .mw-phone-preview{
+    width:min(420px,calc(100% - 48px));
+    max-width:420px;
+    min-height:calc(100vh - 112px);
+    margin:20px auto;
+    border-radius:32px;
+    border:1px solid rgba(255,255,255,.10);
+    background:#180b14;
+    overflow:hidden;
+    box-shadow:0 26px 70px rgba(0,0,0,.24);
+  }
+  .mw-phone-preview .phone-stage{
+    min-height:calc(100vh - 156px);
+    padding:18px;
+  }
+
+  /* ready screen desktop */
+  .ma-ready{
+    max-width:620px;
+    min-height:calc(100vh - 130px);
+  }
+  .ma-ready-actions{
+    max-width:460px;
+  }
+
+  body.ma-no-tabs .ma-tabbar{display:none}
+}
+
+/* shared editorial surface rules */
+@media (min-width:901px){
+  .ma-setting-card,
+  .ma-action-row,
+  .ma-draft-card{
+    background:rgba(255,255,255,.72);
+    box-shadow:inset 0 0 0 1px rgba(65,42,53,.05);
+  }
+}
+
 </style>
 </head>
 <body>
@@ -2843,10 +3296,11 @@ function setMobileAppVisibility(app=true){
   if(app){
     appEl?.classList.remove("hidden");
     wizard?.classList.add("hidden");
-    document.body.classList.remove("mw-keyboard-open");
+    document.body.classList.remove("mw-keyboard-open","mw-create-active");
   }else{
     appEl?.classList.add("hidden");
     wizard?.classList.remove("hidden");
+    document.body.classList.add("mw-create-active");
   }
 }
 
@@ -2879,40 +3333,41 @@ function renderAppHome(){
   setMobileAppVisibility(true);
   document.body.classList.remove("ma-no-tabs");
   setTab("home");
-  document.getElementById("maTopTitle").textContent="Love Letter";
+  document.getElementById("maTopTitle").textContent="";
 
   const library=getLocalLibrary();
   const recent=library.slice(0,3);
   const draftExists=!!localStorage.getItem(DRAFT_KEY);
 
   document.getElementById("maScreen").innerHTML=`
-    <section>
-      <div class="ma-section-kicker">${isStandaloneApp() ? "Твій простір" : "Love Letter"}</div>
-      <h1 class="ma-hero-title">Створи те, що хочеться зберегти.</h1>
-      <p class="ma-hero-copy">Особистий лист, маленька історія, конверт, фото або портрет зі слів — усе в одному приватному посиланні.</p>
-
-      <div class="ma-primary-card">
-        <div aria-hidden="true" style="position:absolute;right:18px;bottom:18px;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.55);font:600 24px/1 Georgia,serif">L</div>
-        <div class="ey">${draftExists ? "Чернетка збережена" : "Новий лист"}</div>
-        <h2>${draftExists ? "Продовжити свою історію" : "Почати з одного імені"}</h2>
-        <p>${draftExists ? "Твої зміни залишилися на цьому пристрої." : "Без реєстрації, шаблонів і зайвих налаштувань."}</p>
-        <button class="ma-primary-cta" id="maStartBtn" type="button">${draftExists ? "Продовжити" : "Створити лист"}</button>
+    <section class="ma-home-clean">
+      <div class="ma-home-intro">
+        <h1 class="ma-hero-title">Лист для однієї людини.</h1>
+        <p class="ma-hero-copy">Створи особисту історію й надішли одним приватним посиланням.</p>
+        <button class="ma-home-create" id="maStartBtn" type="button">Створити лист</button>
       </div>
 
-      <div class="ma-row-head">
-        <h3>Останні листи</h3>
-        ${library.length ? '<button class="ma-link-btn" id="maSeeAllBtn" type="button">Усі</button>' : ''}
-      </div>
-      <div class="ma-letter-list">
-        ${recent.length ? recent.map(appLetterCard).join("") : `
-          <div class="ma-empty">
-            <div class="ma-empty-mark">L</div>
-            Тут з’являться листи, створені на цьому пристрої.
-          </div>`}
-      </div>
+      ${draftExists ? `
+        <button class="ma-draft-card" id="maResumeDraftBtn" type="button">
+          <div>
+            <div class="ma-draft-kicker">Чернетка</div>
+            <div class="ma-draft-title">Продовжити незавершений лист</div>
+          </div>
+          <span>›</span>
+        </button>` : ""}
+
+      ${recent.length ? `
+        <div class="ma-row-head ma-home-recent-head">
+          <h3>Останні</h3>
+          ${library.length > 3 ? '<button class="ma-link-btn" id="maSeeAllBtn" type="button">Усі</button>' : ''}
+        </div>
+        <div class="ma-letter-list">
+          ${recent.map(appLetterCard).join("")}
+        </div>` : ""}
     </section>`;
 
-  document.getElementById("maStartBtn")?.addEventListener("click",()=>openMobileCreate({resume:draftExists}));
+  document.getElementById("maStartBtn")?.addEventListener("click",()=>openMobileCreate({resume:false}));
+  document.getElementById("maResumeDraftBtn")?.addEventListener("click",()=>openMobileCreate({resume:true}));
   document.getElementById("maSeeAllBtn")?.addEventListener("click",()=>setMobileAppRoute("library"));
   bindLetterCards();
 }
@@ -3034,6 +3489,7 @@ async function openExistingLetterInWizard(id){
     document.body.classList.add("ma-no-tabs");
     history.replaceState(null,"","#create");
     renderMobileWizard();
+    renderMobilePreview();
   }catch(e){ showMobileToast(e?.message||"Не вдалося відкрити лист"); }
 }
 
@@ -3171,6 +3627,7 @@ function openMobileCreate({resume=false}={}){
 
   history.replaceState(null,"","#create");
   renderMobileWizard();
+  renderMobilePreview();
 }
 
 function showMobileReady(link,id){
@@ -3488,7 +3945,9 @@ const mobileWizardState = {
 };
 
 function isMobileWizard(){
-  return matchMedia("(max-width: 900px)").matches;
+  // Root path uses the same product shell and creation flow on every device.
+  // Recipient routes keep their own focused presentation.
+  return location.pathname === "/" || matchMedia("(max-width: 900px)").matches;
 }
 
 function syncLegacyToMobile(){
