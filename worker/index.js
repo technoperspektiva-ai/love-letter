@@ -210,8 +210,8 @@ export default {
         return await regenerateStoryUrl(request, regenerateMatch[1], env);
       }
 
-      if (/^\/l\/[A-Za-z0-9_-]{4,32}$/.test(url.pathname) ||
-          /^\/edit\/[A-Za-z0-9_-]{4,32}$/.test(url.pathname)) {
+      if (/^\/l\/[A-Za-z0-9_-]{4,32}\/?$/.test(url.pathname) ||
+          /^\/edit\/[A-Za-z0-9_-]{4,32}\/?$/.test(url.pathname)) {
         const assetUrl = new URL("/index.html", url.origin);
         return env.ASSETS.fetch(new Request(assetUrl, request));
       }

@@ -903,7 +903,10 @@ function mountStory(payload){
   // Прихований вхід у редагування для автора:
   // три швидкі кліки/тапи по іконці "L".
   // Працює тільки якщо edit-key вже збережений у цьому браузері.
-  const idMatch = location.pathname.match(/^\/l\/([A-Za-z0-9_-]{4,32})$/);
+  const hiddenPath = location.pathname.length > 1
+    ? location.pathname.replace(/\/+$/, "")
+    : location.pathname;
+  const idMatch = hiddenPath.match(/^\/l\/([A-Za-z0-9_-]{4,32})$/);
   const hiddenSeal = document.getElementById("hiddenEditSeal");
 
   if(idMatch && hiddenSeal){
@@ -1561,10 +1564,23 @@ function attachListeners(){
 }
 
 (async function init(){
-  const pathMatch = location.pathname.match(/^\/l\/([A-Za-z0-9_-]{4,32})$/);
+  const cleanPath = location.pathname.length > 1
+    ? location.pathname.replace(/\/+$/, "")
+    : location.pathname;
+
+  const pathMatch = cleanPath.match(/^\/l\/([A-Za-z0-9_-]{4,32})$/);
   if(pathMatch){
+    document.getElementById("creatorView")?.classList.add("hidden");
+    document.getElementById("storyView")?.classList.remove("hidden");
+    document.getElementById("storyView").innerHTML = `
+      <div class="viewer-loading" style="min-height:100svh;display:grid;place-items:center;text-align:center;padding:24px">
+        <div>
+          <div class="seal" style="margin:0 auto 14px">L</div>
+          <div style="font-family:'Cormorant Garamond';font-size:34px">Відкриваємо лист…</div>
+        </div>
+      </div>`;
     try{
-      const r = await fetch(`/api/story/${encodeURIComponent(pathMatch[1])}`);
+      const r = await fetch(`/api/story/${encodeURIComponent(pathMatch[1])}`, { cache: "no-store" });
       const data = await r.json();
       if(!r.ok) throw new Error(data.error || "История не найдена");
       mountStory(data.payload);
@@ -1575,7 +1591,7 @@ function attachListeners(){
     }
   }
 
-  const editMatch = location.pathname.match(/^\/edit\/([A-Za-z0-9_-]{4,32})$/);
+  const editMatch = cleanPath.match(/^\/edit\/([A-Za-z0-9_-]{4,32})$/);
   if(editMatch){
     try{
       const id = editMatch[1];
@@ -1583,9 +1599,9 @@ function attachListeners(){
       const key = hashParams.get("key") || localStorage.getItem(`love-letter-edit-${id}`) || "";
       if(!key) throw new Error("Немає ключа редагування.");
 
-      const r = await fetch(`/api/story/${encodeURIComponent(id)}`);
+      const r = await fetch(`/api/story/${encodeURIComponent(id)}`, { cache: "no-store" });
       const data = await r.json();
-      if(!r.ok) throw new Error(data.error || "Лист не знайдено.");
+      if(!r.ok) throw new Error(data.error || "Лист не знайдено або посилання вже неактивне.");
 
       state.editingId = id;
       state.editKey = key;
