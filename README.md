@@ -450,3 +450,48 @@ business logic та visual system — спільні.
 - laptop-height polish для низьких viewport.
 
 `/api/health` -> `version: "1.3"`
+
+
+# Love Letter 1.4 — Product Suite
+
+Після review референсу повноцінного mobile tool продукт отримав не лише polish,
+а більше реальної функціональної щільності.
+
+## Dashboard
+- статистика: кількість листів / чернетка / редаговані;
+- quick actions;
+- останні листи;
+- окрема зона чернетки;
+- швидкий старт із preset.
+
+## Ideas
+Додано 6 стартових сценаріїв:
+- Тихий лист
+- Запрошення
+- Вибачення
+- Річниця
+- Сумую
+- Просто так
+
+Це не жорсткі templates: вони лише префілять структуру й одразу відкривають
+той самий wizard для редагування.
+
+## Library
+- пошук за ім'ям і заголовком;
+- фільтри: усі / останні 30 днів / редаговані;
+- count результатів.
+
+## Letter Detail
+- open
+- share
+- copy link
+- edit
+- duplicate
+- regenerate URL
+- delete
+
+## Ecosystem
+Mobile та desktop користуються одними й тими самими Home / Library / Ideas /
+Settings / Letter Detail / Create states.
+
+`/api/health` -> `version: "1.4"`

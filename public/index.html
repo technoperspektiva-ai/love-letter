@@ -3152,6 +3152,142 @@ input:focus,textarea:focus,select:focus{border-color:#cc6d91;box-shadow:0 0 0 4p
   .ma-home-create{margin-top:22px}
 }
 
+
+/* ===============================================================
+   Love Letter 1.4 — Product Suite
+   Dense, functional product surfaces without visual clutter.
+   =============================================================== */
+
+.ma-dashboard-grid{display:grid;gap:14px}
+.ma-stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:16px}
+.ma-stat{
+  min-height:74px;padding:13px 14px;border-radius:18px;background:#fff;
+  box-shadow:inset 0 0 0 1px rgba(66,42,53,.055);
+}
+.ma-stat-value{
+  color:#2f2028;font:700 22px/1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+  letter-spacing:-.03em;
+}
+.ma-stat-label{
+  margin-top:6px;color:#99858f;font:500 12px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+}
+
+.ma-quick-grid{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;
+}
+.ma-quick-card{
+  min-height:116px;padding:16px;border:0;border-radius:20px;text-align:left;
+  background:#fff;color:#35242d;
+  box-shadow:inset 0 0 0 1px rgba(66,42,53,.055);
+  transition:transform .16s ease,box-shadow .16s ease;
+}
+.ma-quick-card:active{transform:scale(.985)}
+.ma-quick-icon{
+  width:36px;height:36px;border-radius:12px;display:grid;place-items:center;
+  background:#f1e8ec;color:#6b3e52;font-size:16px;
+}
+.ma-quick-title{
+  margin-top:14px;font:680 14px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+}
+.ma-quick-sub{
+  margin-top:4px;color:#9a8790;font:400 12px/1.35 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+}
+
+.ma-section-title{
+  margin:0;font:680 19px/1.1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+  letter-spacing:-.025em;color:#30212a;
+}
+.ma-section-row{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;margin:26px 0 12px;
+}
+
+.ma-search{
+  position:relative;margin:4px 0 12px;
+}
+.ma-search input{
+  width:100%;height:50px;margin:0;padding:0 16px 0 42px;border:0;border-radius:16px;
+  background:#fff;color:#31232b;font:400 16px/1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+  box-shadow:inset 0 0 0 1px rgba(66,42,53,.06);
+}
+.ma-search:before{
+  content:"⌕";position:absolute;left:15px;top:50%;transform:translateY(-50%);
+  color:#9c8992;font-size:18px;
+}
+.ma-filter-row{
+  display:flex;gap:7px;overflow:auto;padding:2px 0 4px;scrollbar-width:none;
+}
+.ma-filter-row::-webkit-scrollbar{display:none}
+.ma-filter{
+  flex:0 0 auto;min-height:36px;padding:0 12px;border:0;border-radius:999px;
+  background:#efe8e8;color:#755666;
+  font:650 12px/1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+}
+.ma-filter.is-active{background:#4a2234;color:#fff}
+
+.ma-idea-grid{display:grid;gap:11px}
+.ma-idea-card{
+  width:100%;padding:17px;border:0;border-radius:22px;text-align:left;
+  background:#fff;color:#32232b;box-shadow:inset 0 0 0 1px rgba(66,42,53,.055);
+  display:grid;grid-template-columns:46px minmax(0,1fr) auto;gap:13px;align-items:center;
+}
+.ma-idea-icon{
+  width:46px;height:46px;border-radius:15px;display:grid;place-items:center;
+  background:#efe7e8;color:#693d50;font-size:20px;
+}
+.ma-idea-title{font:680 15px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif}
+.ma-idea-sub{margin-top:4px;color:#95828b;font:400 12px/1.35 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif}
+.ma-idea-arrow{color:#b09da6;font-size:22px}
+
+.ma-library-empty{
+  margin-top:16px;padding:26px 20px;border-radius:22px;background:#f1ebe7;text-align:center;
+  color:#806d77;font:400 14px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+}
+
+@media (max-width:900px){
+  .ma-dashboard-grid{gap:12px}
+  .ma-stat-grid{grid-template-columns:repeat(3,1fr);gap:8px}
+  .ma-stat{min-height:70px;padding:12px}
+  .ma-stat-value{font-size:20px}
+  .ma-quick-grid{grid-template-columns:1fr 1fr}
+}
+
+@media (min-width:901px){
+  .ma-tabbar{gap:5px}
+  .ma-tab-create{order:4}
+
+  .ma-dashboard-layout{
+    display:grid;
+    grid-template-columns:minmax(520px,1.05fr) minmax(360px,.95fr);
+    gap:clamp(34px,4vw,62px);
+    align-items:start;
+  }
+  .ma-dashboard-main{min-width:0}
+  .ma-dashboard-side{min-width:0}
+
+  .ma-stat-grid{grid-template-columns:repeat(3,1fr)}
+  .ma-quick-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ma-quick-card:hover{
+    transform:translateY(-1px);
+    box-shadow:inset 0 0 0 1px rgba(66,42,53,.07),0 8px 22px rgba(57,32,44,.045);
+  }
+
+  .ma-idea-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:12px;
+    width:min(100%,900px);
+  }
+  .ma-idea-card:hover{
+    background:#fffdfb;
+    transform:translateY(-1px);
+  }
+
+  .ma-library-toolbar{
+    width:min(100%,780px);
+    display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;
+  }
+  .ma-filter-row{justify-content:flex-end}
+}
+
 </style>
 </head>
 <body>
@@ -3171,11 +3307,14 @@ input:focus,textarea:focus,select:focus{border-color:#cc6d91;box-shadow:0 0 0 4p
       <button class="ma-tab is-active" data-app-route="home" type="button">
         <span class="ma-tab-icon">⌂</span><span>Головна</span>
       </button>
-      <button class="ma-tab ma-tab-create" data-app-route="create" type="button" aria-label="Новий лист">
-        <span class="ma-plus">＋</span>
-      </button>
       <button class="ma-tab" data-app-route="library" type="button">
         <span class="ma-tab-icon">▤</span><span>Листи</span>
+      </button>
+      <button class="ma-tab" data-app-route="ideas" type="button">
+        <span class="ma-tab-icon">✦</span><span>Ідеї</span>
+      </button>
+      <button class="ma-tab ma-tab-create" data-app-route="create" type="button" aria-label="Новий лист">
+        <span class="ma-plus">＋</span>
       </button>
     </nav>
   </div>
@@ -3451,6 +3590,115 @@ input:focus,textarea:focus,select:focus{border-color:#cc6d91;box-shadow:0 0 0 4p
 
 const LETTER_LIBRARY_KEY = "love-letter-library-v1";
 
+const LETTER_PRESETS = [
+  {
+    id:"quiet",
+    icon:"♡",
+    title:"Тихий лист",
+    sub:"Коротко, ніжно, без зайвих слів.",
+    data:{
+      introMain:"тобі лист",
+      envelopeHint:"відкрий, це тобі",
+      letterTitle:"Для тебе",
+      letterMessage:"Я просто хотів залишити тобі кілька теплих слів.",
+      choiceTitle:"Що зробимо разом?",
+      choices:["Кава удвох","Прогулянка","Кіно","Щось спонтанне"]
+    }
+  },
+  {
+    id:"date",
+    icon:"✦",
+    title:"Запрошення",
+    sub:"Лист, який закінчується побаченням.",
+    data:{
+      introMain:"у мене є план",
+      envelopeHint:"відкрий — там маленька пропозиція",
+      letterTitle:"Один вечір тільки для нас",
+      letterMessage:"Хочу викрасти тебе на кілька годин і зробити цей вечір нашим.",
+      choiceTitle:"Обирай наш вечір",
+      choices:["Вечеря","Кіно","Прогулянка","Сюрприз"]
+    }
+  },
+  {
+    id:"sorry",
+    icon:"○",
+    title:"Вибачення",
+    sub:"Спокійний спосіб сказати важливе.",
+    data:{
+      introMain:"це важливо",
+      envelopeHint:"прочитай, будь ласка",
+      letterTitle:"Я хочу сказати це правильно",
+      letterMessage:"Мені важливо не просто вибачитися, а показати, що я почув тебе.",
+      choiceTitle:"Що зробимо далі?",
+      choices:["Поговоримо","Побудемо разом","Прогуляємось","Дай мені трохи часу"]
+    }
+  },
+  {
+    id:"anniversary",
+    icon:"∞",
+    title:"Річниця",
+    sub:"Маленька цифрова листівка про вас двох.",
+    data:{
+      introMain:"ще один наш рік",
+      envelopeHint:"відкрий нашу маленьку історію",
+      letterTitle:"Я б обрав нас ще раз",
+      letterMessage:"Дякую за всі прості дні, з яких складається щось дуже велике.",
+      choiceTitle:"Як відсвяткуємо?",
+      choices:["Вечеря","Подорож","Домашній вечір","Сюрприз"]
+    }
+  },
+  {
+    id:"missyou",
+    icon:"☾",
+    title:"Сумую",
+    sub:"Коли хочеться бути трохи ближче.",
+    data:{
+      introMain:"трохи сумую",
+      envelopeHint:"це тобі від мене",
+      letterTitle:"Хотів бути поруч",
+      letterMessage:"Поки не можу обійняти тебе наживо, залишу хоча б ці слова.",
+      choiceTitle:"Коли побачимось?",
+      choices:["Сьогодні","Завтра","На вихідних","Якнайшвидше"]
+    }
+  },
+  {
+    id:"justbecause",
+    icon:"☺",
+    title:"Просто так",
+    sub:"Без дати й приводу. Саме тому особливо.",
+    data:{
+      introMain:"без особливого приводу",
+      envelopeHint:"просто відкрий",
+      letterTitle:"Бо ти є",
+      letterMessage:"Сьогодні нічого особливого не сталося. Просто я подумав про тебе.",
+      choiceTitle:"Що зробимо сьогодні?",
+      choices:["Кава","Обійми","Прогулянка","Залишимось вдома"]
+    }
+  }
+];
+
+function applyPreset(id){
+  const preset=LETTER_PRESETS.find(x=>x.id===id);
+  if(!preset) return;
+
+  const d=preset.data;
+  const set=(field,value)=>{const el=document.getElementById(field);if(el)el.value=value||""};
+  set("introMain",d.introMain);
+  set("envelopeHint",d.envelopeHint);
+  set("letterTitle",d.letterTitle);
+  set("letterMessage",d.letterMessage);
+  set("choiceTitle",d.choiceTitle);
+  (d.choices||[]).slice(0,4).forEach((v,i)=>{
+    set(`c${i+1}t`,v);
+  });
+
+  saveDraft();
+  mobileWizardState.index=0;
+  openMobileCreate({resume:true});
+  showMobileToast(`Шаблон «${preset.title}» застосовано`);
+}
+
+
 function haptic(ms=10){
   try{ navigator.vibrate?.(ms); }catch{}
 }
@@ -3579,61 +3827,147 @@ function renderAppHome(){
   document.getElementById("maTopTitle").textContent="";
 
   const library=getLocalLibrary();
-  const recent=library.slice(0,3);
+  const recent=library.slice(0,4);
   const draftExists=!!localStorage.getItem(DRAFT_KEY);
+  const editable=library.filter(x=>!!(x.editKey || localStorage.getItem(`love-letter-edit-${x.id}`))).length;
 
   document.getElementById("maScreen").innerHTML=`
-    <section class="ma-home-clean">
-      <div class="ma-home-intro">
-        <h1 class="ma-hero-title">Лист для однієї людини.</h1>
-        <p class="ma-hero-copy">Створи особисту історію й надішли одним приватним посиланням.</p>
-        <button class="ma-home-create" id="maStartBtn" type="button">Створити лист</button>
+    <section class="ma-dashboard-layout">
+      <div class="ma-dashboard-main">
+        <div class="ma-section-kicker">Твій простір</div>
+        <h1 class="ma-hero-title">Створи лист, який хочеться відкрити.</h1>
+        <p class="ma-hero-copy">Збери особисту історію: слова, конверт, фото або портрет зі слів — і надішли одним приватним посиланням.</p>
+
+        <button class="ma-home-create" id="maStartBtn" type="button">＋ Новий лист</button>
+
+        <div class="ma-stat-grid">
+          <div class="ma-stat">
+            <div class="ma-stat-value">${library.length}</div>
+            <div class="ma-stat-label">листів</div>
+          </div>
+          <div class="ma-stat">
+            <div class="ma-stat-value">${draftExists ? "1" : "0"}</div>
+            <div class="ma-stat-label">чернетка</div>
+          </div>
+          <div class="ma-stat">
+            <div class="ma-stat-value">${editable}</div>
+            <div class="ma-stat-label">можна редагувати</div>
+          </div>
+        </div>
+
+        <div class="ma-section-row">
+          <h3 class="ma-section-title">Швидкі дії</h3>
+        </div>
+        <div class="ma-quick-grid">
+          <button class="ma-quick-card" id="maQuickQuiet" type="button">
+            <div class="ma-quick-icon">♡</div>
+            <div class="ma-quick-title">Тихий лист</div>
+            <div class="ma-quick-sub">Почати з ніжного мінімального сценарію.</div>
+          </button>
+          <button class="ma-quick-card" id="maQuickDate" type="button">
+            <div class="ma-quick-icon">✦</div>
+            <div class="ma-quick-title">Запросити на побачення</div>
+            <div class="ma-quick-sub">Готова структура з фінальним вибором.</div>
+          </button>
+          <button class="ma-quick-card" id="maIdeasBtn" type="button">
+            <div class="ma-quick-icon">⋯</div>
+            <div class="ma-quick-title">Ще ідеї</div>
+            <div class="ma-quick-sub">Шість стартових сценаріїв для різних моментів.</div>
+          </button>
+          <button class="ma-quick-card" id="maLibraryBtn" type="button">
+            <div class="ma-quick-icon">▤</div>
+            <div class="ma-quick-title">Мої листи</div>
+            <div class="ma-quick-sub">Відкрити, змінити або поділитися старими листами.</div>
+          </button>
+        </div>
       </div>
 
-      ${draftExists ? `
-        <button class="ma-draft-card" id="maResumeDraftBtn" type="button">
-          <div>
-            <div class="ma-draft-kicker">Чернетка</div>
-            <div class="ma-draft-title">Продовжити незавершений лист</div>
-          </div>
-          <span>›</span>
-        </button>` : ""}
+      <div class="ma-dashboard-side">
+        ${draftExists ? `
+          <button class="ma-draft-card" id="maResumeDraftBtn" type="button">
+            <div>
+              <div class="ma-draft-kicker">Чернетка</div>
+              <div class="ma-draft-title">Продовжити незавершений лист</div>
+            </div>
+            <span>›</span>
+          </button>` : ""}
 
-      ${recent.length ? `
-        <div class="ma-row-head ma-home-recent-head">
-          <h3>Останні</h3>
-          ${library.length > 3 ? '<button class="ma-link-btn" id="maSeeAllBtn" type="button">Усі листи</button>' : ''}
+        <div class="ma-section-row" style="margin-top:${draftExists ? "20px" : "0"}">
+          <h3 class="ma-section-title">Останні листи</h3>
+          ${library.length > 4 ? '<button class="ma-link-btn" id="maSeeAllBtn" type="button">Усі листи</button>' : ''}
         </div>
-        <div class="ma-letter-list">
-          ${recent.map(appLetterCard).join("")}
-        </div>` : ""}
+
+        ${recent.length ? `
+          <div class="ma-letter-list">
+            ${recent.map(appLetterCard).join("")}
+          </div>` : `
+          <div class="ma-empty">
+            <div class="ma-empty-mark">L</div>
+            Перший лист з’явиться тут одразу після створення.
+          </div>`}
+      </div>
     </section>`;
 
   document.getElementById("maStartBtn")?.addEventListener("click",()=>openMobileCreate({resume:false}));
   document.getElementById("maResumeDraftBtn")?.addEventListener("click",()=>openMobileCreate({resume:true}));
   document.getElementById("maSeeAllBtn")?.addEventListener("click",()=>setMobileAppRoute("library"));
+  document.getElementById("maLibraryBtn")?.addEventListener("click",()=>setMobileAppRoute("library"));
+  document.getElementById("maIdeasBtn")?.addEventListener("click",()=>setMobileAppRoute("ideas"));
+  document.getElementById("maQuickQuiet")?.addEventListener("click",()=>applyPreset("quiet"));
+  document.getElementById("maQuickDate")?.addEventListener("click",()=>applyPreset("date"));
   bindLetterCards();
 }
 
-function renderAppLibrary(){
+function renderAppLibrary(query="",filter="all"){
   setMobileAppVisibility(true);
   document.body.classList.remove("ma-no-tabs");
   setTab("library");
   document.getElementById("maTopTitle").textContent="Твої листи";
   const library=getLocalLibrary();
 
+  const q=(query||"").trim().toLowerCase();
+  const filtered=library.filter(item=>{
+    const editable=!!(item.editKey || localStorage.getItem(`love-letter-edit-${item.id}`));
+    if(filter==="editable" && !editable) return false;
+    if(filter==="recent" && (Date.now()-(item.updatedAt||item.createdAt||0)) > 1000*60*60*24*30) return false;
+    if(q){
+      const hay=`${item.recipient||""} ${item.title||""}`.toLowerCase();
+      if(!hay.includes(q)) return false;
+    }
+    return true;
+  });
+
   document.getElementById("maScreen").innerHTML=`
     <section>
       <h1 class="ma-page-title">Листи</h1>
-      <p class="ma-page-sub">Тут зберігаються листи, створені в цьому браузері. Приватні ключі не покидають твій пристрій.</p>
-      <div class="ma-letter-list">
-        ${library.length ? library.map(appLetterCard).join("") : `
-          <div class="ma-empty">
-            <div class="ma-empty-mark">L</div>
-            Ще немає жодного листа.<br>Створи перший — це займе кілька хвилин.
-          </div>`}
+      <p class="ma-page-sub">Усе, що ти створив на цьому пристрої. Можна швидко знайти, відкрити або продовжити редагування.</p>
+
+      <div class="ma-library-toolbar">
+        <div class="ma-search"><input id="maLibrarySearch" value="${escapeHtml(query)}" placeholder="Пошук за ім’ям або заголовком"></div>
+        <div class="ma-filter-row">
+          <button class="ma-filter ${filter==="all"?"is-active":""}" data-lib-filter="all">Усі</button>
+          <button class="ma-filter ${filter==="recent"?"is-active":""}" data-lib-filter="recent">Останні 30 днів</button>
+          <button class="ma-filter ${filter==="editable"?"is-active":""}" data-lib-filter="editable">Редаговані</button>
+        </div>
       </div>
+
+      <div class="ma-section-row">
+        <h3 class="ma-section-title">${filtered.length ? `${filtered.length} ${filtered.length===1?"лист":"листів"}` : "Нічого не знайдено"}</h3>
+      </div>
+
+      ${filtered.length ? `
+        <div class="ma-letter-list">
+          ${filtered.map(appLetterCard).join("")}
+        </div>` : `
+        <div class="ma-library-empty">Спробуй інший запит або фільтр.</div>`}
     </section>`;
+
+  document.getElementById("maLibrarySearch")?.addEventListener("input",e=>{
+    renderAppLibrary(e.target.value,filter);
+  });
+  document.querySelectorAll("[data-lib-filter]").forEach(btn=>{
+    btn.addEventListener("click",()=>renderAppLibrary(query,btn.dataset.libFilter));
+  });
   bindLetterCards();
 }
 
@@ -3687,6 +4021,9 @@ async function renderLetterDetail(id){
         <button class="ma-action-row" id="maCopyLink" type="button">
           <span>Копіювати посилання</span><span>↗</span>
         </button>
+        <button class="ma-action-row" id="maDuplicateLetter" type="button">
+          <span>Створити копію</span><span>＋</span>
+        </button>
         ${hasKey ? `<button class="ma-action-row" id="maRegenerateLink" type="button">
           <span>Створити нове посилання</span><span>↻</span>
         </button>
@@ -3711,6 +4048,20 @@ async function renderLetterDetail(id){
     }
   });
   document.getElementById("maEditLetter")?.addEventListener("click",()=>openExistingLetterInWizard(id));
+  document.getElementById("maDuplicateLetter")?.addEventListener("click",()=>{
+    if(!payload){ showMobileToast("Не вдалося завантажити лист"); return; }
+    state.editingId="";
+    state.editKey="";
+    populateEditorFromPayload(payload);
+    saveDraft();
+    mobileWizardState.index=0;
+    setMobileAppVisibility(false);
+    document.body.classList.add("ma-no-tabs");
+    history.replaceState(null,"","#create");
+    renderMobileWizard();
+    renderMobilePreview();
+    showMobileToast("Копія готова до редагування");
+  });
   document.getElementById("maRegenerateLink")?.addEventListener("click",()=>regenerateFromApp(id));
   document.getElementById("maDeleteLetter")?.addEventListener("click",()=>deleteFromApp(id));
 }
@@ -3780,6 +4131,35 @@ async function deleteFromApp(id){
     setMobileAppRoute("library",true);
     renderAppLibrary();
   }catch(e){ showMobileToast(e?.message||"Не вдалося видалити"); }
+}
+
+
+function renderAppIdeas(){
+  setMobileAppVisibility(true);
+  document.body.classList.remove("ma-no-tabs");
+  setTab("ideas");
+  document.getElementById("maTopTitle").textContent="Ідеї";
+
+  document.getElementById("maScreen").innerHTML=`
+    <section>
+      <h1 class="ma-page-title">З чого почати?</h1>
+      <p class="ma-page-sub">Обери настрій. Це не готовий шаблон “під копірку” — він лише заповнить стартову структуру, яку ти одразу зможеш переписати під себе.</p>
+      <div class="ma-idea-grid">
+        ${LETTER_PRESETS.map(p=>`
+          <button class="ma-idea-card" type="button" data-preset-id="${p.id}">
+            <div class="ma-idea-icon">${p.icon}</div>
+            <div>
+              <div class="ma-idea-title">${escapeHtml(p.title)}</div>
+              <div class="ma-idea-sub">${escapeHtml(p.sub)}</div>
+            </div>
+            <div class="ma-idea-arrow">›</div>
+          </button>`).join("")}
+      </div>
+    </section>`;
+
+  document.querySelectorAll("[data-preset-id]").forEach(btn=>{
+    btn.addEventListener("click",()=>applyPreset(btn.dataset.presetId));
+  });
 }
 
 function renderAppSettings(){
@@ -3916,6 +4296,7 @@ function handleMobileAppRoute(){
   const route=(location.hash||"#home").slice(1);
   if(route==="create"){ openMobileCreate({resume:true}); return; }
   if(route==="library"){ renderAppLibrary(); return; }
+  if(route==="ideas"){ renderAppIdeas(); return; }
   if(route==="settings"){ renderAppSettings(); return; }
   if(route.startsWith("letter=")){
     renderLetterDetail(decodeURIComponent(route.slice(7)));return;
