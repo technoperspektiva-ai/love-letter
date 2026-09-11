@@ -7207,6 +7207,8 @@ body.story-open .app{background:transparent!important}
 #storyView .recipient-final-caption{color:#e3c3d0!important}
 
 </style>
+<link rel="stylesheet" href="/magic.css?v=3">
+<script src="/magic.js?v=3" defer></script>
 </head>
 <body>
 <div class="app">
@@ -7887,9 +7889,10 @@ function applyPreset(id,greetingIndex=0){
   const secret=document.getElementById("useSecret");
   if(secret) secret.checked=false;
 
-  saveDraft();
+  mobileWizardState.expanded=false;
   mobileWizardState.index=0;
   openMobileCreate({resume:true});
+  saveDraft();
   showMobileToast(`Сценарій «${preset.title}» готовий`);
 }
 
@@ -8078,145 +8081,60 @@ function renderAppHome(){
   document.body.classList.remove("ma-no-tabs");
   setTab("home");
   document.getElementById("maTopTitle").textContent="";
-
   const library=getLocalLibrary();
-  const recent=library.slice(0,5);
-  const draftExists=!!localStorage.getItem(DRAFT_KEY);
-  const editable=library.filter(x=>!!(x.editKey || localStorage.getItem(`love-letter-edit-${x.id}`))).length;
-  const installed=isStandaloneApp();
-
+  const recent=library.slice(0,4);
+  const draftExists=hasMeaningfulDraft();
   document.getElementById("maScreen").innerHTML=`
-    <section class="home-dashboard">
-      <div class="home-topline">
-        <div>
-          <div class="home-eyebrow">Love Letter</div>
-          <h1>Особисті листи,<br>які хочеться зберегти.</h1>
-          <p>Створи маленьку історію для однієї людини — від першого слова до конверта, вибору й фінального моменту.</p>
+    <section class="magic-home">
+      <div class="magic-hero">
+        <div class="magic-hero-copy">
+          <span class="magic-eyebrow"><span aria-hidden="true">✦</span> МАЛЕНЬКЕ ДИВО ДЛЯ ОДНІЄЇ ЛЮДИНИ</span>
+          <h1>Деякі слова<br>заслуговують<br>на <em>магію.</em></h1>
+          <p>Перетвори свої почуття на лист, який хочеться відкривати знову. Твої слова. Їхня усмішка.</p>
+          <div class="magic-hero-actions">
+            <button class="magic-primary" id="maStartBtn" type="button">Створити лист <span aria-hidden="true">↗</span></button>
+            <button class="magic-secondary" id="magicDemoBtn" type="button"><span aria-hidden="true">▷</span> Відчути магію</button>
+          </div>
+          <div class="magic-promise"><span>01 &nbsp; Людина</span><i aria-hidden="true">—</i><span>02 &nbsp; Слова</span><i aria-hidden="true">—</i><span>03 &nbsp; Диво</span></div>
         </div>
-        <button class="home-create-main" id="maStartBtn" type="button">
-          <span class="home-create-plus">＋</span>
-          <span>Створити лист</span>
+        <button class="magic-art" id="magicEnvelopeDemo" type="button" aria-label="Відкрити приклад листа">
+          <span class="magic-orbit orbit-one" aria-hidden="true"></span><span class="magic-orbit orbit-two" aria-hidden="true"></span>
+          <span class="magic-star star-one" aria-hidden="true">✦</span><span class="magic-star star-two" aria-hidden="true">✧</span><span class="magic-star star-three" aria-hidden="true">✦</span>
+          <span class="magic-envelope" aria-hidden="true"><span class="magic-envelope-note">Є дещо, що я хочу<br><em>тобі сказати…</em></span><span class="magic-envelope-flap"></span><span class="magic-envelope-front"></span><span class="magic-seal">L</span><span class="magic-envelope-to">тільки для тебе</span></span>
+          <span class="magic-art-caption">Торкнись. Усередині — почуття.</span>
         </button>
       </div>
-
-      <div class="home-grid">
-        <div class="home-main-column">
-          ${draftExists ? `
-            <section class="home-panel home-draft-panel">
-              <div class="home-panel-head">
-                <div>
-                  <div class="home-panel-kicker">Чернетка</div>
-                  <h2>Продовжити незавершений лист</h2>
-                </div>
-                <button class="home-soft-btn" id="maResumeDraftBtn" type="button">Продовжити</button>
-              </div>
-              <div class="draft-visual" aria-hidden="true">
-                <div class="draft-sheet"></div>
-                <div class="draft-line l1"></div>
-                <div class="draft-line l2"></div>
-                <div class="draft-line l3"></div>
-                <div class="draft-seal">L</div>
-              </div>
-            </section>` : ""}
-
-          <section class="home-panel">
-            <div class="home-panel-head">
-              <div>
-                <div class="home-panel-kicker">Бібліотека</div>
-                <h2>Останні листи</h2>
-              </div>
-              ${library.length ? '<button class="home-text-btn" id="maSeeAllBtn" type="button">Усі листи</button>' : ''}
-            </div>
-
-            ${recent.length ? `
-              <div class="home-recent-list">
-                ${recent.map(appLetterCard).join("")}
-              </div>` : `
-              <div class="home-empty-state">
-                <div class="home-empty-icon">L</div>
-                <div>
-                  <strong>Поки що тут тихо</strong>
-                  <span>Створи перший лист — він одразу з’явиться у бібліотеці.</span>
-                </div>
-              </div>`}
-          </section>
+      ${draftExists ? `<section class="magic-draft"><span aria-hidden="true">✎</span><div><strong>Твої слова чекають</strong><p>Продовж лист із того місця, де зупинився.</p></div><button class="magic-secondary" id="maResumeDraftBtn" type="button">Продовжити →</button></section>` : ""}
+      <section class="magic-occasions">
+        <div class="magic-section-heading"><div><span class="magic-eyebrow">НЕ ПОТРІБНО ОСОБЛИВОГО ПРИВОДУ</span><h2>З якого почуття почнемо?</h2></div><button class="home-text-btn" id="maIdeasBtn" type="button">Усі ідеї ↗</button></div>
+        <div class="magic-occasion-grid">
+          <button class="magic-occasion" data-magic-occasion="love" type="button"><span class="magic-occasion-icon" aria-hidden="true">♡</span><strong>Ти — моє тепло</strong><span>Коханій людині. Просто тому, що вона є.</span><i aria-hidden="true">↗</i></button>
+          <button class="magic-occasion" data-magic-occasion="thanks" type="button"><span class="magic-occasion-icon" aria-hidden="true">☀</span><strong>Дякую, що поруч</strong><span>За великі вчинки й маленькі щоденні речі.</span><i aria-hidden="true">↗</i></button>
+          <button class="magic-occasion" data-magic-occasion="support" type="button"><span class="magic-occasion-icon" aria-hidden="true">✧</span><strong>Я з тобою</strong><span>Кілька слів, які можуть стати обіймами.</span><i aria-hidden="true">↗</i></button>
         </div>
-
-        <aside class="home-side-column">
-          <section class="home-panel home-stats-panel">
-            <div class="home-panel-kicker">Твій простір</div>
-            <div class="home-stats">
-              <div class="home-stat">
-                <strong>${library.length}</strong>
-                <span>листів</span>
-              </div>
-              <div class="home-stat">
-                <strong>${editable}</strong>
-                <span>редагованих</span>
-              </div>
-              <div class="home-stat">
-                <strong>${draftExists ? 1 : 0}</strong>
-                <span>чернетка</span>
-              </div>
-            </div>
-          </section>
-
-          <section class="home-panel">
-            <div class="home-panel-head compact">
-              <div>
-                <div class="home-panel-kicker">Почати швидше</div>
-                <h2>Ідеї</h2>
-              </div>
-              <button class="home-text-btn" id="maIdeasBtn" type="button">Усі</button>
-            </div>
-            <div class="home-idea-list">
-              ${LETTER_PRESETS.slice(0,4).map(p=>`
-                <button class="home-idea" type="button" data-home-preset="${p.id}">
-                  <span class="home-idea-icon">${p.icon}</span>
-                  <span class="home-idea-copy">
-                    <strong>${escapeHtml(p.title)}</strong>
-                    <small>${escapeHtml(p.sub)}</small>
-                  </span>
-                  <span class="home-idea-arrow">›</span>
-                </button>`).join("")}
-            </div>
-          </section>
-
-          <section class="home-panel home-status-panel home-inspiration-panel">
-            <div class="home-panel-kicker">Маленький ритуал</div>
-            <div class="home-inspiration-art" aria-hidden="true">
-              <div class="home-mini-envelope"><span>L</span></div>
-            </div>
-            <h2>Більше, ніж повідомлення.</h2>
-            <p>Почни з готової ідеї, додай свої слова й залиш людині момент, до якого хочеться повернутися.</p>
-            <button class="home-text-btn" id="homeInspirationBtn" type="button">Знайти ідею →</button>
-          </section>
-        </aside>
-      </div>
+      </section>
+      ${recent.length ? `<section class="magic-recent"><div class="magic-section-heading"><div><span class="magic-eyebrow">ТВІЙ МАЛЕНЬКИЙ ВСЕСВІТ</span><h2>Листи, у яких живуть почуття</h2></div><button class="home-text-btn" id="maSeeAllBtn" type="button">Усі листи ↗</button></div><div class="home-recent-list">${recent.map(appLetterCard).join("")}</div></section>` : `<p class="magic-first-note">Кожна велика історія починається з кількох щирих слів.</p>`}
     </section>`;
-
-  document.getElementById("maStartBtn")?.addEventListener("click",()=>openMobileCreate({resume:false}));
+  document.getElementById("maStartBtn").onclick=()=>openMobileCreate({resume:false});
   document.getElementById("maResumeDraftBtn")?.addEventListener("click",()=>openMobileCreate({resume:true}));
   document.getElementById("maSeeAllBtn")?.addEventListener("click",()=>setMobileAppRoute("library"));
-  document.getElementById("maIdeasBtn")?.addEventListener("click",()=>setMobileAppRoute("ideas"));
-  document.getElementById("homeInspirationBtn")?.addEventListener("click",()=>setMobileAppRoute("ideas"));
-
-  document.querySelectorAll("[data-home-preset]").forEach(btn=>{
-    btn.addEventListener("click",()=>applyPreset(btn.dataset.homePreset));
+  document.getElementById("maIdeasBtn").onclick=()=>setMobileAppRoute("ideas");
+  document.getElementById("magicDemoBtn").onclick=()=>window.LetterMagic?.demo();
+  document.getElementById("magicEnvelopeDemo").onclick=()=>window.LetterMagic?.demo();
+  document.querySelectorAll("[data-magic-occasion]").forEach(btn=>btn.onclick=()=>{
+    openMobileCreate({resume:false});
+    const ideas={
+      love:["Ти — моє тепло", "Мені подобається, як поруч із тобою звичайні дні стають особливими. Хочу, щоб ти знав: ти дуже важлива для мене людина."],
+      thanks:["Дякую, що ти є", "Я помічаю твою турботу. Навіть ту, про яку ти не говориш. Дякую за підтримку, за час і за те тепло, яке ти приносиш у моє життя."],
+      support:["Я поруч", "Тобі не потрібно справлятися з усім наодинці. Я поруч: можу вислухати, помовчати разом або просто обійняти. Ти важлива для мене людина."]
+    };
+    const [title,message]=ideas[btn.dataset.magicOccasion];
+    document.getElementById("letterTitle").value=title;
+    document.getElementById("letterMessage").value=message;
+    saveDraft();
   });
-
-  document.getElementById("homeInstallBtn")?.addEventListener("click",async()=>{
-    if(deferredInstallPrompt){
-      deferredInstallPrompt.prompt();
-      try{ await deferredInstallPrompt.userChoice; }catch{}
-      deferredInstallPrompt=null;
-    }else{
-      const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
-      showMobileToast(isIOS ? "Safari → Поділитися → На початковий екран" : "Відкрий меню браузера → Встановити застосунок");
-    }
-  });
-
   bindLetterCards();
+  window.LetterMagic?.reveal(document.getElementById("maScreen"));
 }
 
 function renderAppLibrary(query="",filter="all"){
@@ -8881,6 +8799,23 @@ function openMobileCreate({resume=false}={}){
   if(tabbar) tabbar.style.setProperty("display","none","important");
 
   if(!resume){
+    // Restore every field, including optional details, before creating a fresh letter.
+    document.querySelectorAll("#creatorView > .builder input, #creatorView > .builder textarea, #creatorView > .builder select").forEach(el=>{
+      if(el.type==="file") el.value="";
+      else if(el.type==="checkbox") el.checked=el.defaultChecked;
+      else if(el.tagName==="SELECT") el.selectedIndex=0;
+      else el.value=el.defaultValue;
+    });
+    document.getElementById("useSecret").checked=false;
+    ["letterTo","finalDate","finalTime","finalNote"].forEach(id=>document.getElementById(id).value="");
+    document.getElementById("finalCaption").value="Нехай цей момент залишиться з тобою";
+    document.getElementById("finalTitle").value="Домовились";
+    [["☕","Випити кави"],["🌿","Прогулятися"],["💬","Поговорити"],["♡","Обійнятися"]].forEach(([emoji,title],i)=>{
+      document.getElementById(`c${i+1}e`).value=emoji;
+      document.getElementById(`c${i+1}t`).value=title;
+      document.getElementById(`c${i+1}s`).value="";
+    });
+    mobileWizardState.expanded=false;
     clearDraft();
     state.step=0;
     state.photoData="";
@@ -8911,9 +8846,11 @@ function openMobileCreate({resume=false}={}){
 
 function showMobileReady(link,id){
   setMobileAppVisibility(true);
+  history.replaceState(null,"","#home");
   document.body.classList.add("ma-no-tabs");
   document.getElementById("maTopTitle").textContent="Готово";
   const payload=gatherData();
+  clearDraft();
   upsertLocalLetter({id,editKey:state.editKey,payload});
   const initial=(payload.recipient||"L").slice(0,1).toUpperCase();
 
@@ -8925,22 +8862,33 @@ function showMobileReady(link,id){
         <div class="ma-ready-wax">${escapeHtml(initial)}</div>
       </div>
       <h1>Твій лист готовий.</h1>
-      <p>Він уже живе за приватним посиланням. Можеш переглянути його або одразу поділитися.</p>
+      <p>Твої слова вже чекають на свою людину. Відкрий лист для перевірки або надішли посилання.</p>
+      <p class="magic-link-note">Лист доступний усім, хто має посилання. Керувати ним можна з бібліотеки в цьому браузері.</p>
       <div class="ma-ready-actions">
         <button class="ma-ready-main" id="maReadyShare" type="button">Поділитися листом</button>
+        <button class="ma-ready-soft" id="maReadyCopy" type="button">Скопіювати посилання</button>
         <button class="ma-ready-soft" id="maReadyOpen" type="button">Переглянути як отримувач</button>
         <button class="ma-ready-soft" id="maReadyHome" type="button">На головну</button>
       </div>
     </div>`;
 
-  document.getElementById("maReadyShare")?.addEventListener("click",async()=>{
-    if(navigator.share){
-      try{await navigator.share({title:"Love Letter",url:link})}catch{}
-    }else{
-      await navigator.clipboard.writeText(link);
-      showMobileToast("Посилання скопійовано");
+  const copyLink=async()=>{
+    try{await navigator.clipboard.writeText(link);showMobileToast("Посилання скопійовано");}
+    catch{showMobileToast("Браузер не дозволив копіювання. Скопіюй посилання з поля нижче.");
+      if(!document.getElementById("magicCopyFallback")){
+        const input=document.createElement("input");input.id="magicCopyFallback";input.className="mw-input";
+        input.readOnly=true;input.value=link;input.setAttribute("aria-label","Посилання на лист");
+        document.querySelector(".ma-ready-actions").append(input);input.focus();input.select();
+      }
     }
-  });
+  };
+  document.getElementById("maReadyCopy").onclick=copyLink;
+  document.getElementById("maReadyShare").onclick=async()=>{
+    if(!navigator.share){await copyLink();return;}
+    try{await navigator.share({title:"Love Letter",url:link});}
+    catch(error){if(error.name!=="AbortError") await copyLink();}
+  };
+  window.LetterMagic?.celebrate();
   document.getElementById("maReadyOpen")?.addEventListener("click",()=>location.assign(link));
   document.getElementById("maReadyHome")?.addEventListener("click",()=>{
     history.replaceState(null,"","#home");renderAppHome();
@@ -8990,7 +8938,7 @@ function renderMobileMagic(){
   const host = document.getElementById("mwMagic");
   if(!host) return;
 
-  const key = MOBILE_WIZARD_STEPS[mobileWizardState.index]?.key || "basic";
+  const key = getMobileWizardSteps()[mobileWizardState.index]?.key || "basic";
 
   // Decorative magic is used only when it adds meaning.
   // Utility steps should not reserve a large empty panel.
@@ -9094,7 +9042,7 @@ function renderMobileMagic(){
 
 function updateMobileMagicLive(){
   if(!isMobileWizard()) return;
-  const key = MOBILE_WIZARD_STEPS[mobileWizardState.index]?.key;
+  const key = getMobileWizardSteps()[mobileWizardState.index]?.key;
   if(key==="basic"){
     const val=(document.getElementById("mwRecipient")?.value || "").trim();
     const el=document.getElementById("magicRecipientInitial");
@@ -9341,7 +9289,7 @@ const MOBILE_WIZARD_STEPS = [
 
         <div class="mw-field">
           <label class="mw-label" for="mwLetterMessage">Текст листа</label>
-          <textarea class="mw-textarea" id="mwLetterMessage" placeholder="Напиши тут те, що хочеш сказати…"></textarea>
+          <textarea class="mw-textarea" id="mwLetterMessage" maxlength="2500" placeholder="Напиши тут те, що хочеш сказати…"></textarea>
         </div>
 
         <div class="mw-field">
@@ -9349,7 +9297,8 @@ const MOBILE_WIZARD_STEPS = [
           <input class="mw-input" id="mwLetterSign" maxlength="80" placeholder="Твій..." />
         </div>
 
-        <div class="mw-letter-font-block">
+        <details class="mw-letter-font-block magic-font-options">
+          <summary>Обрати стиль листа <span>за бажанням</span></summary>
           <div class="mw-letter-font-head">
             <div>
               <strong>Стиль листа</strong>
@@ -9366,7 +9315,7 @@ const MOBILE_WIZARD_STEPS = [
                 </span>
               </button>`).join("")}
           </div>
-        </div>
+        </details>
       </div>`
   },
   {
@@ -9483,9 +9432,30 @@ const MOBILE_WIZARD_STEPS = [
 ];
 
 const mobileWizardState = {
+  expanded:false,
   index:0,
   visualMode:"word"
 };
+
+const MOBILE_REVIEW_STEP = {
+  key:"review", kicker:"Майже магія", title:"Поглянь, що ти створив.",
+  render:()=>`<div class="mw-screen magic-review">
+    <p class="mw-copy">Ось твій лист. Можна вже створити посилання або додати ще трохи особистого.</p>
+    <div class="magic-review-paper">${previewLetter(gatherData())}</div>
+    <button class="magic-secondary" type="button" id="magicReviewOpen">Відкрити конверт як отримувач ↗</button>
+    <details class="magic-customize"><summary>Додати особливі деталі <span>за бажанням</span></summary><div class="magic-customize-grid">
+      <button type="button" data-magic-step="first">✦ Перше враження</button><button type="button" data-magic-step="secret">♡ Секретне слово</button>
+      <button type="button" data-magic-step="visual">◻ Фото або портрет</button><button type="button" data-magic-step="finish">☀ Вибір після листа</button><button type="button" data-magic-step="final">✧ Фінальна фраза</button>
+    </div></details>
+    <p class="magic-link-note">Посилання відкриває лист кожному, хто його має. Доступ до редагування залишиться у твоєму браузері.</p>
+  </div>`
+};
+
+function getMobileWizardSteps(){
+  return mobileWizardState.expanded
+    ? [...MOBILE_WIZARD_STEPS, MOBILE_REVIEW_STEP]
+    : [MOBILE_WIZARD_STEPS[0], MOBILE_WIZARD_STEPS[3], MOBILE_REVIEW_STEP];
+}
 
 function isMobileWizard(){
   // Root path uses the same product shell and creation flow on every device.
@@ -9584,6 +9554,7 @@ function renderMobileSecretFields(){
         : document.getElementById("secretAnswer");
       if(target) target.value = e.target.value;
       renderMobilePreview();
+      saveDraft();
     });
   });
 }
@@ -9761,21 +9732,21 @@ function bindMobileScene(){
     });
   });
 
-  if(MOBILE_WIZARD_STEPS[mobileWizardState.index]?.key==="letter"){
+  if(getMobileWizardSteps()[mobileWizardState.index]?.key==="letter"){
     setLetterFont(document.getElementById("letterFont")?.value || "classic");
   }
 
-  if(MOBILE_WIZARD_STEPS[mobileWizardState.index].key==="secret"){
+  if(getMobileWizardSteps()[mobileWizardState.index].key==="secret"){
     renderMobileSecretFields();
   }
-  if(MOBILE_WIZARD_STEPS[mobileWizardState.index].key==="visual"){
+  if(getMobileWizardSteps()[mobileWizardState.index].key==="visual"){
     renderMobileVisualDetails();
   }
 }
 
 function renderMobileWizard(){
   if(!isMobileWizard()) return;
-  const step = MOBILE_WIZARD_STEPS[mobileWizardState.index];
+  const step = getMobileWizardSteps()[mobileWizardState.index];
   const scene = document.getElementById("mwScene");
   if(!scene) return;
 
@@ -9784,9 +9755,9 @@ function renderMobileWizard(){
   document.getElementById("mwTitle").textContent = step.title;
   const wizardRoot=document.getElementById("mobileWizard");
   if(wizardRoot) wizardRoot.dataset.step=step.key;
-  document.getElementById("mwCount").textContent = `${mobileWizardState.index+1} з ${MOBILE_WIZARD_STEPS.length}`;
+  document.getElementById("mwCount").textContent = `${mobileWizardState.index+1} з ${getMobileWizardSteps().length}`;
   document.getElementById("mwProgressBar").style.width =
-    `${((mobileWizardState.index+1)/MOBILE_WIZARD_STEPS.length)*100}%`;
+    `${((mobileWizardState.index+1)/getMobileWizardSteps().length)*100}%`;
   scene.innerHTML = step.render();
   const screen = scene.querySelector(".mw-screen");
   if(screen){
@@ -9798,23 +9769,57 @@ function renderMobileWizard(){
   const next = document.getElementById("mwNextBtn");
   if(back){ back.disabled = false; back.textContent = mobileWizardState.index===0 ? "Закрити" : "Назад"; }
   if(next){
-    next.textContent = mobileWizardState.index===MOBILE_WIZARD_STEPS.length-1
+    next.textContent = mobileWizardState.index===getMobileWizardSteps().length-1
       ? "Створити лист"
       : "Продовжити";
   }
 
   bindMobileScene();
+  const status=document.createElement("p");
+  status.id="magicSaveStatus";
+  status.className="magic-save-status";
+  status.setAttribute("role","status");
+  scene.append(status);
+  saveDraft();
+  if(step.key==="review"){
+    hydrateWordPortraits(scene,gatherData());
+    document.getElementById("magicReviewOpen").onclick=()=>window.LetterMagic?.preview(gatherData());
+    scene.querySelectorAll("[data-magic-step]").forEach(btn=>btn.onclick=()=>{
+      mobileWizardState.expanded=true;
+      mobileWizardState.index=MOBILE_WIZARD_STEPS.findIndex(item=>item.key===btn.dataset.magicStep);
+      renderMobileWizard();
+      window.scrollTo({top:0,behavior:"instant"});
+    });
+  }else if(mobileWizardState.expanded){
+    const review=document.createElement("button");
+    review.type="button"; review.className="magic-return-review";
+    review.textContent="Повернутися до перегляду →";
+    review.onclick=()=>{
+      const error=validateMobileStep();
+      if(error){showMobileToast(error);return;}
+      mobileWizardState.index=getMobileWizardSteps().length-1;
+      renderMobileWizard();
+      window.scrollTo({top:0,behavior:"instant"});
+    };
+    scene.append(review);
+  }
+  document.getElementById("mwTitle").setAttribute("tabindex","-1");
+  document.getElementById("mwTitle").focus({preventScroll:true});
+  window.LetterMagic?.reveal(scene);
 }
 
 function validateMobileStep(){
-  const key = MOBILE_WIZARD_STEPS[mobileWizardState.index].key;
+  const key = getMobileWizardSteps()[mobileWizardState.index].key;
   syncMobileToLegacy();
 
   if(key==="basic" && !document.getElementById("recipient")?.value.trim()){
     return "Напиши ім’я отримувача.";
   }
-  if(key==="letter" && !document.getElementById("letterMessage")?.value.trim()){
+  if((key==="letter" || key==="review") && !document.getElementById("letterMessage")?.value.trim()){
     return "Напиши хоча б кілька слів у листі.";
+  }
+  if(key==="review" && !document.getElementById("recipient")?.value.trim()){
+    return "Напиши ім’я отримувача на першому кроці.";
   }
   if(key==="secret" && document.getElementById("useSecret")?.checked){
     if(!document.getElementById("secretAnswer")?.value.trim()){
@@ -9825,6 +9830,7 @@ function validateMobileStep(){
 }
 
 async function mobileWizardNext(){
+  if(mobileWizardState.busy) return;
   const err = validateMobileStep();
   if(err){
     const scene = document.getElementById("mwScene");
@@ -9840,14 +9846,17 @@ async function mobileWizardNext(){
   renderPhonePreview();
   renderMobilePreview();
 
-  if(mobileWizardState.index < MOBILE_WIZARD_STEPS.length-1){
+  if(mobileWizardState.index < getMobileWizardSteps().length-1){
     playStepConfirm();
     haptic(8);
     mobileSceneDirection = "forward";
     mobileWizardState.index++;
+    mobileWizardState.busy=true;
+    saveDraft();
     setTimeout(()=>{
+      mobileWizardState.busy=false;
       renderMobileWizard();
-      window.scrollTo({top:0,behavior:"smooth"});
+      window.scrollTo({top:0,behavior:window.LetterMagic?.reduced() ? "instant" : "smooth"});
     }, 105);
     return;
   }
@@ -9856,6 +9865,7 @@ async function mobileWizardNext(){
   state.step = steps.length - 1;
   renderEditor();
   try{
+    mobileWizardState.busy=true;
     document.getElementById("mwNextBtn").disabled = true;
     document.getElementById("mwNextBtn").textContent = "Створюю…";
     const result = await makeShareLink();
@@ -9866,14 +9876,18 @@ async function mobileWizardNext(){
       return;
     }
   }catch(e){
-    alert(e?.message || "Не вдалося створити лист.");
+    showMobileToast(e?.message || "Не вдалося створити лист. Перевір з’єднання та спробуй ще раз.");
   }finally{
+    mobileWizardState.busy=false;
     document.getElementById("mwNextBtn").disabled = false;
     document.getElementById("mwNextBtn").textContent = "Створити лист";
   }
 }
 
 function mobileWizardBack(){
+  if(mobileWizardState.busy) return;
+  syncMobileToLegacy();
+  saveDraft();
   if(mobileWizardState.index===0){
     history.replaceState(null,"","#home");
     renderAppHome();
@@ -9894,12 +9908,12 @@ function renderMobilePreview(){
   const host = document.getElementById("mwPhoneStage");
   if(!host) return;
 
-  const key = MOBILE_WIZARD_STEPS[mobileWizardState.index].key;
+  const key = getMobileWizardSteps()[mobileWizardState.index].key;
   let html = "";
   if(key==="basic" || key==="first") html = previewIntro(d);
   else if(key==="secret") html = d.useSecret ? previewSecret(d) : previewEnvelope(d);
   else if(key==="letter") html = previewLetter(d);
-  else if(key==="visual") html = previewLetter(d);
+  else if(key==="visual" || key==="review") html = previewLetter(d);
   else if(key==="finish") html = previewChoice(d);
   else html = previewFinal(d);
 
@@ -10850,6 +10864,7 @@ function renderStory(){
       btn.dataset.opening = "1";
       btn.disabled = true;
       envelope.classList.add("is-opening");
+      window.LetterMagic?.burst(btn,28);
 
       const note = $("#envelopeNote");
       if(note) note.textContent = "відкриваємо…";
@@ -10857,7 +10872,7 @@ function renderStory(){
       setTimeout(()=>{
         state.storyStep = 3;
         renderStory();
-      }, 1050);
+      }, window.LetterMagic?.reduced() ? 0 : 1050);
     };
     return;
   }
@@ -11017,6 +11032,7 @@ migrateOldDraftMedia();
 function getDraftPayload(){
   return {
     step: state.step,
+    wizard: { index: mobileWizardState.index, expanded: mobileWizardState.expanded },
     photoData: getMediaMode()==="photo" ? (state.photoData || "") : "",
     portraitData: getMediaMode()==="portrait" ? (state.portraitData || null) : null,
     fields: {
@@ -11031,6 +11047,7 @@ function getDraftPayload(){
       letterTitle: $("#letterTitle")?.value || "",
       letterMessage: $("#letterMessage")?.value || "",
       letterSign: $("#letterSign")?.value || "",
+      letterFont: $("#letterFont")?.value || "classic",
       showPhoto: getMediaMode()!=="none" && !!$("#showPhoto")?.checked,
       mediaMode: getMediaMode(),
       mediaEnabled: getMediaMode()!=="none",
@@ -11058,11 +11075,25 @@ function getDraftPayload(){
   };
 }
 
+function hasMeaningfulDraft(){
+  try{
+    const draft=JSON.parse(localStorage.getItem(DRAFT_KEY)||"null");
+    return Boolean(draft?.fields?.recipient?.trim() || draft?.fields?.letterMessage?.trim());
+  }catch{return false;}
+}
+
 function saveDraft(){
   try{
     if(!document.getElementById("recipient")) return;
-    localStorage.setItem(DRAFT_KEY, JSON.stringify(getDraftPayload()));
+    const draft=getDraftPayload();
+    // Initialization should not create a fake draft from the demo defaults.
+    if(!document.body.classList.contains("mw-create-active") && !localStorage.getItem(DRAFT_KEY)) return;
+    localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
+    const status=document.getElementById("magicSaveStatus");
+    if(status) status.textContent="✓ Чернетку збережено на цьому пристрої";
   }catch(e){
+    const status=document.getElementById("magicSaveStatus");
+    if(status) status.textContent="Не вдалося зберегти чернетку. Не закривай сторінку до створення посилання.";
     console.warn("Draft save failed", e);
   }
 }
@@ -11075,6 +11106,8 @@ function loadDraft(){
     if(!d || !d.fields) return false;
 
     state.step = Math.min(steps.length - 1, Math.max(0, Number(d.step || 0)));
+    mobileWizardState.expanded=d.wizard?.expanded===true;
+    mobileWizardState.index=Math.min(getMobileWizardSteps().length-1,Math.max(0,Number(d.wizard?.index)||0));
     const f = d.fields;
     const restoredMode=(f?.mediaEnabled === true && ["portrait","photo"].includes(f?.mediaMode)) ? f.mediaMode : "none";
     state.photoData = restoredMode==="photo" ? (d.photoData || "") : "";
@@ -11272,7 +11305,7 @@ function attachListenersImpl(){
         const result = await makeShareLink();
         $("#shareLink").value = result.link;
       }
-      const recipientUrl = new посилання($("#shareLink").value, location.origin);
+      const recipientUrl = new URL($("#shareLink").value, location.origin);
       if(!/^\/l\/[A-Za-z0-9_-]{4,32}$/.test(recipientUrl.pathname.replace(/\/+$/, ""))){
         throw new Error("Некоректне посилання отримувача.");
       }
@@ -11292,7 +11325,7 @@ function attachListenersImpl(){
 
       // Переходимо саме на recipient посилання у цій вкладці.
       // Це прибирає поведінку pop-up/new-tab, яка на телефоні могла не спрацювати.
-      const u = new посилання(link, location.origin);
+      const u = new URL(link, location.origin);
       if(!/^\/l\/[A-Za-z0-9_-]{4,32}$/.test(u.pathname.replace(/\/+$/, ""))){
         throw new Error("Некоректне посилання отримувача.");
       }
@@ -11604,7 +11637,7 @@ initPWA();
     // Legacy private links are accepted only to recover the local доступ до редагування.
     // Then the посилання is immediately normalized to the normal recipient route.
     const id = editMatch[1];
-    const hashParams = new посиланняSearchParams(location.hash.replace(/^#/,""));
+    const hashParams = new URLSearchParams(location.hash.replace(/^#/,""));
     const key = hashParams.get("key") || "";
     if(key){
       try{ localStorage.setItem(`love-letter-edit-${id}`, key); }catch{}
