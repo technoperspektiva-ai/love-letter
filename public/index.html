@@ -130,6 +130,19 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
 }
 .btn.primary{background:#281521;color:white;box-shadow:0 6px 0 #120711}
 .btn.ghost{background:#eee3df;color:#36212f}
+.btn.danger{
+ background:#7d203e;
+ color:#fff;
+ box-shadow:0 5px 0 #4e1026;
+}
+.url-control-box{
+ margin-top:16px;
+ padding:14px;
+ border-radius:16px;
+ background:#f4e5ea;
+ border:1px solid #e7ced8;
+}
+
 .btn.slim{padding:11px 14px}
 .field-note{font-size:12px;color:#8e7986;margin-top:8px;line-height:1.45}
 .switch{display:flex;align-items:center;gap:10px;margin-top:12px}
@@ -495,6 +508,14 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
                 <div class="mini-actions">
                   <button class="btn ghost slim" type="button" id="copyEditLink">Копіювати edit-link</button>
                   <button class="btn ghost slim" type="button" id="openEditLink">Редагувати зараз</button>
+                </div>
+                <div class="url-control-box">
+                  <div class="field-note"><b>Керування посиланням</b><br>Можна перевипустити URL або повністю видалити лист.</div>
+                  <div class="mini-actions">
+                    <button class="btn ghost slim" type="button" id="regenerateUrlBtn">Створити новий URL</button>
+                    <button class="btn danger slim" type="button" id="deleteStoryBtn">Видалити лист</button>
+                  </div>
+                  <div id="urlControlStatus" class="field-note"></div>
                 </div>
               </div>
               <div class="muted" style="margin-top:12px">Письмо сохраняется в бесплатной Cloudflare D1, а получатель получает короткую ссылку вида /l/Ab3Xy9Qk.</div>
@@ -1338,6 +1359,89 @@ function attachListeners(){
     if(link) location.href = link;
   };
 
+  $("#regenerateUrlBtn").onclick = async()=>{
+    const status = $("#urlControlStatus");
+    if(!state.editingId || !state.editKey){
+      status.textContent = "Спочатку створи лист або відкрий його через edit-link.";
+      return;
+    }
+
+    const ok = confirm("Створити новий короткий URL? Старе посилання для отримувача одразу перестане працювати.");
+    if(!ok) return;
+
+    try{
+      $("#regenerateUrlBtn").disabled = true;
+      status.textContent = "Створюю новий URL…";
+
+      const r = await fetch(`/api/story/${encodeURIComponent(state.editingId)}/regenerate`, {
+        method: "POST",
+        headers: { "x-edit-token": state.editKey }
+      });
+      const data = await r.json();
+      if(!r.ok) throw new Error(data.error || "Не вдалося створити новий URL.");
+
+      try{
+        localStorage.removeItem(`love-letter-edit-${state.editingId}`);
+      }catch{}
+
+      state.editingId = data.id;
+      try{
+        localStorage.setItem(`love-letter-edit-${state.editingId}`, state.editKey);
+      }catch{}
+
+      const shortLink = `${location.origin}${data.path}`;
+      const editLink = `${location.origin}${data.editPath}`;
+
+      $("#shareLink").value = shortLink;
+      $("#editLinkBox").value = editLink;
+
+      status.textContent = "Новий URL готовий. Старе посилання більше не працює.";
+      history.replaceState(null, "", data.editPath);
+    }catch(e){
+      status.textContent = e.message || "Не вдалося перевипустити URL.";
+    }finally{
+      $("#regenerateUrlBtn").disabled = false;
+    }
+  };
+
+  $("#deleteStoryBtn").onclick = async()=>{
+    const status = $("#urlControlStatus");
+    if(!state.editingId || !state.editKey){
+      status.textContent = "Немає активного листа для видалення.";
+      return;
+    }
+
+    const ok = confirm("Видалити цей лист назавжди? Посилання для отримувача перестане працювати. Цю дію не можна скасувати.");
+    if(!ok) return;
+
+    try{
+      $("#deleteStoryBtn").disabled = true;
+      status.textContent = "Видаляю лист…";
+
+      const currentId = state.editingId;
+      const r = await fetch(`/api/story/${encodeURIComponent(currentId)}`, {
+        method: "DELETE",
+        headers: { "x-edit-token": state.editKey }
+      });
+      const data = await r.json();
+      if(!r.ok) throw new Error(data.error || "Не вдалося видалити лист.");
+
+      try{
+        localStorage.removeItem(`love-letter-edit-${currentId}`);
+      }catch{}
+
+      state.editingId = "";
+      state.editKey = "";
+      clearDraft();
+
+      alert("Лист видалено. Старе посилання більше не працює.");
+      location.href = "/";
+    }catch(e){
+      status.textContent = e.message || "Не вдалося видалити лист.";
+      $("#deleteStoryBtn").disabled = false;
+    }
+  };
+
   $$("#recipient, #introMain, #introTop, #envelopeHint, #secretQuestion, #secretAnswer, #letterTo, #letterTitle, #letterMessage, #letterSign, #choiceTitle, #finalCaption, #finalTitle, #finalDate, #finalTime, #finalNote, #finalChoiceIndex, #showPhoto, #useSecret, #c1e, #c1t, #c1s, #c2e, #c2t, #c2s, #c3e, #c3t, #c3s, #c4e, #c4t, #c4s").forEach(el=>{
     el.addEventListener("input", () => {
       if(el.id === "recipient" && !$("#letterTo").dataset.touched){
@@ -1407,6 +1511,15 @@ function attachListeners(){
 
       const gen = $("#generateLink");
       if(gen) gen.textContent = "Зберегти зміни";
+
+      const editWrap = document.querySelector(".edit-link-wrap");
+      const editBox = $("#editLinkBox");
+      if(editWrap && editBox){
+        editWrap.classList.remove("hidden");
+        editBox.value = `${location.origin}/edit/${id}#key=${key}`;
+      }
+      const shareBox = $("#shareLink");
+      if(shareBox) shareBox.value = `${location.origin}/l/${id}`;
 
       return;
     }catch(e){

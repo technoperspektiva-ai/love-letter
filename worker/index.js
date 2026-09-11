@@ -1,6 +1,6 @@
 const cors = {
   "access-control-allow-origin": "*",
-  "access-control-allow-methods": "GET,POST,PUT,OPTIONS",
+  "access-control-allow-methods": "GET,POST,PUT,DELETE,OPTIONS",
   "access-control-allow-headers": "content-type,x-edit-token"
 };
 
@@ -125,6 +125,61 @@ async function updateStory(request, id, env) {
   return json({ ok: true, id, path: `/l/${id}` });
 }
 
+
+async function authorizeEdit(id, editKey, env) {
+  if (!editKey) return { ok: false, status: 401, error: "missing_edit_token" };
+
+  const row = await env.DB.prepare(
+    "SELECT edit_token, payload FROM stories WHERE id = ?"
+  ).bind(id).first();
+
+  if (!row) return { ok: false, status: 404, error: "not_found" };
+  if (!row.edit_token) return { ok: false, status: 403, error: "not_editable" };
+
+  const hash = await sha256(editKey);
+  if (hash !== row.edit_token) {
+    return { ok: false, status: 403, error: "invalid_edit_token" };
+  }
+
+  return { ok: true, row };
+}
+
+async function deleteStory(request, id, env) {
+  const editKey = request.headers.get("x-edit-token") || "";
+  const auth = await authorizeEdit(id, editKey, env);
+  if (!auth.ok) return json({ error: auth.error }, auth.status);
+
+  await env.DB.prepare("DELETE FROM stories WHERE id = ?").bind(id).run();
+  return json({ ok: true, deleted: id });
+}
+
+async function regenerateStoryUrl(request, id, env) {
+  const editKey = request.headers.get("x-edit-token") || "";
+  const auth = await authorizeEdit(id, editKey, env);
+  if (!auth.ok) return json({ error: auth.error }, auth.status);
+
+  let newId = "";
+  for (let i = 0; i < 6; i++) {
+    const candidate = randomId(8);
+    const exists = await env.DB.prepare("SELECT id FROM stories WHERE id = ?").bind(candidate).first();
+    if (!exists) { newId = candidate; break; }
+  }
+  if (!newId) return json({ error: "id_generation_failed" }, 500);
+
+  // Move the story to a new id. Old recipient URL stops working immediately.
+  await env.DB.prepare(
+    "UPDATE stories SET id = ? WHERE id = ?"
+  ).bind(newId, id).run();
+
+  return json({
+    ok: true,
+    oldId: id,
+    id: newId,
+    path: `/l/${newId}`,
+    editPath: `/edit/${newId}#key=${editKey}`
+  });
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -144,6 +199,15 @@ export default {
       }
       if (apiMatch && request.method === "PUT") {
         return await updateStory(request, apiMatch[1], env);
+      }
+
+      if (apiMatch && request.method === "DELETE") {
+        return await deleteStory(request, apiMatch[1], env);
+      }
+
+      const regenerateMatch = url.pathname.match(/^\/api\/story\/([A-Za-z0-9_-]{4,32})\/regenerate$/);
+      if (regenerateMatch && request.method === "POST") {
+        return await regenerateStoryUrl(request, regenerateMatch[1], env);
       }
 
       if (/^\/l\/[A-Za-z0-9_-]{4,32}$/.test(url.pathname) ||
