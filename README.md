@@ -294,3 +294,27 @@ Cloudflare Static Assets за замовчуванням канонізує `/in
 - Перероблено product design: system-first typography, premium surfaces, install UX, mobile cards, privacy state.
 - Google Fonts прибрані: PWA не залежить від зовнішніх шрифтів.
 - `/api/health` повертає `version: "v24"`.
+
+
+## v25 — premium mobile story wizard
+
+Повний mobile UX redesign без переписування backend/business logic.
+
+- На мобільному legacy form/layout приховано.
+- Новий mobile flow — story-like wizard: один екран = одне рішення.
+- 6 великих етапів, але кожен показується окремо:
+  1. Для кого
+  2. Перше враження
+  3. Секрет
+  4. Сам лист
+  5. Образ
+  6. Фінальний вибір
+- Компактний progress: назва кроку + `1 з 6` + тонка progress bar.
+- Bottom CTA з safe-area, blur та VisualViewport keyboard handling.
+- Окремий fullscreen live preview sheet.
+- UI typography — system/SF-like sans; letter preview — editorial serif.
+- Mobile form controls 52–54px, без giant inputs.
+- Жодного horizontal stepper / overflow / desktop-card-stack.
+- Word portrait та existing business logic залишені й синхронізуються через legacy fields.
+- Desktop layout не змінювався.
+- `/api/health` -> `version: "v25"`.

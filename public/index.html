@@ -1438,13 +1438,502 @@ input:focus,textarea:focus,select:focus{border-color:#cc6d91;box-shadow:0 0 0 4p
   .word-portrait-wrap.letter-photo{max-width:210px}
 }
 
+
+/* ===============================================================
+   v25 — premium mobile story wizard
+   =============================================================== */
+
+.mobile-wizard,
+.mw-preview-sheet{display:none}
+
+@media (max-width: 900px){
+  /* Hide legacy creator UI on mobile; desktop remains untouched */
+  #creatorView > .topbar,
+  #creatorView > .hero,
+  #creatorView > .builder{
+    display:none !important;
+  }
+
+  #creatorView{
+    min-height:100dvh;
+    background:
+      radial-gradient(circle at 50% -12%, rgba(116,41,74,.055), transparent 34%),
+      linear-gradient(180deg,#fbf8f3 0%, #f8f4f0 100%);
+    color:#241922;
+  }
+
+  .mobile-wizard{
+    display:flex !important;
+    min-height:100dvh;
+    flex-direction:column;
+    background:transparent;
+    padding-top:env(safe-area-inset-top);
+  }
+
+  .mw-top{
+    min-height:62px;
+    padding:10px 20px 8px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+  }
+  .mw-brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    min-width:0;
+  }
+  .mw-mark{
+    width:34px;
+    height:34px;
+    display:grid;
+    place-items:center;
+    border-radius:50%;
+    color:#fff;
+    background:#4a2134;
+    font:600 19px/1 Georgia,serif;
+    box-shadow:0 5px 14px rgba(74,33,52,.14);
+  }
+  .mw-brandtext{
+    font:600 15px/1.1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Display","Inter",sans-serif;
+    letter-spacing:-.01em;
+    color:#2a1c24;
+  }
+  .mw-preview-btn{
+    min-height:38px;
+    padding:0 14px;
+    border:0;
+    border-radius:999px;
+    background:rgba(74,33,52,.07);
+    color:#4b2939;
+    font:600 14px/1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",sans-serif;
+    transition:transform .18s ease, background .18s ease;
+  }
+  .mw-preview-btn:active{transform:scale(.98);background:rgba(74,33,52,.11)}
+
+  .mw-main{
+    flex:1;
+    min-height:0;
+    padding:12px 20px 118px;
+    display:flex;
+    flex-direction:column;
+  }
+
+  .mw-progress-wrap{
+    padding:4px 0 18px;
+  }
+  .mw-progress-meta{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:20px;
+  }
+  .mw-kicker{
+    margin-bottom:5px;
+    font:600 13px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",sans-serif;
+    color:#9a7f8c;
+  }
+  .mw-title{
+    max-width:285px;
+    font:650 clamp(30px,8.2vw,34px)/1.03 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Display","Inter",sans-serif;
+    letter-spacing:-.035em;
+    color:#231820;
+    text-wrap:balance;
+  }
+  .mw-count{
+    padding-top:4px;
+    font:600 13px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",sans-serif;
+    color:#8c7680;
+    white-space:nowrap;
+  }
+  .mw-progress-track{
+    margin-top:16px;
+    height:3px;
+    border-radius:999px;
+    background:#eadfe4;
+    overflow:hidden;
+  }
+  .mw-progress-bar{
+    width:16.666%;
+    height:100%;
+    border-radius:inherit;
+    background:#6f334c;
+    transition:width .24s cubic-bezier(.2,.7,.2,1);
+  }
+
+  .mw-scene{
+    flex:1;
+    min-height:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+  }
+  .mw-screen{
+    flex:1;
+    min-height:0;
+    display:flex;
+    flex-direction:column;
+    animation:mwIn .22s ease both;
+  }
+  @keyframes mwIn{
+    from{opacity:0;transform:translateY(8px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+
+  .mw-copy{
+    margin:2px 0 20px;
+    max-width:330px;
+    color:#786671;
+    font:400 16px/1.48 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",sans-serif;
+  }
+  .mw-emotional{
+    margin-top:4px;
+    color:#5f4d57;
+    font:500 16px/1.45 Georgia,"Times New Roman",serif;
+  }
+
+  .mw-field{
+    margin-top:4px;
+  }
+  .mw-label{
+    display:block;
+    margin:0 0 8px;
+    color:#5d4a54;
+    font:600 14px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",sans-serif;
+  }
+  .mw-input,
+  .mw-textarea,
+  .mw-select{
+    width:100%;
+    border:0;
+    outline:0;
+    border-radius:16px;
+    background:#fff;
+    color:#291d24;
+    font:400 17px/1.25 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",sans-serif;
+    box-shadow:
+      inset 0 0 0 1px rgba(67,42,55,.08),
+      0 2px 12px rgba(67,42,55,.035);
+    transition:box-shadow .18s ease, transform .18s ease, background .18s ease;
+  }
+  .mw-input,.mw-select{
+    height:54px;
+    padding:0 16px;
+  }
+  .mw-textarea{
+    min-height:132px;
+    max-height:240px;
+    resize:none;
+    padding:15px 16px;
+    line-height:1.45;
+  }
+  .mw-input:focus,
+  .mw-textarea:focus,
+  .mw-select:focus{
+    background:#fffdfb;
+    box-shadow:
+      inset 0 0 0 1.5px rgba(111,51,76,.38),
+      0 0 0 4px rgba(111,51,76,.07),
+      0 3px 18px rgba(67,42,55,.04);
+  }
+  .mw-helper{
+    margin-top:8px;
+    color:#a08d97;
+    font:400 13px/1.4 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",sans-serif;
+  }
+
+  .mw-chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:2px;
+  }
+  .mw-chip{
+    min-height:40px;
+    padding:0 14px;
+    border:0;
+    border-radius:999px;
+    background:#f1e8ec;
+    color:#5d3e4c;
+    font:600 14px/1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",sans-serif;
+    transition:transform .18s ease, background .18s ease;
+  }
+  .mw-chip:active{transform:scale(.98)}
+  .mw-chip.is-active{
+    color:#fff;
+    background:#6f334c;
+  }
+
+  .mw-soft-card{
+    padding:16px;
+    border-radius:20px;
+    background:#f1ebe7;
+  }
+
+  .mw-choice-stack{
+    display:grid;
+    gap:10px;
+  }
+  .mw-choice-row{
+    display:grid;
+    grid-template-columns:46px minmax(0,1fr);
+    gap:10px;
+    align-items:center;
+  }
+  .mw-choice-emoji{
+    width:46px;
+    height:46px;
+    border:0;
+    border-radius:14px;
+    background:#f4ecef;
+    text-align:center;
+    font-size:22px;
+  }
+
+  .mw-photo-choice{
+    display:grid;
+    gap:10px;
+  }
+  .mw-option{
+    width:100%;
+    min-height:64px;
+    padding:12px 14px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    border:0;
+    border-radius:18px;
+    text-align:left;
+    color:#3d2934;
+    background:#fff;
+    box-shadow:inset 0 0 0 1px rgba(67,42,55,.07);
+  }
+  .mw-option.is-active{
+    box-shadow:
+      inset 0 0 0 1.5px rgba(111,51,76,.34),
+      0 0 0 4px rgba(111,51,76,.055);
+  }
+  .mw-option-icon{
+    width:38px;
+    height:38px;
+    display:grid;
+    place-items:center;
+    border-radius:12px;
+    background:#f2e9ed;
+    font-size:18px;
+    flex:0 0 auto;
+  }
+  .mw-option-copy{
+    min-width:0;
+  }
+  .mw-option-title{
+    font:650 15px/1.25 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",sans-serif;
+  }
+  .mw-option-sub{
+    margin-top:3px;
+    color:#8f7c86;
+    font:400 13px/1.35 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",sans-serif;
+  }
+
+  .mw-actionbar{
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index:60;
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:10px;
+    padding:10px 20px calc(16px + env(safe-area-inset-bottom));
+    background:
+      linear-gradient(180deg,rgba(251,248,243,0),rgba(251,248,243,.88) 30%,#fbf8f3 58%);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+  }
+  .mw-back,
+  .mw-next{
+    min-height:52px;
+    border:0;
+    border-radius:16px;
+    font:650 17px/1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",sans-serif;
+    transition:transform .16s ease, opacity .16s ease, background .16s ease;
+  }
+  .mw-back{
+    min-width:92px;
+    padding:0 16px;
+    color:#624a56;
+    background:#efe7e9;
+  }
+  .mw-next{
+    width:100%;
+    padding:0 18px;
+    color:#fff;
+    background:#4a2134;
+    box-shadow:0 8px 20px rgba(74,33,52,.12);
+  }
+  .mw-back:active,.mw-next:active{transform:scale(.98)}
+  .mw-back[disabled],.mw-next[disabled]{opacity:.42}
+
+  /* keyboard-aware compact mode */
+  body.mw-keyboard-open .mw-actionbar{
+    position:fixed;
+    padding-bottom:10px;
+  }
+  body.mw-keyboard-open .mw-main{
+    padding-bottom:88px;
+  }
+
+  /* mobile preview */
+  .mw-preview-sheet{
+    display:block;
+    position:fixed;
+    inset:0;
+    z-index:120;
+    background:#1e0f19;
+    color:#fff;
+    padding-top:env(safe-area-inset-top);
+  }
+  .mw-preview-head{
+    min-height:64px;
+    padding:10px 16px 8px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    border-bottom:1px solid rgba(255,255,255,.06);
+    background:rgba(29,13,24,.86);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+  }
+  .mw-preview-kicker{
+    color:#d7b9c5;
+    font:600 12px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",sans-serif;
+  }
+  .mw-preview-title{
+    margin-top:3px;
+    color:#fff7fa;
+    font:650 16px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",sans-serif;
+  }
+  .mw-preview-close{
+    min-height:38px;
+    padding:0 14px;
+    border:0;
+    border-radius:999px;
+    background:rgba(255,255,255,.09);
+    color:#fff;
+    font:600 14px/1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",sans-serif;
+  }
+  .mw-preview-canvas{
+    height:calc(100dvh - 64px - env(safe-area-inset-top));
+    overflow:auto;
+  }
+  .mw-phone-preview{
+    width:100%;
+    max-width:none;
+    min-height:100%;
+    margin:0;
+    border:0;
+    border-radius:0;
+    background:transparent;
+    box-shadow:none;
+  }
+  .mw-phone-preview .phone-stage{
+    min-height:100%;
+    padding:14px 16px 24px;
+  }
+
+  /* Letter hero moment: editorial restraint */
+  .mw-phone-preview .paper,
+  #storyView .paper{
+    background:
+      linear-gradient(180deg,rgba(255,255,255,.64),rgba(255,255,255,.10) 34%),
+      #f5e7db;
+    color:#443841;
+    border:1px solid rgba(255,255,255,.72);
+    box-shadow:0 24px 70px rgba(15,4,12,.20);
+  }
+  .mw-phone-preview .paper .title,
+  #storyView .paper .title{
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:clamp(30px,8.4vw,36px);
+    line-height:1.04;
+    font-weight:600;
+    letter-spacing:-.02em;
+    text-wrap:pretty;
+    overflow-wrap:break-word;
+  }
+  .mw-phone-preview .paper .msg,
+  #storyView .paper .msg{
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:clamp(17px,4.5vw,19px);
+    line-height:1.52;
+    text-wrap:pretty;
+    overflow-wrap:break-word;
+    hyphens:none;
+  }
+
+  /* Word portrait as emotional visual, not admin preview */
+  .mw-word-preview{
+    margin-top:14px;
+    padding:14px;
+    border-radius:20px;
+    background:#efe8e4;
+  }
+
+  @media (max-width:390px){
+    .mw-main{padding-left:18px;padding-right:18px}
+    .mw-top{padding-left:18px;padding-right:18px}
+    .mw-actionbar{padding-left:18px;padding-right:18px}
+    .mw-title{max-width:250px}
+  }
+
+  @media (max-width:340px){
+    .mw-main{padding-left:16px;padding-right:16px}
+    .mw-top{padding-left:16px;padding-right:16px}
+    .mw-actionbar{padding-left:16px;padding-right:16px}
+    .mw-title{font-size:29px}
+    .mw-back{min-width:78px}
+  }
+}
+
 </style>
 </head>
 <body>
 <div class="app">
   <div class="glow"></div>
   <div class="stars"></div>
-  <div id="creatorView">
+  
+<div id="creatorView">
+  <div id="mobileWizard" class="mobile-wizard hidden">
+    <header class="mw-top">
+      <div class="mw-brand">
+        <div class="mw-mark">L</div>
+        <div class="mw-brandtext">Love Letter</div>
+      </div>
+      <button type="button" class="mw-preview-btn" id="mwPreviewBtn">Перегляд</button>
+    </header>
+
+    <main class="mw-main">
+      <section class="mw-progress-wrap">
+        <div class="mw-progress-meta">
+          <div>
+            <div class="mw-kicker" id="mwKicker">Основне</div>
+            <div class="mw-title" id="mwTitle">Для кого цей лист?</div>
+          </div>
+          <div class="mw-count" id="mwCount">1 з 6</div>
+        </div>
+        <div class="mw-progress-track"><div class="mw-progress-bar" id="mwProgressBar"></div></div>
+      </section>
+
+      <section class="mw-scene" id="mwScene"></section>
+    </main>
+
+    <div class="mw-actionbar" id="mwActionbar">
+      <button type="button" class="mw-back" id="mwBackBtn">Назад</button>
+      <button type="button" class="mw-next" id="mwNextBtn">Продовжити</button>
+    </div>
+  </div>
     <header class="topbar shell">
       <div class="brand"><div class="seal">L</div><div>Love Letter</div></div>
       <div class="top-actions">
@@ -1683,6 +2172,490 @@ input:focus,textarea:focus,select:focus{border-color:#cc6d91;box-shadow:0 0 0 4p
 </div>
 
 <script>
+
+const MOBILE_WIZARD_STEPS = [
+  {
+    key:"basic",
+    kicker:"Основне",
+    title:"Для кого цей лист?",
+    render:()=>`
+      <div class="mw-screen">
+        <p class="mw-copy">Почнемо з найпростішого — імені людини, для якої ти це створюєш.</p>
+        <div class="mw-field">
+          <label class="mw-label" for="mwRecipient">Ім’я</label>
+          <input class="mw-input" id="mwRecipient" autocomplete="off" inputmode="text" placeholder="Наприклад, Настя" />
+          <div class="mw-helper">Це ім’я з’явиться на першому екрані та конверті.</div>
+        </div>
+      </div>`
+  },
+  {
+    key:"first",
+    kicker:"Перше враження",
+    title:"Що вона побачить першою?",
+    render:()=>`
+      <div class="mw-screen">
+        <p class="mw-copy">Один короткий рядок. Без пояснень — тільки відчуття, що це зроблено саме для неї.</p>
+        <div class="mw-field">
+          <label class="mw-label" for="mwIntroMain">Головна фраза</label>
+          <input class="mw-input" id="mwIntroMain" maxlength="80" placeholder="тобі лист" />
+        </div>
+        <div class="mw-field" style="margin-top:16px">
+          <label class="mw-label" for="mwIntroTop">Звернення зверху</label>
+          <input class="mw-input" id="mwIntroTop" maxlength="80" placeholder="Настя," />
+        </div>
+      </div>`
+  },
+  {
+    key:"secret",
+    kicker:"Маленький секрет",
+    title:"Хочеш додати кодове слово?",
+    render:()=>`
+      <div class="mw-screen">
+        <p class="mw-copy">Це необов’язково. Можна зробити момент відкриття трохи особистішим.</p>
+        <div class="mw-chips" id="mwSecretMode">
+          <button class="mw-chip" data-secret="off">Без секрету</button>
+          <button class="mw-chip" data-secret="on">Додати секрет</button>
+        </div>
+        <div id="mwSecretFields" style="margin-top:20px"></div>
+      </div>`
+  },
+  {
+    key:"letter",
+    kicker:"Сам лист",
+    title:"Скажи те, заради чого все це.",
+    render:()=>`
+      <div class="mw-screen">
+        <p class="mw-copy mw-emotional">Не намагайся написати ідеально. Найкраще працює те, що звучить як ти.</p>
+        <div class="mw-field">
+          <label class="mw-label" for="mwLetterTitle">Короткий заголовок</label>
+          <input class="mw-input" id="mwLetterTitle" maxlength="100" placeholder="Для тебе" />
+        </div>
+        <div class="mw-field" style="margin-top:16px">
+          <label class="mw-label" for="mwLetterMessage">Текст листа</label>
+          <textarea class="mw-textarea" id="mwLetterMessage" placeholder="Напиши тут те, що хочеш сказати…"></textarea>
+        </div>
+        <div class="mw-field" style="margin-top:16px">
+          <label class="mw-label" for="mwLetterSign">Підпис</label>
+          <input class="mw-input" id="mwLetterSign" maxlength="80" placeholder="Твій..." />
+        </div>
+      </div>`
+  },
+  {
+    key:"visual",
+    kicker:"Образ",
+    title:"Що з’явиться поруч із листом?",
+    render:()=>`
+      <div class="mw-screen">
+        <p class="mw-copy">Фото — не обов’язкове. Можна зробити легкий портрет зі слів прямо в браузері.</p>
+        <div class="mw-photo-choice">
+          <button class="mw-option" data-visual="word">
+            <div class="mw-option-icon">✦</div>
+            <div class="mw-option-copy">
+              <div class="mw-option-title">Портрет зі слів</div>
+              <div class="mw-option-sub">Локальна обробка. Оригінал фото не йде в D1.</div>
+            </div>
+          </button>
+          <button class="mw-option" data-visual="photo">
+            <div class="mw-option-icon">◻︎</div>
+            <div class="mw-option-copy">
+              <div class="mw-option-title">Звичайне фото</div>
+              <div class="mw-option-sub">Стиснуте фото в листі.</div>
+            </div>
+          </button>
+          <button class="mw-option" data-visual="none">
+            <div class="mw-option-icon">○</div>
+            <div class="mw-option-copy">
+              <div class="mw-option-title">Без зображення</div>
+              <div class="mw-option-sub">Тільки текст і композиція.</div>
+            </div>
+          </button>
+        </div>
+        <div id="mwVisualDetails" style="margin-top:16px"></div>
+      </div>`
+  },
+  {
+    key:"finish",
+    kicker:"Фінальний момент",
+    title:"Що вона обере після листа?",
+    render:()=>`
+      <div class="mw-screen">
+        <p class="mw-copy">Заверши історію маленьким вибором — побаченням, прогулянкою, кавою чи чимось вашим.</p>
+        <div class="mw-field">
+          <label class="mw-label" for="mwChoiceTitle">Питання</label>
+          <input class="mw-input" id="mwChoiceTitle" maxlength="100" placeholder="Що будемо робити?" />
+        </div>
+        <div class="mw-choice-stack" style="margin-top:16px">
+          ${[1,2,3,4].map(i=>`
+            <div class="mw-choice-row">
+              <input class="mw-choice-emoji" id="mwc${i}e" maxlength="4" />
+              <input class="mw-input" id="mwc${i}t" maxlength="80" placeholder="Варіант ${i}" />
+            </div>
+          `).join("")}
+        </div>
+      </div>`
+  }
+];
+
+const mobileWizardState = {
+  index:0,
+  visualMode:"word"
+};
+
+function isMobileWizard(){
+  return matchMedia("(max-width: 900px)").matches;
+}
+
+function syncLegacyToMobile(){
+  const map = {
+    mwRecipient:"recipient",
+    mwIntroMain:"introMain",
+    mwIntroTop:"introTop",
+    mwLetterTitle:"letterTitle",
+    mwLetterMessage:"letterMessage",
+    mwLetterSign:"letterSign",
+    mwChoiceTitle:"choiceTitle",
+    mwc1e:"c1e", mwc1t:"c1t",
+    mwc2e:"c2e", mwc2t:"c2t",
+    mwc3e:"c3e", mwc3t:"c3t",
+    mwc4e:"c4e", mwc4t:"c4t"
+  };
+  for(const [mobileId, legacyId] of Object.entries(map)){
+    const m = document.getElementById(mobileId);
+    const l = document.getElementById(legacyId);
+    if(m && l){
+      if(document.activeElement === m || m.dataset.userEdited === "1"){
+        l.value = m.value;
+      }else{
+        m.value = l.value || "";
+      }
+    }
+  }
+}
+
+function syncMobileToLegacy(){
+  const map = {
+    mwRecipient:"recipient",
+    mwIntroMain:"introMain",
+    mwIntroTop:"introTop",
+    mwLetterTitle:"letterTitle",
+    mwLetterMessage:"letterMessage",
+    mwLetterSign:"letterSign",
+    mwChoiceTitle:"choiceTitle",
+    mwc1e:"c1e", mwc1t:"c1t",
+    mwc2e:"c2e", mwc2t:"c2t",
+    mwc3e:"c3e", mwc3t:"c3t",
+    mwc4e:"c4e", mwc4t:"c4t"
+  };
+  for(const [mobileId, legacyId] of Object.entries(map)){
+    const m = document.getElementById(mobileId);
+    const l = document.getElementById(legacyId);
+    if(m && l) l.value = m.value;
+  }
+}
+
+function renderMobileSecretFields(){
+  const useSecret = document.getElementById("useSecret")?.checked;
+  const host = document.getElementById("mwSecretFields");
+  if(!host) return;
+
+  document.querySelectorAll("[data-secret]").forEach(btn=>{
+    btn.classList.toggle("is-active", (btn.dataset.secret==="on") === !!useSecret);
+  });
+
+  if(!useSecret){
+    host.innerHTML = "";
+    return;
+  }
+
+  host.innerHTML = `
+    <div class="mw-field">
+      <label class="mw-label" for="mwSecretQuestion">Питання</label>
+      <input class="mw-input" id="mwSecretQuestion" placeholder="Наше слово?" />
+    </div>
+    <div class="mw-field" style="margin-top:16px">
+      <label class="mw-label" for="mwSecretAnswer">Правильна відповідь</label>
+      <input class="mw-input" id="mwSecretAnswer" placeholder="Наприклад, море" />
+    </div>`;
+  const q = document.getElementById("secretQuestion");
+  const a = document.getElementById("secretAnswer");
+  if(q) document.getElementById("mwSecretQuestion").value = q.value || "";
+  if(a) document.getElementById("mwSecretAnswer").value = a.value || "";
+
+  ["mwSecretQuestion","mwSecretAnswer"].forEach(id=>{
+    document.getElementById(id)?.addEventListener("input", e=>{
+      const target = id==="mwSecretQuestion"
+        ? document.getElementById("secretQuestion")
+        : document.getElementById("secretAnswer");
+      if(target) target.value = e.target.value;
+      renderMobilePreview();
+    });
+  });
+}
+
+function renderMobileVisualDetails(){
+  const host = document.getElementById("mwVisualDetails");
+  if(!host) return;
+  document.querySelectorAll("[data-visual]").forEach(btn=>{
+    btn.classList.toggle("is-active", btn.dataset.visual === mobileWizardState.visualMode);
+  });
+
+  if(mobileWizardState.visualMode === "none"){
+    host.innerHTML = `<div class="mw-helper">Лист залишиться чистим і типографічним.</div>`;
+    const show = document.getElementById("showPhoto");
+    if(show) show.checked = false;
+    return;
+  }
+
+  if(mobileWizardState.visualMode === "photo"){
+    host.innerHTML = `
+      <div class="mw-soft-card">
+        <label class="mw-label">Фото</label>
+        <input class="mw-input" id="mwPhotoInput" type="file" accept="image/*" style="padding-top:13px" />
+        <div class="mw-helper">Фото буде зменшено прямо в браузері.</div>
+      </div>`;
+    document.getElementById("mwPhotoInput")?.addEventListener("change", async e=>{
+      const file = e.target.files?.[0];
+      if(!file) return;
+      const data = await compressImage(file);
+      state.photoData = data;
+      const show = document.getElementById("showPhoto");
+      if(show) show.checked = true;
+      renderMobilePreview();
+      saveDraft();
+    });
+    return;
+  }
+
+  host.innerHTML = `
+    <div class="mw-soft-card">
+      <label class="mw-label">Фото для аналізу</label>
+      <input class="mw-input" id="mwWordPhotoInput" type="file" accept="image/*" style="padding-top:13px" />
+      <div class="mw-field" style="margin-top:14px">
+        <label class="mw-label" for="mwWordList">Слова портрета</label>
+        <input class="mw-input" id="mwWordList" placeholder="кохаю, разом, назавжди, ми" />
+      </div>
+      <div class="mw-helper">Фото обробляється локально. У сховище потрапляє тільки компактна карта тіней.</div>
+      <div id="mwWordPreview" class="mw-word-preview"></div>
+    </div>`;
+
+  const legacyWords = document.getElementById("wordPortraitWords");
+  if(legacyWords) document.getElementById("mwWordList").value = legacyWords.value || "";
+
+  document.getElementById("mwWordList")?.addEventListener("input", e=>{
+    if(legacyWords) legacyWords.value = e.target.value;
+    renderMobilePreview();
+  });
+
+  document.getElementById("mwWordPhotoInput")?.addEventListener("change", async e=>{
+    const file = e.target.files?.[0];
+    if(!file) return;
+    if(typeof generateWordPortraitFromFile === "function"){
+      await generateWordPortraitFromFile(file);
+    }else{
+      const data = await compressImage(file);
+      state.photoData = data;
+    }
+    renderMobilePreview();
+  });
+}
+
+function bindMobileScene(){
+  syncLegacyToMobile();
+
+  document.querySelectorAll(".mw-input,.mw-textarea,.mw-select").forEach(el=>{
+    el.addEventListener("input", ()=>{
+      el.dataset.userEdited = "1";
+      syncMobileToLegacy();
+      renderPhonePreview();
+      renderMobilePreview();
+      saveDraft();
+    });
+    el.addEventListener("focus", ()=>{
+      setTimeout(()=>el.scrollIntoView({block:"center",behavior:"smooth"}), 180);
+    });
+  });
+
+  document.querySelectorAll("[data-secret]").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      const use = btn.dataset.secret === "on";
+      const legacy = document.getElementById("useSecret");
+      if(legacy) legacy.checked = use;
+      renderMobileSecretFields();
+      renderMobilePreview();
+      saveDraft();
+    });
+  });
+
+  document.querySelectorAll("[data-visual]").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      mobileWizardState.visualMode = btn.dataset.visual;
+      renderMobileVisualDetails();
+      renderMobilePreview();
+    });
+  });
+
+  if(MOBILE_WIZARD_STEPS[mobileWizardState.index].key==="secret"){
+    renderMobileSecretFields();
+  }
+  if(MOBILE_WIZARD_STEPS[mobileWizardState.index].key==="visual"){
+    renderMobileVisualDetails();
+  }
+}
+
+function renderMobileWizard(){
+  if(!isMobileWizard()) return;
+  const step = MOBILE_WIZARD_STEPS[mobileWizardState.index];
+  const scene = document.getElementById("mwScene");
+  if(!scene) return;
+
+  document.getElementById("mobileWizard")?.classList.remove("hidden");
+  document.getElementById("mwKicker").textContent = step.kicker;
+  document.getElementById("mwTitle").textContent = step.title;
+  document.getElementById("mwCount").textContent = `${mobileWizardState.index+1} з ${MOBILE_WIZARD_STEPS.length}`;
+  document.getElementById("mwProgressBar").style.width =
+    `${((mobileWizardState.index+1)/MOBILE_WIZARD_STEPS.length)*100}%`;
+  scene.innerHTML = step.render();
+
+  const back = document.getElementById("mwBackBtn");
+  const next = document.getElementById("mwNextBtn");
+  if(back) back.disabled = mobileWizardState.index===0;
+  if(next){
+    next.textContent = mobileWizardState.index===MOBILE_WIZARD_STEPS.length-1
+      ? "Створити лист"
+      : "Продовжити";
+  }
+
+  bindMobileScene();
+}
+
+function validateMobileStep(){
+  const key = MOBILE_WIZARD_STEPS[mobileWizardState.index].key;
+  syncMobileToLegacy();
+
+  if(key==="basic" && !document.getElementById("recipient")?.value.trim()){
+    return "Напиши ім’я отримувача.";
+  }
+  if(key==="letter" && !document.getElementById("letterMessage")?.value.trim()){
+    return "Напиши хоча б кілька слів у листі.";
+  }
+  if(key==="secret" && document.getElementById("useSecret")?.checked){
+    if(!document.getElementById("secretAnswer")?.value.trim()){
+      return "Додай секретну відповідь або вимкни секрет.";
+    }
+  }
+  return "";
+}
+
+async function mobileWizardNext(){
+  const err = validateMobileStep();
+  if(err){
+    const scene = document.getElementById("mwScene");
+    const existing = scene?.querySelector(".mw-inline-error");
+    existing?.remove();
+    scene?.insertAdjacentHTML("afterbegin",
+      `<div class="mw-inline-error" style="margin-bottom:12px;padding:11px 12px;border-radius:14px;background:#f6e8eb;color:#7a3b52;font:500 13px/1.4 system-ui">${escapeHtml(err)}</div>`);
+    return;
+  }
+
+  syncMobileToLegacy();
+  saveDraft();
+  renderPhonePreview();
+  renderMobilePreview();
+
+  if(mobileWizardState.index < MOBILE_WIZARD_STEPS.length-1){
+    mobileWizardState.index++;
+    renderMobileWizard();
+    window.scrollTo({top:0,behavior:"smooth"});
+    return;
+  }
+
+  // Jump legacy wizard to final/link state so business logic stays untouched.
+  state.step = steps.length - 1;
+  renderEditor();
+  try{
+    document.getElementById("mwNextBtn").disabled = true;
+    document.getElementById("mwNextBtn").textContent = "Створюю…";
+    const result = await makeShareLink();
+    const link = result.link;
+    if(link){
+      location.assign(link);
+      return;
+    }
+  }catch(e){
+    alert(e?.message || "Не вдалося створити лист.");
+  }finally{
+    document.getElementById("mwNextBtn").disabled = false;
+    document.getElementById("mwNextBtn").textContent = "Створити лист";
+  }
+}
+
+function mobileWizardBack(){
+  if(mobileWizardState.index===0) return;
+  syncMobileToLegacy();
+  mobileWizardState.index--;
+  renderMobileWizard();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function renderMobilePreview(){
+  if(!isMobileWizard()) return;
+  syncMobileToLegacy();
+  const d = gatherData();
+  const host = document.getElementById("mwPhoneStage");
+  if(!host) return;
+
+  const key = MOBILE_WIZARD_STEPS[mobileWizardState.index].key;
+  let html = "";
+  if(key==="basic" || key==="first") html = previewIntro(d);
+  else if(key==="secret") html = d.useSecret ? previewSecret(d) : previewEnvelope(d);
+  else if(key==="letter") html = previewLetter(d);
+  else if(key==="visual") html = previewLetter(d);
+  else html = previewChoice(d);
+
+  host.innerHTML = html;
+}
+
+function openMobilePreview(){
+  renderMobilePreview();
+  const sheet = document.getElementById("mwPreviewSheet");
+  sheet?.classList.remove("hidden");
+  sheet?.setAttribute("aria-hidden","false");
+  document.body.style.overflow = "hidden";
+}
+function closeMobilePreview(){
+  const sheet = document.getElementById("mwPreviewSheet");
+  sheet?.classList.add("hidden");
+  sheet?.setAttribute("aria-hidden","true");
+  document.body.style.overflow = "";
+}
+
+function setupVisualViewportHandling(){
+  if(!window.visualViewport) return;
+  const sync = ()=>{
+    const keyboardOpen = (window.innerHeight - window.visualViewport.height) > 120;
+    document.body.classList.toggle("mw-keyboard-open", keyboardOpen);
+  };
+  window.visualViewport.addEventListener("resize", sync);
+  window.visualViewport.addEventListener("scroll", sync);
+  sync();
+}
+
+function initMobileWizard(){
+  if(!isMobileWizard()) return;
+
+  // Restore state from legacy fields/draft business logic.
+  renderMobileWizard();
+  renderMobilePreview();
+
+  document.getElementById("mwNextBtn")?.addEventListener("click", mobileWizardNext);
+  document.getElementById("mwBackBtn")?.addEventListener("click", mobileWizardBack);
+  document.getElementById("mwPreviewBtn")?.addEventListener("click", openMobilePreview);
+  document.getElementById("mwPreviewClose")?.addEventListener("click", closeMobilePreview);
+
+  setupVisualViewportHandling();
+}
+
+
 const steps = ["Основне","Слово","Лист","Фото","Вибір","Фінал","Посилання"];
 const state = {
   step: 0,
@@ -3250,6 +4223,28 @@ initPWA();
     }
   }
 })();
+
+window.addEventListener("load", ()=>{
+  if(isMobileWizard()){
+    setTimeout(initMobileWizard, 60);
+  }
+});
 </script>
+
+  <div class="mw-preview-sheet hidden" id="mwPreviewSheet" aria-hidden="true">
+    <div class="mw-preview-head">
+      <div>
+        <div class="mw-preview-kicker">Живий перегляд</div>
+        <div class="mw-preview-title">Так це побачить отримувач</div>
+      </div>
+      <button type="button" class="mw-preview-close" id="mwPreviewClose">Готово</button>
+    </div>
+    <div class="mw-preview-canvas">
+      <div class="phone mw-phone-preview">
+        <div class="phone-stage" id="mwPhoneStage"></div>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
