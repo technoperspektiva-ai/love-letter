@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1025">
+<title>Love Letter — письмо, которое дождётся</title>
+<meta name="description" content="Бесплатные цифровые письма и капсулы времени. Без регистрации и подписки.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,500&display=swap');
+:root{--bg1:#080d24;--bg2:#171d4e;--accent:#f58aad;--accent2:#b9a7ff;--paper:#fbf4ed;--ink:#2c2026;font-family:"DM Sans",system-ui,sans-serif;color:#fff;background:#090d20}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#090d20}button,input,textarea{font:inherit}button{cursor:pointer}a{color:inherit}
+body{min-width:320px}
+.app{min-height:100svh;position:relative;overflow:hidden;background:
+radial-gradient(circle at 75% 0,#724fca55,transparent 35%),
+radial-gradient(circle at 0 45%,#f58aad20,transparent 30%),
+linear-gradient(150deg,var(--bg1),var(--bg2));padding-bottom:42px}
+.stars{position:absolute;inset:0;pointer-events:none;opacity:.75;background-image:
+radial-gradient(circle at 8% 20%,#fff 0 1px,transparent 1.7px),
+radial-gradient(circle at 18% 69%,#fff 0 1.2px,transparent 1.8px),
+radial-gradient(circle at 32% 31%,#fff 0 1px,transparent 1.7px),
+radial-gradient(circle at 53% 12%,#fff 0 1px,transparent 1.6px),
+radial-gradient(circle at 61% 58%,#fff 0 1.2px,transparent 1.8px),
+radial-gradient(circle at 79% 23%,#fff 0 1px,transparent 1.7px),
+radial-gradient(circle at 92% 72%,#fff 0 1px,transparent 1.6px),
+radial-gradient(circle at 45% 82%,#fff 0 1px,transparent 1.7px)}
+.shell{width:min(1120px,calc(100% - 28px));margin:auto;position:relative;z-index:2}
+.top{display:flex;justify-content:space-between;align-items:center;padding:20px 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700}.seal{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#ff95b2,#b64469);box-shadow:inset -4px -5px 8px #8b3150,0 8px 24px #0004;font:italic 20px "Playfair Display"}
+.free{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;border:1px solid #fff2;padding:8px 11px;border-radius:999px;background:#fff1}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:42px;align-items:center;padding:56px 0 45px}
+.eyebrow{font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent2);font-weight:700}
+.hero h1{font:600 clamp(46px,7vw,86px)/.94 "Playfair Display";letter-spacing:-3px;margin:13px 0 22px}
+.hero p{max-width:620px;color:#eef0ffb8;font-size:18px;line-height:1.7;margin:0}
+.previewbox{border:1px solid #fff2;background:#fff1;backdrop-filter:blur(10px);border-radius:30px;min-height:320px;display:grid;place-items:center;box-shadow:0 35px 90px #0005;transform:rotate(2deg)}
+.envmini{width:255px;height:155px;border-radius:12px;background:#f7f2f4;position:relative;box-shadow:0 22px 45px #0005;color:#53434d;display:flex;align-items:flex-end;justify-content:center;padding-bottom:17px;font:italic 19px "Playfair Display"}
+.envmini:before{content:"";position:absolute;inset:0 0 auto;height:95px;background:linear-gradient(#fff,#e3dce1);clip-path:polygon(0 0,100% 0,50% 74%)}
+.envmini:after{content:"L";position:absolute;z-index:3;left:50%;top:50%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#a181db,#5a3b8a);color:#e2d2f7;font-style:normal;box-shadow:inset -3px -4px 8px #482970,0 6px 14px #0004}
+.steps{display:flex;gap:7px;overflow:auto;padding:4px 0 12px}.steps button{white-space:nowrap;border:0;color:#fff9;background:#fff1;border-radius:999px;padding:9px 12px}.steps button.on{background:#fff;color:#241b2d}.steps button.done{background:#ffffff1d;color:#fff}
+.card{background:var(--paper);color:var(--ink);border-radius:28px;padding:clamp(22px,4vw,48px);box-shadow:0 35px 100px #0006;border:1px solid #fff;min-height:430px}
+.panel{max-width:820px;margin:auto}.panel[hidden]{display:none}
+.kicker{display:flex;gap:15px;align-items:flex-start;margin-bottom:28px}.num{border:1px solid #2c202630;padding:6px 8px;border-radius:999px;font-size:11px}.kicker h2{font:600 clamp(31px,4vw,46px) "Playfair Display";margin:-7px 0 3px}.kicker p{margin:0;color:#74676d}
+label{display:block;font-weight:700;font-size:13px;margin:17px 0;color:#493b42}
+input,textarea{width:100%;margin-top:8px;padding:15px 16px;border-radius:14px;border:1px solid #2c202625;background:#fffefa;outline:none;color:#2c2026}input:focus,textarea:focus{border-color:#d96d93;box-shadow:0 0 0 4px #d96d9318}textarea{min-height:210px;resize:vertical;line-height:1.6}
+.themes{display:grid;grid-template-columns:1fr 1fr;gap:12px}.theme{border:2px solid transparent;border-radius:18px;background:#fff;padding:10px;text-align:left;color:#30242a}.theme.on{border-color:#2d2027;box-shadow:0 6px 0 #2d2027}.swatch{height:100px;border-radius:12px;margin-bottom:10px}.s1{background:linear-gradient(145deg,#080d24,#283269)}.s2{background:linear-gradient(145deg,#200b19,#83264e)}.s3{background:linear-gradient(145deg,#061824,#126589)}.s4{background:linear-gradient(145deg,#281307,#9a6223)}
+.timegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.timegrid button{border:2px solid #dfd3ce;background:#fff;border-radius:16px;padding:17px;text-align:left;color:#30242a}.timegrid button.on{border-color:#2c2026;box-shadow:0 6px 0 #2c2026}.timegrid b,.timegrid span{display:block}.timegrid span{font-size:12px;color:#877a80;margin-top:4px}
+.note{padding:13px 14px;background:#e8f1ec;color:#42604f;border-radius:13px;margin-top:22px;font-size:13px;line-height:1.5}
+.actions{display:flex;justify-content:flex-end;gap:10px;max-width:820px;margin:28px auto 0;padding-top:22px;border-top:1px solid #2c202612}.btn{border:0;border-radius:999px;padding:14px 20px;font-weight:700}.primary{background:#291b24;color:#fff;box-shadow:0 6px 0 #120a0f}.ghost{background:#ebe2de;color:#33262c}.btn:disabled{opacity:.35;cursor:not-allowed}
+.done{text-align:center}.bigseal{width:74px;height:74px;border-radius:50%;display:grid;place-items:center;margin:0 auto 16px;background:linear-gradient(145deg,#ff9bb8,#b74068);box-shadow:inset -4px -5px 9px #913552,0 11px 28px #8e40513b;font-size:28px;color:#fff}.done h2{font:600 42px "Playfair Display";margin:6px 0}.done p{color:#76676e}.share{display:flex;gap:8px;background:#eee4df;padding:8px;border-radius:16px;margin:27px auto 13px;max-width:680px}.share input{margin:0;border:0}.share button{border:0;border-radius:11px;background:#291b24;color:#fff;font-weight:700;padding:0 15px}
+.foot{display:flex;justify-content:space-between;color:#fff7;font-size:12px;padding:28px 0 0}
+.viewer{min-height:100svh;display:grid;place-items:center;padding:80px 16px;position:relative;z-index:3}.closed{text-align:center}.for{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#fff8;margin-bottom:28px}
+.envelope{position:relative;width:min(430px,88vw);height:min(270px,55vw);border:0;background:transparent;filter:drop-shadow(0 35px 35px #0007)}.back,.front,.flap{position:absolute;inset:0;border-radius:18px}.back{background:#f4eef2}.flap{z-index:2;background:linear-gradient(#fff,#ddd5db);clip-path:polygon(0 0,100% 0,50% 68%)}.front{z-index:3;background:linear-gradient(155deg,transparent 49%,#e2d9df 50%),linear-gradient(205deg,transparent 49%,#eee7eb 50%)}.wax{position:absolute;z-index:5;left:50%;top:51%;transform:translate(-50%,-50%);width:68px;height:68px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#a27eda,#5b3a8a);box-shadow:inset -5px -7px 10px #45246f,0 10px 20px #0005;color:#decdf3;font:600 30px "Playfair Display"}.to{position:absolute;z-index:4;left:50%;bottom:20px;transform:translateX(-50%);font:italic 22px "Playfair Display";color:#5a4a56;white-space:nowrap}.tap{margin-top:28px;color:#fff9;font:italic 19px "Playfair Display"}.count{font-size:clamp(30px,7vw,58px);font-weight:700;margin-top:10px;letter-spacing:2px;font-variant-numeric:tabular-nums}
+.paper{background:#fff8ee;color:#38282f;border-radius:24px;padding:clamp(30px,7vw,70px);width:min(760px,100%);box-shadow:0 35px 100px #0007;text-align:left;animation:rise .7s cubic-bezier(.2,.9,.2,1)}@keyframes rise{from{opacity:0;transform:translateY(30px) scale(.97)}}.paper .small{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:#a87684}.paper h1{font:600 clamp(40px,7vw,72px)/1 "Playfair Display";margin:13px 0 28px}.letter{white-space:pre-wrap;font:20px/1.8 "Playfair Display"}.sign{text-align:right;font:italic 22px "Playfair Display";color:#795461;margin-top:35px}.heart{text-align:center;color:#b95d7b;font-size:28px;margin-top:38px}
+@media(max-width:800px){.hero{grid-template-columns:1fr;padding-top:34px}.previewbox{display:none}.themes,.timegrid{grid-template-columns:1fr}.foot{flex-direction:column;gap:7px}.hero p{font-size:16px}}
+@media(max-width:520px){.shell{width:calc(100% - 20px)}.hero{padding:24px 0 32px}.hero h1{letter-spacing:-2px}.card{padding:22px 16px;border-radius:22px}.actions{position:sticky;bottom:8px;background:#fbf4ed;padding-bottom:4px}.actions .btn{flex:1}.share{display:block}.share button{width:100%;padding:13px;margin-top:7px}.done h2{font-size:34px}}
+</style>
+</head>
+<body>
+<div id="app" class="app">
+  <div class="stars"></div>
+  <div id="creator">
+    <header class="top shell"><div class="brand"><span class="seal">L</span>Love Letter</div><div class="free">бесплатно</div></header>
+    <section class="hero shell">
+      <div><div class="eyebrow">Письмо, которое дождётся</div><h1>Скажи важное красиво.</h1><p>Создай цифровой конверт, выбери момент открытия и отправь одну секретную ссылку. Без регистрации, рекламы и платных тем.</p></div>
+      <div class="previewbox"><div class="envmini" id="miniName">кому-то важному</div></div>
+    </section>
+    <section class="shell">
+      <div class="steps" id="steps"></div>
+      <div class="card">
+        <section class="panel" data-step="0">
+          <div class="kicker"><span class="num">01</span><div><h2>Кому это письмо?</h2><p>Имя появится прямо на конверте.</p></div></div>
+          <label>Имя получателя<input id="recipient" maxlength="60" placeholder="Например, Малика"></label>
+          <label>Подсказка под конвертом<input id="opener" maxlength="80" value="Нажми на конверт"></label>
+        </section>
+        <section class="panel" data-step="1" hidden>
+          <div class="kicker"><span class="num">02</span><div><h2>Напиши самое важное</h2><p>Здесь нет правильных слов — только твои.</p></div></div>
+          <label>Заголовок<input id="title" maxlength="120" value="Для тебя"></label>
+          <label>Письмо<textarea id="message" maxlength="6000" placeholder="Я давно хотел(а) сказать тебе…"></textarea></label>
+          <label>Подпись<input id="signature" maxlength="80" placeholder="С любовью…"></label>
+        </section>
+        <section class="panel" data-step="2" hidden>
+          <div class="kicker"><span class="num">03</span><div><h2>Выбери настроение</h2><p>Все темы бесплатные.</p></div></div>
+          <div class="themes">
+            <button class="theme on" data-theme="starry"><div class="swatch s1"></div><b>Звёздная ночь</b></button>
+            <button class="theme" data-theme="rose"><div class="swatch s2"></div><b>Ночная роза</b></button>
+            <button class="theme" data-theme="ocean"><div class="swatch s3"></div><b>Полночный океан</b></button>
+            <button class="theme" data-theme="golden"><div class="swatch s4"></div><b>Золотой час</b></button>
+          </div>
+        </section>
+        <section class="panel" data-step="3" hidden>
+          <div class="kicker"><span class="num">04</span><div><h2>Когда можно открыть?</h2><p>Сразу или позже — как маленькую капсулу времени.</p></div></div>
+          <div class="timegrid">
+            <button class="on" data-mode="now"><b>Сразу</b><span>можно открыть моментально</span></button>
+            <button data-mode="minutes"><b>Через время</b><span>например через 20 минут</span></button>
+            <button data-mode="date"><b>В дату</b><span>годовщина или день рождения</span></button>
+          </div>
+          <label id="minutesBox" hidden>Через сколько минут?<input id="minutes" type="number" min="1" max="525600" value="20"></label>
+          <label id="dateBox" hidden>Дата и время<input id="date" type="datetime-local"></label>
+          <div class="note">🔐 Эта версия хранит письмо прямо внутри секретной ссылки — на сервере ничего не сохраняется. Поэтому сервис может оставаться бесплатным.</div>
+        </section>
+        <section class="panel done" data-step="4" hidden>
+          <div class="bigseal">✓</div><h2>Письмо готово</h2><p>Отправь ссылку — всё остальное произойдёт внутри.</p>
+          <div class="share"><input id="shareUrl" readonly><button id="copyBtn">Копировать</button></div>
+          <button class="btn primary" id="openPreview">Открыть письмо</button>
+        </section>
+        <div class="actions" id="actions"><button class="btn ghost" id="back" hidden>Назад</button><button class="btn primary" id="next">Продолжить</button></div>
+      </div>
+    </section>
+    <footer class="shell foot"><span>Love Letter</span><span>Без подписки • без рекламы • без платных тем</span></footer>
+  </div>
+  <div id="viewer" hidden></div>
+</div>
+<script>
+const themes={
+ starry:["#080d24","#171d4e","#f58aad","#b9a7ff"],
+ rose:["#220c1b","#641d3c","#ff8aad","#ffc1cb"],
+ ocean:["#061825","#0f5073","#70d7ff","#a9f0ff"],
+ golden:["#251208","#754319","#ffc75f","#ffe5a6"]
+};
+let state={step:0,theme:"starry",mode:"now"};
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const steps=["Кому","Письмо","Тема","Когда","Готово"];
+function renderSteps(){ $("#steps").innerHTML=steps.map((s,i)=>`<button class="${i===state.step?"on":i<state.step?"done":""}" data-i="${i}">${i<state.step?"✓":i+1} ${s}</button>`).join(""); $$("#steps button").forEach(b=>b.onclick=()=>{const i=+b.dataset.i;if(i<=state.step){state.step=i;render()}}) }
+function render(){ $$("[data-step]").forEach(p=>p.hidden=+p.dataset.step!==state.step); renderSteps(); $("#back").hidden=state.step===0||state.step===4; $("#actions").hidden=state.step===4; $("#next").textContent=state.step===3?"Создать секретную ссылку":"Продолжить"; }
+function applyTheme(name){state.theme=name; const [a,b,c,d]=themes[name]; const r=document.documentElement.style;r.setProperty("--bg1",a);r.setProperty("--bg2",b);r.setProperty("--accent",c);r.setProperty("--accent2",d); $$(".theme").forEach(x=>x.classList.toggle("on",x.dataset.theme===name))}
+function b64url(str){const bytes=new TextEncoder().encode(str);let bin="";bytes.forEach(b=>bin+=String.fromCharCode(b));return btoa(bin).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"")}
+function unb64url(s){s=s.replace(/-/g,"+").replace(/_/g,"/");while(s.length%4)s+="=";const bin=atob(s);const bytes=Uint8Array.from(bin,c=>c.charCodeAt(0));return new TextDecoder().decode(bytes)}
+function payload(){
+ let unlockAt=0;if(state.mode==="minutes")unlockAt=Date.now()+Math.max(1,+$("#minutes").value||20)*60000;if(state.mode==="date")unlockAt=new Date($("#date").value).getTime()||0;
+ return {r:$("#recipient").value.trim(),o:$("#opener").value.trim(),t:$("#title").value.trim(),m:$("#message").value,s:$("#signature").value.trim(),h:state.theme,u:unlockAt,v:1};
+}
+function makeLink(){const data=payload();const token=b64url(JSON.stringify(data));return location.origin+location.pathname+"#l="+token}
+$("#recipient").oninput=e=>$("#miniName").textContent=e.target.value||"кому-то важному";
+$("#back").onclick=()=>{state.step--;render()};
+$("#next").onclick=()=>{
+ if(state.step===0&&!$("#recipient").value.trim()){alert("Укажи имя получателя");return}
+ if(state.step===1&&!$("#message").value.trim()){alert("Напиши письмо");return}
+ if(state.step===3){const url=makeLink();$("#shareUrl").value=url;state.step=4;render();return}
+ state.step++;render()
+};
+$$(".theme").forEach(b=>b.onclick=()=>applyTheme(b.dataset.theme));
+$$(".timegrid button").forEach(b=>b.onclick=()=>{state.mode=b.dataset.mode;$$(".timegrid button").forEach(x=>x.classList.toggle("on",x===b));$("#minutesBox").hidden=state.mode!=="minutes";$("#dateBox").hidden=state.mode!=="date"});
+$("#copyBtn").onclick=async()=>{await navigator.clipboard.writeText($("#shareUrl").value);$("#copyBtn").textContent="Скопировано";setTimeout(()=>$("#copyBtn").textContent="Копировать",1500)};
+$("#openPreview").onclick=()=>location.href=$("#shareUrl").value;
+function showViewer(data){
+ $("#creator").hidden=true;$("#viewer").hidden=false;applyTheme(data.h||"starry");
+ const locked=data.u&&data.u>Date.now();
+ $("#viewer").innerHTML=`<div class="viewer"><div class="closed" id="closed"><div class="for">это тебе</div><button class="envelope" id="env"><div class="back"></div><div class="flap"></div><div class="front"></div><div class="wax">${(data.r||"L").slice(0,1).toUpperCase()}</div><div class="to">${esc(data.r||"Для тебя")}</div></button><div class="tap" id="tap">${locked?"Откроется через":esc(data.o||"Нажми на конверт")}</div><div class="count" id="count"></div></div></div>`;
+ const open=()=>{$("#viewer").innerHTML=`<div class="viewer"><article class="paper"><div class="small">для ${esc(data.r||"тебя")}</div><h1>${esc(data.t||"Для тебя")}</h1><div class="letter">${esc(data.m||"")}</div>${data.s?`<div class="sign">${esc(data.s)}</div>`:""}<div class="heart">♡</div></article></div>`};
+ if(locked){$("#env").style.cursor="default";const tick=()=>{const ms=data.u-Date.now();if(ms<=0){$("#tap").textContent=data.o||"Нажми на конверт";$("#count").textContent="";$("#env").onclick=open;return}const d=Math.floor(ms/86400000),h=Math.floor(ms/3600000)%24,m=Math.floor(ms/60000)%60,s=Math.floor(ms/1000)%60;$("#count").textContent=(d?d+"д ":"")+String(h).padStart(2,"0")+":"+String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");requestAnimationFrame(()=>setTimeout(tick,250))};tick()} else $("#env").onclick=open;
+}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+if(location.hash.startsWith("#l=")){try{showViewer(JSON.parse(unb64url(location.hash.slice(3))))}catch(e){alert("Ссылка повреждена")}} else {render();applyTheme("starry")}
+</script>
+</body>
+</html>
