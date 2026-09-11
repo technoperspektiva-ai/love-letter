@@ -114,8 +114,11 @@ linear-gradient(205deg,transparent 49%, #f0e5e8 50%)}
 .preview{padding:18px;position:sticky;top:12px;align-self:start;min-height:780px}
 .stepbar{display:flex;gap:8px;overflow:auto;padding:2px 2px 14px}
 .stepbar button{
- white-space:nowrap;border:0;border-radius:999px;padding:10px 12px;background:rgba(255,255,255,.08);color:#ffe8ef
+ white-space:nowrap;border:0;border-radius:999px;padding:10px 12px;background:rgba(255,255,255,.08);color:#ffe8ef;
+ cursor:pointer;transition:background .18s ease,color .18s ease,transform .16s ease
 }
+.stepbar button:hover{background:rgba(255,255,255,.14)}
+.stepbar button:active{transform:scale(.98)}
 .stepbar .active{background:white;color:#2b1123}
 .stepbar .done{background:rgba(255,255,255,.16);color:white}
 .card{
@@ -2139,6 +2142,320 @@ input:focus,textarea:focus,select:focus{border-color:#cc6d91;box-shadow:0 0 0 4p
   body.ma-no-tabs .ma-tabbar{display:none}
 }
 
+
+/* ===============================================================
+   Love Letter 1.1 — emotional choreography / magic pass
+   =============================================================== */
+@media (max-width:900px){
+  .mw-progress-wrap{position:relative;z-index:3}
+  .mw-magic{
+    position:relative;
+    min-height:138px;
+    margin:-2px 0 18px;
+    display:grid;
+    place-items:center;
+    overflow:hidden;
+    pointer-events:none;
+  }
+  .mw-magic:before{
+    content:"";
+    position:absolute;
+    width:230px;height:230px;border-radius:50%;
+    background:radial-gradient(circle,rgba(111,51,76,.075),rgba(111,51,76,0) 68%);
+    filter:blur(1px);
+    transform:translateY(18px);
+  }
+  .mw-magic-scene{
+    position:relative;
+    width:100%;
+    height:136px;
+    display:grid;
+    place-items:center;
+    animation:magicSceneIn .42s cubic-bezier(.2,.75,.2,1) both;
+  }
+  @keyframes magicSceneIn{
+    from{opacity:0;transform:translateY(10px) scale(.985)}
+    to{opacity:1;transform:translateY(0) scale(1)}
+  }
+
+  /* 1 — recipient / identity */
+  .magic-monogram{
+    position:relative;
+    width:92px;height:92px;border-radius:50%;
+    display:grid;place-items:center;
+    background:#4b2335;color:#fffafc;
+    font:600 39px/1 Georgia,"Times New Roman",serif;
+    box-shadow:
+      0 18px 42px rgba(74,34,52,.13),
+      inset 0 0 0 1px rgba(255,255,255,.10);
+  }
+  .magic-monogram:before,
+  .magic-monogram:after{
+    content:"";
+    position:absolute;border-radius:50%;
+    border:1px solid rgba(92,48,67,.12);
+    animation:monogramRing 3.8s ease-in-out infinite;
+  }
+  .magic-monogram:before{inset:-15px}
+  .magic-monogram:after{inset:-29px;animation-delay:.55s}
+  @keyframes monogramRing{
+    0%,100%{transform:scale(.96);opacity:.30}
+    50%{transform:scale(1.035);opacity:.65}
+  }
+  .magic-caption{
+    position:absolute;
+    bottom:0;
+    color:#9c828e;
+    font:500 12px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+  }
+
+  /* 2 — opening line / typography */
+  .magic-firstlook{
+    width:min(100%,310px);
+    display:grid;
+    place-items:center;
+    text-align:center;
+  }
+  .magic-firstlook .small{
+    min-height:18px;
+    color:#9d8390;
+    font:500 12px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+  }
+  .magic-firstlook .headline{
+    margin-top:7px;
+    max-width:290px;
+    color:#3e2b35;
+    font:600 clamp(28px,8vw,34px)/1.02 Georgia,"Times New Roman",serif;
+    letter-spacing:-.03em;
+    text-wrap:balance;
+  }
+  .magic-cursor{
+    width:1.5px;height:30px;margin-left:4px;display:inline-block;vertical-align:-4px;
+    background:#7b435b;animation:magicBlink 1.05s steps(1) infinite;
+  }
+  @keyframes magicBlink{50%{opacity:0}}
+
+  /* 3 — secret */
+  .magic-secret{
+    position:relative;
+    width:88px;height:88px;display:grid;place-items:center;
+  }
+  .magic-secret-ring{
+    position:absolute;inset:0;border-radius:50%;
+    border:1px solid rgba(87,45,63,.16);
+    box-shadow:inset 0 0 0 10px rgba(98,51,71,.025);
+  }
+  .magic-secret-lock{
+    width:44px;height:44px;border-radius:15px;
+    display:grid;place-items:center;background:#fff;color:#6a3b50;
+    box-shadow:0 12px 28px rgba(67,37,50,.08),inset 0 0 0 1px rgba(67,37,50,.07);
+    font-size:20px;
+    animation:lockFloat 3s ease-in-out infinite;
+  }
+  @keyframes lockFloat{0%,100%{transform:translateY(2px)}50%{transform:translateY(-3px)}}
+
+  /* 4 — letter, the hero creation moment */
+  .magic-paper{
+    position:relative;
+    width:176px;height:112px;
+    border-radius:13px;
+    background:#fffaf5;
+    box-shadow:0 18px 38px rgba(64,36,48,.10),inset 0 0 0 1px rgba(92,58,72,.06);
+    transform:rotate(-1.5deg);
+    overflow:hidden;
+  }
+  .magic-paper:before{
+    content:"";position:absolute;left:18px;right:18px;top:22px;height:7px;border-radius:5px;
+    background:#d8c2cb;
+    box-shadow:
+      0 17px 0 #eadde2,
+      0 31px 0 #eadde2,
+      0 45px 0 #eee4e7;
+    animation:paperWriting 1.35s cubic-bezier(.2,.7,.2,1) both;
+  }
+  .magic-paper:after{
+    content:"♡";position:absolute;right:15px;bottom:11px;color:#986076;font:20px/1 Georgia,serif;
+    opacity:.75;
+  }
+  @keyframes paperWriting{
+    from{clip-path:inset(0 100% 0 0)}
+    to{clip-path:inset(0 0 0 0)}
+  }
+  .magic-paper-shadow{
+    position:absolute;width:150px;height:24px;border-radius:50%;bottom:0;
+    background:rgba(72,40,54,.07);filter:blur(10px);
+  }
+
+  /* 5 — word portrait/photo */
+  .magic-portrait{
+    position:relative;
+    width:102px;height:114px;border-radius:30px 30px 38px 38px;
+    overflow:hidden;
+    background:#ebe2df;
+    box-shadow:0 17px 38px rgba(62,35,47,.09);
+  }
+  .magic-word{
+    position:absolute;
+    color:#70485a;
+    font:650 9px/1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+    opacity:.28;
+    animation:wordGather .65s cubic-bezier(.2,.8,.2,1) both;
+  }
+  @keyframes wordGather{
+    from{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.8)}
+    to{opacity:var(--o,.3);transform:translate(0,0) scale(1)}
+  }
+  .magic-portrait-glow{
+    position:absolute;inset:20% 10% 0;border-radius:45% 45% 36% 36%;
+    background:radial-gradient(ellipse at 50% 35%,rgba(80,47,62,.12),rgba(80,47,62,.02) 58%,transparent 60%);
+  }
+
+  /* 6 — final choice */
+  .magic-orbit{
+    position:relative;width:126px;height:102px;
+  }
+  .magic-orbit-center{
+    position:absolute;left:50%;top:50%;width:42px;height:42px;margin:-21px;
+    border-radius:50%;display:grid;place-items:center;background:#4b2335;color:white;font-size:18px;
+    box-shadow:0 12px 26px rgba(74,34,52,.13);
+  }
+  .magic-orbit-dot{
+    position:absolute;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+    background:#fff;color:#694052;
+    box-shadow:0 8px 22px rgba(57,32,44,.07),inset 0 0 0 1px rgba(61,38,48,.05);
+    animation:orbitBreathe 3s ease-in-out infinite;
+  }
+  .magic-orbit-dot:nth-child(2){left:2px;top:6px}
+  .magic-orbit-dot:nth-child(3){right:2px;top:6px;animation-delay:.3s}
+  .magic-orbit-dot:nth-child(4){left:2px;bottom:1px;animation-delay:.6s}
+  .magic-orbit-dot:nth-child(5){right:2px;bottom:1px;animation-delay:.9s}
+  @keyframes orbitBreathe{0%,100%{transform:scale(.96)}50%{transform:scale(1.04)}}
+
+  /* Scene transitions */
+  .mw-screen{
+    transform-origin:50% 0;
+  }
+  .mw-screen.scene-enter-forward{
+    animation:sceneForward .24s cubic-bezier(.2,.72,.2,1) both;
+  }
+  .mw-screen.scene-enter-back{
+    animation:sceneBack .24s cubic-bezier(.2,.72,.2,1) both;
+  }
+  @keyframes sceneForward{
+    from{opacity:0;transform:translateX(10px)}
+    to{opacity:1;transform:translateX(0)}
+  }
+  @keyframes sceneBack{
+    from{opacity:0;transform:translateX(-10px)}
+    to{opacity:1;transform:translateX(0)}
+  }
+
+  /* Premium interaction feedback */
+  .mw-input,.mw-textarea,.mw-select{
+    caret-color:#6f334c;
+  }
+  .mw-input:focus,.mw-textarea:focus,.mw-select:focus{
+    transform:translateY(-1px);
+  }
+  .mw-next{
+    overflow:hidden;position:relative;
+  }
+  .mw-next:before{
+    content:"";position:absolute;inset:-1px;
+    background:linear-gradient(105deg,transparent 25%,rgba(255,255,255,.12) 47%,transparent 68%);
+    transform:translateX(-130%);
+    transition:transform .6s ease;
+  }
+  .mw-next:not(:disabled):active:before{transform:translateX(130%)}
+
+  /* Magic transition between decisions */
+  .mw-step-confirm{
+    position:fixed;z-index:150;inset:0;display:grid;place-items:center;
+    pointer-events:none;background:rgba(251,248,243,.01);
+  }
+  .mw-step-confirm .pulse{
+    width:54px;height:54px;border-radius:50%;display:grid;place-items:center;
+    background:#4b2335;color:white;font-size:20px;
+    box-shadow:0 16px 40px rgba(74,34,52,.16);
+    animation:confirmPulse .42s cubic-bezier(.2,.8,.2,1) both;
+  }
+  @keyframes confirmPulse{
+    0%{opacity:0;transform:scale(.68)}
+    55%{opacity:1;transform:scale(1.06)}
+    100%{opacity:0;transform:scale(.96)}
+  }
+
+  /* Ready sequence — envelope assembles before success copy appears */
+  .ma-ready-stage{
+    position:relative;width:190px;height:150px;margin:0 auto 4px;perspective:700px;
+  }
+  .ma-ready-envelope{
+    position:absolute;left:50%;top:54%;width:150px;height:94px;transform:translate(-50%,-50%);
+    border-radius:15px;background:#f2e5df;
+    box-shadow:0 20px 45px rgba(64,35,48,.12);
+    animation:readyEnvelopeIn .54s cubic-bezier(.18,.8,.24,1) both;
+  }
+  .ma-ready-envelope:before{
+    content:"";position:absolute;inset:0 0 auto;height:58%;
+    background:#fbf1ed;clip-path:polygon(0 0,100% 0,50% 78%);
+    transform-origin:50% 0;animation:readyFlap .62s .36s cubic-bezier(.2,.8,.2,1) both;
+  }
+  .ma-ready-envelope:after{
+    content:"";position:absolute;inset:0;border-radius:15px;
+    background:
+      linear-gradient(155deg,transparent 49%,#e8d9dc 50%),
+      linear-gradient(205deg,transparent 49%,#f0e5e7 50%);
+  }
+  .ma-ready-letter{
+    position:absolute;left:50%;top:10px;width:116px;height:82px;transform:translateX(-50%);
+    border-radius:10px;background:#fffaf5;
+    box-shadow:0 8px 18px rgba(52,29,39,.08);
+    animation:readyLetterDrop .72s .25s cubic-bezier(.2,.8,.2,1) both;
+  }
+  .ma-ready-wax{
+    position:absolute;z-index:5;left:50%;top:58%;width:42px;height:42px;margin:-21px;
+    border-radius:50%;display:grid;place-items:center;background:#6d334c;color:#fff;font:600 18px/1 Georgia,serif;
+    box-shadow:inset -3px -4px 6px rgba(61,24,42,.28);
+    animation:readyWax .42s .74s cubic-bezier(.2,.8,.2,1) both;
+  }
+  @keyframes readyEnvelopeIn{
+    from{opacity:0;transform:translate(-50%,-38%) scale(.9)}
+    to{opacity:1;transform:translate(-50%,-50%) scale(1)}
+  }
+  @keyframes readyLetterDrop{
+    from{opacity:0;transform:translate(-50%,-18px)}
+    to{opacity:1;transform:translate(-50%,28px)}
+  }
+  @keyframes readyFlap{
+    from{transform:rotateX(-160deg)}
+    to{transform:rotateX(0)}
+  }
+  @keyframes readyWax{
+    from{opacity:0;transform:scale(.45)}
+    to{opacity:1;transform:scale(1)}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    .mw-magic-scene,.magic-monogram:before,.magic-monogram:after,.magic-secret-lock,
+    .magic-paper:before,.magic-word,.magic-orbit-dot,.mw-screen.scene-enter-forward,
+    .mw-screen.scene-enter-back,.mw-step-confirm .pulse,.ma-ready-envelope,.ma-ready-letter,
+    .ma-ready-envelope:before,.ma-ready-wax{
+      animation-duration:.01ms!important;animation-delay:0ms!important;
+    }
+  }
+
+  @media (max-height:720px){
+    .mw-magic{min-height:98px;margin-bottom:10px}
+    .mw-magic-scene{height:98px}
+    .magic-monogram{width:70px;height:70px;font-size:30px}
+    .magic-monogram:before{inset:-10px}.magic-monogram:after{inset:-19px}
+    .magic-paper{width:142px;height:90px}
+    .magic-portrait{width:80px;height:90px}
+    .magic-orbit{transform:scale(.82)}
+    .mw-copy{margin-bottom:14px}
+  }
+}
+
 </style>
 </head>
 <body>
@@ -2187,6 +2504,7 @@ input:focus,textarea:focus,select:focus{border-color:#cc6d91;box-shadow:0 0 0 4p
         <div class="mw-progress-track"><div class="mw-progress-bar" id="mwProgressBar"></div></div>
       </section>
 
+      <section class="mw-magic" id="mwMagic" aria-hidden="true"></section>
       <section class="mw-scene" id="mwScene"></section>
     </main>
 
@@ -2574,6 +2892,7 @@ function renderAppHome(){
       <p class="ma-hero-copy">Особистий лист, маленька історія, конверт, фото або портрет зі слів — усе в одному приватному посиланні.</p>
 
       <div class="ma-primary-card">
+        <div aria-hidden="true" style="position:absolute;right:18px;bottom:18px;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.55);font:600 24px/1 Georgia,serif">L</div>
         <div class="ey">${draftExists ? "Чернетка збережена" : "Новий лист"}</div>
         <h2>${draftExists ? "Продовжити свою історію" : "Почати з одного імені"}</h2>
         <p>${draftExists ? "Твої зміни залишилися на цьому пристрої." : "Без реєстрації, шаблонів і зайвих налаштувань."}</p>
@@ -2864,7 +3183,11 @@ function showMobileReady(link,id){
 
   document.getElementById("maScreen").innerHTML=`
     <div class="ma-ready">
-      <div class="ma-ready-seal">${escapeHtml(initial)}</div>
+      <div class="ma-ready-stage" aria-hidden="true">
+        <div class="ma-ready-letter"></div>
+        <div class="ma-ready-envelope"></div>
+        <div class="ma-ready-wax">${escapeHtml(initial)}</div>
+      </div>
       <h1>Твій лист готовий.</h1>
       <p>Він уже живе за приватним посиланням. Можеш переглянути його або одразу поділитися.</p>
       <div class="ma-ready-actions">
@@ -2914,6 +3237,125 @@ async function initMobileApp(){
   });
   window.addEventListener("hashchange",handleMobileAppRoute);
   handleMobileAppRoute();
+}
+
+
+
+let mobileSceneDirection = "forward";
+
+function magicValue(id, fallback=""){
+  return (document.getElementById(id)?.value || fallback).trim();
+}
+
+function renderMobileMagic(){
+  if(!isMobileWizard()) return;
+  const host = document.getElementById("mwMagic");
+  if(!host) return;
+
+  const key = MOBILE_WIZARD_STEPS[mobileWizardState.index]?.key || "basic";
+  const recipient = magicValue("recipient","Для тебе");
+  const intro = magicValue("introMain","тобі лист");
+  const introTop = magicValue("introTop", recipient ? `${recipient},` : "");
+  const initial = (recipient || "L").slice(0,1).toUpperCase();
+
+  if(key==="basic"){
+    host.innerHTML = `
+      <div class="mw-magic-scene">
+        <div class="magic-monogram" id="magicRecipientInitial">${escapeHtml(initial)}</div>
+        <div class="magic-caption">починається з однієї людини</div>
+      </div>`;
+    return;
+  }
+
+  if(key==="first"){
+    host.innerHTML = `
+      <div class="mw-magic-scene">
+        <div class="magic-firstlook">
+          <div class="small" id="magicIntroTop">${escapeHtml(introTop || recipient)}</div>
+          <div class="headline"><span id="magicIntroMain">${escapeHtml(intro)}</span><span class="magic-cursor"></span></div>
+        </div>
+      </div>`;
+    return;
+  }
+
+  if(key==="secret"){
+    const useSecret = !!document.getElementById("useSecret")?.checked;
+    host.innerHTML = `
+      <div class="mw-magic-scene">
+        <div class="magic-secret">
+          <div class="magic-secret-ring"></div>
+          <div class="magic-secret-lock">${useSecret ? "⌁" : "♡"}</div>
+        </div>
+        <div class="magic-caption">${useSecret ? "маленький ключ лише для вас двох" : "можна залишити відкритим"}</div>
+      </div>`;
+    return;
+  }
+
+  if(key==="letter"){
+    host.innerHTML = `
+      <div class="mw-magic-scene">
+        <div class="magic-paper-shadow"></div>
+        <div class="magic-paper"></div>
+        <div class="magic-caption">слова вже складаються в лист</div>
+      </div>`;
+    return;
+  }
+
+  if(key==="visual"){
+    const words = ["кохаю","разом","тепло","ми","усмішка","дім","ти","назавжди"];
+    const positions = [
+      [12,12,-16,-12,.24],[48,10,18,-8,.38],[18,33,-12,6,.30],[57,31,20,-10,.45],
+      [9,53,-18,12,.24],[44,50,8,14,.40],[27,72,-10,18,.35],[52,78,16,20,.28]
+    ];
+    host.innerHTML = `
+      <div class="mw-magic-scene">
+        <div class="magic-portrait">
+          <div class="magic-portrait-glow"></div>
+          ${words.map((w,i)=>{
+            const p=positions[i];
+            return `<span class="magic-word" style="left:${p[0]}%;top:${p[1]}%;--dx:${p[2]}px;--dy:${p[3]}px;--o:${p[4]};animation-delay:${i*45}ms">${w}</span>`;
+          }).join("")}
+        </div>
+        <div class="magic-caption">образ народжується прямо на пристрої</div>
+      </div>`;
+    return;
+  }
+
+  host.innerHTML = `
+    <div class="mw-magic-scene">
+      <div class="magic-orbit">
+        <div class="magic-orbit-center">♡</div>
+        <div class="magic-orbit-dot">☕</div>
+        <div class="magic-orbit-dot">✦</div>
+        <div class="magic-orbit-dot">♪</div>
+        <div class="magic-orbit-dot">☺</div>
+      </div>
+      <div class="magic-caption">залишився останній маленький вибір</div>
+    </div>`;
+}
+
+function updateMobileMagicLive(){
+  if(!isMobileWizard()) return;
+  const key = MOBILE_WIZARD_STEPS[mobileWizardState.index]?.key;
+  if(key==="basic"){
+    const val=(document.getElementById("mwRecipient")?.value || "").trim();
+    const el=document.getElementById("magicRecipientInitial");
+    if(el) el.textContent=(val||"L").slice(0,1).toUpperCase();
+  }else if(key==="first"){
+    const main=document.getElementById("magicIntroMain");
+    const top=document.getElementById("magicIntroTop");
+    if(main) main.textContent=document.getElementById("mwIntroMain")?.value || "тобі лист";
+    if(top) top.textContent=document.getElementById("mwIntroTop")?.value || document.getElementById("mwRecipient")?.value || "";
+  }
+}
+
+function playStepConfirm(){
+  if(matchMedia("(prefers-reduced-motion:reduce)").matches) return;
+  const el=document.createElement("div");
+  el.className="mw-step-confirm";
+  el.innerHTML='<div class="pulse">✓</div>';
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(),450);
 }
 
 
@@ -3212,6 +3654,7 @@ function bindMobileScene(){
       syncMobileToLegacy();
       renderPhonePreview();
       renderMobilePreview();
+      updateMobileMagicLive();
       saveDraft();
     });
     el.addEventListener("focus", ()=>{
@@ -3226,6 +3669,8 @@ function bindMobileScene(){
       if(legacy) legacy.checked = use;
       renderMobileSecretFields();
       renderMobilePreview();
+      renderMobileMagic();
+      haptic(7);
       saveDraft();
     });
   });
@@ -3259,6 +3704,11 @@ function renderMobileWizard(){
   document.getElementById("mwProgressBar").style.width =
     `${((mobileWizardState.index+1)/MOBILE_WIZARD_STEPS.length)*100}%`;
   scene.innerHTML = step.render();
+  const screen = scene.querySelector(".mw-screen");
+  if(screen){
+    screen.classList.add(mobileSceneDirection === "back" ? "scene-enter-back" : "scene-enter-forward");
+  }
+  renderMobileMagic();
 
   const back = document.getElementById("mwBackBtn");
   const next = document.getElementById("mwNextBtn");
@@ -3307,9 +3757,14 @@ async function mobileWizardNext(){
   renderMobilePreview();
 
   if(mobileWizardState.index < MOBILE_WIZARD_STEPS.length-1){
+    playStepConfirm();
+    haptic(8);
+    mobileSceneDirection = "forward";
     mobileWizardState.index++;
-    renderMobileWizard();
-    window.scrollTo({top:0,behavior:"smooth"});
+    setTimeout(()=>{
+      renderMobileWizard();
+      window.scrollTo({top:0,behavior:"smooth"});
+    }, 105);
     return;
   }
 
@@ -3341,6 +3796,8 @@ function mobileWizardBack(){
     return;
   }
   syncMobileToLegacy();
+  haptic(5);
+  mobileSceneDirection = "back";
   mobileWizardState.index--;
   renderMobileWizard();
   window.scrollTo({top:0,behavior:"smooth"});
@@ -3425,7 +3882,23 @@ function updateStepbar(){
   $$("#stepbar button").forEach(btn=>{
     btn.onclick = ()=>{
       const i = +btn.dataset.i;
-      if(i<=state.step){ state.step = i; renderEditor(); }
+
+      // Desktop step navigation is intentionally non-linear:
+      // every step is directly clickable, not only already-visited steps.
+      // We save the current draft first so jumping around never loses input.
+      saveDraft();
+
+      state.step = i;
+      renderEditor();
+
+      // Keep the active tab visible in the horizontal step row.
+      requestAnimationFrame(()=>{
+        btn.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+          inline: "center"
+        });
+      });
     };
   });
 }
