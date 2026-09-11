@@ -4219,6 +4219,409 @@ input:focus,textarea:focus,select:focus{border-color:#cc6d91;box-shadow:0 0 0 4p
   }
 }
 
+
+/* Love Letter 1.8 — settings + brand refresh */
+.ma-settings-shell{display:grid;gap:16px}
+.ma-settings-hero{position:relative;overflow:hidden;padding:22px;border-radius:28px;background:radial-gradient(120px 120px at 88% 18%, rgba(124,65,90,.09), transparent 60%),linear-gradient(180deg,#fffaf8 0%,#fff 100%);box-shadow:inset 0 0 0 1px rgba(74,34,52,.055),0 12px 34px rgba(74,34,52,.045)}
+.ma-settings-brand{display:flex;align-items:center;gap:14px}
+.ma-settings-brandmark{width:64px;height:64px;border-radius:18px;overflow:hidden;flex:0 0 64px;box-shadow:0 10px 26px rgba(74,34,52,.12);background:#f6efe9}
+.ma-settings-brandmark img{width:100%;height:100%;display:block;object-fit:cover}
+.ma-settings-wordmark{height:30px;width:auto;display:block}
+.ma-settings-kicker{margin:12px 0 6px;color:#9a7c88;font:650 12px/1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.ma-settings-hero h2{margin:0;color:#241920;font:680 clamp(25px,3vw,34px)/1.03 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;letter-spacing:-.04em;max-width:11ch}
+.ma-settings-hero p{max-width:46ch;margin:10px 0 0;color:#7a6872;font:400 15px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif}
+.ma-settings-summary{margin-top:16px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.ma-settings-chip{min-height:76px;padding:12px;border-radius:18px;background:rgba(245,238,234,.78);box-shadow:inset 0 0 0 1px rgba(74,34,52,.045)}
+.ma-settings-chip strong{display:block;color:#321f28;font:700 20px/1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif}
+.ma-settings-chip span{display:block;margin-top:7px;color:#8b7680;font:500 12px/1.25 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif}
+.ma-setting-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ma-setting-card{position:relative;padding:18px;border-radius:24px;background:linear-gradient(180deg,#fff 0%,#fffdfc 100%);box-shadow:inset 0 0 0 1px rgba(65,42,53,.055),0 10px 24px rgba(62,34,47,.03)}
+.ma-setting-card--warm{background:linear-gradient(180deg,#fff9f7 0%,#fff 100%)}
+.ma-setting-card--tall{min-height:164px}
+.ma-setting-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+.ma-setting-copy{min-width:0}
+.ma-setting-icon{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:#f5ecef;color:#6a4153;font-size:18px;box-shadow:inset 0 0 0 1px rgba(74,34,52,.045);flex:0 0 42px}
+.ma-setting-badge{display:inline-flex;align-items:center;gap:6px;min-height:28px;padding:0 11px;border-radius:999px;background:#f5ecef;color:#6a4153;font:650 12px/1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;white-space:nowrap}
+.ma-setting-badge.ok{background:#eef3ee;color:#4d6a57}
+.ma-setting-badge.soft{background:#f3efed;color:#8a737d}
+.ma-setting-title{font:680 17px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;color:#31222b}
+.ma-setting-sub{margin-top:7px;color:#87717a;font:400 14px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif}
+.ma-setting-meta{margin-top:14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.ma-setting-note{color:#9a838d;font:500 12px/1.35 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif}
+.ma-small-btn{min-height:40px;padding:0 15px;border:0;border-radius:999px;background:#f1e8ec;color:#61384b;font:650 13px/1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;white-space:nowrap;transition:transform .18s ease,background .18s ease,box-shadow .18s ease}
+.ma-small-btn:hover{background:#ebdee4}.ma-small-btn:active{transform:scale(.98)}
+.ma-small-btn--primary{background:#5b203d;color:#fff8fb;box-shadow:0 10px 22px rgba(91,32,61,.14)}
+.ma-small-btn--ghost{background:#f8f3f5}
+.ma-setting-actions{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
+@media (max-width:900px){
+  .ma-settings-hero{padding:18px;border-radius:24px}
+  .ma-settings-brandmark{width:56px;height:56px;flex-basis:56px;border-radius:16px}
+  .ma-settings-wordmark{height:25px}
+  .ma-settings-summary{grid-template-columns:1fr 1fr 1fr;gap:8px}
+  .ma-settings-chip{min-height:72px;padding:10px;border-radius:16px}
+  .ma-settings-chip strong{font-size:18px}
+  .ma-settings-chip span{font-size:11px}
+  .ma-setting-grid{grid-template-columns:1fr;gap:10px}
+  .ma-setting-card,.ma-setting-card--tall{min-height:0;border-radius:20px;padding:16px}
+  .ma-setting-title{font-size:16px}
+  .ma-setting-sub{font-size:13px}
+  .ma-setting-badge{min-height:26px;padding:0 10px;font-size:11px}
+}
+
+
+/* ===============================================================
+   Love Letter 1.9 — unified control system
+   No browser-default buttons, inputs or file pickers in product UI.
+   =============================================================== */
+
+/* Normalize native appearance without removing semantic behavior */
+#creatorView button,
+#creatorView input,
+#creatorView textarea,
+#creatorView select,
+.app-sheet button,
+#storyView button{
+  -webkit-appearance:none;
+  appearance:none;
+  box-sizing:border-box;
+}
+
+#creatorView button,
+.app-sheet button,
+#storyView button{
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",sans-serif;
+}
+
+/* ---------- Story wizard: secret segmented control ---------- */
+.mw-chips{
+  display:grid !important;
+  grid-template-columns:1fr 1fr !important;
+  gap:8px !important;
+  padding:4px !important;
+  border-radius:18px !important;
+  background:#f1e9e6 !important;
+  box-shadow:inset 0 0 0 1px rgba(74,34,52,.045) !important;
+}
+.mw-chip{
+  min-height:46px !important;
+  margin:0 !important;
+  padding:0 16px !important;
+  border:0 !important;
+  border-radius:14px !important;
+  background:transparent !important;
+  color:#765d69 !important;
+  box-shadow:none !important;
+  font:650 14px/1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",sans-serif !important;
+  transition:background .18s ease,color .18s ease,box-shadow .18s ease,transform .16s ease !important;
+}
+.mw-chip:hover{
+  background:rgba(255,255,255,.5) !important;
+}
+.mw-chip.is-active{
+  background:#fff !important;
+  color:#4a2234 !important;
+  box-shadow:0 4px 14px rgba(74,34,52,.07), inset 0 0 0 1px rgba(74,34,52,.05) !important;
+}
+.mw-chip:active{transform:scale(.985) !important}
+
+/* ---------- Visual mode cards ---------- */
+.mw-photo-choice{
+  display:grid !important;
+  grid-template-columns:1fr !important;
+  gap:9px !important;
+}
+.mw-option{
+  width:100% !important;
+  min-height:74px !important;
+  margin:0 !important;
+  padding:13px 14px !important;
+  border:1px solid rgba(74,34,52,.07) !important;
+  border-radius:19px !important;
+  display:grid !important;
+  grid-template-columns:44px minmax(0,1fr) 22px !important;
+  align-items:center !important;
+  gap:12px !important;
+  text-align:left !important;
+  background:#fff !important;
+  color:#382630 !important;
+  box-shadow:0 5px 18px rgba(63,34,47,.025) !important;
+  transition:transform .16s ease,border-color .18s ease,background .18s ease,box-shadow .18s ease !important;
+}
+.mw-option::after{
+  content:"";
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  border:1.5px solid #cdbcc4;
+  background:#fff;
+  box-shadow:inset 0 0 0 4px #fff;
+  transition:.18s ease;
+}
+.mw-option:hover{
+  transform:translateY(-1px) !important;
+  border-color:rgba(111,51,76,.18) !important;
+}
+.mw-option.is-active{
+  background:#fff8fa !important;
+  border-color:#9b6078 !important;
+  box-shadow:0 0 0 3px rgba(111,51,76,.07),0 8px 22px rgba(63,34,47,.035) !important;
+}
+.mw-option.is-active::after{
+  border-color:#6f334c;
+  background:#6f334c;
+  box-shadow:inset 0 0 0 4px #fff;
+}
+.mw-option-icon{
+  width:44px !important;
+  height:44px !important;
+  border-radius:14px !important;
+  display:grid !important;
+  place-items:center !important;
+  background:#f4ecef !important;
+  color:#6b4053 !important;
+  font-size:18px !important;
+}
+.mw-option-title{
+  color:#382630 !important;
+  font:680 15px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",sans-serif !important;
+}
+.mw-option-sub{
+  margin-top:4px !important;
+  color:#8c7781 !important;
+  font:400 12.5px/1.4 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",sans-serif !important;
+}
+
+/* ---------- Soft detail card / upload area ---------- */
+.mw-soft-card{
+  padding:15px !important;
+  border-radius:20px !important;
+  background:#f7f2ef !important;
+  border:1px solid rgba(74,34,52,.055) !important;
+  box-shadow:none !important;
+}
+
+/* All file inputs: replace ugly native gray picker */
+#creatorView input[type="file"]{
+  width:100% !important;
+  min-height:54px !important;
+  padding:6px 8px !important;
+  border:1px solid #eadde2 !important;
+  border-radius:16px !important;
+  background:#fff !important;
+  color:#7b6872 !important;
+  font:500 13px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",sans-serif !important;
+}
+#creatorView input[type="file"]::file-selector-button{
+  min-height:40px !important;
+  margin-right:12px !important;
+  padding:0 14px !important;
+  border:0 !important;
+  border-radius:12px !important;
+  background:#5b263f !important;
+  color:#fff !important;
+  font:650 13px/1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",sans-serif !important;
+  cursor:pointer !important;
+}
+#creatorView input[type="file"]::-webkit-file-upload-button{
+  min-height:40px !important;
+  margin-right:12px !important;
+  padding:0 14px !important;
+  border:0 !important;
+  border-radius:12px !important;
+  background:#5b263f !important;
+  color:#fff !important;
+  font:650 13px/1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",sans-serif !important;
+  cursor:pointer !important;
+}
+
+/* ---------- Choice editor: emoji and text must read as one row ---------- */
+.mw-choice-stack{
+  display:grid !important;
+  gap:9px !important;
+}
+.mw-choice-row{
+  display:grid !important;
+  grid-template-columns:54px minmax(0,1fr) !important;
+  gap:9px !important;
+  align-items:center !important;
+}
+.mw-choice-emoji{
+  width:54px !important;
+  height:54px !important;
+  padding:0 !important;
+  border:1px solid #eadde2 !important;
+  border-radius:16px !important;
+  outline:0 !important;
+  background:#f7f1f3 !important;
+  color:#5c3447 !important;
+  text-align:center !important;
+  font-size:20px !important;
+  box-shadow:none !important;
+}
+.mw-choice-emoji:focus{
+  border-color:#98647a !important;
+  box-shadow:0 0 0 3px rgba(111,51,76,.07) !important;
+}
+
+/* ---------- Main wizard actions ---------- */
+.mw-actionbar{
+  gap:9px !important;
+}
+.mw-back,
+.mw-next{
+  min-height:52px !important;
+  border:0 !important;
+  border-radius:16px !important;
+  font:680 15px/1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",sans-serif !important;
+}
+.mw-back{
+  background:#efe7e9 !important;
+  color:#624555 !important;
+  box-shadow:none !important;
+}
+.mw-next{
+  background:#55233c !important;
+  color:#fff !important;
+  box-shadow:0 9px 20px rgba(74,34,52,.14) !important;
+}
+.mw-back:hover{background:#e9dee2 !important}
+.mw-next:hover{background:#481c32 !important}
+
+/* ---------- Final ready state ---------- */
+.ma-ready{
+  width:min(100%,560px) !important;
+  margin:0 auto !important;
+}
+.ma-ready h1{
+  margin-top:22px !important;
+  color:#261820 !important;
+}
+.ma-ready p{
+  color:#806b76 !important;
+}
+.ma-ready-actions{
+  width:100% !important;
+  margin-top:26px !important;
+  display:grid !important;
+  gap:9px !important;
+}
+.ma-ready-actions button{
+  width:100% !important;
+  min-height:52px !important;
+  padding:0 18px !important;
+  border:0 !important;
+  border-radius:16px !important;
+  font:680 15px/1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",sans-serif !important;
+}
+.ma-ready-main{
+  background:#55233c !important;
+  color:#fff !important;
+  box-shadow:0 9px 20px rgba(74,34,52,.13) !important;
+}
+.ma-ready-soft{
+  background:#f1e8eb !important;
+  color:#5f3e4e !important;
+  box-shadow:none !important;
+}
+
+/* ---------- Legacy creator controls: keep them presentable too ---------- */
+.media-mode-grid{
+  display:grid !important;
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  gap:10px !important;
+}
+.media-mode-card{
+  min-height:86px !important;
+  padding:13px !important;
+  border:1px solid #eadde2 !important;
+  border-radius:18px !important;
+  background:#fff !important;
+  color:#3c2933 !important;
+  box-shadow:0 4px 14px rgba(63,34,47,.025) !important;
+}
+.media-mode-card:has(input:checked){
+  border-color:#966177 !important;
+  background:#fff8fa !important;
+  box-shadow:0 0 0 3px rgba(111,51,76,.065) !important;
+}
+.media-mode-icon{
+  width:38px !important;
+  height:38px !important;
+  border-radius:12px !important;
+  display:grid !important;
+  place-items:center !important;
+  background:#f3eaed !important;
+  color:#6c4053 !important;
+}
+.media-mode-card b{
+  color:#3b2932 !important;
+  font-size:13px !important;
+}
+.media-mode-card small{
+  color:#907b85 !important;
+  font-size:11px !important;
+}
+.privacy-note{
+  border:0 !important;
+  background:#f5efec !important;
+  border-radius:16px !important;
+  color:#493740 !important;
+}
+
+/* ---------- Product shell controls ---------- */
+.home-text-btn,
+.home-soft-btn,
+.home-mini-btn,
+.ma-small-btn,
+.ma-link-btn,
+.ma-filter{
+  border:0 !important;
+  border-radius:999px !important;
+  box-shadow:none !important;
+}
+.ma-filter{
+  min-height:36px !important;
+  padding:0 13px !important;
+  background:#f0e8eb !important;
+  color:#735363 !important;
+}
+.ma-filter.is-active{
+  background:#55233c !important;
+  color:#fff !important;
+}
+.ma-detail-actions button{
+  border-radius:16px !important;
+}
+
+/* ---------- Accessibility/focus ---------- */
+#creatorView button:focus-visible,
+#creatorView input:focus-visible,
+#creatorView textarea:focus-visible,
+#creatorView select:focus-visible,
+.app-sheet button:focus-visible{
+  outline:0 !important;
+  box-shadow:0 0 0 3px rgba(111,51,76,.12) !important;
+}
+
+/* ---------- Responsive tune ---------- */
+@media (max-width:900px){
+  .mw-option{
+    min-height:70px !important;
+    grid-template-columns:42px minmax(0,1fr) 20px !important;
+    padding:12px !important;
+  }
+  .mw-option-icon{
+    width:42px !important;
+    height:42px !important;
+  }
+  .media-mode-grid{
+    grid-template-columns:1fr !important;
+  }
+  .media-mode-card{
+    min-height:68px !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -5349,45 +5752,90 @@ function renderAppSettings(){
   document.getElementById("maTopTitle").textContent="Налаштування";
   const library=getLocalLibrary();
   const installed=isStandaloneApp();
+  const hasDraft=Boolean(localStorage.getItem(DRAFT_KEY));
 
   document.getElementById("maScreen").innerHTML=`
-    <section>
-      <h1 class="ma-page-title">Налаштування</h1>
-      <p class="ma-page-sub">Love Letter зберігає приватні ключі та чернетки локально на цьому пристрої.</p>
+    <section class="ma-settings-shell">
+      <div class="ma-settings-hero">
+        <div class="ma-settings-brand">
+          <div class="ma-settings-brandmark"><img src="/brand/logo-icon.png" alt="Love Letter"></div>
+          <img class="ma-settings-wordmark" src="/brand/logo-wordmark.png" alt="Love Letter">
+        </div>
+        <div class="ma-settings-kicker">Твій простір</div>
+        <h2>Налаштуй Love Letter красиво й спокійно.</h2>
+        <p>Усе важливе — в одному місці: швидкий доступ, приватність, твої листи та незавершені історії.</p>
 
-      <div class="ma-setting-list">
-        <div class="ma-setting-card">
-          <div class="ma-setting-row">
-            <div>
-              <div class="ma-setting-title">${installed ? "Застосунок встановлено" : "Встановити Love Letter"}</div>
-              <div class="ma-setting-sub">${installed ? "Працює у standalone режимі." : "Додай на домашній екран для повноцінного app experience."}</div>
+        <div class="ma-settings-summary">
+          <div class="ma-settings-chip">
+            <strong>${library.length}</strong>
+            <span>${library.length===1 ? "готовий лист" : "готових листів"}</span>
+          </div>
+          <div class="ma-settings-chip">
+            <strong>${hasDraft ? "1" : "0"}</strong>
+            <span>${hasDraft ? "активна чернетка" : "чернеток зараз немає"}</span>
+          </div>
+          <div class="ma-settings-chip">
+            <strong>${installed ? "Так" : "Ще ні"}</strong>
+            <span>${installed ? "додано на екран" : "можна встановити"}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ma-setting-grid">
+        <div class="ma-setting-card ma-setting-card--warm">
+          <div class="ma-setting-head">
+            <div class="ma-setting-copy">
+              <div class="ma-setting-title">Love Letter як застосунок</div>
+              <div class="ma-setting-sub">${installed ? "Застосунок уже готовий для швидкого відкриття з домашнього екрана." : "Додай Love Letter на головний екран, щоб повертатися до листів в один дотик."}</div>
             </div>
-            ${installed ? "" : '<button class="ma-small-btn" id="maInstallBtn" type="button">Встановити</button>'}
+            <div class="ma-setting-icon">✦</div>
+          </div>
+          <div class="ma-setting-meta">
+            <span class="ma-setting-badge ${installed ? "ok" : ""}">${installed ? "Вже встановлено" : "Швидкий доступ"}</span>
+            ${installed ? "" : '<button class="ma-small-btn ma-small-btn--primary" id="maInstallBtn" type="button">Встановити</button>'}
           </div>
         </div>
 
         <div class="ma-setting-card">
-          <div class="ma-setting-title">Приватність</div>
-          <div class="ma-setting-sub">Оригінал фото для word portrait обробляється локально. сховище отримує лише компактні дані портрета або стиснуте фото, якщо ти сам обрав режим фото.</div>
+          <div class="ma-setting-head">
+            <div class="ma-setting-copy">
+              <div class="ma-setting-title">Приватність</div>
+              <div class="ma-setting-sub">Чернетки залишаються на цьому пристрої, а особисті дані не показуються нікому, поки ти сам не надішлеш лист.</div>
+            </div>
+            <div class="ma-setting-icon">♡</div>
+          </div>
+          <div class="ma-setting-meta">
+            <span class="ma-setting-badge soft">Лише для тебе</span>
+            <span class="ma-setting-note">Спокійне приватне середовище для особистих історій.</span>
+          </div>
         </div>
 
-        <div class="ma-setting-card">
-          <div class="ma-setting-row">
-            <div>
+        <div class="ma-setting-card ma-setting-card--tall">
+          <div class="ma-setting-head">
+            <div class="ma-setting-copy">
               <div class="ma-setting-title">Мої листи</div>
-              <div class="ma-setting-sub">${library.length} ${library.length===1?"лист":"листів"} на цьому пристрої.</div>
+              <div class="ma-setting-sub">${library.length ? `На цьому пристрої зараз ${library.length} ${library.length===1 ? "лист" : "листів"}.` : "Тут зберігатимуться листи, до яких ти захочеш повернутися."}</div>
             </div>
-            ${library.length ? '<button class="ma-small-btn" id="maClearLibraryBtn" type="button">Очистити список</button>' : ''}
+            <div class="ma-setting-icon">✉</div>
+          </div>
+          <div class="ma-setting-actions">
+            <span class="ma-setting-badge">${library.length} ${library.length===1 ? "лист" : "листів"}</span>
+            ${library.length ? '<button class="ma-small-btn ma-small-btn--ghost" id="maClearLibraryBtn" type="button">Очистити список</button>' : ""}
+            <button class="ma-small-btn" id="maOpenLibraryBtn" type="button">Відкрити листи</button>
           </div>
         </div>
 
-        <div class="ma-setting-card">
-          <div class="ma-setting-row">
-            <div>
+        <div class="ma-setting-card ma-setting-card--tall">
+          <div class="ma-setting-head">
+            <div class="ma-setting-copy">
               <div class="ma-setting-title">Чернетка</div>
-              <div class="ma-setting-sub">${localStorage.getItem(DRAFT_KEY) ? "Є незавершений лист." : "Немає активної чернетки."}</div>
+              <div class="ma-setting-sub">${hasDraft ? "Незавершений лист уже чекає на тебе. Можна продовжити його або почати все спочатку." : "Коли зупинишся посеред створення, Love Letter збереже історію й дозволить повернутися пізніше."}</div>
             </div>
-            ${localStorage.getItem(DRAFT_KEY) ? '<button class="ma-small-btn" id="maClearDraftBtn" type="button">Очистити</button>' : ''}
+            <div class="ma-setting-icon">✎</div>
+          </div>
+          <div class="ma-setting-actions">
+            <span class="ma-setting-badge ${hasDraft ? "ok" : "soft"}">${hasDraft ? "Чернетка активна" : "Поки порожньо"}</span>
+            ${hasDraft ? '<button class="ma-small-btn" id="maResumeDraftBtn" type="button">Продовжити</button><button class="ma-small-btn ma-small-btn--ghost" id="maClearDraftBtn" type="button">Очистити</button>' : '<button class="ma-small-btn ma-small-btn--primary" id="maStartNewFromSettings" type="button">Новий лист</button>'}
           </div>
         </div>
       </div>
@@ -5403,24 +5851,38 @@ function renderAppSettings(){
       showMobileToast(isIOS ? "Safari → Поділитися → На початковий екран" : "Відкрий меню браузера → Встановити застосунок");
     }
   });
+  document.getElementById("maOpenLibraryBtn")?.addEventListener("click",()=>{
+    location.hash="#library";
+    renderFromHash();
+  });
+  document.getElementById("maResumeDraftBtn")?.addEventListener("click",()=>{
+    location.hash="#create";
+    openMobileCreate({resume:true});
+  });
+  document.getElementById("maStartNewFromSettings")?.addEventListener("click",()=>{
+    location.hash="#create";
+    openMobileCreate({resume:false});
+  });
   document.getElementById("maClearDraftBtn")?.addEventListener("click",()=>{
-    clearDraft();showMobileToast("Чернетку очищено");renderAppSettings();
+    clearDraft();
+    showMobileToast("Чернетку очищено");
+    renderAppSettings();
   });
   document.getElementById("maClearLibraryBtn")?.addEventListener("click",()=>{
     openAppSheet(`
       <div class="app-sheet-head">
-        <div class="app-sheet-kicker">Мої дані</div>
-        <div class="app-sheet-title">Очистити список листів на цьому пристрої?</div>
-        <div class="app-sheet-copy">Серверні листи та їхні посилання залишаться активними. Це видалить лише локальний список у застосунку.</div>
+        <div class="app-sheet-kicker">Мої листи</div>
+        <div class="app-sheet-title">Очистити локальний список листів?</div>
+        <div class="app-sheet-copy">Це прибере список лише з цього пристрою. Уже надіслані листи та їхні посилання залишаться доступними.</div>
       </div>
       <div class="app-sheet-actions">
-        <button class="app-sheet-action danger" id="confirmClearLibrary" type="button">Очистити список листів</button>
+        <button class="app-sheet-action danger" id="confirmClearLibrary" type="button">Очистити список</button>
         <button class="app-sheet-action cancel" id="cancelClearLibrary" type="button">Скасувати</button>
       </div>`);
     document.getElementById("confirmClearLibrary")?.addEventListener("click",()=>{
       saveLocalLibrary([]);
       closeAppSheet();
-      showMobileToast("Локальну бібліотеку очищено");
+      showMobileToast("Список очищено");
       renderAppSettings();
     });
     document.getElementById("cancelClearLibrary")?.addEventListener("click",closeAppSheet);
@@ -5725,13 +6187,13 @@ const MOBILE_WIZARD_STEPS = [
     title:"Що з’явиться поруч із листом?",
     render:()=>`
       <div class="mw-screen">
-        <p class="mw-copy">Фото — не обов’язкове. Можна зробити легкий портрет зі слів прямо в браузері.</p>
+        <p class="mw-copy">Фото — не обов’язкове. Можна зробити легкий портрет зі слів прямо на пристрої.</p>
         <div class="mw-photo-choice">
           <button class="mw-option" data-visual="word">
             <div class="mw-option-icon">✦</div>
             <div class="mw-option-copy">
               <div class="mw-option-title">Портрет зі слів</div>
-              <div class="mw-option-sub">Локальна обробка. Оригінал фото не йде в сховище.</div>
+              <div class="mw-option-sub">Оригінал фото не зберігається.</div>
             </div>
           </button>
           <button class="mw-option" data-visual="photo">
@@ -5934,7 +6396,7 @@ function renderMobileVisualDetails(){
       <div class="mw-soft-card">
         <label class="mw-label">Фото</label>
         <input class="mw-input" id="mwPhotoInput" type="file" accept="image/*" style="padding-top:13px" />
-        <div class="mw-helper">Фото буде зменшено прямо в браузері.</div>
+        <div class="mw-helper">Фото автоматично підготується до листа.</div>
       </div>`;
     document.getElementById("mwPhotoInput")?.addEventListener("change", async e=>{
       const file = e.target.files?.[0];
@@ -5957,7 +6419,7 @@ function renderMobileVisualDetails(){
         <label class="mw-label" for="mwWordList">Слова портрета</label>
         <input class="mw-input" id="mwWordList" placeholder="кохаю, разом, назавжди, ми" />
       </div>
-      <div class="mw-helper">Фото обробляється локально. У сховище потрапляє тільки компактна карта тіней.</div>
+      <div class="mw-helper">Оригінал фото не зберігається — лишається тільки готовий ефект.</div>
       <div id="mwWordPreview" class="mw-word-preview"></div>
     </div>`;
 
