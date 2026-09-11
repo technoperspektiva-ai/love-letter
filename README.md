@@ -176,3 +176,21 @@ Worker сам створює таблицю `stories` при першому API-
 - recipient URL показується лише якщо запис реально доступний.
 
 Deploy command: `npx wrangler deploy`
+
+
+## v16 — explicit D1 binding
+
+D1 прив'язано напряму:
+- binding: `DB`
+- database_name: `love-letter`
+- database_id: `fbe0e91b-ca33-40cb-881c-a7f834c46cc8`
+
+Deploy command: `npx wrangler deploy`
+
+
+## v17 — D1 name correction
+
+Виправлено назву бази:
+- binding: `DB`
+- database_name: `love-letter-db`
+- database_id: `fbe0e91b-ca33-40cb-881c-a7f834c46cc8`
