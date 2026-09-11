@@ -4622,6 +4622,42 @@ input:focus,textarea:focus,select:focus{border-color:#cc6d91;box-shadow:0 0 0 4p
   }
 }
 
+
+/* ===============================================================
+   Love Letter 1.9.1 — visible brand identity
+   =============================================================== */
+.ma-avatar--logo,
+.mw-mark--logo{
+  padding:0 !important;
+  overflow:hidden !important;
+  background:#f7efe9 !important;
+  border:0 !important;
+}
+.ma-avatar--logo img,
+.mw-mark--logo img{
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+  display:block !important;
+}
+.mw-brandtext--logo{
+  display:flex !important;
+  align-items:center !important;
+}
+.mw-brandtext--logo img{
+  display:block !important;
+  height:22px !important;
+  width:auto !important;
+  max-width:142px !important;
+  object-fit:contain !important;
+}
+@media (max-width:900px){
+  .mw-brandtext--logo img{
+    height:20px !important;
+    max-width:128px !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -4632,7 +4668,7 @@ input:focus,textarea:focus,select:focus{border-color:#cc6d91;box-shadow:0 0 0 4p
 <div id="creatorView">
   <div id="mobileApp" class="mobile-app hidden">
     <header class="ma-topbar">
-      <button class="ma-avatar" id="maHomeLogo" type="button" aria-label="Love Letter">L</button>
+      <button class="ma-avatar ma-avatar--logo" id="maHomeLogo" type="button" aria-label="Love Letter"><img src="/brand/logo-icon.png" alt=""></button>
       <div class="ma-top-title" id="maTopTitle">Love Letter</div>
       <button class="ma-icon-btn" id="maSettingsBtn" type="button" aria-label="Налаштування">•••</button>
     </header>
@@ -4655,8 +4691,8 @@ input:focus,textarea:focus,select:focus{border-color:#cc6d91;box-shadow:0 0 0 4p
   <div id="mobileWizard" class="mobile-wizard hidden">
     <header class="mw-top">
       <div class="mw-brand">
-        <div class="mw-mark">L</div>
-        <div class="mw-brandtext">Love Letter</div>
+        <div class="mw-mark mw-mark--logo"><img src="/brand/logo-icon.png" alt=""></div>
+        <div class="mw-brandtext mw-brandtext--logo"><img src="/brand/logo-wordmark.png" alt="Love Letter"></div>
       </div>
       <button type="button" class="mw-preview-btn" id="mwPreviewBtn">Перегляд</button>
     </header>

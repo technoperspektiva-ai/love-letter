@@ -1,19 +1,13 @@
-# Love Letter 1.9 — Unified Control System
+# Love Letter 1.9.1 — Logo Visible
 
-Цей реліз — не точковий fix однієї кнопки. Проведено повний audit інтерактивних контролів.
+Виправлення:
+- новий логотип тепер реально видно в головному app header;
+- логотип видно у wizard header;
+- wordmark Love Letter використовується у створенні листа;
+- PWA icons залишаються новими;
+- settings hero вже використовує той самий brand asset.
 
-Виправлено:
-- secret toggle;
-- photo / word portrait / no-image selector;
-- file picker;
-- choice editor;
-- wizard bottom actions;
-- ready screen actions;
-- legacy desktop visual selector;
-- filters, small actions, settings controls;
-- focus / pressed / selected states.
-
-Головний принцип:
-жодних випадкових browser-default сірих кнопок у продуктовому UI.
-
-Також оновлено service worker cache до 1.9.
+Перевірка:
+- Home: зверху зліва має бути wax-seal logo, а не літера L.
+- Create: у header має бути logo + Love Letter wordmark.
+- Settings: hero використовує ті самі brand assets.
