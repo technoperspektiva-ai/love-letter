@@ -495,3 +495,46 @@ Mobile та desktop користуються одними й тими самим
 Settings / Letter Detail / Create states.
 
 `/api/health` -> `version: "1.4"`
+
+
+# Love Letter 1.5 — Complete Product Pass
+
+Повний audit після product review.
+
+## Виправлено системно
+- mobile bottom nav тепер реально підтримує 4 пункти без зламаної сітки;
+- icon controls круглі, action controls мають спільну геометрію;
+- прибрані випадкові квадратні кнопки;
+- Library card перетворено на composite row з окремим overflow menu;
+- додано native-like action sheet замість browser `confirm()`.
+
+## Видалення
+Видалення тепер доступне:
+- з Letter Detail;
+- прямо з Library через `•••`.
+
+Якщо є edit key:
+- DELETE іде в D1;
+- 404 вважається вже видаленим і чистить локальний стан;
+- 401/403 показує реальну проблему ключа й пропонує окремо прибрати local item.
+
+Якщо edit key немає:
+- продукт чесно не обіцяє серверне видалення;
+- дозволяє прибрати запис із локальної Library.
+
+## Create flow
+Раніше mobile wizard не давав налаштувати реальний фінал листа.
+Тепер є 7-й повний етап:
+- final title;
+- date;
+- time;
+- final note;
+- live final preview.
+
+## Detail / Settings
+- loading/error states;
+- status «керування доступне / лише перегляд»;
+- regenerate URL через custom sheet;
+- local library cleanup із чітким поясненням, що server stories не видаляються.
+
+`/api/health` -> `version: "1.5"`

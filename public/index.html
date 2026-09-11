@@ -3288,6 +3288,248 @@ input:focus,textarea:focus,select:focus{border-color:#cc6d91;box-shadow:0 0 0 4p
   .ma-filter-row{justify-content:flex-end}
 }
 
+
+/* ===============================================================
+   Love Letter 1.5 — complete product pass
+   Geometry, missing flows, delete reliability, full create flow.
+   =============================================================== */
+
+:root{
+  --ui-radius-sm:14px;
+  --ui-radius-md:18px;
+  --ui-radius-lg:24px;
+  --ui-control-h:50px;
+}
+
+/* Never let interactive controls feel like accidental squares. */
+.ma-icon-btn,
+.ma-quick-icon,
+.ma-option-icon,
+.ma-idea-icon,
+.mw-choice-emoji{
+  border-radius:999px !important;
+}
+.ma-small-btn,
+.ma-filter,
+.ma-link-btn{
+  border-radius:999px !important;
+}
+.ma-home-create,
+.ma-primary-cta,
+.ma-detail-actions button,
+.ma-ready-actions button,
+.mw-back,
+.mw-next{
+  border-radius:16px !important;
+}
+
+/* Composite library row: main action + independent overflow action. */
+.ma-letter-row{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 42px;
+  gap:6px;
+  align-items:stretch;
+}
+.ma-letter-card{
+  border-radius:18px !important;
+}
+.ma-letter-more{
+  width:42px;
+  min-width:42px;
+  border:0;
+  border-radius:999px;
+  background:transparent;
+  color:#8e7984;
+  font:700 18px/1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+  transition:background .16s ease,transform .16s ease;
+}
+.ma-letter-more:hover{background:#eee6e8}
+.ma-letter-more:active{transform:scale(.96)}
+
+/* Native-feeling action / confirmation sheet */
+.app-sheet{
+  position:fixed;
+  inset:0;
+  z-index:500;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+}
+.app-sheet.hidden{display:none!important}
+.app-sheet-backdrop{
+  position:absolute;
+  inset:0;
+  border:0;
+  background:rgba(30,18,25,.30);
+  backdrop-filter:blur(4px);
+  -webkit-backdrop-filter:blur(4px);
+}
+.app-sheet-panel{
+  position:relative;
+  z-index:1;
+  width:min(100% - 20px,520px);
+  margin:0 10px calc(10px + env(safe-area-inset-bottom));
+  padding:10px;
+  border-radius:26px;
+  background:rgba(255,252,249,.98);
+  box-shadow:0 24px 70px rgba(36,20,29,.24);
+  animation:sheetIn .22s cubic-bezier(.2,.75,.2,1) both;
+}
+@keyframes sheetIn{
+  from{opacity:0;transform:translateY(18px) scale(.985)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+.app-sheet-head{padding:10px 10px 12px}
+.app-sheet-kicker{
+  color:#9c8791;
+  font:650 11px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.07em;
+}
+.app-sheet-title{
+  margin-top:4px;
+  color:#30212a;
+  font:700 20px/1.15 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+  letter-spacing:-.025em;
+}
+.app-sheet-copy{
+  margin-top:7px;
+  color:#7e6b75;
+  font:400 13px/1.45 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+}
+.app-sheet-actions{display:grid;gap:6px}
+.app-sheet-action{
+  width:100%;
+  min-height:50px;
+  padding:0 14px;
+  border:0;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  text-align:left;
+  background:#f4eeeb;
+  color:#392832;
+  font:650 14px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+}
+.app-sheet-action:active{transform:scale(.99)}
+.app-sheet-action.primary{background:#4a2234;color:#fff}
+.app-sheet-action.danger{background:#faeaed;color:#9b3452}
+.app-sheet-action.cancel{background:transparent;color:#806b76;justify-content:center}
+.app-sheet-action[disabled]{opacity:.42}
+
+.ma-danger-note{
+  margin-top:8px;
+  padding:10px 12px;
+  border-radius:14px;
+  background:#faeef0;
+  color:#8b5062;
+  font:500 12px/1.4 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+}
+
+/* Detail state / status */
+.ma-detail-status{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  margin-top:12px;
+  padding:6px 9px;
+  border-radius:999px;
+  background:rgba(255,255,255,.10);
+  color:#e6d1da;
+  font:600 11px/1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+}
+.ma-detail-status-dot{
+  width:6px;height:6px;border-radius:50%;background:#cfd8c6;
+}
+.ma-detail-error{
+  margin:18px auto 0;
+  max-width:720px;
+  padding:14px 16px;
+  border-radius:16px;
+  background:#faecef;
+  color:#8d4158;
+  font:500 13px/1.45 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+}
+
+/* Final invitation screen */
+.mw-final-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+.mw-final-preview{
+  margin-top:16px;
+  padding:16px;
+  border-radius:22px;
+  background:#f1e9e6;
+}
+.mw-final-preview .top{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:10px;
+}
+.mw-final-preview .title{
+  color:#3e2b35;
+  font:600 24px/1.05 Georgia,"Times New Roman",serif;
+}
+.mw-final-preview .date{
+  color:#7e6672;
+  font:650 12px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+}
+.mw-final-preview .note{
+  margin-top:12px;
+  color:#7d6973;
+  font:400 13px/1.45 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+}
+
+/* Four-item bottom nav must actually fit. */
+@media (max-width:900px){
+  .ma-tabbar{
+    grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+    gap:2px !important;
+    padding-left:7px !important;
+    padding-right:7px !important;
+  }
+  .ma-tab{
+    min-width:0;
+    padding:0 4px;
+  }
+  .ma-tab-create{
+    order:initial !important;
+    background:transparent !important;
+    box-shadow:none !important;
+  }
+  .ma-tab-create:after{content:none!important}
+  .ma-plus{
+    width:46px!important;
+    height:46px!important;
+    border-radius:999px!important;
+    background:#4a2234!important;
+    box-shadow:0 8px 20px rgba(74,34,52,.15)!important;
+  }
+  .mw-final-grid{grid-template-columns:1fr}
+  .app-sheet-panel{
+    width:calc(100% - 16px);
+    margin-left:8px;
+    margin-right:8px;
+  }
+}
+
+@media (min-width:901px){
+  .app-sheet{
+    align-items:center;
+  }
+  .app-sheet-panel{
+    margin:0;
+  }
+  .ma-letter-row:hover .ma-letter-more{
+    background:rgba(74,34,52,.045);
+  }
+}
+
 </style>
 </head>
 <body>
@@ -3810,14 +4052,17 @@ function setTab(route){
 function appLetterCard(item){
   const initial=(item.recipient||"L").trim().slice(0,1).toUpperCase() || "L";
   return `
-    <button class="ma-letter-card" type="button" data-letter-id="${escapeHtml(item.id)}">
-      <div class="ma-letter-cover">${escapeHtml(initial)}</div>
-      <div style="min-width:0">
-        <div class="ma-letter-title">${escapeHtml(item.recipient || "Особистий лист")}</div>
-        <div class="ma-letter-meta">${escapeHtml(item.title || "Твій лист")} · ${formatLocalDate(item.updatedAt||item.createdAt)}</div>
-      </div>
-      <div class="ma-chevron">›</div>
-    </button>`;
+    <div class="ma-letter-row">
+      <button class="ma-letter-card" type="button" data-letter-id="${escapeHtml(item.id)}">
+        <div class="ma-letter-cover">${escapeHtml(initial)}</div>
+        <div style="min-width:0">
+          <div class="ma-letter-title">${escapeHtml(item.recipient || "Особистий лист")}</div>
+          <div class="ma-letter-meta">${escapeHtml(item.title || "Твій лист")} · ${formatLocalDate(item.updatedAt||item.createdAt)}</div>
+        </div>
+        <div class="ma-chevron">›</div>
+      </button>
+      <button class="ma-letter-more" type="button" data-letter-menu="${escapeHtml(item.id)}" aria-label="Дії з листом">•••</button>
+    </div>`;
 }
 
 function renderAppHome(){
@@ -3971,11 +4216,136 @@ function renderAppLibrary(query="",filter="all"){
   bindLetterCards();
 }
 
+
+function closeAppSheet(){
+  const sheet=document.getElementById("appSheet");
+  sheet?.classList.add("hidden");
+  sheet?.setAttribute("aria-hidden","true");
+  const panel=document.getElementById("appSheetPanel");
+  if(panel) panel.innerHTML="";
+}
+
+function openAppSheet(html){
+  const sheet=document.getElementById("appSheet");
+  const panel=document.getElementById("appSheetPanel");
+  if(!sheet || !panel) return;
+  panel.innerHTML=html;
+  sheet.classList.remove("hidden");
+  sheet.setAttribute("aria-hidden","false");
+}
+
+function letterEditKey(id){
+  const item=getLocalLibrary().find(x=>x.id===id)||{};
+  try{
+    return item.editKey || localStorage.getItem(`love-letter-edit-${id}`) || "";
+  }catch{
+    return item.editKey || "";
+  }
+}
+
+async function fetchStoryPayload(id){
+  const r=await fetch(`/api/story/${encodeURIComponent(id)}`,{cache:"no-store"});
+  let data={};
+  try{data=await r.json()}catch{}
+  if(!r.ok || !data?.payload){
+    const message=data?.message || data?.error || `Помилка ${r.status}`;
+    throw new Error(message);
+  }
+  return data.payload;
+}
+
+function openLetterActions(id){
+  const item=getLocalLibrary().find(x=>x.id===id)||{id};
+  const key=letterEditKey(id);
+  openAppSheet(`
+    <div class="app-sheet-head">
+      <div class="app-sheet-kicker">Лист</div>
+      <div class="app-sheet-title">${escapeHtml(item.recipient||"Особистий лист")}</div>
+      <div class="app-sheet-copy">${escapeHtml(item.title||"Керування листом")}</div>
+    </div>
+    <div class="app-sheet-actions">
+      <button class="app-sheet-action primary" id="sheetOpenLetter" type="button"><span>Відкрити лист</span><span>↗</span></button>
+      ${key ? '<button class="app-sheet-action" id="sheetEditLetter" type="button"><span>Редагувати</span><span>›</span></button>' : ''}
+      <button class="app-sheet-action" id="sheetCopyLetter" type="button"><span>Копіювати посилання</span><span>⧉</span></button>
+      <button class="app-sheet-action" id="sheetDuplicateLetter" type="button"><span>Створити копію</span><span>＋</span></button>
+      <button class="app-sheet-action danger" id="sheetDeleteLetter" type="button"><span>${key?"Видалити лист":"Прибрати з бібліотеки"}</span><span>×</span></button>
+      <button class="app-sheet-action cancel" id="sheetCancel" type="button">Скасувати</button>
+    </div>
+  `);
+
+  const url=`${location.origin}/l/${id}`;
+  document.getElementById("sheetOpenLetter")?.addEventListener("click",()=>location.assign(url));
+  document.getElementById("sheetEditLetter")?.addEventListener("click",()=>{
+    closeAppSheet();openExistingLetterInWizard(id);
+  });
+  document.getElementById("sheetCopyLetter")?.addEventListener("click",async()=>{
+    await navigator.clipboard.writeText(url);
+    closeAppSheet();showMobileToast("Посилання скопійовано");
+  });
+  document.getElementById("sheetDuplicateLetter")?.addEventListener("click",async()=>{
+    try{
+      const payload=await fetchStoryPayload(id);
+      state.editingId="";
+      state.editKey="";
+      populateEditorFromPayload(payload);
+      saveDraft();
+      mobileWizardState.index=0;
+      closeAppSheet();
+      setMobileAppVisibility(false);
+      document.body.classList.add("ma-no-tabs");
+      history.replaceState(null,"","#create");
+      renderMobileWizard();
+      renderMobilePreview();
+      showMobileToast("Копію створено як нову чернетку");
+    }catch(e){
+      showMobileToast(e?.message||"Не вдалося створити копію");
+    }
+  });
+  document.getElementById("sheetDeleteLetter")?.addEventListener("click",()=>{
+    closeAppSheet();requestDeleteLetter(id);
+  });
+  document.getElementById("sheetCancel")?.addEventListener("click",closeAppSheet);
+}
+
+function requestDeleteLetter(id){
+  const item=getLocalLibrary().find(x=>x.id===id)||{id};
+  const key=letterEditKey(id);
+  openAppSheet(`
+    <div class="app-sheet-head">
+      <div class="app-sheet-kicker">${key?"Незворотна дія":"Локальна бібліотека"}</div>
+      <div class="app-sheet-title">${key?"Видалити цей лист?":"Прибрати лист з цього пристрою?"}</div>
+      <div class="app-sheet-copy">${
+        key
+        ? "Посилання отримувача перестане працювати, а запис буде видалений із D1. Відновити його не можна."
+        : "Приватного ключа редагування на цьому пристрої немає, тому серверний лист ми не чіпаємо — лише прибираємо його з локальної бібліотеки."
+      }</div>
+    </div>
+    <div class="app-sheet-actions">
+      <button class="app-sheet-action danger" id="confirmDeleteLetter" type="button">${key?"Видалити назавжди":"Прибрати з бібліотеки"}</button>
+      <button class="app-sheet-action cancel" id="cancelDeleteLetter" type="button">Скасувати</button>
+    </div>
+  `);
+  document.getElementById("confirmDeleteLetter")?.addEventListener("click",async()=>{
+    const btn=document.getElementById("confirmDeleteLetter");
+    if(btn){btn.disabled=true;btn.textContent=key?"Видаляю…":"Прибираю…"}
+    await deleteFromApp(id,{skipConfirm:true});
+  });
+  document.getElementById("cancelDeleteLetter")?.addEventListener("click",closeAppSheet);
+}
+
 function bindLetterCards(){
   document.querySelectorAll("[data-letter-id]").forEach(btn=>{
     btn.addEventListener("click",()=>{
       haptic(7);
       setMobileAppRoute(`letter=${encodeURIComponent(btn.dataset.letterId)}`);
+    });
+  });
+  document.querySelectorAll("[data-letter-menu]").forEach(btn=>{
+    btn.addEventListener("click",e=>{
+      e.preventDefault();
+      e.stopPropagation();
+      haptic(5);
+      openLetterActions(btn.dataset.letterMenu);
     });
   });
 }
@@ -3984,18 +4354,28 @@ async function renderLetterDetail(id){
   setMobileAppVisibility(true);
   document.body.classList.add("ma-no-tabs");
   document.getElementById("maTopTitle").textContent="Лист";
+  document.getElementById("maScreen").innerHTML=`
+    <section>
+      <div class="ma-empty"><div class="ma-empty-mark">L</div>Відкриваю лист…</div>
+    </section>`;
   const library=getLocalLibrary();
   let item=library.find(x=>x.id===id) || {id};
   let payload=null;
+  let loadError="";
   try{
     const r=await fetch(`/api/story/${encodeURIComponent(id)}`,{cache:"no-store"});
-    const data=await r.json();
+    let data={};
+    try{data=await r.json()}catch{}
     if(r.ok && data?.payload){
       payload=data.payload;
       upsertLocalLetter({id,editKey:item.editKey||"",payload});
       item=getLocalLibrary().find(x=>x.id===id)||item;
+    }else{
+      loadError=data?.message || data?.error || `Помилка ${r.status}`;
     }
-  }catch{}
+  }catch(e){
+    loadError=e?.message || "Немає з’єднання";
+  }
 
   const recipient=payload?.recipient || item.recipient || "Особистий лист";
   const title=payload?.letterTitle || item.title || "Твій лист";
@@ -4008,6 +4388,7 @@ async function renderLetterDetail(id){
         <div class="ma-detail-cover">${escapeHtml(initial)}</div>
         <h1>${escapeHtml(recipient)}</h1>
         <p>${escapeHtml(title)}</p>
+        <div class="ma-detail-status"><span class="ma-detail-status-dot"></span>${hasKey ? "Керування доступне" : "Лише перегляд"}</div>
         <div class="ma-detail-actions">
           <button class="ma-detail-primary" id="maOpenRecipient" type="button">Відкрити</button>
           <button class="ma-detail-secondary" id="maShareRecipient" type="button">Поділитися</button>
@@ -4026,11 +4407,12 @@ async function renderLetterDetail(id){
         </button>
         ${hasKey ? `<button class="ma-action-row" id="maRegenerateLink" type="button">
           <span>Створити нове посилання</span><span>↻</span>
-        </button>
-        <button class="ma-action-row danger" id="maDeleteLetter" type="button">
-          <span>Видалити лист</span><span>×</span>
         </button>` : ""}
+        <button class="ma-action-row danger" id="maDeleteLetter" type="button">
+          <span>${hasKey ? "Видалити лист" : "Прибрати з бібліотеки"}</span><span>×</span>
+        </button>
       </div>
+      ${loadError ? `<div class="ma-detail-error">Серверний лист зараз не вдалося прочитати: ${escapeHtml(loadError)}. Локальні дії все одно доступні настільки, наскільки дозволяє збережений ключ.</div>` : ""}
     </section>`;
 
   const recipientUrl=`${location.origin}/l/${id}`;
@@ -4063,7 +4445,7 @@ async function renderLetterDetail(id){
     showMobileToast("Копія готова до редагування");
   });
   document.getElementById("maRegenerateLink")?.addEventListener("click",()=>regenerateFromApp(id));
-  document.getElementById("maDeleteLetter")?.addEventListener("click",()=>deleteFromApp(id));
+  document.getElementById("maDeleteLetter")?.addEventListener("click",()=>requestDeleteLetter(id));
 }
 
 async function openExistingLetterInWizard(id){
@@ -4087,11 +4469,25 @@ async function openExistingLetterInWizard(id){
   }catch(e){ showMobileToast(e?.message||"Не вдалося відкрити лист"); }
 }
 
-async function regenerateFromApp(id){
+async function regenerateFromApp(id,{confirmed=false}={}){
   const item=getLocalLibrary().find(x=>x.id===id)||{};
   const key=item.editKey || localStorage.getItem(`love-letter-edit-${id}`) || "";
   if(!key) return;
-  if(!confirm("Створити нове посилання? Старе перестане працювати.")) return;
+  if(!confirmed){
+    openAppSheet(`
+      <div class="app-sheet-head">
+        <div class="app-sheet-kicker">Нове посилання</div>
+        <div class="app-sheet-title">Перевипустити URL?</div>
+        <div class="app-sheet-copy">Поточне посилання отримувача одразу перестане працювати. Сам лист залишиться тим самим.</div>
+      </div>
+      <div class="app-sheet-actions">
+        <button class="app-sheet-action primary" id="confirmRegenerate" type="button">Створити нове посилання</button>
+        <button class="app-sheet-action cancel" id="cancelRegenerate" type="button">Скасувати</button>
+      </div>`);
+    document.getElementById("confirmRegenerate")?.addEventListener("click",()=>{closeAppSheet();regenerateFromApp(id,{confirmed:true})});
+    document.getElementById("cancelRegenerate")?.addEventListener("click",closeAppSheet);
+    return;
+  }
 
   try{
     const r=await fetch(`/api/story/${encodeURIComponent(id)}/regenerate`,{
@@ -4114,23 +4510,78 @@ async function regenerateFromApp(id){
   }catch(e){ showMobileToast(e?.message||"Не вдалося створити URL"); }
 }
 
-async function deleteFromApp(id){
-  const item=getLocalLibrary().find(x=>x.id===id)||{};
-  const key=item.editKey || localStorage.getItem(`love-letter-edit-${id}`) || "";
-  if(!key) return;
-  if(!confirm("Видалити цей лист назавжди?")) return;
+async function deleteFromApp(id,{skipConfirm=false}={}){
+  const key=letterEditKey(id);
+
+  // No edit key: we cannot truthfully claim server deletion.
+  // Still allow the user to remove stale/shared items from their own Library.
+  if(!key){
+    removeLocalLetter(id);
+    closeAppSheet();
+    showMobileToast("Лист прибрано з бібліотеки");
+    if((location.hash||"").includes(`letter=${encodeURIComponent(id)}`)){
+      history.replaceState(null,"","#library");
+    }
+    renderAppLibrary();
+    return;
+  }
+
+  if(!skipConfirm){
+    requestDeleteLetter(id);
+    return;
+  }
 
   try{
     const r=await fetch(`/api/story/${encodeURIComponent(id)}`,{
-      method:"DELETE",headers:{"x-edit-token":key}
+      method:"DELETE",
+      headers:{"x-edit-token":key}
     });
-    if(!r.ok) throw new Error("Не вдалося видалити");
-    removeLocalLetter(id);
-    try{localStorage.removeItem(`love-letter-edit-${id}`)}catch{}
-    showMobileToast("Лист видалено");
-    setMobileAppRoute("library",true);
-    renderAppLibrary();
-  }catch(e){ showMobileToast(e?.message||"Не вдалося видалити"); }
+
+    let data={};
+    try{data=await r.json()}catch{}
+
+    // 404 means the server copy is already gone; clean local state too.
+    if(r.status===404 || (r.ok && data?.ok)){
+      removeLocalLetter(id);
+      try{localStorage.removeItem(`love-letter-edit-${id}`)}catch{}
+      closeAppSheet();
+      showMobileToast(r.status===404 ? "Лист уже був видалений. Локальну копію прибрано." : "Лист видалено");
+      history.replaceState(null,"","#library");
+      renderAppLibrary();
+      return;
+    }
+
+    const code=data?.error || "";
+    if(r.status===401 || r.status===403){
+      closeAppSheet();
+      openAppSheet(`
+        <div class="app-sheet-head">
+          <div class="app-sheet-kicker">Ключ не підходить</div>
+          <div class="app-sheet-title">Не вдалося видалити лист із сервера</div>
+          <div class="app-sheet-copy">На цьому пристрої збережений ключ редагування, але сервер його не прийняв. Серверний лист залишиться активним.</div>
+          <div class="ma-danger-note">Код: ${escapeHtml(code||String(r.status))}</div>
+        </div>
+        <div class="app-sheet-actions">
+          <button class="app-sheet-action danger" id="removeLocalOnly" type="button">Прибрати тільки з бібліотеки</button>
+          <button class="app-sheet-action cancel" id="keepLetterLocal" type="button">Залишити</button>
+        </div>
+      `);
+      document.getElementById("removeLocalOnly")?.addEventListener("click",()=>{
+        removeLocalLetter(id);
+        closeAppSheet();
+        history.replaceState(null,"","#library");
+        renderAppLibrary();
+        showMobileToast("Локальну копію прибрано");
+      });
+      document.getElementById("keepLetterLocal")?.addEventListener("click",closeAppSheet);
+      return;
+    }
+
+    throw new Error(data?.message || data?.error || `Помилка видалення (${r.status})`);
+  }catch(e){
+    closeAppSheet();
+    showMobileToast(e?.message||"Не вдалося видалити лист");
+  }
 }
 
 
@@ -4196,6 +4647,7 @@ function renderAppSettings(){
               <div class="ma-setting-title">Локальна бібліотека</div>
               <div class="ma-setting-sub">${library.length} ${library.length===1?"лист":"листів"} на цьому пристрої.</div>
             </div>
+            ${library.length ? '<button class="ma-small-btn" id="maClearLibraryBtn" type="button">Очистити локально</button>' : ''}
           </div>
         </div>
 
@@ -4223,6 +4675,25 @@ function renderAppSettings(){
   });
   document.getElementById("maClearDraftBtn")?.addEventListener("click",()=>{
     clearDraft();showMobileToast("Чернетку очищено");renderAppSettings();
+  });
+  document.getElementById("maClearLibraryBtn")?.addEventListener("click",()=>{
+    openAppSheet(`
+      <div class="app-sheet-head">
+        <div class="app-sheet-kicker">Локальні дані</div>
+        <div class="app-sheet-title">Очистити список листів на цьому пристрої?</div>
+        <div class="app-sheet-copy">Серверні листи та їхні посилання залишаться активними. Це видалить лише локальний список у застосунку.</div>
+      </div>
+      <div class="app-sheet-actions">
+        <button class="app-sheet-action danger" id="confirmClearLibrary" type="button">Очистити локальну бібліотеку</button>
+        <button class="app-sheet-action cancel" id="cancelClearLibrary" type="button">Скасувати</button>
+      </div>`);
+    document.getElementById("confirmClearLibrary")?.addEventListener("click",()=>{
+      saveLocalLibrary([]);
+      closeAppSheet();
+      showMobileToast("Локальну бібліотеку очищено");
+      renderAppSettings();
+    });
+    document.getElementById("cancelClearLibrary")?.addEventListener("click",closeAppSheet);
   });
 }
 
@@ -4309,6 +4780,7 @@ async function initMobileApp(){
   await hydrateLocalLibrary();
   document.getElementById("maHomeLogo")?.addEventListener("click",()=>setMobileAppRoute("home"));
   document.getElementById("maSettingsBtn")?.addEventListener("click",()=>setMobileAppRoute("settings"));
+  document.getElementById("appSheetBackdrop")?.addEventListener("click",closeAppSheet);
   document.querySelectorAll("[data-app-route]").forEach(btn=>{
     btn.addEventListener("click",()=>{
       const route=btn.dataset.appRoute;
@@ -4402,16 +4874,26 @@ function renderMobileMagic(){
     return;
   }
 
+  if(key==="finish"){
+    host.innerHTML = `
+      <div class="mw-magic-scene">
+        <div class="magic-orbit">
+          <div class="magic-orbit-center">♡</div>
+          <div class="magic-orbit-dot">☕</div>
+          <div class="magic-orbit-dot">✦</div>
+          <div class="magic-orbit-dot">♪</div>
+          <div class="magic-orbit-dot">☺</div>
+        </div>
+        <div class="magic-caption">залишився маленький вибір</div>
+      </div>`;
+    return;
+  }
+
   host.innerHTML = `
     <div class="mw-magic-scene">
-      <div class="magic-orbit">
-        <div class="magic-orbit-center">♡</div>
-        <div class="magic-orbit-dot">☕</div>
-        <div class="magic-orbit-dot">✦</div>
-        <div class="magic-orbit-dot">♪</div>
-        <div class="magic-orbit-dot">☺</div>
-      </div>
-      <div class="magic-caption">залишився останній маленький вибір</div>
+      <div class="magic-paper-shadow"></div>
+      <div class="magic-paper"></div>
+      <div class="magic-caption">останній штрих — і лист готовий</div>
     </div>`;
 }
 
@@ -4542,7 +5024,7 @@ const MOBILE_WIZARD_STEPS = [
   },
   {
     key:"finish",
-    kicker:"Фінальний момент",
+    kicker:"Вибір",
     title:"Що вона обере після листа?",
     render:()=>`
       <div class="mw-screen">
@@ -4558,6 +5040,40 @@ const MOBILE_WIZARD_STEPS = [
               <input class="mw-input" id="mwc${i}t" maxlength="80" placeholder="Варіант ${i}" />
             </div>
           `).join("")}
+        </div>
+      </div>`
+  },
+  {
+    key:"final",
+    kicker:"Фінал",
+    title:"Як завершиться ця історія?",
+    render:()=>`
+      <div class="mw-screen">
+        <p class="mw-copy">Додай дату, час або коротку фразу. Саме це людина побачить після свого вибору.</p>
+        <div class="mw-field">
+          <label class="mw-label" for="mwFinalTitle">Заголовок фіналу</label>
+          <input class="mw-input" id="mwFinalTitle" maxlength="80" placeholder="Чекаю на тебе" />
+        </div>
+        <div class="mw-final-grid" style="margin-top:16px">
+          <div class="mw-field">
+            <label class="mw-label" for="mwFinalDate">Дата</label>
+            <input class="mw-input" id="mwFinalDate" maxlength="60" placeholder="сб, 13 вересня" />
+          </div>
+          <div class="mw-field">
+            <label class="mw-label" for="mwFinalTime">Час</label>
+            <input class="mw-input" id="mwFinalTime" maxlength="60" placeholder="19:00" />
+          </div>
+        </div>
+        <div class="mw-field" style="margin-top:16px">
+          <label class="mw-label" for="mwFinalNote">Остання фраза</label>
+          <textarea class="mw-textarea" id="mwFinalNote" maxlength="240" placeholder="Я вже рахую хвилини…"></textarea>
+        </div>
+        <div class="mw-final-preview">
+          <div class="top">
+            <div class="title" id="mwFinalPreviewTitle">Чекаю на тебе</div>
+            <div class="date" id="mwFinalPreviewDate">твоя дата</div>
+          </div>
+          <div class="note" id="mwFinalPreviewNote">Тут з’явиться твоя остання фраза.</div>
         </div>
       </div>`
   }
@@ -4586,7 +5102,11 @@ function syncLegacyToMobile(){
     mwc1e:"c1e", mwc1t:"c1t",
     mwc2e:"c2e", mwc2t:"c2t",
     mwc3e:"c3e", mwc3t:"c3t",
-    mwc4e:"c4e", mwc4t:"c4t"
+    mwc4e:"c4e", mwc4t:"c4t",
+    mwFinalTitle:"finalTitle",
+    mwFinalDate:"finalDate",
+    mwFinalTime:"finalTime",
+    mwFinalNote:"finalNote"
   };
   for(const [mobileId, legacyId] of Object.entries(map)){
     const m = document.getElementById(mobileId);
@@ -4613,7 +5133,11 @@ function syncMobileToLegacy(){
     mwc1e:"c1e", mwc1t:"c1t",
     mwc2e:"c2e", mwc2t:"c2t",
     mwc3e:"c3e", mwc3t:"c3t",
-    mwc4e:"c4e", mwc4t:"c4t"
+    mwc4e:"c4e", mwc4t:"c4t",
+    mwFinalTitle:"finalTitle",
+    mwFinalDate:"finalDate",
+    mwFinalTime:"finalTime",
+    mwFinalNote:"finalNote"
   };
   for(const [mobileId, legacyId] of Object.entries(map)){
     const m = document.getElementById(mobileId);
@@ -4738,6 +5262,12 @@ function bindMobileScene(){
       renderPhonePreview();
       renderMobilePreview();
       updateMobileMagicLive();
+      const fTitle=document.getElementById("mwFinalPreviewTitle");
+      const fDate=document.getElementById("mwFinalPreviewDate");
+      const fNote=document.getElementById("mwFinalPreviewNote");
+      if(fTitle) fTitle.textContent=document.getElementById("mwFinalTitle")?.value || "Чекаю на тебе";
+      if(fDate) fDate.textContent=document.getElementById("mwFinalDate")?.value || "твоя дата";
+      if(fNote) fNote.textContent=document.getElementById("mwFinalNote")?.value || "Тут з’явиться твоя остання фраза.";
       saveDraft();
     });
     el.addEventListener("focus", ()=>{
@@ -4899,7 +5429,8 @@ function renderMobilePreview(){
   else if(key==="secret") html = d.useSecret ? previewSecret(d) : previewEnvelope(d);
   else if(key==="letter") html = previewLetter(d);
   else if(key==="visual") html = previewLetter(d);
-  else html = previewChoice(d);
+  else if(key==="finish") html = previewChoice(d);
+  else html = previewFinal(d);
 
   host.innerHTML = html;
 }
@@ -6572,6 +7103,12 @@ window.addEventListener("load", ()=>{
       </div>
     </div>
   </div>
+
+
+<div id="appSheet" class="app-sheet hidden" aria-hidden="true">
+  <button class="app-sheet-backdrop" id="appSheetBackdrop" type="button" aria-label="Закрити"></button>
+  <section class="app-sheet-panel" id="appSheetPanel" role="dialog" aria-modal="true"></section>
+</div>
 
 </body>
 </html>
