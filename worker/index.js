@@ -73,7 +73,7 @@ async function health(env) {
       ok: true,
       db: true,
       stories: Number(row?.count || 0),
-      version: "v21"
+      version: "v22"
     });
   } catch (error) {
     return json({
@@ -264,8 +264,15 @@ export default {
 
       if (/^\/l\/[A-Za-z0-9_-]{4,32}\/?$/.test(url.pathname) ||
           /^\/edit\/[A-Za-z0-9_-]{4,32}\/?$/.test(url.pathname)) {
-        const assetUrl = new URL("/index.html", url.origin);
-        return env.ASSETS.fetch(new Request(assetUrl, request));
+        // IMPORTANT:
+        // Pass the ORIGINAL navigation request to the Assets binding.
+        // With `not_found_handling: "single-page-application"` Cloudflare
+        // serves index.html internally while the browser keeps /l/<id>.
+        //
+        // Do NOT fetch "/index.html" directly: Cloudflare canonical HTML
+        // handling redirects /index.html -> /, which was exactly why
+        // recipient links kept landing on the creator page.
+        return env.ASSETS.fetch(request);
       }
 
       if (url.pathname.startsWith("/api/")) {

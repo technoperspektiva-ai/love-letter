@@ -247,3 +247,20 @@ Deploy command: `npx wrangler deploy`
 - `/l/ID` примусово запускає тільки recipient mode.
 - Query/hash/trailing slash на recipient URL очищаються без зміни самого `/l/ID`.
 - `/api/health` тепер повертає `version: "v21"`.
+
+
+## v22 — actual recipient routing fix
+
+Знайдено реальну причину редіректу на головну сторінку.
+
+Worker раніше для `/l/ID` робив внутрішній fetch на `/index.html`.
+Cloudflare Static Assets за замовчуванням канонізує `/index.html` у `/`, тому браузер
+фактично переходив на головну сторінку конструктора.
+
+У v22:
+- `/l/ID` передається в `env.ASSETS.fetch(request)` з ОРИГІНАЛЬНИМ URL;
+- `single-page-application` сам віддає `index.html`, але адреса `/l/ID` зберігається;
+- `html_handling` встановлено в `none`, щоб Cloudflare не робив HTML canonical redirects;
+- `/api/health` повертає `version: "v22"`.
+
+Мобільний редактор з v20/v21 збережено.
