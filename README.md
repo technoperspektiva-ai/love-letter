@@ -1,12 +1,16 @@
-# Love Letter 1.15.4 — Recipient Cream Desktop
+# Love Letter 1.15.5 — Explicit Media + Story Gap Fix
 
-Це виправляє неправильне трактування попереднього запиту.
+## Портрет більше не може підчепитися сам
+Причина була в тому, що старий `portraitData` зберігався в draft/state,
+а кілька місць у коді трактували сам факт його існування як вибір портрета.
 
-- кольори creator/dashboard повернені до стану 1.15.2;
-- кремовий фон застосовано саме до сторінки отримувача;
-- на desktop recipient story тепер стоїть на warm ivory canvas;
-- сам емоційний story-card з burgundy стилем збережений;
-- recipient topbar лишається кремовим для читабельності логотипа;
-- desktop story centered і має нормальну shadow/surface композицію.
+Тепер:
+- media працює тільки при `mediaEnabled: true`;
+- `mediaMode: none` повністю очищає portrait/photo/file state;
+- новий лист і Ideas-сценарій стартують без зображення;
+- старий draft мігрується: неявні portrait/photo очищаються;
+- desktop preview, recipient story і share PNG використовують одне правило.
 
-Cache: love-letter-1.15.4
+## Порожня прогалина desktop recipient
+Прибрано штучні `min-height: 650/720px`.
+Story surface тепер росте від реального контенту, а не від макета «телефона».

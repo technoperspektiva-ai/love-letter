@@ -6985,6 +6985,70 @@ body.story-open #storyView img{
   }
 }
 
+
+/* ===============================================================
+   Love Letter 1.15.5 — explicit media + desktop story spacing
+   =============================================================== */
+
+/* Desktop recipient page should not reserve a fake 650–720px blank stage.
+   The story surface grows from its actual content. */
+@media (min-width:901px){
+  #storyView > .shell{
+    padding-top:22px !important;
+    padding-bottom:30px !important;
+  }
+
+  #storyView .phone{
+    width:min(100%,760px) !important;
+    min-height:0 !important;
+    height:auto !important;
+    margin:0 auto !important;
+    border-radius:30px !important;
+    overflow:hidden !important;
+  }
+
+  #storyView .phone-stage{
+    height:auto !important;
+    min-height:0 !important;
+    padding-top:0 !important;
+    padding-bottom:0 !important;
+  }
+
+  #storyView #storyStage{
+    height:auto !important;
+    min-height:0 !important;
+  }
+
+  #storyView .stage-center,
+  #storyView .recipient-choice-shell,
+  #storyView .recipient-final-shell{
+    min-height:0 !important;
+    height:auto !important;
+    padding-top:44px !important;
+    padding-bottom:44px !important;
+  }
+
+  #storyView .letter-story-screen{
+    min-height:0 !important;
+    height:auto !important;
+    padding-top:20px !important;
+    padding-bottom:20px !important;
+  }
+
+  /* Enough breathing room without turning it into an empty full-screen mock phone. */
+  #storyView #storyStage:empty{
+    min-height:280px !important;
+  }
+}
+
+/* Media surfaces only exist when user explicitly selected media. */
+#storyView [data-media-mode="none"] .letter-photo,
+#storyView [data-media-mode="none"] .final-photo,
+.mw-phone-preview [data-media-mode="none"] .letter-photo,
+.mw-phone-preview [data-media-mode="none"] .final-photo{
+  display:none !important;
+}
+
 </style>
 </head>
 <body>
@@ -8655,6 +8719,8 @@ function openMobileCreate({resume=false}={}){
     state.photoData="";
     state.portraitData=null;
     state.lastImageFile=null;
+    setMediaMode("none");
+    if(document.getElementById("showPhoto")) document.getElementById("showPhoto").checked=false;
     state.editingId="";
     state.editKey="";
     mobileWizardState.index=0;
@@ -9439,6 +9505,18 @@ function bindMobileScene(){
   document.querySelectorAll("[data-visual]").forEach(btn=>{
     btn.addEventListener("click", ()=>{
       mobileWizardState.visualMode = btn.dataset.visual;
+      setMediaMode(mobileWizardState.visualMode);
+
+      if(mobileWizardState.visualMode==="none"){
+        state.photoData="";
+        state.portraitData=null;
+        state.lastImageFile=null;
+        if(document.getElementById("showPhoto")) document.getElementById("showPhoto").checked=false;
+      }else{
+        if(document.getElementById("showPhoto")) document.getElementById("showPhoto").checked=true;
+      }
+
+      saveDraft();
       renderMobileVisualDetails();
       renderMobilePreview();
     });
@@ -9896,8 +9974,9 @@ function hydrateWordPortraits(root, data){
 }
 
 function mediaMarkup(d, context="letter"){
-  if(context === "letter" && !d.showPhoto) return "";
-  const mode=d.mediaMode || (d.portraitData?"portrait":d.photoData?"photo":"none");
+  const mode=d.mediaMode || "none";
+  if(d.mediaEnabled !== true || mode==="none") return "";
+  if(context === "letter" && d.showPhoto !== true) return "";
   if(mode==="portrait" && d.portraitData){
     const cls=context==="final"?"final-photo word-portrait-wrap":"letter-photo word-portrait-wrap";
     return `<div class="${cls}"><canvas class="word-portrait-canvas" aria-label="Портрет зі слів"></canvas></div>`;
@@ -9925,8 +10004,9 @@ function gatherData(){
     letterMessage: $("#letterMessage").value,
     letterSign: $("#letterSign").value.trim(),
     letterFont: ($("#letterFont")?.value || "classic"),
-    showPhoto: getMediaMode() !== "none" && $("#showPhoto").checked,
+    showPhoto: getMediaMode() !== "none" && $("#showPhoto").checked === true,
     mediaMode: getMediaMode(),
+    mediaEnabled: getMediaMode() !== "none",
     portraitWords: recipient,
     portraitData: getMediaMode() === "portrait" && state.portraitData ? state.portraitData : null,
     photoData: getMediaMode() === "photo" && state.photoData ? state.photoData : "",
@@ -10372,7 +10452,7 @@ async function buildChoiceShareImage(d){
   ctx.lineWidth = 2;
   ctx.stroke();
 
-  if(d.portraitData && (d.mediaMode === "portrait" || !d.mediaMode)){
+  if(d.mediaEnabled === true && d.mediaMode === "portrait" && d.portraitData){
     try{
       const portrait=document.createElement("canvas");
       renderWordPortrait(portrait,d.portraitData);
@@ -10382,7 +10462,7 @@ async function buildChoiceShareImage(d){
       ctx.strokeStyle="rgba(255,255,255,.22)"; ctx.lineWidth=2;
       roundRect(ctx,px,py,pw,ph,pr); ctx.stroke();
     }catch{}
-  }else if(d.photoData){
+  }else if(d.mediaEnabled === true && d.mediaMode === "photo" && d.photoData){
     try{
       const img = await new Promise((resolve, reject)=>{
         const i = new Image();
@@ -10698,12 +10778,31 @@ function renderStory(){
 
 
 const DRAFT_KEY = "love-letter-draft-v4";
+const MEDIA_MIGRATION_KEY = "love-letter-media-explicit-v2";
+
+function migrateOldDraftMedia(){
+  try{
+    if(localStorage.getItem(MEDIA_MIGRATION_KEY)==="1") return;
+    const raw=localStorage.getItem(DRAFT_KEY);
+    if(raw){
+      const draft=JSON.parse(raw);
+      if(draft?.fields?.mediaEnabled !== true){
+        draft.photoData="";
+        draft.portraitData=null;
+        draft.fields={...draft.fields,mediaMode:"none",mediaEnabled:false,showPhoto:false};
+        localStorage.setItem(DRAFT_KEY,JSON.stringify(draft));
+      }
+    }
+    localStorage.setItem(MEDIA_MIGRATION_KEY,"1");
+  }catch{}
+}
+migrateOldDraftMedia();
 
 function getDraftPayload(){
   return {
     step: state.step,
-    photoData: state.photoData || "",
-    portraitData: state.portraitData || null,
+    photoData: getMediaMode()==="photo" ? (state.photoData || "") : "",
+    portraitData: getMediaMode()==="portrait" ? (state.portraitData || null) : null,
     fields: {
       recipient: $("#recipient")?.value || "",
       introMain: $("#introMain")?.value || "",
@@ -10716,8 +10815,9 @@ function getDraftPayload(){
       letterTitle: $("#letterTitle")?.value || "",
       letterMessage: $("#letterMessage")?.value || "",
       letterSign: $("#letterSign")?.value || "",
-      showPhoto: !!$("#showPhoto")?.checked,
+      showPhoto: getMediaMode()!=="none" && !!$("#showPhoto")?.checked,
       mediaMode: getMediaMode(),
+      mediaEnabled: getMediaMode()!=="none",
       portraitWords: $("#portraitWords")?.value || "",
       choiceTitle: $("#choiceTitle")?.value || "",
       c1e: $("#c1e")?.value || "",
@@ -10759,10 +10859,10 @@ function loadDraft(){
     if(!d || !d.fields) return false;
 
     state.step = Math.min(steps.length - 1, Math.max(0, Number(d.step || 0)));
-    state.photoData = d.photoData || "";
-    state.portraitData = d.portraitData || null;
-
     const f = d.fields;
+    const restoredMode=(f?.mediaEnabled === true && ["portrait","photo"].includes(f?.mediaMode)) ? f.mediaMode : "none";
+    state.photoData = restoredMode==="photo" ? (d.photoData || "") : "";
+    state.portraitData = restoredMode==="portrait" ? (d.portraitData || null) : null;
     for(const [id, value] of Object.entries(f)){
       const el = document.getElementById(id);
       if(!el) continue;
@@ -10774,10 +10874,8 @@ function loadDraft(){
       }
     }
 
-    setMediaMode(f.mediaMode || (state.portraitData ? "portrait" : state.photoData ? "photo" : "none"));
-    if(state.photoData || state.portraitData){
-      $("#showPhoto").checked = f.showPhoto !== false;
-    }
+    setMediaMode(restoredMode);
+    if($("#showPhoto")) $("#showPhoto").checked = restoredMode!=="none" && f.showPhoto === true;
     if(state.portraitData){
       const wrap=$("#localPortraitPreviewWrap");
       wrap?.classList.remove("hidden");
@@ -10814,6 +10912,9 @@ function startNewLetter(){
   state.photoData = "";
   state.portraitData = null;
   state.lastImageFile = null;
+  setMediaMode("none");
+  if($("#showPhoto")) $("#showPhoto").checked=false;
+  if($("#photoInput")) $("#photoInput").value="";
   location.href = "/";
 }
 
@@ -10865,9 +10966,10 @@ function populateEditorFromPayload(d){
   set("letterMessage", d.letterMessage);
   set("letterSign", d.letterSign);
   set("letterFont", d.letterFont || "classic");
-  set("showPhoto", d.showPhoto !== false);
+  const restoredMediaMode=(d.mediaEnabled === true && ["portrait","photo"].includes(d.mediaMode)) ? d.mediaMode : "none";
+  set("showPhoto", restoredMediaMode!=="none" && d.showPhoto === true);
   set("portraitWords", d.recipient || "");
-  setMediaMode(d.mediaMode || (d.portraitData ? "portrait" : d.photoData ? "photo" : "none"));
+  setMediaMode(restoredMediaMode);
   set("choiceTitle", d.choiceTitle);
 
   (d.choices || []).slice(0,4).forEach((c, i)=>{
@@ -10884,8 +10986,8 @@ function populateEditorFromPayload(d){
   set("finalTime", d.finalTime);
   set("finalNote", d.finalNote);
 
-  state.photoData = d.photoData || "";
-  state.portraitData = d.portraitData || null;
+  state.photoData = restoredMediaMode==="photo" ? (d.photoData || "") : "";
+  state.portraitData = restoredMediaMode==="portrait" ? (d.portraitData || null) : null;
   if(state.portraitData){
     $("#localPortraitPreviewWrap")?.classList.remove("hidden");
     renderWordPortrait($("#localPortraitPreview"),state.portraitData);
@@ -11103,20 +11205,34 @@ function attachListenersImpl(){
 
   document.querySelectorAll('input[name="mediaMode"]').forEach(radio=>{
     radio.addEventListener("change", async()=>{
+      const mode=getMediaMode();
       updateMediaModeUI();
-      if(getMediaMode()==="portrait" && state.lastImageFile){
+
+      if($("#showPhoto")) $("#showPhoto").checked = mode!=="none";
+
+      if(mode==="portrait" && state.lastImageFile){
         try{
           state.portraitData=await createWordPortrait(state.lastImageFile,$("#recipient")?.value||"");
           state.photoData="";
           $("#localPortraitPreviewWrap")?.classList.remove("hidden");
           renderWordPortrait($("#localPortraitPreview"),state.portraitData);
         }catch(e){ showError("Не вдалося створити портрет зі слів."); }
-      }else if(getMediaMode()==="photo" && state.lastImageFile){
+      }else if(mode==="photo" && state.lastImageFile){
         try{
           state.photoData=await compressImage(state.lastImageFile);
           state.portraitData=null;
+          $("#localPortraitPreviewWrap")?.classList.add("hidden");
         }catch(e){ showError("Не вдалося обробити фото."); }
+      }else if(mode==="none"){
+        state.photoData="";
+        state.portraitData=null;
+        state.lastImageFile=null;
+        if($("#showPhoto")) $("#showPhoto").checked=false;
+        if($("#photoInput")) $("#photoInput").value="";
+        $("#localPortraitPreviewWrap")?.classList.add("hidden");
+        if($("#portraitBuildStatus")) $("#portraitBuildStatus").textContent="";
       }
+
       saveDraft();
       renderPhonePreview();
     });
