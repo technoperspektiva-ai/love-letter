@@ -4165,6 +4165,60 @@ input:focus,textarea:focus,select:focus{border-color:#cc6d91;box-shadow:0 0 0 4p
   }
 }
 
+
+/* ===============================================================
+   Love Letter 1.7.1 — wizard overlap fix
+   =============================================================== */
+@media (max-width:900px){
+  /* When the story wizard is open, completely hide the app shell
+     so the bottom tab bar and top bar can never overlap the wizard. */
+  body.mw-create-active #mobileApp,
+  body.mw-create-active .ma-topbar,
+  body.mw-create-active .ma-tabbar{
+    display:none !important;
+    visibility:hidden !important;
+    pointer-events:none !important;
+  }
+
+  body.mw-create-active #mobileWizard{
+    display:flex !important;
+    min-height:100dvh;
+  }
+
+  /* Give the wizard its own safe breathing room at the bottom. */
+  .mw-main{
+    padding-bottom:132px !important;
+  }
+
+  .mw-actionbar{
+    padding:12px 20px calc(18px + env(safe-area-inset-bottom)) !important;
+    box-shadow:0 -10px 28px rgba(46,25,36,.035);
+  }
+
+  /* Small-screen spacing polish */
+  .mw-progress-wrap{
+    padding-bottom:16px !important;
+  }
+  .mw-progress-meta{
+    gap:14px !important;
+  }
+  .mw-title{
+    max-width:260px !important;
+  }
+}
+
+@media (max-width:390px){
+  .mw-main{
+    padding-bottom:128px !important;
+  }
+}
+
+@media (max-width:340px){
+  .mw-title{
+    max-width:230px !important;
+  }
+}
+
 </style>
 </head>
 <body>
