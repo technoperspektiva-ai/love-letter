@@ -104,3 +104,7 @@ git push -u origin main
 ## Что логично добавить дальше
 
 Следующая версия может получить Telegram Login, список «Мои письма», одноразовые письма, реакцию получателя, аудиосообщение и собственный домен.
+
+## Build note
+
+`@cloudflare/workers-types` intentionally isn't pinned: the project ships a minimal local type shim so Cloudflare/Bun builds don't fail on unavailable dated type-package versions.
