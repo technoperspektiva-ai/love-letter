@@ -40,7 +40,43 @@ function validatePayload(payload) {
   return "";
 }
 
+async function ensureSchema(env) {
+  if (!env.DB) {
+    throw new Error("D1 binding DB is not available");
+  }
+
+  await env.DB.exec(`
+    CREATE TABLE IF NOT EXISTS stories (
+      id TEXT PRIMARY KEY,
+      payload TEXT NOT NULL,
+      created_at INTEGER NOT NULL,
+      edit_token TEXT
+    );
+    CREATE INDEX IF NOT EXISTS idx_stories_created_at ON stories(created_at);
+    CREATE INDEX IF NOT EXISTS idx_stories_edit_token ON stories(edit_token);
+  `);
+}
+
+async function health(env) {
+  try {
+    await ensureSchema(env);
+    const row = await env.DB.prepare("SELECT COUNT(*) AS count FROM stories").first();
+    return json({
+      ok: true,
+      db: true,
+      stories: Number(row?.count || 0)
+    });
+  } catch (error) {
+    return json({
+      ok: false,
+      db: false,
+      error: String(error?.message || error)
+    }, 500);
+  }
+}
+
 async function createStory(request, env) {
+  await ensureSchema(env);
   const body = await request.json();
   const payload = body?.payload;
   const invalid = validatePayload(payload);
@@ -79,6 +115,7 @@ async function createStory(request, env) {
 }
 
 async function getStory(id, env) {
+  await ensureSchema(env);
   const row = await env.DB.prepare(
     "SELECT payload FROM stories WHERE id = ?"
   ).bind(id).first();
@@ -93,6 +130,7 @@ async function getStory(id, env) {
 }
 
 async function updateStory(request, id, env) {
+  await ensureSchema(env);
   const editKey = request.headers.get("x-edit-token") || "";
   if (!editKey) return json({ error: "missing_edit_token" }, 401);
 
@@ -127,6 +165,7 @@ async function updateStory(request, id, env) {
 
 
 async function authorizeEdit(id, editKey, env) {
+  await ensureSchema(env);
   if (!editKey) return { ok: false, status: 401, error: "missing_edit_token" };
 
   const row = await env.DB.prepare(
@@ -189,6 +228,10 @@ export default {
     }
 
     try {
+      if (url.pathname === "/api/health" && request.method === "GET") {
+        return await health(env);
+      }
+
       if (url.pathname === "/api/story" && request.method === "POST") {
         return await createStory(request, env);
       }

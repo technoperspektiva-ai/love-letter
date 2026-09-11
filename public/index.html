@@ -889,6 +889,23 @@ async function makeShareLink(){
   state.editingId = data.id || "";
   state.editKey = data.editKey || "";
 
+  // Не показуємо отримувачу URL, доки сервер не підтвердить,
+  // що щойно створений лист реально читається назад з D1.
+  if(state.editingId){
+    const verify = await fetch(`/api/story/${encodeURIComponent(state.editingId)}`, {
+      cache: "no-store"
+    });
+
+    let verifyData = {};
+    try{ verifyData = await verify.json(); }catch{}
+
+    if(!verify.ok || !verifyData?.payload){
+      throw new Error(
+        "Лист створено, але сервер не зміг прочитати його назад. Посилання не буде показано, щоб не надсилати порожню сторінку."
+      );
+    }
+  }
+
   if(state.editingId && state.editKey){
     try{
       localStorage.setItem(`love-letter-edit-${state.editingId}`, state.editKey);
@@ -1638,11 +1655,11 @@ function attachListeners(){
     try{
       const r = await fetch(`/api/story/${encodeURIComponent(pathMatch[1])}`, { cache: "no-store" });
       const data = await r.json();
-      if(!r.ok) throw new Error(data.error || "История не найдена");
+      if(!r.ok) throw new Error(data.error || "Лист не знайдено в сховищі.");
       mountStory(data.payload);
       return;
     }catch(e){
-      document.body.innerHTML = `<div style="min-height:100vh;display:grid;place-items:center;background:#1e0d1e;color:white;font-family:Inter,sans-serif;padding:24px;text-align:center"><div><h1 style="font-family:'Cormorant Garamond',serif;font-size:48px;margin:0 0 12px">Лист не найдено</h1><p style="opacity:.75">${escapeHtml(e.message || "Посилання недействительна")}</p><a href="/" style="color:#ff9fbe">Створити свій лист</a></div></div>`;
+      document.body.innerHTML = `<div style="min-height:100vh;display:grid;place-items:center;background:#1e0d1e;color:white;font-family:Inter,sans-serif;padding:24px;text-align:center"><div><h1 style="font-family:'Cormorant Garamond',serif;font-size:48px;margin:0 0 12px">Лист не знайдено</h1><p style="opacity:.75">${escapeHtml(e.message || "Посилання недійсне")}</p><a href="/" style="color:#ff9fbe">Створити свій лист</a></div></div>`;
       return;
     }
   }

@@ -155,3 +155,24 @@ npx wrangler deploy
 `npx wrangler deploy`
 
 Під час встановлення залежностей `postinstall` виконає bootstrap автоматично.
+
+
+## v15 — D1 without bootstrap scripts
+
+Ця версія більше не підставляє `database_id` через `postinstall`.
+
+Wrangler 4.131 використовує нативне автоматичне provision:
+```json
+"d1_databases": [{ "binding": "DB" }]
+```
+
+Під час `npx wrangler deploy` Cloudflare сам створює/підключає ресурс D1 і зберігає цей зв'язок для наступних deploy.
+
+Worker сам створює таблицю `stories` при першому API-запиті, тому окремі migrations для запуску сайту більше не потрібні.
+
+Додано:
+- `GET /api/health` для перевірки D1;
+- після створення листа frontend одразу читає його назад через API;
+- recipient URL показується лише якщо запис реально доступний.
+
+Deploy command: `npx wrangler deploy`

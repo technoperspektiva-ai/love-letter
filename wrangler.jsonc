@@ -11,10 +11,7 @@
   },
   "d1_databases": [
     {
-      "binding": "DB",
-      "database_name": "love-letter-db",
-      "database_id": "SET_BY_BOOTSTRAP",
-      "migrations_dir": "migrations"
+      "binding": "DB"
     }
   ]
 }
