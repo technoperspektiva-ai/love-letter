@@ -285,12 +285,35 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
 .hearts span:nth-child(5){left:82%;bottom:46%;animation-delay:1.6s}
 @keyframes floatUp{50%{transform:translateY(-24px) scale(1.06)}}
 .final-card{
- width:100%;max-width:330px;margin:18px auto 0;background:rgba(36,17,31,.6);
+ width:100%;max-width:340px;margin:18px auto 0;background:rgba(36,17,31,.6);
  border:1px solid rgba(255,208,224,.18);border-radius:26px;padding:20px 18px;backdrop-filter:blur(10px)
 }
-.final-card .line1{font-family:"Cormorant Garamond";font-size:42px}
-.final-card .line2{margin-top:6px;color:#ffe6ee}
-.final-card .time{margin-top:18px;font-family:"Cormorant Garamond";font-size:31px}
+.final-card .topline{
+ display:flex;
+ align-items:baseline;
+ justify-content:center;
+ gap:10px;
+ white-space:nowrap;
+ text-align:center;
+}
+.final-card .line1{
+ font-family:"Cormorant Garamond";
+ font-size:36px;
+ line-height:1.02;
+}
+.final-card .time{
+ font-family:"Cormorant Garamond";
+ font-size:28px;
+ line-height:1.02;
+ color:#fff3f7;
+}
+.final-card .line2{margin-top:10px;color:#ffe6ee}
+.final-card .time2{
+ margin-top:10px;
+ font-family:"Cormorant Garamond";
+ font-size:25px;
+ color:#fff0f6;
+}
 .final-card .note{color:#efcad9;margin-top:8px}
 .sharebox{margin-top:14px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);padding:8px;border-radius:18px}
 .sharebox input{margin:0;background:rgba(255,255,255,.94)}
@@ -325,6 +348,11 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
  .preview{position:relative;top:auto;min-height:0}
 }
 @media (max-width: 600px){
+
+ .final-card .topline{gap:8px}
+ .final-card .line1{font-size:32px}
+ .final-card .time{font-size:24px}
+ .final-card .time2{font-size:22px}
 
  .topbar{gap:10px;align-items:flex-start}
  .top-actions{gap:7px;flex-wrap:wrap;justify-content:flex-end}
@@ -704,9 +732,12 @@ function previewFinal(d){
     <div class="stage-center centered" style="justify-content:flex-start;padding-top:38px">
       <div style="font-family:'Marck Script';font-size:28px;color:#ffd6e4;max-width:320px">${escapeHtml(d.finalCaption)}</div>
       <div class="final-card">
-        <div class="line1">${escapeHtml(d.finalTitle)}</div>
+        <div class="topline">
+          <div class="line1">${escapeHtml(d.finalTitle)}</div>
+          ${d.finalDate ? `<div class="time">${escapeHtml(d.finalDate)}</div>` : ``}
+        </div>
         <div class="line2">${escapeHtml(choice.emoji)} ${escapeHtml(choice.title)}</div>
-        <div class="time">${escapeHtml(d.finalDate)} · ${escapeHtml(d.finalTime)}</div>
+        ${d.finalTime ? `<div class="time2">${escapeHtml(d.finalTime)}</div>` : ``}
         <div class="note">${escapeHtml(d.finalNote || choice.subtitle)}</div>
       </div>
       <button class="big-button" type="button" style="max-width:330px;margin-top:18px">Поділитися</button>
@@ -948,8 +979,25 @@ async function buildChoiceShareImage(d){
   ctx.stroke();
 
   ctx.fillStyle = "#fff4f7";
-  ctx.font = '600 80px "Cormorant Garamond", serif';
-  ctx.fillText(d.finalTitle || "Виходимо", 540, 520);
+  ctx.font = '600 70px "Cormorant Garamond", serif';
+  const topTitle = d.finalTitle || "Виходимо";
+  const topDate = d.finalDate || "";
+  const topGap = 20;
+  const titleW = ctx.measureText(topTitle).width;
+  ctx.font = '600 40px "Cormorant Garamond", serif';
+  const dateW = topDate ? ctx.measureText(topDate).width : 0;
+  const totalW = titleW + (topDate ? topGap + dateW : 0);
+  let startX = 540 - totalW / 2;
+
+  ctx.font = '600 70px "Cormorant Garamond", serif';
+  ctx.textAlign = "left";
+  ctx.fillText(topTitle, startX, 520);
+  if(topDate){
+    startX += titleW + topGap;
+    ctx.font = '600 40px "Cormorant Garamond", serif';
+    ctx.fillText(topDate, startX, 516);
+  }
+  ctx.textAlign = "center";
 
   ctx.font = '68px sans-serif';
   ctx.fillText(choice.emoji || "❤", 540, 635);
@@ -957,18 +1005,20 @@ async function buildChoiceShareImage(d){
   ctx.font = '700 44px Inter, sans-serif';
   wrapCanvasText(ctx, choice.title || "Наш вибір", 540, 730, 700, 56);
 
+  if(d.finalTime){
+    ctx.fillStyle = "#fff3f7";
+    ctx.font = '600 42px "Cormorant Garamond", serif';
+    wrapCanvasText(ctx, d.finalTime, 540, 820, 720, 50);
+  }
+
   ctx.fillStyle = "#f0c7d7";
   ctx.font = '34px Inter, sans-serif';
-  wrapCanvasText(ctx, choice.subtitle || "", 540, 835, 700, 46);
-
-  ctx.fillStyle = "#fff3f7";
-  ctx.font = '600 44px "Cormorant Garamond", serif';
-  wrapCanvasText(ctx, [d.finalDate, d.finalTime].filter(Boolean).join(" · "), 540, 925, 720, 52);
+  wrapCanvasText(ctx, choice.subtitle || "", 540, 895, 700, 46);
 
   if(d.finalNote){
     ctx.fillStyle = "#efcad9";
     ctx.font = '32px Inter, sans-serif';
-    wrapCanvasText(ctx, d.finalNote, 540, 1010, 720, 44);
+    wrapCanvasText(ctx, d.finalNote, 540, 980, 720, 44);
   }
 
   ctx.fillStyle = "#ffd8e5";
@@ -1103,9 +1153,12 @@ function renderStory(){
         ${d.showPhoto && d.photoData ? `<div style="width:100%;max-width:310px;margin-bottom:14px;border-radius:24px;overflow:hidden;box-shadow:0 18px 34px rgba(0,0,0,.24)"><img src="${d.photoData}" alt="Фото"></div>` : ``}
         <div style="font-family:'Marck Script';font-size:28px;color:#ffd6e4;max-width:320px">${escapeHtml(d.finalCaption)}</div>
         <div class="final-card">
-          <div class="line1">${escapeHtml(d.finalTitle || "Виходимо")}</div>
+          <div class="topline">
+            <div class="line1">${escapeHtml(d.finalTitle || "Виходимо")}</div>
+            ${d.finalDate ? `<div class="time">${escapeHtml(d.finalDate)}</div>` : ``}
+          </div>
           <div class="line2">${escapeHtml(choice.emoji)} ${escapeHtml(choice.title)}</div>
-          <div class="time">${escapeHtml(d.finalDate)}${d.finalDate && d.finalTime ? " · " : ""}${escapeHtml(d.finalTime)}</div>
+          ${d.finalTime ? `<div class="time2">${escapeHtml(d.finalTime)}</div>` : ``}
           <div class="note">${escapeHtml(d.finalNote || choice.subtitle)}</div>
         </div>
         <button class="big-button" id="recipientShareBtn" style="max-width:330px;margin-top:18px">Поділитися вибором 💌</button>
