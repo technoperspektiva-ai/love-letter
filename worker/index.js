@@ -228,6 +228,82 @@ async function regenerateStoryUrl(request, id, env) {
   });
 }
 
+const developerCreditStyles = `<style id="developer-credit-styles">
+  .developer-credit-footer {
+    padding: 12px max(16px, env(safe-area-inset-right, 0px))
+      calc(16px + env(safe-area-inset-bottom, 0px))
+      max(16px, env(safe-area-inset-left, 0px));
+    text-align: center;
+  }
+  .developer-credit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    max-width: 100%;
+    padding: 8px 12px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: #8b7481;
+    font: 400 11px/1.5 system-ui, sans-serif;
+    letter-spacing: .02em;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  .developer-credit span {
+    transition: filter 180ms ease;
+  }
+  .developer-credit:focus-visible {
+    outline: 2px solid #a46ac4;
+    outline-offset: 2px;
+  }
+  .developer-credit:is(:hover, :active, :focus) span {
+    color: #b85b9c;
+    filter: drop-shadow(0 0 4px rgb(174 104 220 / 35%));
+  }
+  @supports (background-clip: text) or (-webkit-background-clip: text) {
+    .developer-credit:is(:hover, :active, :focus) span {
+      background: linear-gradient(100deg, #df579c, #a264d4 50%, #4e8ddd);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+  }
+  @media (max-width: 900px) {
+    /* Leave room to scroll the credit above the fixed mobile controls. */
+    .developer-credit-footer {
+      padding-bottom: calc(120px + env(safe-area-inset-bottom, 0px));
+    }
+  }
+  @media (min-width: 901px) {
+    body:not(.story-open):not(.mw-create-active) .developer-credit-footer {
+      margin-left: 220px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .developer-credit span { transition: none; }
+  }
+</style>`;
+
+const developerCredit = `<footer class="developer-credit-footer">
+  <button class="developer-credit" type="button" onclick="this.focus()"><span>Developed by Hodynnyk 2026</span></button>
+</footer>`;
+
+async function serveAssets(request, env) {
+  const response = await env.ASSETS.fetch(request);
+  // Preserve redirects, HEAD responses, and non-HTML assets unchanged.
+  if (request.method !== "GET" || !response.ok ||
+      !/^text\/html\b/i.test(response.headers.get("content-type") || "")) {
+    return response;
+  }
+  return new HTMLRewriter()
+    .on("head", { element: element => element.append(developerCreditStyles, { html: true }) })
+    .on("body", { element: element => element.append(developerCredit, { html: true }) })
+    .transform(response);
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -272,14 +348,14 @@ export default {
         // Do NOT fetch "/index.html" directly: Cloudflare canonical HTML
         // handling redirects /index.html -> /, which was exactly why
         // recipient links kept landing on the creator page.
-        return env.ASSETS.fetch(request);
+        return serveAssets(request, env);
       }
 
       if (url.pathname.startsWith("/api/")) {
         return json({ error: "not_found" }, 404);
       }
 
-      return env.ASSETS.fetch(request);
+      return serveAssets(request, env);
     } catch (err) {
       console.error(err);
       return json({ error: "server_error" }, 500);
