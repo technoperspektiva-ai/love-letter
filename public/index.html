@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="ru">
+<html lang="uk">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#231224">
-<title>Love Letter — interactive story</title>
-<meta name="description" content="Бесплатный сервис интерактивных романтических писем.">
+<title>Love Letter — інтерактивна історія</title>
+<meta name="description" content="Безкоштовний сервіс інтерактивних романтичних листів.">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Marck+Script&display=swap');
 :root{
@@ -364,23 +364,23 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
       <div class="brand"><div class="seal">L</div><div>Love Letter</div></div>
       <div class="top-actions">
         <button class="new-letter-btn" id="newLetterBtn" type="button">Створити новий лист</button>
-        <div class="badge">free story builder</div>
+        <div class="badge">безкоштовний конструктор</div>
       </div>
     </header>
 
     <section class="hero shell">
       <div>
-        <div class="eyebrow">интерактивный подарок</div>
-        <h1>Не сайт. История для одного человека.</h1>
-        <p>Создай мини-сценарий: вопрос с секретным словом, вступление, конверт, письмо, фото, выбор свидания и финальный экран. Всё в одной ссылке, без регистрации и платных тем.</p>
+        <div class="eyebrow">інтерактивний подарунок</div>
+        <h1>Не сайт. Історія для однієї людини.</h1>
+        <p>Створи маленьку історію: питання із секретним словом, вступ, конверт, лист, фото, вибір побачення та фінальний екран. Усе в одному посиланні, без реєстрації та платних тем.</p>
       </div>
       <div class="demo-card">
         <div class="demo-screen">
-          <h3>Даша,<br>тебе письмо</h3>
+          <h3>Настя,<br>тобі лист</h3>
           <div class="demo-env">
             <div class="demo-wax">D</div>
           </div>
-          <div class="demo-caption">открой, это тебе</div>
+          <div class="demo-caption">відкрий, це тобі</div>
         </div>
       </div>
     </section>
@@ -391,110 +391,110 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
           <div class="stepbar" id="stepbar"></div>
           <div class="card">
             <div class="step" data-step="0">
-              <h2>Основное</h2>
-              <p class="subtitle">Кому это письмо и как звучит самое первое касание.</p>
-              <label>Имя получателя<input id="recipient" maxlength="60" placeholder="Например, Даша"></label>
-              <label>Главная надпись на первом экране<input id="introMain" maxlength="80" value="тебе письмо"></label>
-              <label>Подпись над главной фразой<input id="introTop" maxlength="80" value=""></label>
-              <label>Подсказка под конвертом<input id="envelopeHint" maxlength="80" value="открой, это тебе"></label>
-              <div class="tip">Совет: сделай первый экран очень коротким. Лучше «тебе письмо», чем длинная фраза на весь экран.</div>
+              <h2>Основне</h2>
+              <p class="subtitle">Кому цей лист і як звучить найперше звернення.</p>
+              <label>Імʼя отримувача<input id="recipient" maxlength="60" placeholder="Наприклад, Настя"></label>
+              <label>Головний напис на першому екрані<input id="introMain" maxlength="80" value="тобі лист"></label>
+              <label>Підпис над головною фразою<input id="introTop" maxlength="80" value=""></label>
+              <label>Підказка під конвертом<input id="envelopeHint" maxlength="80" value="відкрий, це тобі"></label>
+              <div class="tip">Совет: сделай первый экран очень коротким. Лучше «тобі лист», чем длинная фраза на весь экран.</div>
             </div>
 
             <div class="step hidden" data-step="1">
-              <h2>Секретное слово</h2>
-              <p class="subtitle">Опциональный первый экран с вопросом, чтобы открыть историю мог только нужный человек.</p>
+              <h2>Секретне слово</h2>
+              <p class="subtitle">Необовʼязковий перший екран із питанням, щоб відкрити історію могла лише потрібна людина.</p>
               <div class="switch">
                 <input type="checkbox" id="useSecret">
-                <label for="useSecret" style="margin:0">Включить экран с секретным словом</label>
+                <label for="useSecret" style="margin:0">Увімкнути екран із секретним словом</label>
               </div>
-              <label>Вопрос<input id="secretQuestion" maxlength="140" placeholder="Где мы познакомились?"></label>
-              <label>Правильный ответ<input id="secretAnswer" maxlength="80" placeholder="Например: Кафе Луна"></label>
-              <div class="field-note">Проверка идёт без учёта регистра и лишних пробелов.</div>
+              <label>Питання<input id="secretQuestion" maxlength="140" placeholder="Де ми познайомилися?"></label>
+              <label>Правильна відповідь<input id="secretAnswer" maxlength="80" placeholder="Наприклад: Кавʼярня Луна"></label>
+              <div class="field-note">Перевірка не враховує регістр і зайві пробіли.</div>
             </div>
 
             <div class="step hidden" data-step="2">
-              <h2>Само письмо</h2>
-              <p class="subtitle">Это бумажный лист, который увидит получатель после открытия конверта.</p>
-              <label>Обращение вверху листа<input id="letterTo" maxlength="100" value="цей лист адресовано, Настюші"></label>
-              <label>Заголовок письма<input id="letterTitle" maxlength="120" value="Даша, с днём рождения!"></label>
-              <label>Текст письма<textarea id="letterMessage" maxlength="2500" placeholder="Напиши письмо..."></textarea></label>
-              <label>Подпись внизу<input id="letterSign" maxlength="80" placeholder="Люблю тебя."></label>
+              <h2>Сам лист</h2>
+              <p class="subtitle">Це паперовий лист, який побачить отримувач після відкриття конверта.</p>
+              <label>Звернення у верхній частині листа<input id="letterTo" maxlength="100" value="цей лист адресовано, Настюші"></label>
+              <label>Заголовок листа<input id="letterTitle" maxlength="120" value="Настя, з днем народження!"></label>
+              <label>Текст листа<textarea id="letterMessage" maxlength="2500" placeholder="Напиши лист..."></textarea></label>
+              <label>Підпис унизу<input id="letterSign" maxlength="80" placeholder="Люблю тебе."></label>
             </div>
 
             <div class="step hidden" data-step="3">
-              <h2>Фото внутри письма</h2>
-              <p class="subtitle">Можно прикрепить одно фото. Оно будет сжато для ссылки.</p>
-              <label>Загрузить фото
+              <h2>Фото всередині листа</h2>
+              <p class="subtitle">Можна додати одне фото. Воно буде стиснуте для посилання.</p>
+              <label>Завантажити фото
                 <input type="file" id="photoInput" accept="image/*">
               </label>
-              <div class="field-note">Фото сжимается автоматически. Если ссылка станет слишком длинной для мессенджера, просто отключи фото.</div>
+              <div class="field-note">Фото стискається автоматично. Якщо посилання стане надто довгим для месенджера, просто вимкни фото.</div>
               <div class="switch">
                 <input type="checkbox" id="showPhoto" checked>
-                <label for="showPhoto" style="margin:0">Показывать фото в письме</label>
+                <label for="showPhoto" style="margin:0">Показувати фото в листі</label>
               </div>
-              <button class="btn ghost slim add-top" type="button" id="removePhoto">Удалить фото</button>
+              <button class="btn ghost slim add-top" type="button" id="removePhoto">Видалити фото</button>
             </div>
 
             <div class="step hidden" data-step="4">
-              <h2>Выбор для получателя</h2>
-              <p class="subtitle">После письма можно показать карточки с вариантами, что делать дальше.</p>
-              <label>Заголовок блока выбора<input id="choiceTitle" maxlength="80" value="Что будем делать?"></label>
+              <h2>Вибір для получателя</h2>
+              <p class="subtitle">Після листа можна показати картки з варіантами, що робити далі.</p>
+              <label>Заголовок блоку вибору<input id="choiceTitle" maxlength="80" value="Що будемо робити?"></label>
               <div class="choice-list">
                 <div class="choice-item">
                   <div class="emoji"><input id="c1e" value="🍰" maxlength="2" style="margin:0;border:0;padding:0;background:transparent;text-align:center;font-size:24px;width:100%"></div>
                   <div>
-                    <input id="c1t" maxlength="50" value="Завтрак в постель">
-                    <input id="c1s" maxlength="60" value="самой красивой">
+                    <input id="c1t" maxlength="50" value="Сніданок у ліжко">
+                    <input id="c1s" maxlength="60" value="для найкрасивішої">
                   </div>
                 </div>
                 <div class="choice-item">
                   <div class="emoji"><input id="c2e" value="🎡" maxlength="2" style="margin:0;border:0;padding:0;background:transparent;text-align:center;font-size:24px;width:100%"></div>
                   <div>
-                    <input id="c2t" maxlength="50" value="Парк и сладкая вата">
-                    <input id="c2s" maxlength="60" value="как маленькие">
+                    <input id="c2t" maxlength="50" value="Парк і солодка вата">
+                    <input id="c2s" maxlength="60" value="як малі">
                   </div>
                 </div>
                 <div class="choice-item">
                   <div class="emoji"><input id="c3e" value="🎵" maxlength="2" style="margin:0;border:0;padding:0;background:transparent;text-align:center;font-size:24px;width:100%"></div>
                   <div>
-                    <input id="c3t" maxlength="50" value="Твой плейлист и дорога">
-                    <input id="c3s" maxlength="60" value="весь день">
+                    <input id="c3t" maxlength="50" value="Твій плейлист і дорога">
+                    <input id="c3s" maxlength="60" value="увесь день">
                   </div>
                 </div>
                 <div class="choice-item">
                   <div class="emoji"><input id="c4e" value="🕯️" maxlength="3" style="margin:0;border:0;padding:0;background:transparent;text-align:center;font-size:24px;width:100%"></div>
                   <div>
-                    <input id="c4t" maxlength="50" value="Ужин при свечах">
-                    <input id="c4s" maxlength="60" value="дома, вдвоём">
+                    <input id="c4t" maxlength="50" value="Вечеря при свічках">
+                    <input id="c4s" maxlength="60" value="вдома, удвох">
                   </div>
                 </div>
               </div>
             </div>
 
             <div class="step hidden" data-step="5">
-              <h2>Финальный экран</h2>
-              <p class="subtitle">После выбора покажем итоговую карточку как маленькое приглашение.</p>
-              <label>Фраза над карточкой<input id="finalCaption" maxlength="120" value="по 1450 раз думаю о тебе каждый день"></label>
-              <label>Заголовок карточки<input id="finalTitle" maxlength="50" value="Выходим"></label>
-              <label>Какая опция выбрана по умолчанию?
+              <h2>Фінальный экран</h2>
+              <p class="subtitle">Після вибору покажемо підсумкову картку як маленьке запрошення.</p>
+              <label>Фраза над карткою<input id="finalCaption" maxlength="120" value="думаю про тебе щодня"></label>
+              <label>Заголовок картки<input id="finalTitle" maxlength="50" value="Виходимо"></label>
+              <label>Який варіант вибрано за замовчуванням?
                 <select id="finalChoiceIndex">
-                  <option value="0">1-я</option>
-                  <option value="1" selected>2-я</option>
-                  <option value="2">3-я</option>
-                  <option value="3">4-я</option>
+                  <option value="0">1-й</option>
+                  <option value="1" selected>2-й</option>
+                  <option value="2">3-й</option>
+                  <option value="3">4-й</option>
                 </select>
               </label>
               <div class="grid2">
-                <label>Дата<input id="finalDate" maxlength="60" value="чт, 10 сентября"></label>
-                <label>Время<input id="finalTime" maxlength="20" value="20:00"></label>
+                <label>Дата<input id="finalDate" maxlength="60" value="чт, 10 вересня"></label>
+                <label>Час<input id="finalTime" maxlength="20" value="20:00"></label>
               </div>
-              <label>Нижняя подпись<input id="finalNote" maxlength="80" value="как маленькие"></label>
+              <label>Нижній підпис<input id="finalNote" maxlength="80" value="як малі"></label>
             </div>
 
             <div class="step hidden" data-step="6">
               <h2>Готово</h2>
-              <p class="subtitle">Сгенерируй секретную ссылку и открой историю как получатель.</p>
-              <button class="btn primary" type="button" id="generateLink">Сделать короткую ссылку</button>
+              <p class="subtitle">Створи секретне посилання й відкрий історію як отримувач.</p>
+              <button class="btn primary" type="button" id="generateLink">Створити коротке посилання</button>
               <div class="sharebox">
                 <input id="shareLink" readonly placeholder="Здесь появится короткая ссылка вида /l/Ab3Xy9Qk">
               </div>
@@ -518,12 +518,12 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
                   <div id="urlControlStatus" class="field-note"></div>
                 </div>
               </div>
-              <div class="muted" style="margin-top:12px">Письмо сохраняется в бесплатной Cloudflare D1, а получатель получает короткую ссылку вида /l/Ab3Xy9Qk.</div>
+              <div class="muted" style="margin-top:12px">Лист сохраняется в бесплатной Cloudflare D1, а получатель получает короткую ссылку вида /l/Ab3Xy9Qk.</div>
             </div>
 
             <div class="actions">
               <button class="btn ghost" type="button" id="backBtn">Назад</button>
-              <button class="btn primary" type="button" id="nextBtn">Дальше</button>
+              <button class="btn primary" type="button" id="nextBtn">Далі</button>
             </div>
             <div id="errorBox" class="error hidden"></div>
           </div>
@@ -531,8 +531,8 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
 
         <div class="preview">
           <div class="preview-head">
-            <h3>Live preview</h3>
-            <div class="badge" style="padding:7px 10px">recipient flow</div>
+            <h3>Живий перегляд</h3>
+            <div class="badge" style="padding:7px 10px">режим отримувача</div>
           </div>
           <div class="phone">
             <div class="phone-bar">
@@ -551,7 +551,7 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
 </div>
 
 <script>
-const steps = ["Основное","Слово","Письмо","Фото","Выбор","Финал","Ссылка"];
+const steps = ["Основне","Слово","Лист","Фото","Вибір","Фінал","Посилання"];
 const state = {
   step: 0,
   photoData: "",
@@ -596,22 +596,22 @@ function gatherData(){
   return {
     v: 2,
     recipient,
-    introMain: $("#introMain").value.trim() || "тебе письмо",
+    introMain: $("#introMain").value.trim() || "тобі лист",
     introTop: $("#introTop").value.trim() || recipient,
-    envelopeHint: $("#envelopeHint").value.trim() || "открой, это тебе",
+    envelopeHint: $("#envelopeHint").value.trim() || "відкрий, це тобі",
     useSecret: $("#useSecret").checked,
     secretQuestion: $("#secretQuestion").value.trim(),
     secretAnswer: $("#secretAnswer").value.trim(),
     letterTo: ($("#letterTo").value.trim() || `это тебе, ${recipient || 'тебе'}`),
-    letterTitle: $("#letterTitle").value.trim() || "Для тебя",
+    letterTitle: $("#letterTitle").value.trim() || "Для тебе",
     letterMessage: $("#letterMessage").value,
     letterSign: $("#letterSign").value.trim(),
     showPhoto: $("#showPhoto").checked,
     photoData: state.photoData || "",
-    choiceTitle: $("#choiceTitle").value.trim() || "Что будем делать?",
+    choiceTitle: $("#choiceTitle").value.trim() || "Що будемо робити?",
     choices: getChoices(),
     finalCaption: $("#finalCaption").value.trim() || "думаю о тебе каждый день",
-    finalTitle: $("#finalTitle").value.trim() || "Выходим",
+    finalTitle: $("#finalTitle").value.trim() || "Виходимо",
     finalChoiceIndex: Math.min(3, Math.max(0, +$("#finalChoiceIndex").value || 0)),
     finalDate: $("#finalDate").value.trim() || "",
     finalTime: $("#finalTime").value.trim() || "",
@@ -621,12 +621,12 @@ function gatherData(){
 
 function validateStep(){
   const d = gatherData();
-  if(state.step === 0 && !d.recipient) return "Нужно указать имя получателя.";
+  if(state.step === 0 && !d.recipient) return "Потрібно вказати імʼя отримувача.";
   if(state.step === 1 && $("#useSecret").checked){
-    if(!d.secretQuestion) return "Заполни вопрос для секретного слова.";
-    if(!d.secretAnswer) return "Заполни правильный ответ.";
+    if(!d.secretQuestion) return "Заповни питання для секретного слова.";
+    if(!d.secretAnswer) return "Заповни правильну відповідь.";
   }
-  if(state.step === 2 && !d.letterMessage.trim()) return "Письмо пустое — добавь текст.";
+  if(state.step === 2 && !d.letterMessage.trim()) return "Лист пустое — добавь текст.";
   return "";
 }
 
@@ -642,10 +642,10 @@ function previewIntro(d){
 function previewSecret(d){
   return `
     <div class="stage-center centered">
-      <h2 class="qmark">Эта эмоция<br>закрыта словом</h2>
-      <div class="light-sub" style="font-size:28px;margin-top:8px">${escapeHtml(d.secretQuestion || "Где мы познакомились?")}</div>
+      <h2 class="qmark">Ця емоція<br>закрита словом</h2>
+      <div class="light-sub" style="font-size:28px;margin-top:8px">${escapeHtml(d.secretQuestion || "Де ми познайомилися?")}</div>
       <input class="pale-input" readonly value="слово">
-      <button class="big-button" type="button">Открыть</button>
+      <button class="big-button" type="button">Відкрити</button>
     </div>
   `;
 }
@@ -657,7 +657,7 @@ function previewEnvelope(d){
         <div class="flap"></div>
         <div class="front"></div>
         <div class="wax">${escapeHtml((d.recipient || "L").slice(0,1).toUpperCase())}</div>
-        <div class="recipient">${escapeHtml(d.recipient || "для тебя")}</div>
+        <div class="recipient">${escapeHtml(d.recipient || "для тебе")}</div>
       </div>
       <div class="preview-note">${escapeHtml(d.envelopeHint)}</div>
     </div>
@@ -699,7 +699,7 @@ function previewChoice(d){
 }
 
 function previewFinal(d){
-  const choice = (d.choices || [])[d.finalChoiceIndex] || {emoji:"❤", title:"Выходим", subtitle:""};
+  const choice = (d.choices || [])[d.finalChoiceIndex] || {emoji:"❤", title:"Виходимо", subtitle:""};
   return `
     <div class="stage-center centered" style="justify-content:flex-start;padding-top:38px">
       <div style="font-family:'Marck Script';font-size:28px;color:#ffd6e4;max-width:320px">${escapeHtml(d.finalCaption)}</div>
@@ -847,7 +847,7 @@ function escapeHtml(text){
 function formatRecipientName(d){
   const a = d.introTop && d.introTop.trim();
   if(a) return a;
-  return d.recipient || "Для тебя";
+  return d.recipient || "Для тебе";
 }
 
 function mountStory(payload){
@@ -858,7 +858,7 @@ function mountStory(payload){
   view.innerHTML = `
     <div class="shell" style="padding-bottom:18px">
       <header class="topbar">
-        <div class="brand"><div class="seal">L</div><div>Love Letter</div></div>
+        <div class="brand"><div class="seal" id="hiddenEditSeal">L</div><div>Love Letter</div></div>
       </header>
       <div class="phone" style="max-width:430px;margin:0 auto">
         <div class="phone-bar"><span>21:41</span><span>${escapeHtml(payload.recipient || "Love Letter")}</span><span>❤︎</span></div>
@@ -868,6 +868,43 @@ function mountStory(payload){
   `;
   state.storyStep = payload.useSecret ? 0 : 1;
   renderStory();
+
+  // Прихований вхід у редагування для автора:
+  // три швидкі кліки/тапи по іконці "L".
+  // Працює тільки якщо edit-key вже збережений у цьому браузері.
+  const idMatch = location.pathname.match(/^\/l\/([A-Za-z0-9_-]{4,32})$/);
+  const hiddenSeal = document.getElementById("hiddenEditSeal");
+
+  if(idMatch && hiddenSeal){
+    const storyId = idMatch[1];
+    let tapCount = 0;
+    let tapTimer = null;
+
+    hiddenSeal.style.cursor = "default";
+    hiddenSeal.setAttribute("aria-label", "Love Letter");
+
+    hiddenSeal.addEventListener("click", ()=>{
+      tapCount++;
+
+      clearTimeout(tapTimer);
+      tapTimer = setTimeout(()=>{ tapCount = 0; }, 1100);
+
+      if(tapCount >= 3){
+        tapCount = 0;
+        clearTimeout(tapTimer);
+
+        let editKey = "";
+        try{
+          editKey = localStorage.getItem(`love-letter-edit-${storyId}`) || "";
+        }catch{}
+
+        // Якщо цей браузер не є браузером автора — нічого не відбувається.
+        if(!editKey) return;
+
+        location.href = `/edit/${storyId}#key=${encodeURIComponent(editKey)}`;
+      }
+    });
+  }
 }
 
 
@@ -980,10 +1017,10 @@ function renderStory(){
   if(state.storyStep === 0){
     root.innerHTML = `
       <div class="stage-center centered">
-        <h2 class="qmark">Эта эмоция<br>закрыта словом</h2>
-        <div class="light-sub" style="font-size:28px">${escapeHtml(d.secretQuestion || "Где мы познакомились?")}</div>
+        <h2 class="qmark">Ця емоція<br>закрита словом</h2>
+        <div class="light-sub" style="font-size:28px">${escapeHtml(d.secretQuestion || "Де ми познайомилися?")}</div>
         <input class="pale-input" id="secretInput" placeholder="слово">
-        <button class="big-button" id="secretOpenBtn">Открыть</button>
+        <button class="big-button" id="secretOpenBtn">Відкрити</button>
         <div class="muted" id="secretError" style="margin-top:12px;color:#ffd2df"></div>
       </div>`;
     $("#secretOpenBtn").onclick = ()=>{
@@ -992,7 +1029,7 @@ function renderStory(){
         state.storyStep = 1;
         renderStory();
       } else {
-        $("#secretError").textContent = "Не то слово. Попробуй ещё раз.";
+        $("#secretError").textContent = "Не те слово. Спробуй ще раз.";
       }
     };
     return;
@@ -1002,8 +1039,8 @@ function renderStory(){
     root.innerHTML = `
       <div class="stage-center centered">
         <div class="light-sub">${escapeHtml(formatRecipientName(d))}</div>
-        <h2 class="light-title">${escapeHtml(d.introMain || "тебе письмо")}</h2>
-        <button class="big-button" id="toEnvelopeBtn" style="max-width:220px;margin-top:28px">Дальше</button>
+        <h2 class="light-title">${escapeHtml(d.introMain || "тобі лист")}</h2>
+        <button class="big-button" id="toEnvelopeBtn" style="max-width:220px;margin-top:28px">Далі</button>
       </div>`;
     $("#toEnvelopeBtn").onclick = ()=>{ state.storyStep = 2; renderStory(); };
     return;
@@ -1017,17 +1054,17 @@ function renderStory(){
             <div class="flap"></div>
             <div class="front"></div>
             <div class="wax">${escapeHtml((d.recipient || "L").slice(0,1).toUpperCase())}</div>
-            <div class="recipient">${escapeHtml(d.recipient || "для тебя")}</div>
+            <div class="recipient">${escapeHtml(d.recipient || "для тебе")}</div>
           </div>
         </button>
-        <div class="preview-note">${escapeHtml(d.envelopeHint || "открой, это тебе")}</div>
+        <div class="preview-note">${escapeHtml(d.envelopeHint || "відкрий, це тобі")}</div>
       </div>`;
     $("#envBtn").onclick = ()=>{ state.storyStep = 3; renderStory(); };
     return;
   }
 
   if(state.storyStep === 3){
-    root.innerHTML = previewLetter(d) + `<div style="text-align:center;margin-top:16px"><button class="big-button" id="toChoicesBtn" style="max-width:310px">${escapeHtml(d.choiceTitle || "Что будем делать?")}</button></div>`;
+    root.innerHTML = previewLetter(d) + `<div style="text-align:center;margin-top:16px"><button class="big-button" id="toChoicesBtn" style="max-width:310px">${escapeHtml(d.choiceTitle || "Що будемо робити?")}</button></div>`;
     $("#toChoicesBtn").onclick = ()=>{ state.storyStep = 4; renderStory(); };
     return;
   }
@@ -1035,7 +1072,7 @@ function renderStory(){
   if(state.storyStep === 4){
     root.innerHTML = `
       <div class="stage-center choice-screen" style="justify-content:flex-start;padding-top:56px">
-        <h4>${escapeHtml(d.choiceTitle || "Что будем делать?")}</h4>
+        <h4>${escapeHtml(d.choiceTitle || "Що будемо робити?")}</h4>
         <div style="width:100%;max-width:330px">
           ${(d.choices || []).map((c, idx)=>`
             <button class="choice-card" data-idx="${idx}" style="width:100%;background:rgba(255,196,215,.10);border:1px solid rgba(255,196,215,.18)">
@@ -1060,13 +1097,13 @@ function renderStory(){
   }
 
   if(state.storyStep === 5){
-    const choice = (d.choices || [])[d.finalChoiceIndex] || {emoji:"❤", title:"Выходим", subtitle:""};
+    const choice = (d.choices || [])[d.finalChoiceIndex] || {emoji:"❤", title:"Виходимо", subtitle:""};
     root.innerHTML = `
       <div class="stage-center centered" style="justify-content:flex-start;padding-top:34px">
         ${d.showPhoto && d.photoData ? `<div style="width:100%;max-width:310px;margin-bottom:14px;border-radius:24px;overflow:hidden;box-shadow:0 18px 34px rgba(0,0,0,.24)"><img src="${d.photoData}" alt="Фото"></div>` : ``}
         <div style="font-family:'Marck Script';font-size:28px;color:#ffd6e4;max-width:320px">${escapeHtml(d.finalCaption)}</div>
         <div class="final-card">
-          <div class="line1">${escapeHtml(d.finalTitle || "Выходим")}</div>
+          <div class="line1">${escapeHtml(d.finalTitle || "Виходимо")}</div>
           <div class="line2">${escapeHtml(choice.emoji)} ${escapeHtml(choice.title)}</div>
           <div class="time">${escapeHtml(d.finalDate)}${d.finalDate && d.finalTime ? " · " : ""}${escapeHtml(d.finalTime)}</div>
           <div class="note">${escapeHtml(d.finalNote || choice.subtitle)}</div>
@@ -1305,7 +1342,7 @@ function attachListeners(){
     if(err){ showError(err); return; }
     try{
       $("#generateLink").disabled = true;
-      $("#generateLink").textContent = "Создаю…";
+      $("#generateLink").textContent = "Створюю…";
       const result = await makeShareLink();
       $("#shareLink").value = result.link;
       const editLink = result.editLink || "";
@@ -1315,14 +1352,14 @@ function attachListeners(){
         editBox.closest(".edit-link-wrap")?.classList.toggle("hidden", !editLink);
       }
       showError("");
-      $("#generateLink").textContent = "Короткая ссылка готова ✓";
+      $("#generateLink").textContent = "Коротке посилання готове ✓";
       saveDraft();
     }catch(e){
-      showError(e.message || "Не удалось создать короткую ссылку");
+      showError(e.message || "Не вдалося створити коротке посилання");
     }finally{
       $("#generateLink").disabled = false;
       if(!$("#shareLink").value){
-        $("#generateLink").textContent = "Сделать короткую ссылку";
+        $("#generateLink").textContent = "Створити коротке посилання";
       }
     }
   };
@@ -1333,9 +1370,9 @@ function attachListeners(){
         $("#shareLink").value = result.link;
       }
       await navigator.clipboard.writeText($("#shareLink").value);
-      $("#copyLink").textContent = "Скопировано";
-      setTimeout(()=>$("#copyLink").textContent = "Копировать", 1500);
-    }catch(e){ showError(e.message || "Не удалось создать ссылку"); }
+      $("#copyLink").textContent = "Скопійовано";
+      setTimeout(()=>$("#copyLink").textContent = "Копіювати", 1500);
+    }catch(e){ showError(e.message || "Не вдалося створити посилання"); }
   };
   $("#openLink").onclick = async()=>{
     try{
@@ -1345,7 +1382,7 @@ function attachListeners(){
         link = result.link;
       }
       location.href = link;
-    }catch(e){ showError(e.message || "Не удалось создать ссылку"); }
+    }catch(e){ showError(e.message || "Не вдалося створити посилання"); }
   };
   $("#copyEditLink").onclick = async()=>{
     const link = $("#editLinkBox").value;
@@ -1480,7 +1517,7 @@ function attachListeners(){
       mountStory(data.payload);
       return;
     }catch(e){
-      document.body.innerHTML = `<div style="min-height:100vh;display:grid;place-items:center;background:#1e0d1e;color:white;font-family:Inter,sans-serif;padding:24px;text-align:center"><div><h1 style="font-family:'Cormorant Garamond',serif;font-size:48px;margin:0 0 12px">Письмо не найдено</h1><p style="opacity:.75">${escapeHtml(e.message || "Ссылка недействительна")}</p><a href="/" style="color:#ff9fbe">Создать своё письмо</a></div></div>`;
+      document.body.innerHTML = `<div style="min-height:100vh;display:grid;place-items:center;background:#1e0d1e;color:white;font-family:Inter,sans-serif;padding:24px;text-align:center"><div><h1 style="font-family:'Cormorant Garamond',serif;font-size:48px;margin:0 0 12px">Лист не найдено</h1><p style="opacity:.75">${escapeHtml(e.message || "Посилання недействительна")}</p><a href="/" style="color:#ff9fbe">Створити свій лист</a></div></div>`;
       return;
     }
   }
@@ -1536,7 +1573,7 @@ function attachListeners(){
       mountStory(payload);
       return;
     }catch(e){
-      alert("Ссылка повреждена или слишком большая.");
+      alert("Посилання повреждена или слишком большая.");
     }
   }
 
