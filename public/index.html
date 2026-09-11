@@ -695,6 +695,18 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
   display:none !important;
 }
 
+
+.recipient-mode-badge{
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  padding:6px 9px;
+  border-radius:999px;
+  background:rgba(255,255,255,.10);
+  color:#ffdce8;
+  border:1px solid rgba(255,255,255,.12);
+}
+
 </style>
 </head>
 <body>
@@ -1231,6 +1243,7 @@ function mountStory(payload){
     <div class="shell" style="padding-bottom:18px">
       <header class="topbar">
         <div class="brand"><div class="seal" id="hiddenEditSeal">L</div><div>Love Letter</div></div>
+        <div class="recipient-mode-badge">для отримувача</div>
       </header>
       <div class="phone" style="max-width:430px;margin:0 auto">
         <div class="phone-bar"><span>21:41</span><span>${escapeHtml(payload.recipient || "Love Letter")}</span><span>❤︎</span></div>
@@ -1859,7 +1872,11 @@ function attachListenersImpl(){
         const result = await makeShareLink();
         $("#shareLink").value = result.link;
       }
-      await navigator.clipboard.writeText($("#shareLink").value);
+      const recipientUrl = new URL($("#shareLink").value, location.origin);
+      if(!/^\/l\/[A-Za-z0-9_-]{4,32}$/.test(recipientUrl.pathname.replace(/\/+$/, ""))){
+        throw new Error("Некоректне посилання отримувача.");
+      }
+      await navigator.clipboard.writeText(recipientUrl.href);
       $("#copyLink").textContent = "Скопійовано";
       setTimeout(()=>$("#copyLink").textContent = "Копіювати", 1500);
     }catch(e){ showError(e.message || "Не вдалося створити посилання"); }
@@ -1872,12 +1889,15 @@ function attachListenersImpl(){
         link = result.link;
         $("#shareLink").value = link;
       }
-      const w = window.open(link, "_blank", "noopener,noreferrer");
-      if(!w){
-        // Якщо браузер заблокував pop-up, показуємо посилання, але не міняємо route редактора.
-        showError("Браузер заблокував нову вкладку. Скопіюй посилання кнопкою «Копіювати».");
+
+      // Переходимо саме на recipient URL у цій вкладці.
+      // Це прибирає поведінку pop-up/new-tab, яка на телефоні могла не спрацювати.
+      const u = new URL(link, location.origin);
+      if(!/^\/l\/[A-Za-z0-9_-]{4,32}$/.test(u.pathname.replace(/\/+$/, ""))){
+        throw new Error("Некоректне посилання отримувача.");
       }
-    }catch(e){ showError(e.message || "Не вдалося створити посилання"); }
+      location.assign(u.href);
+    }catch(e){ showError(e.message || "Не вдалося відкрити лист"); }
   };
   $("#copyEditLink").onclick = async()=>{
     const link = $("#editLinkBox").value;
@@ -2020,6 +2040,16 @@ function attachListenersImpl(){
 
   const pathMatch = cleanPath.match(/^\/l\/([A-Za-z0-9_-]{4,32})$/);
   if(pathMatch){
+    // /l/... is ALWAYS recipient mode. Never auto-open editor here.
+    state.editingId = "";
+    state.editKey = "";
+    state.storyPayload = null;
+
+    // Normalize URL without changing the route itself.
+    if(location.pathname !== cleanPath || location.search || location.hash){
+      history.replaceState(null, "", cleanPath);
+    }
+
     document.getElementById("creatorView")?.classList.add("hidden");
     document.getElementById("storyView")?.classList.remove("hidden");
     document.getElementById("storyView").innerHTML = `

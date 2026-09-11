@@ -238,3 +238,12 @@ Deploy command: `npx wrangler deploy`
 - кроки sticky;
 - навігація «Назад / Далі» закріплена внизу;
 - поля та textarea адаптовані під touch/iOS.
+
+
+## v21 — force recipient open
+
+- Кнопка «Відкрити лист як отримувач» тепер переходить у цій же вкладці через `location.assign()`.
+- Копіювання перевіряє, що URL має формат `/l/ID`.
+- `/l/ID` примусово запускає тільки recipient mode.
+- Query/hash/trailing slash на recipient URL очищаються без зміни самого `/l/ID`.
+- `/api/health` тепер повертає `version: "v21"`.
