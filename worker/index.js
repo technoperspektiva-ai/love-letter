@@ -72,7 +72,8 @@ async function health(env) {
     return json({
       ok: true,
       db: true,
-      stories: Number(row?.count || 0)
+      stories: Number(row?.count || 0),
+      version: "v20"
     });
   } catch (error) {
     return json({

@@ -533,6 +533,168 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
  .stage-center{min-height:455px}
 }
 
+
+/* v20: actual phone editor */
+.editor-mobile-tools,
+.mobile-preview-open,
+.mobile-preview-close{display:none}
+
+@media (max-width: 900px){
+  html,body{overflow-x:hidden}
+  .app{overflow:visible}
+  .shell{width:100%;padding-left:10px;padding-right:10px}
+  .hero{display:none}
+  .builder{padding:8px 0 90px}
+  .layout{display:block}
+  .panel{
+    padding:8px;
+    border-radius:0;
+    border-left:0;
+    border-right:0;
+    box-shadow:none;
+    background:rgba(255,255,255,.06);
+  }
+
+  .editor-mobile-tools{
+    display:flex;
+    justify-content:flex-end;
+    margin:2px 0 8px;
+  }
+  .mobile-preview-open{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid rgba(255,255,255,.18);
+    background:rgba(255,255,255,.11);
+    color:#fff;
+    border-radius:999px;
+    padding:9px 13px;
+    font-weight:700;
+    font-size:12px;
+  }
+  .mobile-preview-close{
+    display:inline-grid;
+    place-items:center;
+    width:34px;
+    height:34px;
+    border:0;
+    border-radius:50%;
+    background:rgba(255,255,255,.12);
+    color:#fff;
+    font-size:17px;
+  }
+
+  .stepbar{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:linear-gradient(180deg,#311226 82%,rgba(49,18,38,0));
+    padding:8px 2px 14px;
+    margin:0 -2px;
+  }
+  .stepbar button{
+    flex:0 0 auto;
+    font-size:12px;
+    padding:9px 11px;
+  }
+
+  .card{
+    padding:18px 14px 96px;
+    border-radius:20px;
+    min-height:calc(100svh - 155px);
+  }
+  .card h2{font-size:34px}
+  input,textarea,select{
+    font-size:16px;
+    width:100%;
+  }
+  textarea{min-height:130px}
+
+  .actions{
+    position:fixed;
+    z-index:35;
+    left:10px;
+    right:10px;
+    bottom:max(8px, env(safe-area-inset-bottom));
+    display:grid;
+    grid-template-columns:1fr 1.35fr;
+    gap:8px;
+    margin:0;
+    padding:8px;
+    border-radius:18px;
+    background:rgba(35,13,29,.94);
+    border:1px solid rgba(255,255,255,.13);
+    backdrop-filter:blur(18px);
+    box-shadow:0 14px 34px rgba(0,0,0,.35);
+  }
+  .actions .btn{
+    width:100%;
+    min-height:48px;
+    padding:12px 10px;
+  }
+
+  .preview{
+    display:none;
+    position:fixed !important;
+    inset:0;
+    z-index:80;
+    width:100%;
+    min-height:100svh;
+    padding:10px;
+    overflow:auto;
+    border-radius:0;
+    background:#1c0c19;
+  }
+  .preview.mobile-open{display:block}
+  .preview-head{
+    position:sticky;
+    top:0;
+    z-index:5;
+    padding:8px 4px 10px;
+    background:linear-gradient(180deg,#1c0c19 78%,rgba(28,12,25,0));
+  }
+  .preview .phone{
+    width:min(100%,430px);
+    margin:4px auto 24px;
+    min-height:0;
+  }
+  .preview .phone-stage{min-height:calc(100svh - 130px)}
+  .preview .stage-center{min-height:calc(100svh - 165px)}
+
+  .topbar.shell{
+    padding:10px;
+  }
+  .top-actions{max-width:none}
+  .new-letter-btn{font-size:11px}
+}
+
+@media (max-width: 520px){
+  .shell{padding-left:6px;padding-right:6px}
+  .topbar.shell{padding:8px 6px}
+  .brand > div:last-child{display:none}
+  .panel{padding:5px}
+  .card{
+    padding:16px 11px 98px;
+    border-radius:17px;
+  }
+  .card h2{font-size:31px}
+  .subtitle{font-size:13px}
+  .stepbar{gap:5px}
+  .stepbar button{font-size:11px;padding:8px 10px}
+  .actions{left:6px;right:6px}
+  .mini-actions{grid-template-columns:1fr}
+  .choice-item{grid-template-columns:46px minmax(0,1fr)}
+  .recipient-sharebox input{font-size:12px}
+}
+
+
+.edit-link-wrap .field-note:first-child,
+.edit-link-wrap .sharebox,
+.edit-link-wrap #copyEditLink,
+.edit-link-wrap #openEditLink{
+  display:none !important;
+}
+
 </style>
 </head>
 <body>
@@ -568,6 +730,9 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
     <section class="builder shell">
       <div class="layout">
         <div class="panel">
+          <div class="editor-mobile-tools">
+            <button class="mobile-preview-open" id="mobilePreviewOpen" type="button">👁 Перегляд</button>
+          </div>
           <div class="stepbar" id="stepbar"></div>
           <div class="card">
             <div class="step" data-step="0">
@@ -675,15 +840,16 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
               <h2>Готово</h2>
               <p class="subtitle">Створи секретне посилання й відкрий історію як отримувач.</p>
               <button class="btn primary" type="button" id="generateLink">Створити коротке посилання</button>
-              <div class="recipient-link-label">ПОСИЛАННЯ ДЛЯ ОТРИМУВАЧА</div>
+              <div id="storageStatus" class="field-note" style="margin-top:12px"></div>
+              <div class="recipient-link-label">НАДСИЛАЙ САМЕ ЦЕ ПОСИЛАННЯ</div>
               <div class="sharebox recipient-sharebox">
                 <input id="shareLink" readonly placeholder="Тут з’явиться посилання для отримувача: /l/Ab3Xy9Qk">
               </div>
               <div class="mini-actions">
                 <button class="btn ghost slim" type="button" id="copyLink">Копіювати</button>
-                <button class="btn ghost slim" type="button" id="openLink">Перевірити як отримувач</button>
+                <button class="btn ghost slim" type="button" id="openLink">Відкрити лист як отримувач</button>
               </div>
-              <button class="private-edit-toggle hidden" type="button" id="privateEditToggle">Показати приватне керування</button>
+              <button class="private-edit-toggle hidden" type="button" id="privateEditToggle">Керування листом</button>
               <div class="edit-link-wrap hidden" style="margin-top:10px">
                 <div class="field-note"><b>Приватне службове посилання.</b> Не надсилай його отримувачу:</div>
                 <div class="sharebox"><input id="editLinkBox" readonly></div>
@@ -714,7 +880,10 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
         <div class="preview">
           <div class="preview-head">
             <h3>Живий перегляд</h3>
-            <div class="badge" style="padding:7px 10px">режим отримувача</div>
+            <div style="display:flex;gap:8px;align-items:center">
+              <button class="mobile-preview-close" id="mobilePreviewClose" type="button" aria-label="Закрити перегляд">✕</button>
+              <div class="badge" style="padding:7px 10px">режим отримувача</div>
+            </div>
           </div>
           <div class="phone">
             <div class="phone-bar">
@@ -993,7 +1162,7 @@ async function makeShareLink(){
 
     return {
       link: `${location.origin}${data.path}`,
-      editLink: `${location.origin}/edit/${state.editingId}#key=${state.editKey}`
+      editLink: ""
     };
   }
 
@@ -1041,7 +1210,7 @@ async function makeShareLink(){
 
   return {
     link: `${location.origin}${data.path}`,
-    editLink: data.editPath ? `${location.origin}${data.editPath}` : ""
+    editLink: ""
   };
 }
 function escapeHtml(text){
@@ -1107,9 +1276,49 @@ function mountStory(payload){
         // Якщо цей браузер не є браузером автора — нічого не відбувається.
         if(!editKey) return;
 
-        location.href = `/edit/${storyId}#key=${encodeURIComponent(editKey)}`;
+        openHiddenEditor(storyId, editKey);
       }
     });
+  }
+}
+async function openHiddenEditor(storyId, editKey){
+  try{
+    const response = await fetch(`/api/story/${encodeURIComponent(storyId)}`, {
+      cache: "no-store"
+    });
+    const data = await response.json();
+    if(!response.ok || !data?.payload){
+      throw new Error(data?.error || "Лист не знайдено.");
+    }
+
+    state.editingId = storyId;
+    state.editKey = editKey;
+    state.storyPayload = null;
+
+    try{
+      localStorage.setItem(`love-letter-edit-${storyId}`, editKey);
+    }catch{}
+
+    $("#storyView")?.classList.add("hidden");
+    $("#creatorView")?.classList.remove("hidden");
+
+    populateEditorFromPayload(data.payload);
+    attachListenersOnce();
+    renderEditor();
+    installDraftAutosaveOnce();
+
+    const badge = document.querySelector("#creatorView .badge");
+    if(badge) badge.textContent = "приховане редагування";
+
+    const gen = $("#generateLink");
+    if(gen) gen.textContent = "Зберегти зміни";
+
+    // Приватні URL не показуємо. Керування листом доступне тільки після прихованого входу.
+    $("#privateEditToggle")?.classList.remove("hidden");
+
+    window.scrollTo({top:0, behavior:"smooth"});
+  }catch(error){
+    alert(error?.message || "Не вдалося відкрити редагування.");
   }
 }
 
@@ -1520,7 +1729,7 @@ function startNewLetter(){
   clearDraft();
   state.step = 0;
   state.photoData = "";
-  location.href = location.origin + location.pathname;
+  location.href = "/";
 }
 
 function installDraftAutosave(){
@@ -1589,10 +1798,35 @@ function populateEditorFromPayload(d){
   state.step = 0;
 }
 
-function attachListeners(){
+
+let editorListenersAttached = false;
+let draftAutosaveInstalled = false;
+
+function attachListenersOnce(){
+  if(editorListenersAttached) return;
+  editorListenersAttached = true;
+  attachListenersImpl();
+}
+
+function installDraftAutosaveOnce(){
+  if(draftAutosaveInstalled) return;
+  draftAutosaveInstalled = true;
+  installDraftAutosave();
+}
+
+function attachListenersImpl(){
   $("#newLetterBtn").onclick = startNewLetter;
   $("#nextBtn").onclick = nextStep;
   $("#backBtn").onclick = prevStep;
+
+  $("#mobilePreviewOpen")?.addEventListener("click", ()=>{
+    document.querySelector(".preview")?.classList.add("mobile-open");
+    document.body.style.overflow = "hidden";
+  });
+  $("#mobilePreviewClose")?.addEventListener("click", ()=>{
+    document.querySelector(".preview")?.classList.remove("mobile-open");
+    document.body.style.overflow = "";
+  });
   $("#generateLink").onclick = async()=>{
     const err = validateStep();
     if(err){ showError(err); return; }
@@ -1601,15 +1835,13 @@ function attachListeners(){
       $("#generateLink").textContent = "Створюю…";
       const result = await makeShareLink();
       $("#shareLink").value = result.link;
-      const editLink = result.editLink || "";
       const editBox = $("#editLinkBox");
-      if(editBox){
-        editBox.value = editLink;
-        const toggle = $("#privateEditToggle");
-        if(toggle) toggle.classList.toggle("hidden", !editLink);
-        editBox.closest(".edit-link-wrap")?.classList.add("hidden");
-      }
+      if(editBox) editBox.value = "";
+      $("#privateEditToggle")?.classList.toggle("hidden", !state.editingId);
+      document.querySelector(".edit-link-wrap")?.classList.add("hidden");
       showError("");
+      const storageStatus = $("#storageStatus");
+      if(storageStatus) storageStatus.textContent = "✓ Лист записаний у D1 і успішно прочитаний назад сервером.";
       $("#generateLink").textContent = "Коротке посилання готове ✓";
       saveDraft();
     }catch(e){
@@ -1665,8 +1897,8 @@ function attachListeners(){
     const willShow = wrap.classList.contains("hidden");
     wrap.classList.toggle("hidden", !willShow);
     $("#privateEditToggle").textContent = willShow
-      ? "Сховати приватне керування"
-      : "Показати приватне керування";
+      ? "Сховати керування"
+      : "Керування листом";
   };
 
   $("#regenerateUrlBtn").onclick = async()=>{
@@ -1811,47 +2043,16 @@ function attachListeners(){
 
   const editMatch = cleanPath.match(/^\/edit\/([A-Za-z0-9_-]{4,32})$/);
   if(editMatch){
-    try{
-      const id = editMatch[1];
-      const hashParams = new URLSearchParams(location.hash.replace(/^#/,""));
-      const key = hashParams.get("key") || localStorage.getItem(`love-letter-edit-${id}`) || "";
-      if(!key) throw new Error("Немає ключа редагування.");
-
-      const r = await fetch(`/api/story/${encodeURIComponent(id)}`, { cache: "no-store" });
-      const data = await r.json();
-      if(!r.ok) throw new Error(data.error || "Лист не знайдено або посилання вже неактивне.");
-
-      state.editingId = id;
-      state.editKey = key;
-      localStorage.setItem(`love-letter-edit-${id}`, key);
-
-      attachListeners();
-      populateEditorFromPayload(data.payload);
-      renderEditor();
-      installDraftAutosave();
-
-      const badge = document.querySelector(".badge");
-      if(badge) badge.textContent = "режим редагування";
-
-      const gen = $("#generateLink");
-      if(gen) gen.textContent = "Зберегти зміни";
-
-      const editWrap = document.querySelector(".edit-link-wrap");
-      const editBox = $("#editLinkBox");
-      const editToggle = $("#privateEditToggle");
-      if(editWrap && editBox){
-        editWrap.classList.add("hidden");
-        editBox.value = `${location.origin}/edit/${id}#key=${key}`;
-        editToggle?.classList.remove("hidden");
-      }
-      const shareBox = $("#shareLink");
-      if(shareBox) shareBox.value = `${location.origin}/l/${id}`;
-
-      return;
-    }catch(e){
-      document.body.innerHTML = `<div style="min-height:100vh;display:grid;place-items:center;background:#1e0d1e;color:white;font-family:Inter,sans-serif;padding:24px;text-align:center"><div><h1 style="font-family:'Cormorant Garamond',serif;font-size:48px;margin:0 0 12px">Не вдалося відкрити редагування</h1><p style="opacity:.75">${escapeHtml(e.message || "Невідома помилка")}</p><a href="/" style="color:#ff9fbe">Створити новий лист</a></div></div>`;
-      return;
+    // Legacy private links are accepted only to recover the local edit key.
+    // Then the URL is immediately normalized to the normal recipient route.
+    const id = editMatch[1];
+    const hashParams = new URLSearchParams(location.hash.replace(/^#/,""));
+    const key = hashParams.get("key") || "";
+    if(key){
+      try{ localStorage.setItem(`love-letter-edit-${id}`, key); }catch{}
     }
+    location.replace(`/l/${id}`);
+    return;
   }
 
   // Backward compatibility with older long links.
@@ -1866,10 +2067,10 @@ function attachListeners(){
     }
   }
 
-  attachListeners();
+  attachListenersOnce();
   const restored = loadDraft();
   renderEditor();
-  installDraftAutosave();
+  installDraftAutosaveOnce();
 
   if(restored){
     const box = $("#errorBox");
