@@ -426,3 +426,27 @@ Desktop більше не використовує legacy horizontal-pill constr
 business logic та visual system — спільні.
 
 `/api/health` -> `version: "1.2"`
+
+
+# Love Letter 1.3 — Desktop Home Polish
+
+Перероблено desktop Home після реального screenshot review.
+
+Проблеми 1.2:
+- надто багато порожнього простору;
+- hero і recent list виглядали як дві випадкові області;
+- cards мали занадто слабкий contrast;
+- sidebar візуально не завершував app shell;
+- композиція була «розтягнутим макетом», а не desktop product.
+
+1.3:
+- компактніший 220px app rail;
+- бренд нормально читається в rail;
+- main canvas до 1180px, центрований;
+- hero + recent area мають збалансовану двоколонкову композицію;
+- recent list отримав єдину світлу surface;
+- cards тепер мають нормальний текстовий contrast і hover state;
+- на екранах без листів hero автоматично центрується;
+- laptop-height polish для низьких viewport.
+
+`/api/health` -> `version: "1.3"`
