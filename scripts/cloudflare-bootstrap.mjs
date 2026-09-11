@@ -91,5 +91,5 @@ cfg = cfg.replace(
 writeFileSync(CONFIG, cfg);
 
 console.log(`D1 ready: ${DB_NAME} (${id})`);
-exec(`npx wrangler d1 migrations apply ${DB_NAME} --remote`, true);
-console.log("Short-link database migration applied.");
+const migrationOut = exec(`npx wrangler d1 migrations apply ${DB_NAME} --remote`, false);
+console.log(migrationOut || "Short-link database migration applied.");

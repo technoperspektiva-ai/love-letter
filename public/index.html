@@ -446,7 +446,7 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
               <p class="subtitle">Сгенерируй секретную ссылку и открой историю как получатель.</p>
               <button class="btn primary" type="button" id="generateLink">Сделать короткую ссылку</button>
               <div class="sharebox">
-                <input id="shareLink" readonly placeholder="Здесь появится ссылка">
+                <input id="shareLink" readonly placeholder="Здесь появится короткая ссылка вида /l/Ab3Xy9Qk">
               </div>
               <div class="mini-actions">
                 <button class="btn ghost slim" type="button" id="copyLink">Копировать</button>
@@ -641,7 +641,7 @@ function previewFinal(d){
         <div class="time">${escapeHtml(d.finalDate)} · ${escapeHtml(d.finalTime)}</div>
         <div class="note">${escapeHtml(d.finalNote || choice.subtitle)}</div>
       </div>
-      <button class="big-button" type="button" style="max-width:330px;margin-top:18px">Поделиться</button>
+      <button class="big-button" type="button" style="max-width:330px;margin-top:18px">Поділитися</button>
     </div>
   `;
 }
@@ -721,11 +721,24 @@ async function makeShareLink(){
     headers: { "content-type": "application/json" },
     body: JSON.stringify({ payload })
   });
-  const data = await response.json();
-  if(!response.ok){
-    throw new Error(data.message || data.error || "Не удалось создать короткую ссылку");
+
+  let data = {};
+  try{ data = await response.json(); }catch{}
+
+  if(!response.ok || !data.path){
+    throw new Error(
+      data.message ||
+      "Короткая ссылка не создана: серверное хранилище ещё не подключено. " +
+      "Эта версия специально НЕ создаёт длинную ссылку как запасной вариант."
+    );
   }
-  return `${location.origin}${data.path}`;
+
+  const path = String(data.path);
+  if(!/^\/l\/[A-Za-z0-9_-]{4,32}$/.test(path)){
+    throw new Error("Сервер вернул некорректную короткую ссылку.");
+  }
+
+  return `${location.origin}${path}`;
 }
 function escapeHtml(text){
   return String(text || "").replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
@@ -855,8 +868,38 @@ function renderStory(){
           <div class="time">${escapeHtml(d.finalDate)}${d.finalDate && d.finalTime ? " · " : ""}${escapeHtml(d.finalTime)}</div>
           <div class="note">${escapeHtml(d.finalNote || choice.subtitle)}</div>
         </div>
-        <button class="big-button" id="restartBtn" style="max-width:330px;margin-top:18px">Ещё раз</button>
+        <button class="big-button" id="recipientShareBtn" style="max-width:330px;margin-top:18px">Поділитися 💌</button>
+        <div id="recipientShareStatus" class="muted" style="margin-top:10px;color:#ffd2df"></div>
+        <button class="btn ghost slim" id="restartBtn" style="margin-top:12px;background:rgba(255,255,255,.12);color:white">Переглянути ще раз</button>
       </div>`;
+
+    $("#recipientShareBtn").onclick = async()=>{
+      const shareData = {
+        title: "Love Letter",
+        text: `Для ${d.recipient || "тебе"} є дещо особливе 💌`,
+        url: location.href
+      };
+
+      try{
+        if(navigator.share){
+          await navigator.share(shareData);
+          $("#recipientShareStatus").textContent = "";
+        }else{
+          await navigator.clipboard.writeText(location.href);
+          $("#recipientShareStatus").textContent = "Посилання скопійовано — можеш надіслати його 💌";
+        }
+      }catch(e){
+        if(e?.name !== "AbortError"){
+          try{
+            await navigator.clipboard.writeText(location.href);
+            $("#recipientShareStatus").textContent = "Посилання скопійовано 💌";
+          }catch{
+            $("#recipientShareStatus").textContent = "Скопіюй адресу сторінки з браузера.";
+          }
+        }
+      }
+    };
+
     $("#restartBtn").onclick = ()=>{ state.storyStep = d.useSecret ? 0 : 1; renderStory(); };
   }
 }
@@ -873,11 +916,14 @@ function attachListeners(){
       const link = await makeShareLink();
       $("#shareLink").value = link;
       showError("");
+      $("#generateLink").textContent = "Короткая ссылка готова ✓";
     }catch(e){
       showError(e.message || "Не удалось создать короткую ссылку");
     }finally{
       $("#generateLink").disabled = false;
-      $("#generateLink").textContent = "Сделать короткую ссылку";
+      if(!$("#shareLink").value){
+        $("#generateLink").textContent = "Сделать короткую ссылку";
+      }
     }
   };
   $("#copyLink").onclick = async()=>{
