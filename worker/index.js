@@ -73,7 +73,7 @@ async function health(env) {
       ok: true,
       db: true,
       stories: Number(row?.count || 0),
-      version: "2.1"
+      version: "2.1.1"
     });
   } catch (error) {
     return json({
@@ -228,6 +228,9 @@ async function regenerateStoryUrl(request, id, env) {
   });
 }
 
+
+const recipientPolishLink = `<link rel="stylesheet" href="/recipient.css?v=2111">`;
+
 const developerCreditStyles = `<style id="developer-credit-styles">
   .developer-credit-footer {
     padding: 12px max(16px, env(safe-area-inset-right, 0px))
@@ -252,13 +255,8 @@ const developerCreditStyles = `<style id="developer-credit-styles">
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
   }
-  .developer-credit span {
-    transition: filter 180ms ease;
-  }
-  .developer-credit:focus-visible {
-    outline: 2px solid #a46ac4;
-    outline-offset: 2px;
-  }
+  .developer-credit span { transition: filter 180ms ease; }
+  .developer-credit:focus-visible { outline: 2px solid #a46ac4; outline-offset: 2px; }
   .developer-credit:is(:hover, :active, :focus) span {
     color: #b85b9c;
     filter: drop-shadow(0 0 4px rgb(174 104 220 / 35%));
@@ -272,15 +270,10 @@ const developerCreditStyles = `<style id="developer-credit-styles">
     }
   }
   @media (max-width: 900px) {
-    /* Leave room to scroll the credit above the fixed mobile controls. */
-    .developer-credit-footer {
-      padding-bottom: calc(120px + env(safe-area-inset-bottom, 0px));
-    }
+    .developer-credit-footer { padding-bottom: calc(120px + env(safe-area-inset-bottom, 0px)); }
   }
   @media (min-width: 901px) {
-    body:not(.story-open):not(.mw-create-active) .developer-credit-footer {
-      margin-left: 220px;
-    }
+    body:not(.story-open):not(.mw-create-active) .developer-credit-footer { margin-left: 220px; }
   }
   @media (prefers-reduced-motion: reduce) {
     .developer-credit span { transition: none; }
@@ -293,13 +286,15 @@ const developerCredit = `<footer class="developer-credit-footer">
 
 async function serveAssets(request, env) {
   const response = await env.ASSETS.fetch(request);
-  // Preserve redirects, HEAD responses, and non-HTML assets unchanged.
   if (request.method !== "GET" || !response.ok ||
       !/^text\/html\b/i.test(response.headers.get("content-type") || "")) {
     return response;
   }
   return new HTMLRewriter()
-    .on("head", { element: element => element.append(developerCreditStyles, { html: true }) })
+    .on("head", { element: element => {
+      element.append(recipientPolishLink, { html: true });
+      element.append(developerCreditStyles, { html: true });
+    }})
     .on("body", { element: element => element.append(developerCredit, { html: true }) })
     .transform(response);
 }
