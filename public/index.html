@@ -48,6 +48,22 @@ radial-gradient(circle at 71% 85%,#fff 0 1px,transparent 1.8px)}
 .topbar{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
 .brand{display:flex;align-items:center;gap:10px;font-weight:700}
 .seal{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#ff92b5,#bf406a);box-shadow:inset -4px -5px 8px #8f3354,0 8px 24px rgba(0,0,0,.28);font-family:"Cormorant Garamond";font-size:24px;font-weight:700}
+
+.top-actions{display:flex;align-items:center;gap:10px}
+.new-letter-btn{
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.09);
+  color:#fff3f7;
+  border-radius:999px;
+  padding:9px 13px;
+  font-size:12px;
+  font-weight:700;
+  backdrop-filter:blur(10px);
+  transition:.2s ease;
+}
+.new-letter-btn:hover{background:rgba(255,255,255,.15);transform:translateY(-1px)}
+.new-letter-btn:active{transform:translateY(0)}
+
 .badge{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);padding:8px 12px;border-radius:999px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#ffe6ef}
 
 .hero{padding:30px 0 36px;display:grid;grid-template-columns:1.1fr .9fr;gap:26px;align-items:center}
@@ -297,6 +313,11 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
 }
 @media (max-width: 600px){
 
+ .topbar{gap:10px;align-items:flex-start}
+ .top-actions{gap:7px;flex-wrap:wrap;justify-content:flex-end}
+ .new-letter-btn{padding:8px 10px;font-size:11px}
+ .badge{font-size:10px}
+
  .preview-env{width:86vw;max-width:300px;min-width:210px}
  #envBtn{width:100% !important;display:block !important}
 
@@ -328,7 +349,10 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
   <div id="creatorView">
     <header class="topbar shell">
       <div class="brand"><div class="seal">L</div><div>Love Letter</div></div>
-      <div class="badge">free story builder</div>
+      <div class="top-actions">
+        <button class="new-letter-btn" id="newLetterBtn" type="button">Створити новий лист</button>
+        <div class="badge">free story builder</div>
+      </div>
     </header>
 
     <section class="hero shell">
@@ -675,6 +699,7 @@ function renderPhonePreview(){
 }
 
 function renderEditor(){
+  saveDraft();
   updateStepbar();
   $$(".step").forEach((el,i)=>el.classList.toggle("hidden", i!==state.step));
   $("#backBtn").style.visibility = state.step === 0 ? "hidden" : "visible";
@@ -684,6 +709,7 @@ function renderEditor(){
 }
 
 function nextStep(){
+  saveDraft();
   const err = validateStep();
   if(err){ showError(err); return; }
   showError("");
@@ -693,6 +719,7 @@ function nextStep(){
   }
 }
 function prevStep(){
+  saveDraft();
   if(state.step > 0){
     state.step--;
     renderEditor();
@@ -917,7 +944,139 @@ function renderStory(){
   }
 }
 
+
+const DRAFT_KEY = "love-letter-draft-v4";
+
+function getDraftPayload(){
+  return {
+    step: state.step,
+    photoData: state.photoData || "",
+    fields: {
+      recipient: $("#recipient")?.value || "",
+      introMain: $("#introMain")?.value || "",
+      introTop: $("#introTop")?.value || "",
+      envelopeHint: $("#envelopeHint")?.value || "",
+      useSecret: !!$("#useSecret")?.checked,
+      secretQuestion: $("#secretQuestion")?.value || "",
+      secretAnswer: $("#secretAnswer")?.value || "",
+      letterTo: $("#letterTo")?.value || "",
+      letterTitle: $("#letterTitle")?.value || "",
+      letterMessage: $("#letterMessage")?.value || "",
+      letterSign: $("#letterSign")?.value || "",
+      showPhoto: !!$("#showPhoto")?.checked,
+      choiceTitle: $("#choiceTitle")?.value || "",
+      c1e: $("#c1e")?.value || "",
+      c1t: $("#c1t")?.value || "",
+      c1s: $("#c1s")?.value || "",
+      c2e: $("#c2e")?.value || "",
+      c2t: $("#c2t")?.value || "",
+      c2s: $("#c2s")?.value || "",
+      c3e: $("#c3e")?.value || "",
+      c3t: $("#c3t")?.value || "",
+      c3s: $("#c3s")?.value || "",
+      c4e: $("#c4e")?.value || "",
+      c4t: $("#c4t")?.value || "",
+      c4s: $("#c4s")?.value || "",
+      finalCaption: $("#finalCaption")?.value || "",
+      finalTitle: $("#finalTitle")?.value || "",
+      finalChoiceIndex: $("#finalChoiceIndex")?.value || "0",
+      finalDate: $("#finalDate")?.value || "",
+      finalTime: $("#finalTime")?.value || "",
+      finalNote: $("#finalNote")?.value || ""
+    }
+  };
+}
+
+function saveDraft(){
+  try{
+    if(!document.getElementById("recipient")) return;
+    localStorage.setItem(DRAFT_KEY, JSON.stringify(getDraftPayload()));
+  }catch(e){
+    console.warn("Draft save failed", e);
+  }
+}
+
+function loadDraft(){
+  try{
+    const raw = localStorage.getItem(DRAFT_KEY);
+    if(!raw) return false;
+    const d = JSON.parse(raw);
+    if(!d || !d.fields) return false;
+
+    state.step = Math.min(steps.length - 1, Math.max(0, Number(d.step || 0)));
+    state.photoData = d.photoData || "";
+
+    const f = d.fields;
+    for(const [id, value] of Object.entries(f)){
+      const el = document.getElementById(id);
+      if(!el) continue;
+
+      if(el.type === "checkbox"){
+        el.checked = !!value;
+      }else{
+        el.value = value ?? "";
+      }
+    }
+
+    if(state.photoData){
+      $("#showPhoto").checked = f.showPhoto !== false;
+    }
+    return true;
+  }catch(e){
+    console.warn("Draft load failed", e);
+    return false;
+  }
+}
+
+function clearDraft(){
+  try{
+    localStorage.removeItem(DRAFT_KEY);
+  }catch{}
+}
+
+function startNewLetter(){
+  const hasDraft = !!localStorage.getItem(DRAFT_KEY);
+  const hasContent =
+    ($("#recipient")?.value || "").trim() ||
+    ($("#letterMessage")?.value || "").trim() ||
+    state.photoData;
+
+  if(hasDraft || hasContent){
+    const ok = confirm("Створити новий лист? Поточна чернетка буде очищена.");
+    if(!ok) return;
+  }
+
+  clearDraft();
+  state.step = 0;
+  state.photoData = "";
+  location.href = location.origin + location.pathname;
+}
+
+function installDraftAutosave(){
+  const save = ()=>saveDraft();
+
+  [
+    "#recipient","#introMain","#introTop","#envelopeHint","#useSecret",
+    "#secretQuestion","#secretAnswer","#letterTo","#letterTitle","#letterMessage",
+    "#letterSign","#showPhoto","#choiceTitle",
+    "#c1e","#c1t","#c1s","#c2e","#c2t","#c2s","#c3e","#c3t","#c3s",
+    "#c4e","#c4t","#c4s","#finalCaption","#finalTitle","#finalChoiceIndex",
+    "#finalDate","#finalTime","#finalNote"
+  ].forEach(sel=>{
+    const el = $(sel);
+    if(!el) return;
+    el.addEventListener("input", save);
+    el.addEventListener("change", save);
+  });
+
+  window.addEventListener("beforeunload", save);
+  document.addEventListener("visibilitychange", ()=>{
+    if(document.visibilityState === "hidden") save();
+  });
+}
+
 function attachListeners(){
+  $("#newLetterBtn").onclick = startNewLetter;
   $("#nextBtn").onclick = nextStep;
   $("#backBtn").onclick = prevStep;
   $("#generateLink").onclick = async()=>{
@@ -930,6 +1089,7 @@ function attachListeners(){
       $("#shareLink").value = link;
       showError("");
       $("#generateLink").textContent = "Короткая ссылка готова ✓";
+      clearDraft();
     }catch(e){
       showError(e.message || "Не удалось создать короткую ссылку");
     }finally{
@@ -971,11 +1131,13 @@ function attachListeners(){
     const data = await compressImage(file);
     state.photoData = data;
     $("#showPhoto").checked = true;
+    saveDraft();
     renderPhonePreview();
   });
   $("#removePhoto").onclick = ()=>{
     state.photoData = "";
     $("#photoInput").value = "";
+    saveDraft();
     renderPhonePreview();
   };
 }
@@ -1008,7 +1170,18 @@ function attachListeners(){
   }
 
   attachListeners();
+  const restored = loadDraft();
   renderEditor();
+  installDraftAutosave();
+
+  if(restored){
+    const box = $("#errorBox");
+    if(box){
+      box.textContent = "Чернетку відновлено — можна продовжувати з того місця, де зупинився.";
+      box.classList.remove("hidden");
+      setTimeout(()=>box.classList.add("hidden"), 3200);
+    }
+  }
 })();
 </script>
 </body>
