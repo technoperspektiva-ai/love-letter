@@ -108,3 +108,27 @@ git push -u origin main
 ## Build note
 
 `@cloudflare/workers-types` intentionally isn't pinned: the project ships a minimal local type shim so Cloudflare/Bun builds don't fail on unavailable dated type-package versions.
+
+## Zero-manual Cloudflare deploy
+
+The deploy command now provisions the required Cloudflare resources automatically:
+
+```bash
+npm run deploy
+```
+
+It will:
+1. find or create D1 `love-letter-db`;
+2. write its real UUID into `wrangler.jsonc`;
+3. create/check R2 `love-letter-images`;
+4. apply D1 migrations;
+5. build Vite;
+6. deploy the Worker.
+
+For Cloudflare Git Builds, set **Deploy command** to exactly:
+
+```bash
+npm run deploy
+```
+
+No manual `database_id` replacement is required anymore, provided the Cloudflare build identity has permission to read/create D1 and R2 resources.

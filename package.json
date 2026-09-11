@@ -7,8 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "npm run build && vite preview",
-    "deploy": "npm run build && wrangler deploy",
-    "cf:setup": "node scripts/cloudflare-setup.mjs",
+    "deploy": "node scripts/cloudflare-bootstrap.mjs && vite build && wrangler deploy",
+    "cf:setup": "node scripts/cloudflare-bootstrap.mjs",
     "db:migrate:local": "wrangler d1 migrations apply love-letter-db --local",
     "db:migrate:remote": "wrangler d1 migrations apply love-letter-db --remote"
   },
