@@ -1,0 +1,472 @@
+
+/* Love Letter 2.1.3 — recipient matches the existing Demo experience.
+   This file loads AFTER the current main CSS/magic.css and only affects #storyView.
+*/
+:root{
+  --demo-ink:#67344b;
+  --demo-muted:#916f7f;
+  --demo-paper:#fff8f1;
+  --demo-pink:#e7b9c4;
+  --demo-pink-2:#d9a4b0;
+  --demo-seal:#8a3d5e;
+  --demo-bg:#f5e8e4;
+  --demo-serif:Georgia,"Times New Roman",serif;
+  --demo-ui:system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif;
+}
+
+/* The recipient page must scroll normally and never clip text. */
+body.story-open{
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  min-height:100dvh!important;
+  -webkit-overflow-scrolling:touch!important;
+  touch-action:pan-y!important;
+  background:
+    radial-gradient(circle at 20% 12%,rgba(202,148,166,.11),transparent 26%),
+    linear-gradient(180deg,#fbf6f1,#f2e8e3)!important;
+}
+body.story-open .app,.app.story-open,
+#storyView,#storyView>.shell,#storyView .phone,#storyView .phone-stage,#storyView #storyStage{
+  height:auto!important;
+  max-height:none!important;
+  overflow:visible!important;
+}
+#storyView *{box-sizing:border-box!important}
+#storyView{
+  min-height:100dvh!important;
+  background:transparent!important;
+}
+#storyView>.shell{
+  width:min(100%,1080px)!important;
+  margin:0 auto!important;
+  padding:18px 22px 34px!important;
+}
+
+/* Existing product header stays cream, like the current recipient page. */
+#storyView .topbar{
+  min-height:64px!important;
+  margin:0 0 14px!important;
+  padding:8px 12px!important;
+  border:1px solid rgba(102,56,73,.07)!important;
+  border-radius:20px!important;
+  background:rgba(255,251,247,.95)!important;
+  box-shadow:0 12px 30px rgba(73,36,50,.045)!important;
+  backdrop-filter:blur(18px)!important;
+  -webkit-backdrop-filter:blur(18px)!important;
+}
+#storyView .recipient-main-logo{
+  width:auto!important;max-width:170px!important;height:44px!important;
+  padding:0 4px!important;border:0!important;background:transparent!important;box-shadow:none!important;
+}
+#storyView .recipient-main-logo img{
+  width:auto!important;max-width:164px!important;height:40px!important;object-fit:contain!important;filter:none!important;
+}
+#storyView .recipient-mode-badge{
+  min-height:34px!important;padding:0 12px!important;border:1px solid rgba(100,52,70,.06)!important;
+  border-radius:999px!important;background:#f1e3e8!important;color:#74465a!important;
+  font:750 9px/1 var(--demo-ui)!important;letter-spacing:.11em!important;text-transform:uppercase!important;
+}
+
+/* Recipient canvas: quiet, warm, and intentionally secondary to the paper experience. */
+#storyView .phone{
+  width:min(100%,760px)!important;
+  min-height:0!important;
+  margin:0 auto!important;
+  border:1px solid rgba(97,54,69,.07)!important;
+  border-radius:30px!important;
+  overflow:hidden!important;
+  background:
+    radial-gradient(circle at 50% 10%,rgba(202,144,164,.17),transparent 32%),
+    linear-gradient(180deg,#eadcda 0%,#d8c2c5 100%)!important;
+  box-shadow:0 30px 80px rgba(70,35,48,.12)!important;
+}
+#storyView .phone-bar{
+  min-height:50px!important;
+  padding:0 18px!important;
+  display:grid!important;
+  grid-template-columns:1fr auto 1fr!important;
+  align-items:center!important;
+  gap:10px!important;
+  border-bottom:1px solid rgba(91,49,64,.07)!important;
+  color:#815b6b!important;
+  background:rgba(255,248,244,.50)!important;
+  font:600 11px/1 var(--demo-ui)!important;
+  backdrop-filter:blur(12px)!important;
+}
+#storyView .phone-bar span:first-child{justify-self:start;color:#643549!important;font:500 13px/1 var(--demo-serif)!important}
+#storyView .phone-bar span:nth-child(2){justify-self:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#storyView .phone-bar span:last-child{justify-self:end;color:#7e4d63!important}
+
+/* Normal flow only: this kills the old 'flying text' issue. */
+#storyStage .stage-center>h2,
+#storyStage .stage-center>.light-sub,
+#storyStage .letter-enter,
+#storyStage .letter-enter .title,
+#storyStage .letter-enter .msg,
+#storyStage .letter-enter .sign,
+#storyStage .recipient-choice-card{
+  transform:none!important;
+  translate:none!important;
+  animation:demo-fade .28s ease both!important;
+}
+@keyframes demo-fade{from{opacity:0}to{opacity:1}}
+
+#storyView .stage-center,
+#storyView .recipient-choice-shell,
+#storyView .recipient-final-shell{
+  width:min(100%,620px)!important;
+  min-height:560px!important;
+  margin:0 auto!important;
+  padding:50px 28px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  text-align:center!important;
+  overflow:visible!important;
+}
+
+/* ---- STEP 2: SAME VISUAL LANGUAGE AS THE BUILT-IN DEMO ---- */
+#storyStage[data-story-step="2"]{
+  padding:24px!important;
+}
+#storyStage[data-story-step="2"] .envelope-stage{
+  position:relative!important;
+  width:min(100%,580px)!important;
+  min-height:690px!important;
+  margin:0 auto!important;
+  padding:88px 34px 50px!important;
+  border:1px solid #ead6dd!important;
+  border-radius:30px!important;
+  background:
+    radial-gradient(ellipse at 50% 12%,#f7e1e6 0%,transparent 68%),
+    #fff8f1!important;
+  box-shadow:0 30px 90px rgba(51,17,38,.20)!important;
+  color:var(--demo-ink)!important;
+}
+#storyStage[data-story-step="2"] .envelope-stage:before{
+  content:"ТАК ПОЧИНАЄТЬСЯ МАЛЕНЬКЕ ДИВО";
+  position:absolute;
+  left:28px;right:28px;top:64px;
+  color:#9c647b;
+  font:650 10px/1.6 var(--demo-ui);
+  letter-spacing:.18em;
+  text-align:center;
+}
+#storyStage[data-story-step="2"] .envelope-button{
+  position:relative!important;
+  width:min(100%,340px)!important;
+  min-height:280px!important;
+  margin:90px auto 20px!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  overflow:visible!important;
+  perspective:900px!important;
+  -webkit-tap-highlight-color:transparent!important;
+}
+#storyStage[data-story-step="2"] .preview-env{
+  position:relative!important;
+  inset:auto!important;
+  width:300px!important;
+  max-width:calc(100vw - 100px)!important;
+  min-width:0!important;
+  height:210px!important;
+  aspect-ratio:auto!important;
+  margin:0 auto!important;
+  border:1px solid #ddb0bc!important;
+  border-radius:12px!important;
+  overflow:visible!important;
+  background:linear-gradient(150deg,#efcad0,#e2b0bd)!important;
+  box-shadow:0 20px 35px rgba(115,57,72,.16)!important;
+  transform:rotate(-4deg)!important;
+  transition:transform .55s cubic-bezier(.16,1,.3,1),opacity .45s ease!important;
+}
+#storyStage[data-story-step="2"] .preview-env .letter-peek{
+  display:none!important;
+}
+#storyStage[data-story-step="2"] .preview-env .front{
+  display:none!important;
+}
+#storyStage[data-story-step="2"] .preview-env .flap{
+  position:absolute!important;
+  inset:0!important;
+  height:100%!important;
+  border-radius:12px!important;
+  background:#e7b9c4!important;
+  clip-path:polygon(0 0,100% 0,50% 55%)!important;
+  transform-origin:top center!important;
+  transition:transform .50s cubic-bezier(.16,1,.3,1)!important;
+  z-index:1!important;
+}
+#storyStage[data-story-step="2"] .preview-env .wax{
+  position:absolute!important;
+  left:50%!important;top:46%!important;
+  width:58px!important;height:58px!important;
+  margin:-29px 0 0 -29px!important;
+  border:0!important;
+  border-radius:50%!important;
+  display:grid!important;place-items:center!important;
+  color:transparent!important;
+  background:#8a3d5e!important;
+  box-shadow:0 5px 12px rgba(112,41,75,.25)!important;
+  z-index:4!important;
+  font-size:0!important;
+  transform:none!important;
+}
+#storyStage[data-story-step="2"] .preview-env .wax:before{
+  content:"♡";
+  color:#f4d4b0;
+  font:400 34px/1 var(--demo-serif);
+}
+#storyStage[data-story-step="2"] .preview-env .recipient{
+  position:absolute!important;
+  left:18px!important;right:18px!important;bottom:52px!important;
+  z-index:4!important;
+  color:transparent!important;
+  font-size:0!important;
+  text-align:center!important;
+}
+#storyStage[data-story-step="2"] .preview-env .recipient:after{
+  content:"Для тебе";
+  color:#865168;
+  font:italic 25px/1.2 var(--demo-serif);
+}
+#storyStage[data-story-step="2"] .preview-note{
+  position:static!important;
+  margin:4px auto 0!important;
+  color:transparent!important;
+  font-size:0!important;
+  text-align:center!important;
+}
+#storyStage[data-story-step="2"] .preview-note:after{
+  content:"Торкнись, щоб відкрити";
+  color:#8b5a70;
+  font:500 14px/1.5 var(--demo-ui);
+}
+#storyStage[data-story-step="2"] .envelope-button:hover .preview-env{
+  transform:translateY(-5px) rotate(-4deg)!important;
+  box-shadow:0 26px 45px rgba(115,57,72,.22)!important;
+}
+#storyStage[data-story-step="2"] .recipient-envelope.is-opening .flap{
+  transform:perspective(600px) rotateX(180deg)!important;
+}
+#storyStage[data-story-step="2"] .recipient-envelope.is-opening{
+  transform:translateY(28px) rotate(-4deg) scale(1.05)!important;
+  opacity:0!important;
+}
+
+/* ---- OTHER STORY STEPS: same paper system as the Demo preview ---- */
+#storyView .light-title,
+#storyView .qmark,
+#storyView .recipient-choice-shell h4{
+  position:static!important;
+  margin:8px auto 0!important;
+  color:#63314a!important;
+  font:500 clamp(36px,8vw,54px)/1 var(--demo-serif)!important;
+  letter-spacing:-.04em!important;
+  text-shadow:none!important;
+  overflow-wrap:anywhere!important;
+}
+#storyView .light-sub,
+#storyView .preview-note{
+  position:static!important;
+  color:#956b7d!important;
+  font:500 14px/1.5 var(--demo-ui)!important;
+  overflow-wrap:anywhere!important;
+}
+#storyView .pale-input{
+  width:min(100%,320px)!important;height:54px!important;margin:20px auto 0!important;padding:0 16px!important;
+  border:1px solid #e4cfd7!important;border-radius:16px!important;background:#fffaf7!important;color:#63314a!important;
+  text-align:center!important;font:650 16px/1 var(--demo-ui)!important;
+}
+#storyView .big-button{
+  width:min(100%,320px)!important;min-height:54px!important;margin:16px auto 0!important;padding:0 18px!important;
+  border:1px solid #7c3556!important;border-radius:18px!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  color:#fff4f8!important;background:linear-gradient(120deg,#833554,#561a37)!important;
+  box-shadow:0 12px 28px rgba(117,53,81,.15)!important;
+  font:700 14px/1.1 var(--demo-ui)!important;
+}
+
+/* Letter itself = the Demo's cream paper, and all text stays INSIDE it. */
+#storyView .letter-story-screen{
+  width:100%!important;max-width:580px!important;min-height:0!important;height:auto!important;
+  margin:0 auto!important;padding:36px 22px!important;display:flex!important;flex-direction:column!important;
+  gap:16px!important;overflow:visible!important;
+}
+#storyView .letter-story-scroll,
+#storyView .letter-story-action,
+#storyView .letter-frame{
+  position:static!important;width:100%!important;max-width:100%!important;height:auto!important;overflow:visible!important;
+}
+#storyView .paper{
+  position:relative!important;
+  inset:auto!important;
+  width:100%!important;
+  max-width:500px!important;
+  min-height:0!important;
+  height:auto!important;
+  margin:0 auto!important;
+  padding:clamp(32px,6vw,50px)!important;
+  overflow:hidden!important;
+  border:1px solid #f0ddd7!important;
+  border-radius:20px!important;
+  color:#673f52!important;
+  background:
+    radial-gradient(circle at 84% 8%,rgba(203,139,158,.06),transparent 24%),
+    linear-gradient(135deg,#fffdf4,#faf0e4)!important;
+  box-shadow:0 22px 50px rgba(91,51,65,.14)!important;
+  transform:none!important;
+  translate:none!important;
+}
+#storyView .paper .to,
+#storyView .paper .title,
+#storyView .paper .msg,
+#storyView .paper .sign,
+#storyView .paper-divider{
+  position:relative!important;
+  inset:auto!important;
+  left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;
+  z-index:2!important;
+  width:100%!important;
+  max-width:100%!important;
+  transform:none!important;
+  translate:none!important;
+  opacity:1!important;
+  overflow-wrap:anywhere!important;
+  word-break:normal!important;
+}
+#storyView .paper .to{
+  margin:0 0 10px!important;color:#b67d8e!important;
+  font-size:clamp(15px,3.4vw,19px)!important;line-height:1.3!important;text-align:left!important;
+}
+#storyView .paper .title{
+  margin:0!important;color:#65384c!important;
+  font-size:clamp(30px,7vw,44px)!important;line-height:1.04!important;
+  letter-spacing:-.035em!important;text-align:left!important;
+}
+#storyView .paper-divider{margin:18px 0!important;color:#bd728e!important}
+#storyView .paper .msg{
+  margin:0!important;color:#715263!important;
+  font-size:clamp(15px,3.5vw,18px)!important;line-height:1.72!important;
+  text-align:left!important;white-space:pre-wrap!important;
+}
+#storyView .paper .sign{
+  margin-top:24px!important;padding-top:18px!important;border-top:1px solid rgba(152,95,116,.14)!important;
+  color:#a66c82!important;font-size:clamp(17px,4vw,22px)!important;text-align:right!important;
+}
+#storyView .letter-photo,#storyView .final-photo{
+  position:relative!important;width:min(100%,300px)!important;margin:22px auto 0!important;
+  border-radius:16px!important;overflow:hidden!important;border:1px solid rgba(103,51,69,.08)!important;
+}
+#storyView .letter-photo img,#storyView .final-photo img,#storyView .word-portrait-wrap canvas{
+  display:block!important;width:100%!important;height:auto!important;
+}
+
+/* Choices/final are light paper cards too, not floating text on dark space. */
+#storyView .recipient-choice-shell,
+#storyView .recipient-final-shell{
+  width:min(100%,580px)!important;
+  min-height:560px!important;
+  color:var(--demo-ink)!important;
+}
+#storyView .recipient-choice-kicker{
+  color:#a16d82!important;font:700 10px/1 var(--demo-ui)!important;letter-spacing:.13em!important;text-transform:uppercase!important;
+}
+#storyView .recipient-choice-shell>p{
+  max-width:350px!important;margin:11px auto 22px!important;color:#957889!important;font:450 13px/1.5 var(--demo-ui)!important;
+}
+#storyView .recipient-choice-list{width:100%!important;max-width:440px!important;display:grid!important;gap:10px!important}
+#storyView .recipient-choice-card{
+  width:100%!important;min-height:74px!important;padding:12px 14px!important;
+  border:1px solid #ead9df!important;border-radius:18px!important;
+  display:grid!important;grid-template-columns:46px minmax(0,1fr) 20px!important;gap:11px!important;align-items:center!important;
+  text-align:left!important;background:#fffaf8!important;color:#67344b!important;
+  box-shadow:0 10px 24px rgba(91,51,65,.05)!important;transform:none!important;
+}
+#storyView .recipient-choice-card .emo{
+  width:46px!important;height:46px!important;border-radius:14px!important;display:grid!important;place-items:center!important;
+  background:#f3e3e8!important;font-size:21px!important;
+}
+#storyView .recipient-choice-card .main{color:#60344a!important;font:720 15px/1.2 var(--demo-ui)!important}
+#storyView .recipient-choice-card .sub{margin-top:4px!important;color:#9c7b89!important;font:430 11.5px/1.35 var(--demo-ui)!important}
+#storyView .recipient-choice-arrow{color:#aa758b!important}
+
+#storyView .recipient-final-caption{
+  max-width:350px!important;margin:0 auto 14px!important;color:#9c7586!important;font:500 13px/1.5 var(--demo-ui)!important;
+}
+#storyView .recipient-final-card,
+#storyView .recipient-share-zone{
+  width:100%!important;max-width:440px!important;
+  border:1px solid #ead9df!important;border-radius:20px!important;
+  background:#fffaf8!important;color:#67344b!important;
+  box-shadow:0 14px 30px rgba(91,51,65,.07)!important;
+}
+#storyView .recipient-final-card{padding:20px!important;text-align:left!important}
+#storyView .recipient-final-heading .line1{color:#60344a!important;font:500 clamp(26px,6vw,34px)/1 var(--demo-serif)!important}
+#storyView .recipient-final-heading .time{color:#956f80!important;background:#f4e7eb!important}
+#storyView .recipient-selected-choice{background:#f6e9ed!important}
+#storyView .recipient-selected-choice strong{color:#60344a!important}
+#storyView .recipient-selected-choice small{color:#9a7b88!important}
+#storyView .recipient-final-time{color:#6b4053!important}
+#storyView .recipient-final-note{color:#987888!important}
+#storyView .recipient-share-zone{margin-top:12px!important;padding:10px!important}
+#storyView .recipient-share-ready strong{color:#60344a!important}
+#storyView .recipient-share-ready small{color:#9a7b88!important}
+#storyView .recipient-share-status{color:#956f80!important}
+#storyView .recipient-restart{color:#8e5d73!important}
+
+/* Mobile: the demo card becomes the experience, with safe-area respected. */
+@media(max-width:900px){
+  #storyView>.shell{width:100%!important;padding:0!important}
+  #storyView .topbar{
+    min-height:calc(58px + env(safe-area-inset-top))!important;
+    margin:0!important;
+    padding:calc(7px + env(safe-area-inset-top)) 16px 7px!important;
+    border:0!important;border-radius:0!important;box-shadow:none!important;
+  }
+  #storyView .recipient-main-logo,#storyView .recipient-main-logo img{max-width:150px!important;height:39px!important}
+  #storyView .phone{
+    width:100%!important;margin:0!important;border:0!important;border-radius:0!important;
+    min-height:calc(100dvh - 58px - env(safe-area-inset-top))!important;box-shadow:none!important;
+  }
+  #storyView .phone-bar{min-height:47px!important;padding:0 15px!important}
+  #storyStage[data-story-step="2"]{padding:18px!important}
+  #storyStage[data-story-step="2"] .envelope-stage{
+    width:100%!important;
+    min-height:calc(100dvh - 160px - env(safe-area-inset-top))!important;
+    padding:76px 20px 40px!important;
+    border-radius:26px!important;
+  }
+  #storyStage[data-story-step="2"] .envelope-stage:before{
+    top:52px!important;left:18px!important;right:18px!important;font-size:9px!important;
+  }
+  #storyStage[data-story-step="2"] .envelope-button{margin-top:80px!important}
+  #storyView .stage-center,
+  #storyView .recipient-choice-shell,
+  #storyView .recipient-final-shell{
+    min-height:calc(100dvh - 105px - env(safe-area-inset-top))!important;
+    padding:38px 18px calc(30px + env(safe-area-inset-bottom))!important;
+  }
+  #storyView .letter-story-screen{padding:20px 14px calc(22px + env(safe-area-inset-bottom))!important}
+  #storyView .paper{padding:30px 23px!important}
+  #storyView .letter-story-action .big-button{max-width:100%!important}
+}
+@media(max-width:360px){
+  #storyStage[data-story-step="2"] .preview-env{
+    width:260px!important;height:182px!important;max-width:calc(100vw - 74px)!important;
+  }
+  #storyStage[data-story-step="2"] .preview-env .recipient:after{font-size:22px!important}
+  #storyView .paper{padding:26px 19px!important}
+}
+@media(max-height:720px) and (max-width:900px){
+  #storyStage[data-story-step="2"] .envelope-stage{min-height:540px!important}
+  #storyStage[data-story-step="2"] .envelope-button{margin-top:62px!important}
+  #storyView .stage-center,#storyView .recipient-choice-shell,#storyView .recipient-final-shell{
+    min-height:0!important;padding-top:28px!important;padding-bottom:28px!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  #storyView *,#storyView *:before,#storyView *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}

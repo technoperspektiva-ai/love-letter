@@ -1,41 +1,22 @@
-# Love Letter 2.1.2 — Recipient Stability Patch
+# Love Letter 2.1.3 — Demo Recipient
 
-Цей update створений **під поточний `main`**, де вже є `magic.css`, `magic.js`
-та новий creation flow.
+Цей update навмисно використовує **поточний main story renderer**, але зовнішній вигляд
+отримувача приводить до вже реалізованого Demo (`magic-dialog` / `magic-demo-envelope`).
 
-Він навмисно НЕ замінює `public/index.html`, тому актуальний лист і всі поточні
-фічі з main залишаються. Update лише додає фінальний recipient override поверх
-поточного CSS.
+## Що змінено
+- recipient envelope тепер має ті самі cream/pink proportions, що й Demo;
+- seal = heart, підпис = «Для тебе»;
+- підказка = «Торкнись, щоб відкрити»;
+- навколо envelope — cream Demo card з `ТАК ПОЧИНАЄТЬСЯ МАЛЕНЬКЕ ДИВО`;
+- actual letter використовує той самий cream paper language, що Demo після відкриття;
+- прибрано translate-анімації з recipient text, щоб текст не вилітав і не пропадав;
+- choice/final теж переведені на light paper cards;
+- current main `index.html`, `magic.css`, `magic.js`, creation flow та API не замінюються.
 
-## Причина проблеми
-У current main `magic.css` анімував:
-- `.letter-enter`
-- `.title`
-- `.msg`
-- `.sign`
-- заголовки story
-через translate/`backwards` animations.
-
-Разом зі старими recipient rules на iOS/WebView це могло давати:
-- текст тимчасово `opacity:0`;
-- текст за межами paper card;
-- clipping під час transform;
-- «літаючі» заголовки.
-
-## 2.1.2
-- translate-animation для recipient text замінено на короткий fade;
-- `to/title/msg/sign` жорстко повернуті в normal flow;
-- letter card отримав `height:auto`, коректний wrap і containment;
-- intro/secret/choice/final теж повернуті в normal flow;
-- envelope animation залишена;
-- current-main markup і `previewLetter()` не замінюються;
-- iPhone / Android / desktop rules окремі;
-- cream recipient header + burgundy story surface збережені.
-
-## Файли
-Скопіювати поверх поточного репозиторію:
-- `public/recipient.css`
+## Overlay
+Скопіювати поверх current main:
+- `public/recipient-demo.css`
+- `public/recipient-demo.js`
 - `worker/index.js`
 
-Після deploy:
-`/api/health` → `version: "2.1.2"`.
+`/api/health` → `version: "2.1.3"`.
