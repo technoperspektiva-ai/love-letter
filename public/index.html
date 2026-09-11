@@ -486,8 +486,16 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
                 <input id="shareLink" readonly placeholder="Здесь появится короткая ссылка вида /l/Ab3Xy9Qk">
               </div>
               <div class="mini-actions">
-                <button class="btn ghost slim" type="button" id="copyLink">Копировать</button>
-                <button class="btn ghost slim" type="button" id="openLink">Открыть</button>
+                <button class="btn ghost slim" type="button" id="copyLink">Копіювати</button>
+                <button class="btn ghost slim" type="button" id="openLink">Відкрити</button>
+              </div>
+              <div class="edit-link-wrap hidden" style="margin-top:16px">
+                <div class="field-note">Посилання для редагування — збережи його тільки для себе:</div>
+                <div class="sharebox"><input id="editLinkBox" readonly></div>
+                <div class="mini-actions">
+                  <button class="btn ghost slim" type="button" id="copyEditLink">Копіювати edit-link</button>
+                  <button class="btn ghost slim" type="button" id="openEditLink">Редагувати зараз</button>
+                </div>
               </div>
               <div class="muted" style="margin-top:12px">Письмо сохраняется в бесплатной Cloudflare D1, а получатель получает короткую ссылку вида /l/Ab3Xy9Qk.</div>
             </div>
@@ -527,7 +535,9 @@ const state = {
   step: 0,
   photoData: "",
   storyStep: 0,
-  storyPayload: null
+  storyPayload: null,
+  editingId: "",
+  editKey: ""
 };
 const $ = (s, root=document)=>root.querySelector(s);
 const $$ = (s, root=document)=>[...root.querySelectorAll(s)];
@@ -756,6 +766,30 @@ function decodePayload(token){
 }
 async function makeShareLink(){
   const payload = gatherData();
+
+  if(state.editingId && state.editKey){
+    const response = await fetch(`/api/story/${encodeURIComponent(state.editingId)}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+        "x-edit-token": state.editKey
+      },
+      body: JSON.stringify({ payload })
+    });
+
+    let data = {};
+    try{ data = await response.json(); }catch{}
+
+    if(!response.ok || !data.path){
+      throw new Error(data.message || "Не вдалося оновити лист.");
+    }
+
+    return {
+      link: `${location.origin}${data.path}`,
+      editLink: `${location.origin}/edit/${state.editingId}#key=${state.editKey}`
+    };
+  }
+
   const response = await fetch("/api/story", {
     method: "POST",
     headers: { "content-type": "application/json" },
@@ -768,17 +802,23 @@ async function makeShareLink(){
   if(!response.ok || !data.path){
     throw new Error(
       data.message ||
-      "Короткая ссылка не создана: серверное хранилище ещё не подключено. " +
-      "Эта версия специально НЕ создаёт длинную ссылку как запасной вариант."
+      "Коротке посилання не створено: серверне сховище ще не підключено."
     );
   }
 
-  const path = String(data.path);
-  if(!/^\/l\/[A-Za-z0-9_-]{4,32}$/.test(path)){
-    throw new Error("Сервер вернул некорректную короткую ссылку.");
+  state.editingId = data.id || "";
+  state.editKey = data.editKey || "";
+
+  if(state.editingId && state.editKey){
+    try{
+      localStorage.setItem(`love-letter-edit-${state.editingId}`, state.editKey);
+    }catch{}
   }
 
-  return `${location.origin}${path}`;
+  return {
+    link: `${location.origin}${data.path}`,
+    editLink: data.editPath ? `${location.origin}${data.editPath}` : ""
+  };
 }
 function escapeHtml(text){
   return String(text || "").replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
@@ -807,6 +847,108 @@ function mountStory(payload){
   `;
   state.storyStep = payload.useSecret ? 0 : 1;
   renderStory();
+}
+
+
+async function buildChoiceShareImage(d){
+  const choice = (d.choices || [])[d.finalChoiceIndex] || {emoji:"❤", title:"Наш вибір", subtitle:""};
+
+  try{ if(document.fonts?.ready) await document.fonts.ready; }catch{}
+
+  const canvas = document.createElement("canvas");
+  canvas.width = 1080;
+  canvas.height = 1350;
+  const ctx = canvas.getContext("2d");
+
+  const grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
+  grad.addColorStop(0, "#5a213c");
+  grad.addColorStop(.55, "#321526");
+  grad.addColorStop(1, "#1d0d18");
+  ctx.fillStyle = grad;
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  const glow = ctx.createRadialGradient(540,220,20,540,220,420);
+  glow.addColorStop(0,"rgba(255,171,202,.22)");
+  glow.addColorStop(1,"rgba(255,171,202,0)");
+  ctx.fillStyle = glow;
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  ctx.textAlign = "center";
+  ctx.fillStyle = "#fff2f6";
+  ctx.font = '700 34px Inter, sans-serif';
+  ctx.fillText("LOVE LETTER", 540, 92);
+
+  ctx.fillStyle = "#ffd5e2";
+  ctx.font = '52px "Marck Script", cursive';
+  wrapCanvasText(ctx, d.finalCaption || "наш маленький план", 540, 200, 820, 62);
+
+  roundRect(ctx, 120, 390, 840, 610, 42);
+  ctx.fillStyle = "rgba(45,18,34,.76)";
+  ctx.fill();
+  ctx.strokeStyle = "rgba(255,215,228,.24)";
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  ctx.fillStyle = "#fff4f7";
+  ctx.font = '600 80px "Cormorant Garamond", serif';
+  ctx.fillText(d.finalTitle || "Виходимо", 540, 520);
+
+  ctx.font = '68px sans-serif';
+  ctx.fillText(choice.emoji || "❤", 540, 635);
+
+  ctx.font = '700 44px Inter, sans-serif';
+  wrapCanvasText(ctx, choice.title || "Наш вибір", 540, 730, 700, 56);
+
+  ctx.fillStyle = "#f0c7d7";
+  ctx.font = '34px Inter, sans-serif';
+  wrapCanvasText(ctx, choice.subtitle || "", 540, 835, 700, 46);
+
+  ctx.fillStyle = "#fff3f7";
+  ctx.font = '600 44px "Cormorant Garamond", serif';
+  wrapCanvasText(ctx, [d.finalDate, d.finalTime].filter(Boolean).join(" · "), 540, 925, 720, 52);
+
+  if(d.finalNote){
+    ctx.fillStyle = "#efcad9";
+    ctx.font = '32px Inter, sans-serif';
+    wrapCanvasText(ctx, d.finalNote, 540, 1010, 720, 44);
+  }
+
+  ctx.fillStyle = "#ffd8e5";
+  ctx.font = '46px "Marck Script", cursive';
+  wrapCanvasText(ctx, d.recipient ? `для ${d.recipient}` : "для тебе", 540, 1160, 760, 54);
+
+  ctx.fillStyle = "rgba(255,255,255,.55)";
+  ctx.font = '24px Inter, sans-serif';
+  ctx.fillText("love-letter", 540, 1288);
+
+  return await new Promise(resolve => canvas.toBlob(resolve, "image/png", 0.95));
+}
+
+function roundRect(ctx,x,y,w,h,r){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y);
+  ctx.arcTo(x+w,y,x+w,y+h,r);
+  ctx.arcTo(x+w,y+h,x,y+h,r);
+  ctx.arcTo(x,y+h,x,y,r);
+  ctx.arcTo(x,y,x+w,y,r);
+  ctx.closePath();
+}
+
+function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight){
+  const words = String(text || "").split(/\s+/).filter(Boolean);
+  let line = "";
+  let yy = y;
+  for(const word of words){
+    const test = line ? line + " " + word : word;
+    if(ctx.measureText(test).width > maxWidth && line){
+      ctx.fillText(line, x, yy);
+      line = word;
+      yy += lineHeight;
+    }else{
+      line = test;
+    }
+  }
+  if(line) ctx.fillText(line, x, yy);
 }
 
 function renderStory(){
@@ -908,35 +1050,50 @@ function renderStory(){
           <div class="time">${escapeHtml(d.finalDate)}${d.finalDate && d.finalTime ? " · " : ""}${escapeHtml(d.finalTime)}</div>
           <div class="note">${escapeHtml(d.finalNote || choice.subtitle)}</div>
         </div>
-        <button class="big-button" id="recipientShareBtn" style="max-width:330px;margin-top:18px">Поділитися 💌</button>
+        <button class="big-button" id="recipientShareBtn" style="max-width:330px;margin-top:18px">Поділитися вибором 💌</button>
         <div id="recipientShareStatus" class="muted" style="margin-top:10px;color:#ffd2df"></div>
         <button class="btn ghost slim" id="restartBtn" style="margin-top:12px;background:rgba(255,255,255,.12);color:white">Переглянути ще раз</button>
       </div>`;
 
     $("#recipientShareBtn").onclick = async()=>{
-      const shareData = {
-        title: "Love Letter",
-        text: `Для ${d.recipient || "тебе"} є дещо особливе 💌`,
-        url: location.href
-      };
+      const btn = $("#recipientShareBtn");
+      const status = $("#recipientShareStatus");
+      const oldText = btn.textContent;
 
       try{
-        if(navigator.share){
-          await navigator.share(shareData);
-          $("#recipientShareStatus").textContent = "";
+        btn.disabled = true;
+        btn.textContent = "Готую скрін…";
+        status.textContent = "";
+
+        const blob = await buildChoiceShareImage(d);
+        if(!blob) throw new Error("Не вдалося створити скрін.");
+
+        const file = new File([blob], "love-letter-choice.png", {type:"image/png"});
+
+        if(navigator.share && navigator.canShare?.({files:[file]})){
+          await navigator.share({
+            title: "Love Letter",
+            text: "Ось що я обрав(ла) 💌",
+            files: [file]
+          });
         }else{
-          await navigator.clipboard.writeText(location.href);
-          $("#recipientShareStatus").textContent = "Посилання скопійовано — можеш надіслати його 💌";
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = "love-letter-choice.png";
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          setTimeout(()=>URL.revokeObjectURL(url), 3000);
+          status.textContent = "Скрін збережено як PNG — можеш надіслати його.";
         }
       }catch(e){
         if(e?.name !== "AbortError"){
-          try{
-            await navigator.clipboard.writeText(location.href);
-            $("#recipientShareStatus").textContent = "Посилання скопійовано 💌";
-          }catch{
-            $("#recipientShareStatus").textContent = "Скопіюй адресу сторінки з браузера.";
-          }
+          status.textContent = e?.message || "Не вдалося створити скрін.";
         }
+      }finally{
+        btn.disabled = false;
+        btn.textContent = oldText;
       }
     };
 
@@ -1075,6 +1232,49 @@ function installDraftAutosave(){
   });
 }
 
+
+function populateEditorFromPayload(d){
+  if(!d) return;
+
+  const set = (id, value)=>{
+    const el = document.getElementById(id);
+    if(!el) return;
+    if(el.type === "checkbox") el.checked = !!value;
+    else el.value = value ?? "";
+  };
+
+  set("recipient", d.recipient);
+  set("introMain", d.introMain);
+  set("introTop", d.introTop);
+  set("envelopeHint", d.envelopeHint);
+  set("useSecret", d.useSecret);
+  set("secretQuestion", d.secretQuestion);
+  set("secretAnswer", d.secretAnswer);
+  set("letterTo", d.letterTo);
+  set("letterTitle", d.letterTitle);
+  set("letterMessage", d.letterMessage);
+  set("letterSign", d.letterSign);
+  set("showPhoto", d.showPhoto !== false);
+  set("choiceTitle", d.choiceTitle);
+
+  (d.choices || []).slice(0,4).forEach((c, i)=>{
+    const n = i + 1;
+    set(`c${n}e`, c.emoji);
+    set(`c${n}t`, c.title);
+    set(`c${n}s`, c.subtitle);
+  });
+
+  set("finalCaption", d.finalCaption);
+  set("finalTitle", d.finalTitle);
+  set("finalChoiceIndex", String(d.finalChoiceIndex ?? 0));
+  set("finalDate", d.finalDate);
+  set("finalTime", d.finalTime);
+  set("finalNote", d.finalNote);
+
+  state.photoData = d.photoData || "";
+  state.step = 0;
+}
+
 function attachListeners(){
   $("#newLetterBtn").onclick = startNewLetter;
   $("#nextBtn").onclick = nextStep;
@@ -1085,11 +1285,17 @@ function attachListeners(){
     try{
       $("#generateLink").disabled = true;
       $("#generateLink").textContent = "Создаю…";
-      const link = await makeShareLink();
-      $("#shareLink").value = link;
+      const result = await makeShareLink();
+      $("#shareLink").value = result.link;
+      const editLink = result.editLink || "";
+      const editBox = $("#editLinkBox");
+      if(editBox){
+        editBox.value = editLink;
+        editBox.closest(".edit-link-wrap")?.classList.toggle("hidden", !editLink);
+      }
       showError("");
       $("#generateLink").textContent = "Короткая ссылка готова ✓";
-      clearDraft();
+      saveDraft();
     }catch(e){
       showError(e.message || "Не удалось создать короткую ссылку");
     }finally{
@@ -1101,7 +1307,10 @@ function attachListeners(){
   };
   $("#copyLink").onclick = async()=>{
     try{
-      if(!$("#shareLink").value) $("#shareLink").value = await makeShareLink();
+      if(!$("#shareLink").value){
+        const result = await makeShareLink();
+        $("#shareLink").value = result.link;
+      }
       await navigator.clipboard.writeText($("#shareLink").value);
       $("#copyLink").textContent = "Скопировано";
       setTimeout(()=>$("#copyLink").textContent = "Копировать", 1500);
@@ -1109,9 +1318,24 @@ function attachListeners(){
   };
   $("#openLink").onclick = async()=>{
     try{
-      const link = $("#shareLink").value || await makeShareLink();
+      let link = $("#shareLink").value;
+      if(!link){
+        const result = await makeShareLink();
+        link = result.link;
+      }
       location.href = link;
     }catch(e){ showError(e.message || "Не удалось создать ссылку"); }
+  };
+  $("#copyEditLink").onclick = async()=>{
+    const link = $("#editLinkBox").value;
+    if(!link) return;
+    await navigator.clipboard.writeText(link);
+    $("#copyEditLink").textContent = "Скопійовано";
+    setTimeout(()=>$("#copyEditLink").textContent = "Копіювати edit-link", 1400);
+  };
+  $("#openEditLink").onclick = ()=>{
+    const link = $("#editLinkBox").value;
+    if(link) location.href = link;
   };
 
   $$("#recipient, #introMain, #introTop, #envelopeHint, #secretQuestion, #secretAnswer, #letterTo, #letterTitle, #letterMessage, #letterSign, #choiceTitle, #finalCaption, #finalTitle, #finalDate, #finalTime, #finalNote, #finalChoiceIndex, #showPhoto, #useSecret, #c1e, #c1t, #c1s, #c2e, #c2t, #c2s, #c3e, #c3t, #c3s, #c4e, #c4t, #c4s").forEach(el=>{
@@ -1153,6 +1377,40 @@ function attachListeners(){
       return;
     }catch(e){
       document.body.innerHTML = `<div style="min-height:100vh;display:grid;place-items:center;background:#1e0d1e;color:white;font-family:Inter,sans-serif;padding:24px;text-align:center"><div><h1 style="font-family:'Cormorant Garamond',serif;font-size:48px;margin:0 0 12px">Письмо не найдено</h1><p style="opacity:.75">${escapeHtml(e.message || "Ссылка недействительна")}</p><a href="/" style="color:#ff9fbe">Создать своё письмо</a></div></div>`;
+      return;
+    }
+  }
+
+  const editMatch = location.pathname.match(/^\/edit\/([A-Za-z0-9_-]{4,32})$/);
+  if(editMatch){
+    try{
+      const id = editMatch[1];
+      const hashParams = new URLSearchParams(location.hash.replace(/^#/,""));
+      const key = hashParams.get("key") || localStorage.getItem(`love-letter-edit-${id}`) || "";
+      if(!key) throw new Error("Немає ключа редагування.");
+
+      const r = await fetch(`/api/story/${encodeURIComponent(id)}`);
+      const data = await r.json();
+      if(!r.ok) throw new Error(data.error || "Лист не знайдено.");
+
+      state.editingId = id;
+      state.editKey = key;
+      localStorage.setItem(`love-letter-edit-${id}`, key);
+
+      attachListeners();
+      populateEditorFromPayload(data.payload);
+      renderEditor();
+      installDraftAutosave();
+
+      const badge = document.querySelector(".badge");
+      if(badge) badge.textContent = "режим редагування";
+
+      const gen = $("#generateLink");
+      if(gen) gen.textContent = "Зберегти зміни";
+
+      return;
+    }catch(e){
+      document.body.innerHTML = `<div style="min-height:100vh;display:grid;place-items:center;background:#1e0d1e;color:white;font-family:Inter,sans-serif;padding:24px;text-align:center"><div><h1 style="font-family:'Cormorant Garamond',serif;font-size:48px;margin:0 0 12px">Не вдалося відкрити редагування</h1><p style="opacity:.75">${escapeHtml(e.message || "Невідома помилка")}</p><a href="/" style="color:#ff9fbe">Створити новий лист</a></div></div>`;
       return;
     }
   }
