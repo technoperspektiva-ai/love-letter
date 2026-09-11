@@ -3530,6 +3530,395 @@ input:focus,textarea:focus,select:focus{border-color:#cc6d91;box-shadow:0 0 0 4p
   }
 }
 
+
+/* ===============================================================
+   Love Letter 1.6 — dashboard rebuild
+   =============================================================== */
+.home-dashboard{
+  width:100%;
+}
+.home-topline{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:28px;
+  margin-bottom:24px;
+}
+.home-eyebrow{
+  margin-bottom:8px;
+  color:#917985;
+  font:700 12px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.home-topline h1{
+  margin:0;
+  max-width:720px;
+  color:#241820;
+  font:700 clamp(42px,4.6vw,66px)/.94 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Display","Inter",sans-serif;
+  letter-spacing:-.055em;
+  text-wrap:balance;
+}
+.home-topline p{
+  max-width:620px;
+  margin:16px 0 0;
+  color:#796670;
+  font:400 16px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",sans-serif;
+}
+.home-create-main{
+  flex:0 0 auto;
+  min-height:54px;
+  padding:0 20px 0 14px;
+  border:0;
+  border-radius:18px;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  color:#fff;
+  background:#4a2234;
+  box-shadow:0 10px 26px rgba(74,34,52,.13);
+  font:700 15px/1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+  transition:transform .16s ease,background .16s ease;
+}
+.home-create-main:hover{background:#3f1c2c;transform:translateY(-1px)}
+.home-create-main:active{transform:scale(.985)}
+.home-create-plus{
+  width:32px;height:32px;border-radius:50%;
+  display:grid;place-items:center;
+  background:rgba(255,255,255,.12);
+  font-size:20px;font-weight:400;
+}
+
+.home-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.35fr) minmax(330px,.75fr);
+  gap:16px;
+  align-items:start;
+}
+.home-main-column,
+.home-side-column{
+  display:grid;
+  gap:16px;
+  min-width:0;
+}
+.home-panel{
+  padding:18px;
+  border-radius:24px;
+  background:rgba(255,255,255,.78);
+  box-shadow:
+    inset 0 0 0 1px rgba(66,42,53,.055),
+    0 14px 36px rgba(62,34,47,.035);
+}
+.home-panel-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:14px;
+}
+.home-panel-head.compact{margin-bottom:10px}
+.home-panel-kicker{
+  margin-bottom:4px;
+  color:#9b8490;
+  font:700 11px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.07em;
+}
+.home-panel h2{
+  margin:0;
+  color:#30212a;
+  font:700 20px/1.08 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+  letter-spacing:-.025em;
+}
+.home-text-btn,
+.home-soft-btn,
+.home-mini-btn{
+  border:0;
+  border-radius:999px;
+  font:650 12px/1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+}
+.home-text-btn{
+  min-height:34px;
+  padding:0 12px;
+  background:#eee7e8;
+  color:#69495a;
+}
+.home-text-btn:hover{background:#e7dcdf}
+.home-soft-btn{
+  min-height:38px;
+  padding:0 14px;
+  background:#4a2234;
+  color:#fff;
+}
+.home-mini-btn{
+  min-height:34px;
+  padding:0 12px;
+  background:#eee7e8;
+  color:#69495a;
+}
+
+.home-draft-panel{
+  position:relative;
+  min-height:166px;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 88% 18%,rgba(111,51,76,.055),transparent 26%),
+    #fff;
+}
+.draft-visual{
+  position:absolute;
+  right:26px;
+  bottom:16px;
+  width:150px;
+  height:96px;
+  transform:rotate(-2deg);
+}
+.draft-sheet{
+  position:absolute;inset:0;
+  border-radius:14px;
+  background:#f8eee7;
+  box-shadow:0 12px 26px rgba(67,37,50,.08);
+}
+.draft-line{
+  position:absolute;
+  left:18px;
+  height:5px;
+  border-radius:4px;
+  background:#d9c4cc;
+}
+.draft-line.l1{top:25px;width:78px}
+.draft-line.l2{top:42px;width:102px;background:#e7d9de}
+.draft-line.l3{top:58px;width:88px;background:#e7d9de}
+.draft-seal{
+  position:absolute;
+  right:15px;bottom:12px;
+  width:30px;height:30px;border-radius:50%;
+  display:grid;place-items:center;
+  background:#6d334c;color:#fff;
+  font:600 14px/1 Georgia,serif;
+}
+
+.home-recent-list{
+  display:grid;
+  gap:8px;
+}
+.home-recent-list .ma-letter-row{
+  grid-template-columns:minmax(0,1fr) 40px;
+}
+.home-recent-list .ma-letter-card{
+  min-height:72px;
+  padding:10px 12px;
+  border-radius:17px!important;
+  background:#fbf8f5;
+  box-shadow:inset 0 0 0 1px rgba(66,42,53,.045);
+}
+.home-recent-list .ma-letter-cover{
+  width:46px;height:50px;border-radius:14px;
+  font-size:20px;
+}
+.home-recent-list .ma-letter-title{
+  color:#30222a!important;
+}
+.home-recent-list .ma-letter-meta{
+  color:#8d7983!important;
+}
+.home-empty-state{
+  min-height:118px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:18px;
+  border-radius:18px;
+  background:#f5efeb;
+}
+.home-empty-icon{
+  flex:0 0 auto;
+  width:46px;height:46px;border-radius:15px;
+  display:grid;place-items:center;
+  background:#fff;color:#6d3f54;
+  font:600 21px/1 Georgia,serif;
+}
+.home-empty-state strong{
+  display:block;color:#4a3540;
+  font:650 14px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+}
+.home-empty-state span{
+  display:block;margin-top:4px;color:#927f88;
+  font:400 12px/1.4 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+}
+
+.home-stats-panel{
+  padding:16px 18px 18px;
+}
+.home-stats{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:8px;
+  margin-top:11px;
+}
+.home-stat{
+  min-width:0;
+  padding:12px 10px;
+  border-radius:16px;
+  background:#f5efeb;
+}
+.home-stat strong{
+  display:block;
+  color:#30212a;
+  font:750 22px/1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+  letter-spacing:-.03em;
+}
+.home-stat span{
+  display:block;
+  margin-top:5px;
+  overflow:hidden;
+  color:#99858f;
+  font:500 11px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.home-idea-list{display:grid;gap:6px}
+.home-idea{
+  width:100%;
+  min-height:60px;
+  padding:8px 8px 8px 6px;
+  border:0;
+  border-radius:16px;
+  display:grid;
+  grid-template-columns:42px minmax(0,1fr) 20px;
+  gap:10px;
+  align-items:center;
+  text-align:left;
+  background:transparent;
+  color:#3b2a33;
+  transition:background .15s ease,transform .15s ease;
+}
+.home-idea:hover{background:#f5efeb}
+.home-idea:active{transform:scale(.99)}
+.home-idea-icon{
+  width:42px;height:42px;border-radius:50%;
+  display:grid;place-items:center;
+  background:#f1e8ec;
+  color:#6e4255;
+  font-size:17px;
+}
+.home-idea-copy{min-width:0}
+.home-idea-copy strong{
+  display:block;
+  font:650 13px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+}
+.home-idea-copy small{
+  display:block;
+  margin-top:3px;
+  overflow:hidden;
+  color:#9a8790;
+  font:400 11px/1.3 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.home-idea-arrow{color:#b09ca5;font-size:19px}
+
+.home-status-panel{
+  padding:10px 14px;
+}
+.home-status-row{
+  min-height:58px;
+  display:grid;
+  grid-template-columns:36px minmax(0,1fr) auto;
+  gap:10px;
+  align-items:center;
+}
+.home-status-row + .home-status-row{
+  border-top:1px solid rgba(68,43,55,.055);
+}
+.home-status-icon{
+  width:34px;height:34px;border-radius:50%;
+  display:grid;place-items:center;
+  background:#f1e8ec;
+  color:#684052;
+  font-size:14px;font-weight:700;
+}
+.home-status-row strong{
+  display:block;
+  color:#47343e;
+  font:650 12px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+}
+.home-status-row span{
+  display:block;
+  margin-top:3px;
+  color:#9a8790;
+  font:400 11px/1.35 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+}
+
+/* The old dashboard component set is intentionally suppressed on Home. */
+.home-dashboard .ma-stat-grid,
+.home-dashboard .ma-quick-grid{
+  display:none!important;
+}
+
+@media (max-width:900px){
+  .home-topline{
+    display:block;
+    margin-bottom:16px;
+  }
+  .home-topline h1{
+    font-size:clamp(34px,9.4vw,42px);
+    line-height:.98;
+  }
+  .home-topline p{
+    margin-top:12px;
+    font-size:15px;
+  }
+  .home-create-main{
+    width:100%;
+    justify-content:center;
+    margin-top:22px;
+  }
+  .home-grid{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+  .home-main-column,.home-side-column{gap:12px}
+  .home-panel{padding:15px;border-radius:21px}
+  .home-draft-panel{min-height:132px}
+  .draft-visual{width:110px;height:72px;right:14px;bottom:12px;opacity:.82}
+  .home-stats{grid-template-columns:repeat(3,1fr)}
+  .home-stat{padding:10px 8px}
+  .home-status-row{grid-template-columns:34px minmax(0,1fr)}
+  .home-status-row .home-mini-btn{
+    grid-column:2;
+    justify-self:start;
+    margin-bottom:8px;
+  }
+}
+
+@media (min-width:901px){
+  .ma-screen{
+    margin-left:220px !important;
+    padding:42px clamp(30px,3.4vw,56px) 46px !important;
+  }
+  .ma-screen > section{
+    width:min(100%,1240px)!important;
+  }
+}
+
+@media (min-width:901px) and (max-width:1180px){
+  .home-grid{
+    grid-template-columns:minmax(0,1fr) 330px;
+  }
+  .home-topline h1{font-size:52px}
+}
+
+@media (min-width:901px) and (max-height:760px){
+  .home-topline h1{font-size:46px}
+  .home-topline p{margin-top:12px}
+  .home-grid{gap:12px}
+  .home-main-column,.home-side-column{gap:12px}
+  .home-panel{padding:15px}
+  .home-draft-panel{min-height:136px}
+}
+
 </style>
 </head>
 <body>
@@ -4072,94 +4461,149 @@ function renderAppHome(){
   document.getElementById("maTopTitle").textContent="";
 
   const library=getLocalLibrary();
-  const recent=library.slice(0,4);
+  const recent=library.slice(0,5);
   const draftExists=!!localStorage.getItem(DRAFT_KEY);
   const editable=library.filter(x=>!!(x.editKey || localStorage.getItem(`love-letter-edit-${x.id}`))).length;
+  const installed=isStandaloneApp();
 
   document.getElementById("maScreen").innerHTML=`
-    <section class="ma-dashboard-layout">
-      <div class="ma-dashboard-main">
-        <div class="ma-section-kicker">Твій простір</div>
-        <h1 class="ma-hero-title">Створи лист, який хочеться відкрити.</h1>
-        <p class="ma-hero-copy">Збери особисту історію: слова, конверт, фото або портрет зі слів — і надішли одним приватним посиланням.</p>
-
-        <button class="ma-home-create" id="maStartBtn" type="button">＋ Новий лист</button>
-
-        <div class="ma-stat-grid">
-          <div class="ma-stat">
-            <div class="ma-stat-value">${library.length}</div>
-            <div class="ma-stat-label">листів</div>
-          </div>
-          <div class="ma-stat">
-            <div class="ma-stat-value">${draftExists ? "1" : "0"}</div>
-            <div class="ma-stat-label">чернетка</div>
-          </div>
-          <div class="ma-stat">
-            <div class="ma-stat-value">${editable}</div>
-            <div class="ma-stat-label">можна редагувати</div>
-          </div>
+    <section class="home-dashboard">
+      <div class="home-topline">
+        <div>
+          <div class="home-eyebrow">Love Letter</div>
+          <h1>Особисті листи,<br>які хочеться зберегти.</h1>
+          <p>Створи маленьку історію для однієї людини — від першого слова до конверта, вибору й фінального моменту.</p>
         </div>
-
-        <div class="ma-section-row">
-          <h3 class="ma-section-title">Швидкі дії</h3>
-        </div>
-        <div class="ma-quick-grid">
-          <button class="ma-quick-card" id="maQuickQuiet" type="button">
-            <div class="ma-quick-icon">♡</div>
-            <div class="ma-quick-title">Тихий лист</div>
-            <div class="ma-quick-sub">Почати з ніжного мінімального сценарію.</div>
-          </button>
-          <button class="ma-quick-card" id="maQuickDate" type="button">
-            <div class="ma-quick-icon">✦</div>
-            <div class="ma-quick-title">Запросити на побачення</div>
-            <div class="ma-quick-sub">Готова структура з фінальним вибором.</div>
-          </button>
-          <button class="ma-quick-card" id="maIdeasBtn" type="button">
-            <div class="ma-quick-icon">⋯</div>
-            <div class="ma-quick-title">Ще ідеї</div>
-            <div class="ma-quick-sub">Шість стартових сценаріїв для різних моментів.</div>
-          </button>
-          <button class="ma-quick-card" id="maLibraryBtn" type="button">
-            <div class="ma-quick-icon">▤</div>
-            <div class="ma-quick-title">Мої листи</div>
-            <div class="ma-quick-sub">Відкрити, змінити або поділитися старими листами.</div>
-          </button>
-        </div>
+        <button class="home-create-main" id="maStartBtn" type="button">
+          <span class="home-create-plus">＋</span>
+          <span>Створити лист</span>
+        </button>
       </div>
 
-      <div class="ma-dashboard-side">
-        ${draftExists ? `
-          <button class="ma-draft-card" id="maResumeDraftBtn" type="button">
-            <div>
-              <div class="ma-draft-kicker">Чернетка</div>
-              <div class="ma-draft-title">Продовжити незавершений лист</div>
-            </div>
-            <span>›</span>
-          </button>` : ""}
+      <div class="home-grid">
+        <div class="home-main-column">
+          ${draftExists ? `
+            <section class="home-panel home-draft-panel">
+              <div class="home-panel-head">
+                <div>
+                  <div class="home-panel-kicker">Чернетка</div>
+                  <h2>Продовжити незавершений лист</h2>
+                </div>
+                <button class="home-soft-btn" id="maResumeDraftBtn" type="button">Продовжити</button>
+              </div>
+              <div class="draft-visual" aria-hidden="true">
+                <div class="draft-sheet"></div>
+                <div class="draft-line l1"></div>
+                <div class="draft-line l2"></div>
+                <div class="draft-line l3"></div>
+                <div class="draft-seal">L</div>
+              </div>
+            </section>` : ""}
 
-        <div class="ma-section-row" style="margin-top:${draftExists ? "20px" : "0"}">
-          <h3 class="ma-section-title">Останні листи</h3>
-          ${library.length > 4 ? '<button class="ma-link-btn" id="maSeeAllBtn" type="button">Усі листи</button>' : ''}
+          <section class="home-panel">
+            <div class="home-panel-head">
+              <div>
+                <div class="home-panel-kicker">Бібліотека</div>
+                <h2>Останні листи</h2>
+              </div>
+              ${library.length ? '<button class="home-text-btn" id="maSeeAllBtn" type="button">Усі листи</button>' : ''}
+            </div>
+
+            ${recent.length ? `
+              <div class="home-recent-list">
+                ${recent.map(appLetterCard).join("")}
+              </div>` : `
+              <div class="home-empty-state">
+                <div class="home-empty-icon">L</div>
+                <div>
+                  <strong>Поки що тут тихо</strong>
+                  <span>Створи перший лист — він одразу з’явиться у бібліотеці.</span>
+                </div>
+              </div>`}
+          </section>
         </div>
 
-        ${recent.length ? `
-          <div class="ma-letter-list">
-            ${recent.map(appLetterCard).join("")}
-          </div>` : `
-          <div class="ma-empty">
-            <div class="ma-empty-mark">L</div>
-            Перший лист з’явиться тут одразу після створення.
-          </div>`}
+        <aside class="home-side-column">
+          <section class="home-panel home-stats-panel">
+            <div class="home-panel-kicker">Твій простір</div>
+            <div class="home-stats">
+              <div class="home-stat">
+                <strong>${library.length}</strong>
+                <span>листів</span>
+              </div>
+              <div class="home-stat">
+                <strong>${editable}</strong>
+                <span>редагованих</span>
+              </div>
+              <div class="home-stat">
+                <strong>${draftExists ? 1 : 0}</strong>
+                <span>чернетка</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="home-panel">
+            <div class="home-panel-head compact">
+              <div>
+                <div class="home-panel-kicker">Почати швидше</div>
+                <h2>Ідеї</h2>
+              </div>
+              <button class="home-text-btn" id="maIdeasBtn" type="button">Усі</button>
+            </div>
+            <div class="home-idea-list">
+              ${LETTER_PRESETS.slice(0,4).map(p=>`
+                <button class="home-idea" type="button" data-home-preset="${p.id}">
+                  <span class="home-idea-icon">${p.icon}</span>
+                  <span class="home-idea-copy">
+                    <strong>${escapeHtml(p.title)}</strong>
+                    <small>${escapeHtml(p.sub)}</small>
+                  </span>
+                  <span class="home-idea-arrow">›</span>
+                </button>`).join("")}
+            </div>
+          </section>
+
+          <section class="home-panel home-status-panel">
+            <div class="home-status-row">
+              <div class="home-status-icon">${installed ? "✓" : "↗"}</div>
+              <div>
+                <strong>${installed ? "Застосунок встановлено" : "Можна встановити як застосунок"}</strong>
+                <span>${installed ? "Standalone PWA активний." : "Швидкий запуск із домашнього екрана."}</span>
+              </div>
+              ${installed ? "" : '<button class="home-mini-btn" id="homeInstallBtn" type="button">Встановити</button>'}
+            </div>
+            <div class="home-status-row">
+              <div class="home-status-icon">⌁</div>
+              <div>
+                <strong>Приватна обробка</strong>
+                <span>Word portrait створюється локально у твоєму браузері.</span>
+              </div>
+            </div>
+          </section>
+        </aside>
       </div>
     </section>`;
 
   document.getElementById("maStartBtn")?.addEventListener("click",()=>openMobileCreate({resume:false}));
   document.getElementById("maResumeDraftBtn")?.addEventListener("click",()=>openMobileCreate({resume:true}));
   document.getElementById("maSeeAllBtn")?.addEventListener("click",()=>setMobileAppRoute("library"));
-  document.getElementById("maLibraryBtn")?.addEventListener("click",()=>setMobileAppRoute("library"));
   document.getElementById("maIdeasBtn")?.addEventListener("click",()=>setMobileAppRoute("ideas"));
-  document.getElementById("maQuickQuiet")?.addEventListener("click",()=>applyPreset("quiet"));
-  document.getElementById("maQuickDate")?.addEventListener("click",()=>applyPreset("date"));
+
+  document.querySelectorAll("[data-home-preset]").forEach(btn=>{
+    btn.addEventListener("click",()=>applyPreset(btn.dataset.homePreset));
+  });
+
+  document.getElementById("homeInstallBtn")?.addEventListener("click",async()=>{
+    if(deferredInstallPrompt){
+      deferredInstallPrompt.prompt();
+      try{ await deferredInstallPrompt.userChoice; }catch{}
+      deferredInstallPrompt=null;
+    }else{
+      const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
+      showMobileToast(isIOS ? "Safari → Поділитися → На початковий екран" : "Відкрий меню браузера → Встановити застосунок");
+    }
+  });
+
   bindLetterCards();
 }
 

@@ -538,3 +538,28 @@ Settings / Letter Detail / Create states.
 - local library cleanup із чітким поясненням, що server stories не видаляються.
 
 `/api/health` -> `version: "1.5"`
+
+
+# Love Letter 1.6 — Dashboard Rebuild
+
+Перероблено Home після screenshot review 1.5.
+
+Причина неохайного вигляду була не в одному кольорі:
+частина Home-компонентів мала повні стилі лише у mobile breakpoint, а desktop
+отримував лише окремі override-властивості. Через це Draft та link buttons
+на desktop могли виглядати як майже голі browser controls.
+
+1.6 не патчить окрему кнопку — Home зібрано заново:
+- сильний top hero + один primary CTA;
+- двоколонковий dashboard;
+- повноцінна Draft surface;
+- Recent Library surface;
+- статистика;
+- Ideas / presets;
+- PWA install state;
+- local word-portrait privacy state;
+- explicit desktop styles для кожного Home component;
+- mobile stack використовує ті самі компоненти;
+- cache bumped до `love-letter-1.6`, щоб старий Service Worker CSS не маскував зміни.
+
+`/api/health` -> `version: "1.6"`
