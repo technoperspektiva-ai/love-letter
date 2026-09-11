@@ -1,24 +1,41 @@
-# Love Letter 2.1.1 — Recipient Polish Patch
+# Love Letter 2.1.2 — Recipient Stability Patch
 
-Цей ZIP зроблений як **overlay саме поверх поточного GitHub `technoperspektiva-ai/love-letter` 2.1**.
+Цей update створений **під поточний `main`**, де вже є `magic.css`, `magic.js`
+та новий creation flow.
 
-Замінює / додає тільки:
+Він навмисно НЕ замінює `public/index.html`, тому актуальний лист і всі поточні
+фічі з main залишаються. Update лише додає фінальний recipient override поверх
+поточного CSS.
+
+## Причина проблеми
+У current main `magic.css` анімував:
+- `.letter-enter`
+- `.title`
+- `.msg`
+- `.sign`
+- заголовки story
+через translate/`backwards` animations.
+
+Разом зі старими recipient rules на iOS/WebView це могло давати:
+- текст тимчасово `opacity:0`;
+- текст за межами paper card;
+- clipping під час transform;
+- «літаючі» заголовки.
+
+## 2.1.2
+- translate-animation для recipient text замінено на короткий fade;
+- `to/title/msg/sign` жорстко повернуті в normal flow;
+- letter card отримав `height:auto`, коректний wrap і containment;
+- intro/secret/choice/final теж повернуті в normal flow;
+- envelope animation залишена;
+- current-main markup і `previewLetter()` не замінюються;
+- iPhone / Android / desktop rules окремі;
+- cream recipient header + burgundy story surface збережені.
+
+## Файли
+Скопіювати поверх поточного репозиторію:
 - `public/recipient.css`
 - `worker/index.js`
 
-Тому поточні `magic.css`, `magic.js`, новий creation flow, browser tests та інші GitHub-фічі не відкочуються.
-
-## Що виправляє recipient view
-- cream header з читабельним логотипом;
-- desktop recipient живе на cream canvas, story — у premium burgundy surface;
-- intro / secret / envelope / letter / choices / final зведені в одну систему;
-- конверт має hover/open lift, paper peek і wax animation;
-- лист отримав адекватну serif typography, рамку, line-height та responsive density;
-- choice cards більше не виглядають як випадкові темні блоки;
-- final/share zone має чітку ієрархію;
-- iPhone/Android — fullscreen layout із safe-area;
-- desktop — центрований 760px story surface без мертвих пустот;
-- скрол не блокується.
-
-## Версія
-`/api/health` → `version: "2.1.1"`.
+Після deploy:
+`/api/health` → `version: "2.1.2"`.

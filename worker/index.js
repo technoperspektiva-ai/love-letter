@@ -73,7 +73,7 @@ async function health(env) {
       ok: true,
       db: true,
       stories: Number(row?.count || 0),
-      version: "2.1.1"
+      version: "2.1.2"
     });
   } catch (error) {
     return json({
@@ -229,7 +229,7 @@ async function regenerateStoryUrl(request, id, env) {
 }
 
 
-const recipientPolishLink = `<link rel="stylesheet" href="/recipient.css?v=2111">`;
+const recipientPolishLink = `<link rel="stylesheet" href="/recipient.css?v=2120">`;
 
 const developerCreditStyles = `<style id="developer-credit-styles">
   .developer-credit-footer {
@@ -239,44 +239,19 @@ const developerCreditStyles = `<style id="developer-credit-styles">
     text-align: center;
   }
   .developer-credit {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 44px;
-    max-width: 100%;
-    padding: 8px 12px;
-    border: 0;
-    border-radius: 8px;
-    background: transparent;
-    color: #8b7481;
-    font: 400 11px/1.5 system-ui, sans-serif;
-    letter-spacing: .02em;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 44px; max-width: 100%; padding: 8px 12px;
+    border: 0; border-radius: 8px; background: transparent;
+    color: #8b7481; font: 400 11px/1.5 system-ui,sans-serif;
+    letter-spacing: .02em; cursor: pointer;
   }
-  .developer-credit span { transition: filter 180ms ease; }
   .developer-credit:focus-visible { outline: 2px solid #a46ac4; outline-offset: 2px; }
-  .developer-credit:is(:hover, :active, :focus) span {
-    color: #b85b9c;
-    filter: drop-shadow(0 0 4px rgb(174 104 220 / 35%));
+  .developer-credit:is(:hover,:active,:focus) span { color:#b85b9c; }
+  @media(max-width:900px){
+    .developer-credit-footer{padding-bottom:calc(120px + env(safe-area-inset-bottom,0px));}
   }
-  @supports (background-clip: text) or (-webkit-background-clip: text) {
-    .developer-credit:is(:hover, :active, :focus) span {
-      background: linear-gradient(100deg, #df579c, #a264d4 50%, #4e8ddd);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-  }
-  @media (max-width: 900px) {
-    .developer-credit-footer { padding-bottom: calc(120px + env(safe-area-inset-bottom, 0px)); }
-  }
-  @media (min-width: 901px) {
-    body:not(.story-open):not(.mw-create-active) .developer-credit-footer { margin-left: 220px; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .developer-credit span { transition: none; }
+  @media(min-width:901px){
+    body:not(.story-open):not(.mw-create-active) .developer-credit-footer{margin-left:220px;}
   }
 </style>`;
 
@@ -292,8 +267,8 @@ async function serveAssets(request, env) {
   }
   return new HTMLRewriter()
     .on("head", { element: element => {
-      element.append(recipientPolishLink, { html: true });
       element.append(developerCreditStyles, { html: true });
+      element.append(recipientPolishLink, { html: true });
     }})
     .on("body", { element: element => element.append(developerCredit, { html: true }) })
     .transform(response);
