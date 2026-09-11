@@ -707,6 +707,621 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
   border:1px solid rgba(255,255,255,.12);
 }
 
+
+/* ===============================================================
+   v23 — soft mobile mode + elegant letter + envelope animation
+   =============================================================== */
+
+/* Softer app surface */
+.phone{
+  background:rgba(20,10,20,.86);
+  border-color:rgba(255,255,255,.11);
+  box-shadow:0 26px 70px rgba(8,2,8,.30);
+}
+.phone-bar{
+  min-height:46px;
+  padding:13px 17px;
+  color:rgba(255,239,246,.82);
+  background:rgba(255,255,255,.035);
+  border-bottom:1px solid rgba(255,255,255,.07);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+}
+.phone-bar span:first-child{
+  font-weight:700;
+  color:#fff4f8;
+}
+.phone-bar span:nth-child(2){
+  max-width:58%;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  text-align:center;
+}
+
+/* Letter typography */
+.letter-frame{
+  width:100%;
+  display:flex;
+  justify-content:center;
+  min-width:0;
+}
+.paper{
+  width:min(100%, 390px);
+  max-width:390px;
+  margin:0 auto;
+  padding:30px 28px 32px;
+  border-radius:24px;
+  color:#51444f;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.42),rgba(255,255,255,.04) 36%),
+    #f6e8de;
+  border:1px solid rgba(255,255,255,.62);
+  box-shadow:
+    0 24px 60px rgba(18,7,14,.22),
+    inset 0 1px 0 rgba(255,255,255,.75);
+  text-align:left;
+}
+.paper .to{
+  margin:0 0 12px;
+  max-width:100%;
+  color:#c86688;
+  font-family:"Marck Script","Segoe Print","Bradley Hand",cursive;
+  font-size:22px;
+  line-height:1.18;
+  letter-spacing:0;
+  overflow-wrap:break-word;
+  word-break:normal;
+  hyphens:none;
+}
+.paper .title{
+  margin:0 0 17px;
+  max-width:100%;
+  color:#5b4857;
+  font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  font-size:34px;
+  font-weight:600;
+  line-height:1.02;
+  letter-spacing:-.015em;
+  overflow-wrap:break-word;
+  word-break:normal;
+  hyphens:none;
+  text-wrap:balance;
+}
+.paper-divider{
+  margin:0 0 17px;
+  gap:10px;
+}
+.paper-divider span{
+  font-size:16px;
+  color:#c77a96;
+}
+.paper .msg{
+  max-width:100%;
+  margin:0;
+  white-space:pre-line;
+  color:#574c55;
+  font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  font-size:19px;
+  font-weight:500;
+  line-height:1.43;
+  letter-spacing:.002em;
+  overflow-wrap:break-word;
+  word-break:normal;
+  hyphens:none;
+  text-wrap:pretty;
+}
+.paper .sign{
+  margin-top:20px;
+  padding-top:13px;
+  color:#8f5e73;
+  border-top:1px solid rgba(126,102,119,.13);
+  font-family:"Marck Script","Segoe Print","Bradley Hand",cursive;
+  font-size:21px;
+  line-height:1.25;
+  overflow-wrap:break-word;
+  word-break:normal;
+  hyphens:none;
+}
+.letter-photo{
+  margin-top:18px;
+  border-width:6px;
+  border-radius:16px;
+  transform:none;
+}
+.letter-photo img{
+  width:100%;
+  max-height:230px;
+  object-fit:cover;
+}
+
+/* Automatic typography density for longer letters */
+.paper.letter-compact{
+  padding:25px 24px 27px;
+}
+.paper.letter-compact .to{font-size:20px;margin-bottom:9px}
+.paper.letter-compact .title{font-size:30px;margin-bottom:13px}
+.paper.letter-compact .paper-divider{margin-bottom:13px}
+.paper.letter-compact .msg{font-size:17.5px;line-height:1.36}
+.paper.letter-compact .sign{font-size:19px;margin-top:15px}
+.paper.letter-compact .letter-photo img{max-height:180px}
+
+.paper.letter-dense{
+  padding:22px 21px 24px;
+}
+.paper.letter-dense .to{font-size:18px;margin-bottom:7px}
+.paper.letter-dense .title{font-size:27px;margin-bottom:10px}
+.paper.letter-dense .paper-divider{margin-bottom:10px}
+.paper.letter-dense .msg{font-size:16px;line-height:1.30}
+.paper.letter-dense .sign{font-size:18px;margin-top:12px;padding-top:10px}
+.paper.letter-dense .letter-photo{margin-top:12px}
+.paper.letter-dense .letter-photo img{max-height:135px}
+
+.paper.letter-ultra{
+  padding:19px 19px 21px;
+}
+.paper.letter-ultra .to{font-size:17px;margin-bottom:6px}
+.paper.letter-ultra .title{font-size:24px;line-height:1;margin-bottom:8px}
+.paper.letter-ultra .paper-divider{margin-bottom:8px}
+.paper.letter-ultra .msg{font-size:14.5px;line-height:1.24}
+.paper.letter-ultra .sign{font-size:17px;margin-top:10px;padding-top:8px}
+.paper.letter-ultra .letter-photo{margin-top:10px}
+.paper.letter-ultra .letter-photo img{max-height:105px}
+
+/* The letter screen itself never stretches the whole page.
+   Very long letters scroll inside the paper area instead. */
+.letter-story-screen{
+  width:100%;
+  min-height:620px;
+  display:grid;
+  grid-template-rows:minmax(0,1fr) auto;
+  gap:10px;
+}
+.letter-story-scroll{
+  min-height:0;
+  overflow:auto;
+  overscroll-behavior:contain;
+  padding:10px 2px 6px;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(255,214,230,.30) transparent;
+}
+.letter-story-scroll::-webkit-scrollbar{width:4px}
+.letter-story-scroll::-webkit-scrollbar-thumb{
+  background:rgba(255,214,230,.28);
+  border-radius:999px;
+}
+.letter-story-action{
+  display:flex;
+  justify-content:center;
+  padding:2px 0 4px;
+}
+.letter-story-action .big-button{
+  width:min(100%,310px);
+  margin:0;
+}
+
+/* Envelope animation */
+.envelope-button{
+  width:100%;
+  display:block;
+  padding:0;
+  border:0;
+  background:transparent;
+  perspective:900px;
+  -webkit-tap-highlight-color:transparent;
+}
+.envelope-button:disabled{opacity:1}
+.recipient-envelope{
+  transform-style:preserve-3d;
+  transition:transform .35s ease, filter .35s ease;
+}
+.recipient-envelope .flap{
+  transform-origin:50% 0%;
+  backface-visibility:hidden;
+}
+.letter-peek{
+  position:absolute;
+  z-index:1;
+  left:10%;
+  right:10%;
+  top:18%;
+  height:68%;
+  border-radius:12px 12px 9px 9px;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  padding-top:22px;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.7),rgba(255,255,255,.12)),
+    #f5e5db;
+  color:#b46380;
+  font-family:"Marck Script","Segoe Print",cursive;
+  font-size:20px;
+  box-shadow:0 8px 22px rgba(0,0,0,.14);
+  opacity:0;
+  transform:translateY(22%) scale(.94);
+}
+.recipient-envelope.is-opening{
+  animation:envelopeFloat .95s cubic-bezier(.2,.75,.2,1) both;
+}
+.recipient-envelope.is-opening .flap{
+  animation:flapOpen .72s cubic-bezier(.24,.82,.29,1) forwards;
+}
+.recipient-envelope.is-opening .wax{
+  animation:waxRelease .48s cubic-bezier(.2,.8,.2,1) forwards;
+}
+.recipient-envelope.is-opening .letter-peek{
+  animation:letterPeek .78s .22s cubic-bezier(.2,.8,.2,1) forwards;
+}
+.recipient-envelope.is-opening .front{
+  animation:frontSettle .9s ease forwards;
+}
+@keyframes flapOpen{
+  0%{transform:rotateX(0deg)}
+  55%{transform:rotateX(-135deg)}
+  100%{transform:rotateX(-178deg);z-index:0}
+}
+@keyframes waxRelease{
+  0%{transform:translate(-50%,-50%) scale(1);opacity:1}
+  45%{transform:translate(-50%,-42%) scale(.88) rotate(-5deg);opacity:.9}
+  100%{transform:translate(-50%,-18%) scale(.58) rotate(11deg);opacity:0}
+}
+@keyframes letterPeek{
+  0%{opacity:0;transform:translateY(22%) scale(.94)}
+  35%{opacity:1}
+  100%{opacity:1;transform:translateY(-18%) scale(1)}
+}
+@keyframes envelopeFloat{
+  0%{transform:translateY(0) scale(1)}
+  48%{transform:translateY(5px) scale(.99)}
+  100%{transform:translateY(9px) scale(.975);filter:brightness(.96)}
+}
+@keyframes frontSettle{
+  to{filter:brightness(.97)}
+}
+
+/* Letter reveal */
+.paper.letter-enter{
+  animation:paperReveal .72s cubic-bezier(.18,.82,.24,1) both;
+}
+.paper.letter-enter .to,
+.paper.letter-enter .title,
+.paper.letter-enter .paper-divider,
+.paper.letter-enter .msg,
+.paper.letter-enter .letter-photo,
+.paper.letter-enter .sign{
+  opacity:0;
+  animation:letterContentIn .52s ease forwards;
+}
+.paper.letter-enter .to{animation-delay:.20s}
+.paper.letter-enter .title{animation-delay:.27s}
+.paper.letter-enter .paper-divider{animation-delay:.33s}
+.paper.letter-enter .msg{animation-delay:.39s}
+.paper.letter-enter .letter-photo{animation-delay:.46s}
+.paper.letter-enter .sign{animation-delay:.50s}
+@keyframes paperReveal{
+  from{opacity:0;transform:translateY(34px) scale(.955) rotateX(4deg)}
+  to{opacity:1;transform:translateY(0) scale(1) rotateX(0)}
+}
+@keyframes letterContentIn{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* Softer editor on phones */
+@media (max-width:900px){
+  body{
+    background:#21101d;
+  }
+  #creatorView{
+    min-height:100svh;
+    background:
+      radial-gradient(circle at 50% -5%,rgba(255,163,195,.13),transparent 32%),
+      linear-gradient(180deg,#371329 0,#24101f 42%,#1b0c18 100%);
+  }
+  .topbar.shell{
+    min-height:58px;
+    padding:9px 12px;
+    border-bottom:1px solid rgba(255,255,255,.06);
+  }
+  .new-letter-btn{
+    min-height:38px;
+    padding:8px 12px;
+    background:rgba(255,255,255,.08);
+    border-color:rgba(255,255,255,.10);
+    box-shadow:none;
+  }
+  .builder{
+    padding-top:6px;
+  }
+  .panel{
+    background:transparent;
+    border:0;
+  }
+  .editor-mobile-tools{
+    margin:4px 4px 9px;
+  }
+  .mobile-preview-open{
+    min-height:40px;
+    padding:9px 14px;
+    background:rgba(255,255,255,.095);
+    border-color:rgba(255,255,255,.10);
+    box-shadow:0 8px 20px rgba(0,0,0,.12);
+  }
+  .stepbar{
+    top:0;
+    margin:0 -4px 6px;
+    padding:7px 4px 11px;
+    background:linear-gradient(180deg,rgba(47,17,37,.98) 76%,rgba(47,17,37,0));
+  }
+  .stepbar button{
+    border:1px solid rgba(255,255,255,.07);
+    background:rgba(255,255,255,.06);
+  }
+  .stepbar .active{
+    background:#fff5f8;
+    border-color:#fff5f8;
+    color:#3a152a;
+    box-shadow:0 6px 18px rgba(0,0,0,.12);
+  }
+  .card{
+    min-height:calc(100svh - 172px);
+    padding:20px 16px 102px;
+    border-radius:22px 22px 0 0;
+    border:1px solid rgba(255,255,255,.52);
+    background:linear-gradient(180deg,#fff9f5,#f8eee9);
+    box-shadow:0 -8px 28px rgba(0,0,0,.12);
+  }
+  .card h2{
+    margin-bottom:8px;
+    font-size:35px;
+    color:#321f2c;
+  }
+  .subtitle{
+    margin-bottom:20px;
+    color:#826f7b;
+  }
+  label{
+    margin-top:16px;
+    color:#513d4a;
+  }
+  input,textarea,select{
+    min-height:48px;
+    padding:13px 14px;
+    border:1px solid #e1d2d8;
+    border-radius:15px;
+    background:#fff;
+    color:#34222f;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.7);
+  }
+  textarea{
+    min-height:138px;
+    line-height:1.5;
+  }
+  input:focus,textarea:focus,select:focus{
+    border-color:#d87b9a;
+    box-shadow:0 0 0 3px rgba(216,123,154,.12);
+  }
+  .tip,.url-control-box{
+    border:1px solid #ead8df;
+    background:#f8e9ef;
+  }
+  .actions{
+    left:10px;
+    right:10px;
+    bottom:max(8px,env(safe-area-inset-bottom));
+    padding:7px;
+    border-radius:17px;
+    background:rgba(32,13,27,.88);
+    border-color:rgba(255,255,255,.10);
+    box-shadow:0 14px 40px rgba(0,0,0,.30);
+  }
+  .actions .btn{
+    min-height:48px;
+    box-shadow:none;
+  }
+  .actions .primary{
+    background:linear-gradient(180deg,#fff7fa,#f7dce7);
+    color:#4b1c33;
+  }
+  .actions .ghost{
+    background:rgba(255,255,255,.09);
+    color:#fff4f8;
+  }
+
+  /* Full-screen preview sheet */
+  .preview{
+    padding:0;
+    background:
+      radial-gradient(circle at 50% 18%,rgba(255,167,198,.12),transparent 34%),
+      linear-gradient(180deg,#331326,#1b0c18);
+  }
+  .preview-head{
+    min-height:58px;
+    padding:9px 12px 11px;
+    background:rgba(29,10,24,.80);
+    border-bottom:1px solid rgba(255,255,255,.07);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+  }
+  .preview .phone{
+    width:100%;
+    max-width:none;
+    margin:0;
+    border:0;
+    border-radius:0;
+    box-shadow:none;
+    background:transparent;
+  }
+  .preview .phone-bar{
+    display:none;
+  }
+  .preview .phone-stage{
+    min-height:calc(100svh - 58px);
+    padding:14px;
+  }
+  .preview .stage-center{
+    min-height:calc(100svh - 86px);
+  }
+}
+
+/* Actual recipient page: no fake phone frame on a real phone */
+@media (max-width:600px){
+  #storyView > .shell{
+    width:100%;
+    padding:0;
+  }
+  #storyView .topbar{
+    min-height:52px;
+    padding:8px 12px;
+    background:rgba(30,10,25,.68);
+    border-bottom:1px solid rgba(255,255,255,.06);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+  }
+  #storyView .brand{
+    gap:8px;
+  }
+  #storyView .brand > div:last-child{
+    display:block;
+    font-size:13px;
+    font-weight:600;
+  }
+  #storyView .seal{
+    width:32px;
+    height:32px;
+    font-size:20px;
+  }
+  #storyView .phone{
+    width:100%;
+    max-width:none !important;
+    margin:0 !important;
+    min-height:calc(100svh - 52px);
+    border:0;
+    border-radius:0;
+    box-shadow:none;
+    background:transparent;
+  }
+  #storyView .phone-bar{
+    display:none;
+  }
+  #storyView .phone-stage{
+    min-height:calc(100svh - 52px);
+    height:calc(100svh - 52px);
+    padding:12px 14px max(14px,env(safe-area-inset-bottom));
+    overflow:hidden;
+  }
+  #storyView .stage-center{
+    min-height:100%;
+  }
+
+  #storyView .light-title{
+    max-width:92vw;
+    font-size:clamp(40px,13vw,56px);
+    line-height:.92;
+    text-wrap:balance;
+  }
+  #storyView .light-sub{
+    max-width:88vw;
+    font-size:clamp(24px,7.5vw,31px);
+    line-height:1.08;
+    text-wrap:balance;
+  }
+  #storyView .preview-env{
+    width:min(82vw,320px);
+    min-width:0;
+    max-width:320px;
+  }
+  #storyView .preview-note{
+    max-width:88vw;
+    font-size:25px;
+    line-height:1.15;
+    text-wrap:balance;
+  }
+  #storyView .big-button{
+    min-height:50px;
+    max-width:min(86vw,330px) !important;
+  }
+
+  #storyView .letter-story-screen{
+    height:100%;
+    min-height:0;
+    grid-template-rows:minmax(0,1fr) auto;
+    gap:8px;
+  }
+  #storyView .letter-story-scroll{
+    padding:7px 0 4px;
+  }
+  #storyView .letter-story-action{
+    padding:3px 0 1px;
+  }
+  #storyView .paper{
+    width:min(100%,385px);
+    border-radius:21px;
+  }
+  #storyView .choice-screen{
+    min-height:100%;
+    padding-top:28px !important;
+  }
+  #storyView .choice-screen h4{
+    margin-bottom:13px;
+    max-width:90vw;
+    font-size:clamp(34px,10.5vw,44px);
+    line-height:.98;
+    text-wrap:balance;
+  }
+  #storyView .choice-card{
+    padding:12px 14px;
+    border-radius:18px;
+  }
+  #storyView .final-card{
+    margin-top:13px;
+  }
+}
+
+/* Narrow phones */
+@media (max-width:390px){
+  .card{
+    padding-left:13px;
+    padding-right:13px;
+  }
+  #storyView .phone-stage{
+    padding-left:10px;
+    padding-right:10px;
+  }
+  #storyView .paper{
+    padding-left:20px;
+    padding-right:20px;
+  }
+  #storyView .paper.letter-dense,
+  #storyView .paper.letter-ultra{
+    padding-left:17px;
+    padding-right:17px;
+  }
+}
+
+/* Respect accessibility settings */
+@media (prefers-reduced-motion:reduce){
+  .recipient-envelope.is-opening,
+  .recipient-envelope.is-opening .flap,
+  .recipient-envelope.is-opening .wax,
+  .recipient-envelope.is-opening .letter-peek,
+  .recipient-envelope.is-opening .front,
+  .paper.letter-enter,
+  .paper.letter-enter .to,
+  .paper.letter-enter .title,
+  .paper.letter-enter .paper-divider,
+  .paper.letter-enter .msg,
+  .paper.letter-enter .letter-photo,
+  .paper.letter-enter .sign{
+    animation-duration:.01ms !important;
+    animation-delay:0ms !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -899,9 +1514,9 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
           </div>
           <div class="phone">
             <div class="phone-bar">
-              <span>21:41</span>
               <span>Love Letter</span>
-              <span>❤︎</span>
+              <span>перегляд</span>
+              <span>♡</span>
             </div>
             <div class="phone-stage" id="phoneStage"></div>
           </div>
@@ -1027,15 +1642,32 @@ function previewEnvelope(d){
   `;
 }
 
-function previewLetter(d){
+function letterDensityClass(d){
+  const amount = [
+    d?.letterTo || "",
+    d?.letterTitle || "",
+    d?.letterMessage || "",
+    d?.letterSign || ""
+  ].join(" ").length;
+
+  if(amount > 1500) return "letter-ultra";
+  if(amount > 950) return "letter-dense";
+  if(amount > 560) return "letter-compact";
+  return "letter-normal";
+}
+
+function previewLetter(d, animated = false){
+  const density = letterDensityClass(d);
   return `
-    <div class="paper">
-      <div class="to">${escapeHtml(d.letterTo)}</div>
-      <div class="title">${escapeHtml(d.letterTitle)}</div>
-      <div class="paper-divider"><span>♡</span></div>
-      <div class="msg">${escapeHtml(d.letterMessage)}</div>
-      ${d.showPhoto && d.photoData ? `<div class="letter-photo"><img src="${d.photoData}" alt="Фото"></div>` : ``}
-      ${d.letterSign ? `<div class="sign">${escapeHtml(d.letterSign)}</div>` : ``}
+    <div class="letter-frame">
+      <article class="paper ${density} ${animated ? "letter-enter" : ""}">
+        <div class="to">${escapeHtml(d.letterTo)}</div>
+        <div class="title">${escapeHtml(d.letterTitle)}</div>
+        <div class="paper-divider"><span>♡</span></div>
+        <div class="msg">${escapeHtml(d.letterMessage)}</div>
+        ${d.showPhoto && d.photoData ? `<div class="letter-photo"><img src="${d.photoData}" alt="Фото"></div>` : ``}
+        ${d.letterSign ? `<div class="sign">${escapeHtml(d.letterSign)}</div>` : ``}
+      </article>
     </div>
   `;
 }
@@ -1246,7 +1878,7 @@ function mountStory(payload){
         <div class="recipient-mode-badge">для отримувача</div>
       </header>
       <div class="phone" style="max-width:430px;margin:0 auto">
-        <div class="phone-bar"><span>21:41</span><span>${escapeHtml(payload.recipient || "Love Letter")}</span><span>❤︎</span></div>
+        <div class="phone-bar"><span>Love Letter</span><span>${escapeHtml(payload.recipient || "для тебе")}</span><span>♡</span></div>
         <div class="phone-stage" id="storyStage"></div>
       </div>
     </div>
@@ -1523,23 +2155,51 @@ function renderStory(){
 
   if(state.storyStep === 2){
     root.innerHTML = `
-      <div class="stage-center centered">
-        <button type="button" id="envBtn" style="background:transparent;border:0;width:100%;display:block;padding:0">
-          <div class="preview-env">
+      <div class="stage-center centered envelope-stage">
+        <button type="button" id="envBtn" class="envelope-button" aria-label="Відкрити конверт">
+          <div class="preview-env recipient-envelope">
+            <div class="letter-peek">
+              <span>для тебе</span>
+            </div>
             <div class="flap"></div>
             <div class="front"></div>
             <div class="wax">${escapeHtml((d.recipient || "L").slice(0,1).toUpperCase())}</div>
             <div class="recipient">${escapeHtml(d.recipient || "для тебе")}</div>
           </div>
         </button>
-        <div class="preview-note">${escapeHtml(d.envelopeHint || "відкрий, це тобі")}</div>
+        <div class="preview-note" id="envelopeNote">${escapeHtml(d.envelopeHint || "відкрий, це тобі")}</div>
       </div>`;
-    $("#envBtn").onclick = ()=>{ state.storyStep = 3; renderStory(); };
+
+    $("#envBtn").onclick = ()=>{
+      const btn = $("#envBtn");
+      const envelope = btn?.querySelector(".recipient-envelope");
+      if(!btn || !envelope || btn.dataset.opening === "1") return;
+
+      btn.dataset.opening = "1";
+      btn.disabled = true;
+      envelope.classList.add("is-opening");
+
+      const note = $("#envelopeNote");
+      if(note) note.textContent = "відкриваємо…";
+
+      setTimeout(()=>{
+        state.storyStep = 3;
+        renderStory();
+      }, 1050);
+    };
     return;
   }
 
   if(state.storyStep === 3){
-    root.innerHTML = previewLetter(d) + `<div style="text-align:center;margin-top:16px"><button class="big-button" id="toChoicesBtn" style="max-width:310px">${escapeHtml(d.choiceTitle || "Що будемо робити?")}</button></div>`;
+    root.innerHTML = `
+      <div class="letter-story-screen">
+        <div class="letter-story-scroll">
+          ${previewLetter(d, true)}
+        </div>
+        <div class="letter-story-action">
+          <button class="big-button" id="toChoicesBtn">${escapeHtml(d.choiceTitle || "Що будемо робити?")}</button>
+        </div>
+      </div>`;
     $("#toChoicesBtn").onclick = ()=>{ state.storyStep = 4; renderStory(); };
     return;
   }
