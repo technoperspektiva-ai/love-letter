@@ -444,7 +444,7 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
             <div class="step hidden" data-step="6">
               <h2>Готово</h2>
               <p class="subtitle">Сгенерируй секретную ссылку и открой историю как получатель.</p>
-              <button class="btn primary" type="button" id="generateLink">Сделать ссылку</button>
+              <button class="btn primary" type="button" id="generateLink">Сделать короткую ссылку</button>
               <div class="sharebox">
                 <input id="shareLink" readonly placeholder="Здесь появится ссылка">
               </div>
@@ -452,7 +452,7 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
                 <button class="btn ghost slim" type="button" id="copyLink">Копировать</button>
                 <button class="btn ghost slim" type="button" id="openLink">Открыть</button>
               </div>
-              <div class="muted" style="margin-top:12px">Это статический MVP: данные кодируются прямо в hash-ссылке. Поэтому всё работает без сервера и базы, но очень большие фото могут делать ссылку длинной.</div>
+              <div class="muted" style="margin-top:12px">Письмо сохраняется в бесплатной Cloudflare D1, а получатель получает короткую ссылку вида /l/Ab3Xy9Qk.</div>
             </div>
 
             <div class="actions">
@@ -714,9 +714,18 @@ function decodePayload(token){
   const raw = decodeURIComponent(escape(atob(token)));
   return JSON.parse(raw);
 }
-function makeShareLink(){
+async function makeShareLink(){
   const payload = gatherData();
-  return `${location.origin}${location.pathname}#story=${encodePayload(payload)}`;
+  const response = await fetch("/api/story", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ payload })
+  });
+  const data = await response.json();
+  if(!response.ok){
+    throw new Error(data.message || data.error || "Не удалось создать короткую ссылку");
+  }
+  return `${location.origin}${data.path}`;
 }
 function escapeHtml(text){
   return String(text || "").replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
@@ -855,22 +864,35 @@ function renderStory(){
 function attachListeners(){
   $("#nextBtn").onclick = nextStep;
   $("#backBtn").onclick = prevStep;
-  $("#generateLink").onclick = ()=>{
+  $("#generateLink").onclick = async()=>{
     const err = validateStep();
     if(err){ showError(err); return; }
-    const link = makeShareLink();
-    $("#shareLink").value = link;
-    showError("");
+    try{
+      $("#generateLink").disabled = true;
+      $("#generateLink").textContent = "Создаю…";
+      const link = await makeShareLink();
+      $("#shareLink").value = link;
+      showError("");
+    }catch(e){
+      showError(e.message || "Не удалось создать короткую ссылку");
+    }finally{
+      $("#generateLink").disabled = false;
+      $("#generateLink").textContent = "Сделать короткую ссылку";
+    }
   };
   $("#copyLink").onclick = async()=>{
-    if(!$("#shareLink").value) $("#shareLink").value = makeShareLink();
-    await navigator.clipboard.writeText($("#shareLink").value);
-    $("#copyLink").textContent = "Скопировано";
-    setTimeout(()=>$("#copyLink").textContent = "Копировать", 1500);
+    try{
+      if(!$("#shareLink").value) $("#shareLink").value = await makeShareLink();
+      await navigator.clipboard.writeText($("#shareLink").value);
+      $("#copyLink").textContent = "Скопировано";
+      setTimeout(()=>$("#copyLink").textContent = "Копировать", 1500);
+    }catch(e){ showError(e.message || "Не удалось создать ссылку"); }
   };
-  $("#openLink").onclick = ()=>{
-    const link = $("#shareLink").value || makeShareLink();
-    location.href = link;
+  $("#openLink").onclick = async()=>{
+    try{
+      const link = $("#shareLink").value || await makeShareLink();
+      location.href = link;
+    }catch(e){ showError(e.message || "Не удалось создать ссылку"); }
   };
 
   $$("#recipient, #introMain, #introTop, #envelopeHint, #secretQuestion, #secretAnswer, #letterTo, #letterTitle, #letterMessage, #letterSign, #choiceTitle, #finalCaption, #finalTitle, #finalDate, #finalTime, #finalNote, #finalChoiceIndex, #showPhoto, #useSecret, #c1e, #c1t, #c1s, #c2e, #c2t, #c2s, #c3e, #c3t, #c3s, #c4e, #c4t, #c4s").forEach(el=>{
@@ -899,7 +921,22 @@ function attachListeners(){
   };
 }
 
-(function init(){
+(async function init(){
+  const pathMatch = location.pathname.match(/^\/l\/([A-Za-z0-9_-]{4,32})$/);
+  if(pathMatch){
+    try{
+      const r = await fetch(`/api/story/${encodeURIComponent(pathMatch[1])}`);
+      const data = await r.json();
+      if(!r.ok) throw new Error(data.error || "История не найдена");
+      mountStory(data.payload);
+      return;
+    }catch(e){
+      document.body.innerHTML = `<div style="min-height:100vh;display:grid;place-items:center;background:#1e0d1e;color:white;font-family:Inter,sans-serif;padding:24px;text-align:center"><div><h1 style="font-family:'Cormorant Garamond',serif;font-size:48px;margin:0 0 12px">Письмо не найдено</h1><p style="opacity:.75">${escapeHtml(e.message || "Ссылка недействительна")}</p><a href="/" style="color:#ff9fbe">Создать своё письмо</a></div></div>`;
+      return;
+    }
+  }
+
+  // Backward compatibility with older long links.
   const hash = location.hash || "";
   if(hash.startsWith("#story=")){
     try{
@@ -910,6 +947,7 @@ function attachListeners(){
       alert("Ссылка повреждена или слишком большая.");
     }
   }
+
   attachListeners();
   renderEditor();
 })();
