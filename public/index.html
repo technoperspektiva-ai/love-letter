@@ -147,7 +147,17 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
  background:linear-gradient(180deg,#ffa3c1,#ff7da8);color:#5b1030;font-weight:700;box-shadow:0 0 30px rgba(255,136,177,.35)
 }
 .preview-env{
- width:min(290px,82%);aspect-ratio:1.56;position:relative;background:#f6e9df;border-radius:16px;box-shadow:0 18px 44px rgba(0,0,0,.26);margin:0 auto 22px
+ width:82vw;
+ max-width:290px;
+ min-width:220px;
+ aspect-ratio:1.56;
+ position:relative;
+ background:linear-gradient(180deg,#fff7f1,#f1ddd7);
+ border:1px solid rgba(255,255,255,.75);
+ border-radius:16px;
+ box-shadow:0 18px 44px rgba(0,0,0,.26);
+ margin:0 auto 22px;
+ overflow:visible;
 }
 .preview-env .flap{position:absolute;inset:0 0 auto;height:55%;background:linear-gradient(180deg,#fff5f7,#e6d5da);clip-path:polygon(0 0,100% 0,50% 72%);z-index:2}
 .preview-env .front{position:absolute;inset:0;border-radius:16px;background:
@@ -286,6 +296,9 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
  .preview{position:relative;top:auto;min-height:0}
 }
 @media (max-width: 600px){
+
+ .preview-env{width:86vw;max-width:300px;min-width:210px}
+ #envBtn{width:100% !important;display:block !important}
 
  .preview-env .recipient{font-size:21px;bottom:8px;width:82%}
  .preview-env .wax{width:52px;height:52px;font-size:27px;top:43%}
@@ -809,7 +822,7 @@ function renderStory(){
   if(state.storyStep === 2){
     root.innerHTML = `
       <div class="stage-center centered">
-        <button type="button" id="envBtn" style="background:transparent;border:0">
+        <button type="button" id="envBtn" style="background:transparent;border:0;width:100%;display:block;padding:0">
           <div class="preview-env">
             <div class="flap"></div>
             <div class="front"></div>
