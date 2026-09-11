@@ -1,22 +1,28 @@
-# Love Letter 2.1.3 — Demo Recipient
+# Love Letter 2.1.4 — Demo Recipient Fixed
 
-Цей update навмисно використовує **поточний main story renderer**, але зовнішній вигляд
-отримувача приводить до вже реалізованого Demo (`magic-dialog` / `magic-demo-envelope`).
+Це виправлення зроблено після перевірки реальних mobile screenshots.
 
-## Що змінено
-- recipient envelope тепер має ті самі cream/pink proportions, що й Demo;
-- seal = heart, підпис = «Для тебе»;
-- підказка = «Торкнись, щоб відкрити»;
-- навколо envelope — cream Demo card з `ТАК ПОЧИНАЄТЬСЯ МАЛЕНЬКЕ ДИВО`;
-- actual letter використовує той самий cream paper language, що Demo після відкриття;
-- прибрано translate-анімації з recipient text, щоб текст не вилітав і не пропадав;
-- choice/final теж переведені на light paper cards;
-- current main `index.html`, `magic.css`, `magic.js`, creation flow та API не замінюються.
+## Що було зламано в 2.1.3
+1. У старого `.preview-env .recipient` залишалися `transform: translateX(-50%)`
+   і `width:78%`. Через це псевдо-текст `Для тебе` фізично вилітав ліворуч.
+2. `.phone-stage` продовжував мати старий burgundy background, а 2.1.3
+   зробив intro-текст темним — через це він майже зникав.
+3. Надто широкий reset анімацій прибрав відчуття Demo.
 
-## Overlay
-Скопіювати поверх current main:
-- `public/recipient-demo.css`
-- `public/recipient-demo.js`
-- `worker/index.js`
+## 2.1.4
+- кожен recipient step живе всередині cream Demo card;
+- burgundy використовується як theatre background, а не як фон під темний текст;
+- `Для тебе` повністю reset: left/right/width/transform/overflow;
+- конверт відтворює Demo geometry;
+- повернуто safe animation: card fade+scale, text fade, envelope breathe,
+  wax glow, flap opening і envelope exit;
+- actual letter залишається current-main `previewLetter()`, тільки стабільно
+  оформлений cream paper;
+- усі тексти у normal flow і не можуть вилітати за paper/card.
 
-`/api/health` → `version: "2.1.3"`.
+Overlay поверх current main:
+- public/recipient-demo.css
+- public/recipient-demo.js
+- worker/index.js
+
+/api/health → version 2.1.4
