@@ -5833,6 +5833,81 @@ body.mw-create-active #mobileWizard{
   .mw-suggestion-list{grid-template-columns:1fr}
 }
 
+
+/* ===============================================================
+   Love Letter 1.12.1 — mobile flow cleanup
+   =============================================================== */
+@media (max-width:900px){
+  /* Creation is now a normal vertical flow. No floating bottom panel. */
+  #mobileWizard .mw-main{
+    padding-bottom:calc(24px + env(safe-area-inset-bottom)) !important;
+  }
+
+  #mobileWizard .mw-actionbar{
+    position:static !important;
+    left:auto !important;
+    right:auto !important;
+    bottom:auto !important;
+    z-index:auto !important;
+
+    width:auto !important;
+    margin:14px 20px calc(16px + env(safe-area-inset-bottom)) !important;
+    padding:0 !important;
+
+    display:grid !important;
+    grid-template-columns:minmax(88px,.34fr) minmax(0,1fr) !important;
+    gap:9px !important;
+
+    background:transparent !important;
+    box-shadow:none !important;
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+  }
+
+  #mobileWizard .mw-back,
+  #mobileWizard .mw-next{
+    position:static !important;
+    width:100% !important;
+    min-height:52px !important;
+    height:52px !important;
+  }
+
+  /* No empty decorative box on utility steps. */
+  #mobileWizard .mw-magic.is-hidden{
+    display:none !important;
+  }
+
+  /* When magic actually contributes, keep it compact. */
+  #mobileWizard .mw-magic:not(.is-hidden){
+    height:86px !important;
+    min-height:86px !important;
+    margin:0 0 12px !important;
+    border-radius:20px !important;
+  }
+  #mobileWizard .mw-magic:not(.is-hidden) .mw-magic-scene{
+    height:86px !important;
+  }
+
+  /* Content follows directly after progress instead of leaving a dead visual gap. */
+  #mobileWizard .mw-progress-wrap{
+    padding-bottom:14px !important;
+  }
+
+  /* Slightly tighter first-step composition. */
+  #mobileWizard[data-step="basic"] .mw-scene,
+  #mobileWizard[data-step="first"] .mw-scene,
+  #mobileWizard[data-step="secret"] .mw-scene{
+    margin-top:0 !important;
+  }
+}
+
+
+@media (max-width:900px){
+  body.mw-keyboard-open #mobileWizard .mw-actionbar{
+    display:grid !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -7584,6 +7659,16 @@ function renderMobileMagic(){
   if(!host) return;
 
   const key = MOBILE_WIZARD_STEPS[mobileWizardState.index]?.key || "basic";
+
+  // Decorative magic is used only when it adds meaning.
+  // Utility steps should not reserve a large empty panel.
+  const visibleMagicSteps = new Set(["letter","visual"]);
+  if(!visibleMagicSteps.has(key)){
+    host.innerHTML="";
+    host.classList.add("is-hidden");
+    return;
+  }
+  host.classList.remove("is-hidden");
   const recipient = magicValue("recipient","Для тебе");
   const intro = magicValue("introMain","тобі лист");
   const introTop = magicValue("introTop", recipient ? `${recipient},` : "");
