@@ -1,4 +1,4 @@
-const CACHE="love-letter-1.11.2";
+const CACHE="love-letter-1.12";
 const CORE=["/","/manifest.webmanifest","/icons/icon-192.png","/icons/icon-512.png","/icons/icon-maskable-512.png","/icons/apple-touch-icon.png"];
 
 self.addEventListener("install",event=>{
