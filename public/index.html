@@ -9,11 +9,11 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Love Letter">
 <meta name="mobile-web-app-capable" content="yes">
-<link rel="manifest" href="/manifest.webmanifest?v=110">
-<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png?v=110">
-<link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png?v=110">
-<link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png?v=110">
-<link rel="apple-touch-icon-precomposed" sizes="180x180" href="/icons/apple-touch-icon.png?v=110">
+<link rel="manifest" href="/manifest.webmanifest?v=113">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png?v=113">
+<link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png?v=113">
+<link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png?v=113">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="/icons/apple-touch-icon.png?v=113">
 <title>Love Letter — інтерактивна історія</title>
 <meta name="description" content="Безкоштовний сервіс інтерактивних романтичних листів.">
 <style>
@@ -5908,6 +5908,239 @@ body.mw-create-active #mobileWizard{
   }
 }
 
+
+/* ===============================================================
+   Love Letter 1.13 — main brand + scrolling + choice cleanup
+   =============================================================== */
+
+/* ----- Main transparent logo everywhere ----- */
+.ma-main-logo{
+  width:154px;
+  height:42px;
+  padding:0;
+  border:0;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  overflow:visible;
+  background:transparent;
+}
+.ma-main-logo img,
+.mw-main-logo,
+.ma-settings-main-logo,
+.recipient-main-logo img{
+  display:block;
+  width:auto;
+  object-fit:contain;
+  object-position:left center;
+  background:transparent !important;
+}
+
+.ma-main-logo img{
+  max-width:154px;
+  height:42px;
+}
+
+.mw-main-logo{
+  max-width:158px;
+  height:42px;
+}
+
+.ma-settings-main-logo{
+  max-width:220px;
+  height:72px;
+}
+
+.recipient-main-logo{
+  width:150px;
+  height:40px;
+  padding:0;
+  border:0;
+  overflow:visible;
+  background:transparent;
+}
+.recipient-main-logo img{
+  max-width:150px;
+  height:40px;
+}
+
+/* Old split-brand pieces are retired. */
+.ma-avatar--logo,
+.mw-mark--logo,
+.mw-brandtext--logo,
+.ma-settings-brandmark,
+.ma-settings-wordmark,
+.recipient-logo,
+.recipient-wordmark{
+  display:none !important;
+}
+
+/* App top bar adapts to a wider real logo. */
+@media (max-width:900px){
+  .mobile-app .ma-topbar{
+    grid-template-columns:minmax(150px,1fr) auto !important;
+    gap:10px !important;
+  }
+  .mobile-app .ma-top-title{
+    display:none !important;
+  }
+  .mobile-app .ma-icon-btn{
+    grid-column:2 !important;
+  }
+
+  .mw-top{
+    min-height:62px !important;
+  }
+  .mw-brand{
+    min-width:160px !important;
+  }
+}
+
+/* ----- Scrolling: one predictable document flow ----- */
+html,
+body{
+  min-height:100%;
+  height:auto !important;
+  overflow-x:hidden !important;
+}
+
+body:not(.preview-scroll-lock){
+  overflow-y:auto !important;
+  -webkit-overflow-scrolling:touch;
+}
+
+#creatorView{
+  height:auto !important;
+  min-height:100dvh !important;
+  overflow:visible !important;
+}
+
+#mobileWizard{
+  height:auto !important;
+  min-height:100dvh !important;
+  overflow:visible !important;
+}
+
+#mobileWizard .mw-main{
+  flex:0 0 auto !important;
+  min-height:0 !important;
+  overflow:visible !important;
+}
+
+#mobileWizard .mw-scene,
+#mobileWizard .mw-screen{
+  overflow:visible !important;
+}
+
+#mobileWizard .mw-actionbar{
+  flex:0 0 auto !important;
+}
+
+/* ----- Choice step: remove visual soup and keep one hierarchy ----- */
+#mobileWizard[data-step="finish"] .mw-magic,
+#mobileWizard[data-step="finish"] .magic-orbit,
+#mobileWizard[data-step="finish"] .magic-caption{
+  display:none !important;
+}
+
+#mobileWizard[data-step="finish"] .mw-screen{
+  padding:18px !important;
+}
+
+#mobileWizard[data-step="finish"] .mw-copy{
+  margin-bottom:16px !important;
+  color:#78646f !important;
+}
+
+#mobileWizard[data-step="finish"] .mw-choice-stack{
+  margin-top:12px !important;
+  gap:8px !important;
+}
+
+#mobileWizard[data-step="finish"] .mw-choice-row{
+  grid-template-columns:50px minmax(0,1fr) !important;
+  gap:8px !important;
+  align-items:center !important;
+}
+
+#mobileWizard[data-step="finish"] .mw-choice-emoji{
+  width:50px !important;
+  height:52px !important;
+  border-radius:15px !important;
+  background:#f4ecef !important;
+  border:1px solid #e8dce1 !important;
+  color:#5f374a !important;
+  font-size:20px !important;
+}
+
+#mobileWizard[data-step="finish"] .mw-choice-row .mw-input{
+  height:52px !important;
+  margin:0 !important;
+}
+
+#mobileWizard[data-step="finish"] .mw-suggestion-bank{
+  margin-top:12px !important;
+}
+
+/* Recipient choice page is also deliberately clean. */
+#storyView .recipient-choice-shell{
+  padding-top:28px !important;
+}
+#storyView .recipient-choice-shell h4{
+  margin-bottom:8px !important;
+}
+#storyView .recipient-choice-list{
+  gap:8px !important;
+}
+#storyView .recipient-choice-card{
+  min-height:70px !important;
+}
+#storyView .hearts,
+#storyView .sparkle,
+#storyView .butterfly{
+  display:none !important;
+}
+
+/* ----- Mobile logo sizing ----- */
+@media (max-width:430px){
+  .ma-main-logo{
+    width:142px;
+    height:38px;
+  }
+  .ma-main-logo img{
+    max-width:142px;
+    height:38px;
+  }
+  .mw-main-logo{
+    max-width:144px;
+    height:38px;
+  }
+  .recipient-main-logo{
+    width:142px;
+    height:38px;
+  }
+  .recipient-main-logo img{
+    max-width:142px;
+    height:38px;
+  }
+}
+
+/* ----- Desktop main logo ----- */
+@media (min-width:901px){
+  .ma-main-logo{
+    width:170px;
+    height:46px;
+  }
+  .ma-main-logo img{
+    max-width:170px;
+    height:46px;
+  }
+  .mw-main-logo{
+    max-width:175px;
+    height:48px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -5918,7 +6151,7 @@ body.mw-create-active #mobileWizard{
 <div id="creatorView">
   <div id="mobileApp" class="mobile-app hidden">
     <header class="ma-topbar">
-      <button class="ma-avatar ma-avatar--logo" id="maHomeLogo" type="button" aria-label="Love Letter"><img src="/brand/logo-icon.png" alt=""></button>
+      <button class="ma-main-logo" id="maHomeLogo" type="button" aria-label="Love Letter"><img src="/brand/logo-main.png?v=113" alt="Love Letter"></button>
       <div class="ma-top-title" id="maTopTitle">Love Letter</div>
       <button class="ma-icon-btn" id="maSettingsBtn" type="button" aria-label="Налаштування">•••</button>
     </header>
@@ -5941,8 +6174,7 @@ body.mw-create-active #mobileWizard{
   <div id="mobileWizard" class="mobile-wizard hidden">
     <header class="mw-top">
       <div class="mw-brand">
-        <div class="mw-mark mw-mark--logo"><img src="/brand/logo-icon.png" alt=""></div>
-        <div class="mw-brandtext mw-brandtext--logo"><img src="/brand/logo-wordmark.png" alt="Love Letter"></div>
+        <img class="mw-main-logo" src="/brand/logo-main.png?v=113" alt="Love Letter">
       </div>
       <button type="button" class="mw-preview-btn" id="mwPreviewBtn">Перегляд</button>
     </header>
@@ -6669,6 +6901,15 @@ async function hydrateLocalLibrary(){
   }
 }
 
+function restorePageScroll(){
+  document.documentElement.style.removeProperty("overflow");
+  document.documentElement.style.removeProperty("overflow-y");
+  document.body.style.removeProperty("overflow");
+  document.body.style.removeProperty("overflow-y");
+  document.body.style.overflowX="hidden";
+  document.body.classList.remove("preview-scroll-lock");
+}
+
 function setMobileAppVisibility(app=true){
   const appEl=document.getElementById("mobileApp");
   const wizard=document.getElementById("mobileWizard");
@@ -6700,6 +6941,7 @@ function setMobileAppVisibility(app=true){
 
     document.body.classList.remove("mw-keyboard-open","mw-create-active");
   }else{
+    restorePageScroll();
     appEl?.classList.add("hidden");
     wizard?.classList.remove("hidden");
 
@@ -7415,8 +7657,7 @@ function renderAppSettings(){
     <section class="ma-settings-shell">
       <div class="ma-settings-hero">
         <div class="ma-settings-brand">
-          <div class="ma-settings-brandmark"><img src="/brand/logo-icon.png" alt="Love Letter"></div>
-          <img class="ma-settings-wordmark" src="/brand/logo-wordmark.png" alt="Love Letter">
+          <img class="ma-settings-main-logo" src="/brand/logo-main.png?v=113" alt="Love Letter">
         </div>
         <div class="ma-settings-kicker">Твій простір</div>
         <h2>Налаштуй Love Letter красиво й спокійно.</h2>
@@ -8356,13 +8597,14 @@ function openMobilePreview(){
   const sheet = document.getElementById("mwPreviewSheet");
   sheet?.classList.remove("hidden");
   sheet?.setAttribute("aria-hidden","false");
+  document.body.classList.add("preview-scroll-lock");
   document.body.style.overflow = "hidden";
 }
 function closeMobilePreview(){
   const sheet = document.getElementById("mwPreviewSheet");
   sheet?.classList.add("hidden");
   sheet?.setAttribute("aria-hidden","true");
-  document.body.style.overflow = "";
+  restorePageScroll();
 }
 
 function setupVisualViewportHandling(){
@@ -8967,10 +9209,9 @@ function mountStory(payload){
     <div class="shell" style="padding-bottom:18px">
       <header class="topbar">
         <div class="brand recipient-brand">
-          <button class="recipient-logo" id="hiddenEditSeal" type="button" aria-label="Love Letter">
-            <img src="/brand/logo-icon.png?v=110" alt="">
+          <button class="recipient-main-logo" id="hiddenEditSeal" type="button" aria-label="Love Letter">
+            <img src="/brand/logo-main.png?v=113" alt="Love Letter">
           </button>
-          <img class="recipient-wordmark" src="/brand/logo-wordmark.png?v=110" alt="Love Letter">
         </div>
         <div class="recipient-mode-badge">для отримувача</div>
       </header>
@@ -9650,7 +9891,7 @@ function attachListenersImpl(){
   });
   $("#mobilePreviewClose")?.addEventListener("click", ()=>{
     document.querySelector(".preview")?.classList.remove("mobile-open");
-    document.body.style.overflow = "";
+    restorePageScroll();
   });
   $("#generateLink").onclick = async()=>{
     const err = validateStep();
@@ -9978,7 +10219,7 @@ initPWA();
     document.getElementById("storyView").innerHTML = `
       <div class="viewer-loading" style="min-height:100svh;display:grid;place-items:center;text-align:center;padding:24px">
         <div>
-          <img src="/brand/logo-icon.png?v=110" alt="Love Letter" style="width:58px;height:58px;border-radius:18px;margin:0 auto 14px;object-fit:cover">
+          <img src="/icons/apple-touch-icon.png?v=113" alt="Love Letter" style="width:58px;height:58px;border-radius:18px;margin:0 auto 14px;object-fit:cover">
           <div style="font-family:'Cormorant Garamond';font-size:34px">Відкриваємо лист…</div>
         </div>
       </div>`;
