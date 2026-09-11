@@ -9,8 +9,11 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Love Letter">
 <meta name="mobile-web-app-capable" content="yes">
-<link rel="manifest" href="/manifest.webmanifest">
-<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest?v=110">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png?v=110">
+<link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png?v=110">
+<link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png?v=110">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="/icons/apple-touch-icon.png?v=110">
 <title>Love Letter — інтерактивна історія</title>
 <meta name="description" content="Безкоштовний сервіс інтерактивних романтичних листів.">
 <style>
@@ -4658,6 +4661,509 @@ input:focus,textarea:focus,select:focus{border-color:#cc6d91;box-shadow:0 0 0 4p
   }
 }
 
+
+/* ===============================================================
+   Love Letter 1.9.2 — spacing + wizard hard fix
+   =============================================================== */
+
+/* Absolute wizard isolation */
+body.mw-create-active{
+  overflow-x:hidden !important;
+}
+body.mw-create-active #mobileApp,
+body.mw-create-active #maTabbar,
+body.mw-create-active .ma-tabbar,
+body.mw-create-active .ma-topbar{
+  display:none !important;
+  visibility:hidden !important;
+  pointer-events:none !important;
+  opacity:0 !important;
+}
+body.mw-create-active #mobileWizard{
+  display:flex !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  z-index:100 !important;
+}
+
+/* Universal product page rhythm */
+.ma-screen{
+  box-sizing:border-box;
+}
+.ma-screen > section{
+  box-sizing:border-box;
+}
+.ma-page-title{
+  margin:0 0 8px !important;
+}
+.ma-page-sub{
+  margin:0 0 24px !important;
+  max-width:640px !important;
+}
+
+/* Letter detail: proper product page instead of loose text/buttons */
+.ma-letter-detail-shell{
+  width:min(100%,900px);
+  margin:0 auto;
+  display:grid;
+  gap:16px;
+}
+.ma-detail-hero{
+  position:relative;
+  overflow:hidden;
+  padding:28px !important;
+  border-radius:28px !important;
+  background:
+    radial-gradient(circle at 85% 10%,rgba(255,255,255,.08),transparent 26%),
+    linear-gradient(145deg,#5a2942,#3a1728) !important;
+  color:#fff !important;
+  text-align:left !important;
+  box-shadow:0 18px 50px rgba(64,30,47,.15) !important;
+}
+.ma-detail-main{
+  display:grid;
+  grid-template-columns:88px minmax(0,1fr);
+  gap:18px;
+  align-items:center;
+}
+.ma-detail-cover{
+  width:88px !important;
+  height:104px !important;
+  margin:0 !important;
+  border-radius:22px !important;
+  display:grid !important;
+  place-items:center !important;
+  color:#fff7fa !important;
+  background:linear-gradient(150deg,#84546c,#2c1220) !important;
+  border:1px solid rgba(255,255,255,.12) !important;
+  box-shadow:0 14px 30px rgba(0,0,0,.16) !important;
+  font:600 38px/1 Georgia,serif !important;
+}
+.ma-detail-copy{min-width:0}
+.ma-detail-eyebrow{
+  color:#d8bdc8;
+  font:650 11px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  margin-bottom:7px;
+}
+.ma-detail-hero h1{
+  margin:0 !important;
+  color:#fff !important;
+  font:650 clamp(28px,4vw,38px)/1.02 Georgia,"Times New Roman",serif !important;
+  letter-spacing:-.025em !important;
+  text-wrap:balance;
+}
+.ma-detail-hero p{
+  margin:8px 0 0 !important;
+  color:#ddc8d2 !important;
+  font:400 14px/1.45 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif !important;
+}
+.ma-detail-status{
+  margin-top:12px !important;
+}
+.ma-detail-actions{
+  margin-top:20px !important;
+  display:grid !important;
+  grid-template-columns:1fr 1fr !important;
+  gap:9px !important;
+}
+.ma-detail-actions button{
+  min-height:50px !important;
+  border:0 !important;
+  border-radius:16px !important;
+  font:680 14px/1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif !important;
+}
+.ma-detail-primary{
+  background:#fff8fb !important;
+  color:#4b2035 !important;
+}
+.ma-detail-secondary{
+  background:rgba(255,255,255,.10) !important;
+  color:#fff !important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.08) !important;
+}
+
+.ma-action-list{
+  margin:0 !important;
+  display:grid !important;
+  grid-template-columns:1fr 1fr !important;
+  gap:10px !important;
+}
+.ma-action-row{
+  width:100% !important;
+  min-height:58px !important;
+  padding:0 16px !important;
+  border:0 !important;
+  border-radius:17px !important;
+  background:#fff !important;
+  color:#3a2932 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:14px !important;
+  text-align:left !important;
+  box-shadow:inset 0 0 0 1px rgba(66,42,53,.055),0 6px 18px rgba(57,32,44,.025) !important;
+  font:650 14px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif !important;
+}
+.ma-action-row:hover{
+  background:#fffaf8 !important;
+  transform:translateY(-1px);
+}
+.ma-action-row:disabled{
+  opacity:.45 !important;
+  cursor:not-allowed !important;
+}
+.ma-action-row.danger{
+  color:#9a3551 !important;
+  background:#fff7f8 !important;
+}
+.ma-detail-error{
+  margin:0 !important;
+  padding:13px 15px !important;
+  border-radius:16px !important;
+}
+
+/* Loading state */
+.ma-detail-loading{
+  width:min(100%,720px);
+  margin:12vh auto 0;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  min-height:220px;
+  padding:24px;
+  border-radius:26px;
+  background:#fff;
+  box-shadow:inset 0 0 0 1px rgba(66,42,53,.05),0 12px 34px rgba(62,34,47,.03);
+}
+
+/* Wizard spacing: no giant dead regions */
+.mw-main{
+  justify-content:flex-start !important;
+}
+.mw-scene{
+  justify-content:flex-start !important;
+}
+.mw-screen{
+  justify-content:flex-start !important;
+}
+.mw-copy{
+  margin-top:0 !important;
+}
+.mw-field + .mw-field{
+  margin-top:16px;
+}
+
+/* Prevent footer collision on all iPhone sizes */
+@media (max-width:900px){
+  body.mw-create-active{
+    min-height:100dvh !important;
+  }
+  body.mw-create-active #mobileWizard{
+    min-height:100dvh !important;
+    padding-bottom:0 !important;
+  }
+  .mw-main{
+    min-height:0 !important;
+    padding:10px 20px calc(118px + env(safe-area-inset-bottom)) !important;
+  }
+  .mw-actionbar{
+    left:0 !important;
+    right:0 !important;
+    bottom:0 !important;
+    z-index:300 !important;
+    grid-template-columns:minmax(86px,.34fr) minmax(0,1fr) !important;
+    gap:9px !important;
+    padding:10px 20px calc(14px + env(safe-area-inset-bottom)) !important;
+    background:linear-gradient(180deg,rgba(251,248,243,0),rgba(251,248,243,.94) 26%,#fbf8f3 54%) !important;
+  }
+  .mw-back,.mw-next{
+    width:100% !important;
+  }
+
+  .ma-letter-detail-shell{
+    gap:12px;
+  }
+  .ma-detail-hero{
+    padding:18px !important;
+    border-radius:22px !important;
+  }
+  .ma-detail-main{
+    grid-template-columns:66px minmax(0,1fr);
+    gap:14px;
+  }
+  .ma-detail-cover{
+    width:66px !important;
+    height:78px !important;
+    border-radius:18px !important;
+    font-size:29px !important;
+  }
+  .ma-detail-actions{
+    margin-top:16px !important;
+  }
+  .ma-action-list{
+    grid-template-columns:1fr !important;
+    gap:8px !important;
+  }
+  .ma-action-row{
+    min-height:54px !important;
+  }
+}
+
+/* Desktop page rhythm */
+@media (min-width:901px){
+  .ma-screen{
+    padding-top:56px !important;
+    padding-bottom:56px !important;
+  }
+  .ma-letter-detail-shell{
+    padding-top:10px;
+  }
+}
+
+
+/* ===============================================================
+   Love Letter 1.10 — PWA safe area + real recipient branding
+   =============================================================== */
+
+/* Recipient header brand */
+#storyView .recipient-brand{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  min-width:0;
+}
+#storyView .recipient-logo{
+  width:38px;
+  height:38px;
+  flex:0 0 38px;
+  padding:0;
+  border:0;
+  border-radius:12px;
+  overflow:hidden;
+  background:#f6eee8;
+  box-shadow:0 7px 18px rgba(0,0,0,.14);
+}
+#storyView .recipient-logo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+#storyView .recipient-wordmark{
+  height:23px;
+  width:auto;
+  max-width:145px;
+  object-fit:contain;
+  display:block;
+}
+
+/* PWA standalone: nothing textual may sit under the iOS status bar. */
+@media (max-width:600px){
+  #storyView > .shell{
+    min-height:100dvh;
+    min-height:100svh;
+  }
+
+  #storyView .topbar{
+    box-sizing:border-box;
+    min-height:calc(54px + env(safe-area-inset-top)) !important;
+    padding:
+      calc(9px + env(safe-area-inset-top))
+      max(14px,env(safe-area-inset-right))
+      9px
+      max(14px,env(safe-area-inset-left)) !important;
+    align-items:flex-end !important;
+  }
+
+  #storyView .recipient-logo{
+    width:34px;
+    height:34px;
+    flex-basis:34px;
+    border-radius:11px;
+  }
+  #storyView .recipient-wordmark{
+    height:20px;
+    max-width:124px;
+  }
+
+  #storyView .recipient-mode-badge{
+    max-width:42vw;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+
+  #storyView .phone{
+    min-height:calc(100dvh - 54px - env(safe-area-inset-top)) !important;
+    min-height:calc(100svh - 54px - env(safe-area-inset-top)) !important;
+  }
+
+  #storyView .phone-stage{
+    height:calc(100dvh - 54px - env(safe-area-inset-top)) !important;
+    min-height:calc(100dvh - 54px - env(safe-area-inset-top)) !important;
+    padding:
+      12px
+      max(14px,env(safe-area-inset-right))
+      max(14px,env(safe-area-inset-bottom))
+      max(14px,env(safe-area-inset-left)) !important;
+  }
+}
+
+/* Standalone app shell safety, including devices with Dynamic Island/notch. */
+@media (display-mode: standalone){
+  .mobile-app{
+    padding-top:max(env(safe-area-inset-top),1px) !important;
+  }
+  #storyView .topbar{
+    padding-top:calc(10px + env(safe-area-inset-top)) !important;
+  }
+}
+
+/* Browser/PWA brand asset should never collapse into text layout. */
+.ma-avatar--logo img,
+.mw-mark--logo img,
+.ma-settings-brandmark img{
+  display:block !important;
+}
+
+
+/* ===============================================================
+   Love Letter 1.11 — full scenarios + name-only portrait
+   =============================================================== */
+.ideas-page{display:grid;gap:20px}
+.ideas-hero{max-width:760px}
+.ideas-scenario-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+}
+.ideas-scenario-card{
+  min-width:0;
+  padding:18px;
+  border-radius:24px;
+  background:#fff;
+  box-shadow:inset 0 0 0 1px rgba(66,42,53,.055),0 12px 30px rgba(62,34,47,.035);
+}
+.ideas-card-head{
+  display:grid;
+  grid-template-columns:48px minmax(0,1fr);
+  gap:13px;
+  align-items:start;
+}
+.ideas-card-icon{
+  width:48px;height:48px;border-radius:16px;
+  display:grid;place-items:center;
+  background:#f3e9ed;color:#6b4053;
+  font-size:21px;
+}
+.ideas-card-tone{
+  color:#a07e8c;
+  font:700 10px/1.1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+  text-transform:uppercase;letter-spacing:.08em;
+}
+.ideas-card-copy h2{
+  margin:4px 0 0;
+  color:#30212a;
+  font:700 19px/1.1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+  letter-spacing:-.025em;
+}
+.ideas-card-copy p{
+  margin:5px 0 0;color:#8e7983;
+  font:400 12.5px/1.4 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+}
+.ideas-preview{
+  margin-top:15px;
+  padding:15px;
+  border-radius:18px;
+  background:#f8f3f0;
+}
+.ideas-preview-label{
+  color:#a08a94;
+  font:650 10px/1.1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+  text-transform:uppercase;letter-spacing:.07em;
+}
+.ideas-preview-title{
+  margin-top:7px;color:#49323e;
+  font:600 19px/1.12 Georgia,"Times New Roman",serif;
+}
+.ideas-preview-body{
+  margin-top:7px;
+  color:#78656f;
+  font:400 12.5px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden;
+}
+.ideas-greetings{margin-top:13px;display:grid;gap:7px}
+.ideas-greetings-label{
+  margin-bottom:1px;color:#8d7681;
+  font:650 11px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+}
+.ideas-greeting-option{
+  width:100%;
+  min-height:54px;
+  padding:9px 11px;
+  border:0;
+  border-radius:15px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  text-align:left;
+  background:#fbf8f6;
+  color:#3d2a34;
+  box-shadow:inset 0 0 0 1px rgba(74,34,52,.05);
+  transition:background .16s ease,transform .16s ease,box-shadow .16s ease;
+}
+.ideas-greeting-option:hover{
+  background:#fff4f7;
+  box-shadow:inset 0 0 0 1px rgba(111,51,76,.11);
+  transform:translateY(-1px);
+}
+.ideas-greeting-option strong{
+  display:block;
+  font:680 13px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+}
+.ideas-greeting-option small{
+  display:block;margin-top:3px;color:#9a838d;
+  font:400 11px/1.25 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+}
+.ideas-use{
+  flex:0 0 auto;
+  padding:7px 9px;border-radius:999px;
+  background:#efe5e9;color:#653c4f;
+  font:650 10px/1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+}
+.mw-name-portrait-note{
+  margin-top:14px;
+  padding:12px;
+  border-radius:16px;
+  display:grid;
+  grid-template-columns:38px minmax(0,1fr);
+  gap:11px;
+  align-items:center;
+  background:#fff;
+  box-shadow:inset 0 0 0 1px rgba(74,34,52,.055);
+}
+.mw-name-portrait-mark{
+  width:38px;height:38px;border-radius:12px;display:grid;place-items:center;
+  background:#f2e8ec;color:#6b4053;
+  font:700 14px/1 Georgia,serif;
+}
+.mw-name-portrait-note strong{
+  display:block;color:#45303b;
+  font:650 13px/1.25 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+}
+.mw-name-portrait-note span:last-child{
+  display:block;margin-top:3px;color:#917b86;
+  font:400 11px/1.35 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+}
+@media(max-width:900px){
+  .ideas-scenario-grid{grid-template-columns:1fr}
+  .ideas-scenario-card{padding:15px;border-radius:21px}
+  .ideas-preview-body{-webkit-line-clamp:3}
+}
+
 </style>
 </head>
 <body>
@@ -4807,10 +5313,10 @@ input:focus,textarea:focus,select:focus{border-color:#cc6d91;box-shadow:0 0 0 4p
               </div>
 
               <div id="mediaInputArea">
-                <label class="portrait-only">Слова для портрета
-                  <input id="portraitWords" maxlength="180" value="кохаю, разом, назавжди, ти, ми, тепло, усмішка, дім">
+                <label class="portrait-only">Ім’я для портрета
+                  <input id="portraitWords" maxlength="180" value="" readonly placeholder="Береться з поля «Для кого»">
                 </label>
-                <div class="field-note portrait-only">Розділяй слова або короткі фрази комами. Вони сформують світло й тіні портрета.</div>
+                <div class="field-note portrait-only">Портрет автоматично складається тільки з імені отримувача.</div>
 
                 <label>Обрати зображення
                   <input type="file" id="photoInput" accept="image/*">
@@ -4962,112 +5468,299 @@ const LETTER_LIBRARY_KEY = "love-letter-library-v1";
 
 const LETTER_PRESETS = [
   {
-    id:"quiet",
+    id:"justbecause",
     icon:"♡",
-    title:"Тихий лист",
-    sub:"Коротко, ніжно, без зайвих слів.",
+    title:"Просто так",
+    sub:"Коли не потрібен привід, щоб нагадати про важливе.",
+    tone:"ніжно",
     data:{
-      introMain:"тобі лист",
-      envelopeHint:"відкрий, це тобі",
-      letterTitle:"Для тебе",
-      letterMessage:"Я просто хотів залишити тобі кілька теплих слів.",
+      introMain:"це просто тобі",
+      introTop:"",
+      envelopeHint:"відкрий, коли матимеш хвилинку",
+      letterTo:"це тобі",
+      letterTitle:"Бо ти є",
+      letterMessage:"Сьогодні не сталося нічого особливого. Я просто зловив себе на думці про тебе й захотів залишити кілька слів. Мені подобається, що ти є в моєму житті — у звичайних днях, маленьких розмовах і моментах, які стають важливими саме через тебе.",
+      letterSign:"Обіймаю.",
       choiceTitle:"Що зробимо разом?",
-      choices:["Кава удвох","Прогулянка","Кіно","Щось спонтанне"]
-    }
+      choices:[
+        {emoji:"☕",title:"Кава удвох",subtitle:"без поспіху"},
+        {emoji:"🌙",title:"Вечірня прогулянка",subtitle:"тільки ми"},
+        {emoji:"🎬",title:"Кіно",subtitle:"і щось смачне"},
+        {emoji:"✨",title:"Сюрприз",subtitle:"довірся мені"}
+      ],
+      finalTitle:"Чекаю на тебе",
+      finalDate:"",
+      finalTime:"",
+      finalNote:"Нехай це буде наш маленький вечір."
+    },
+    greetings:[
+      {label:"Дуже ніжно",title:"Бо ти є",message:"Іноді найважливіші речі не потребують особливого приводу. Я просто хочу, щоб ти знала: мені тепло від того, що ти є поруч — навіть у найзвичайніших днях."},
+      {label:"Коротко",title:"Просто хотів сказати",message:"Я сьогодні подумав про тебе й усміхнувся. Вирішив, що це достатня причина написати тобі цей маленький лист."},
+      {label:"Трохи романтичніше",title:"Одна проста думка",message:"Серед усіх справ і шуму дня є одна думка, до якої я люблю повертатися — про тебе. І мені захотілося залишити її тут."}
+    ]
   },
   {
     id:"date",
     icon:"✦",
-    title:"Запрошення",
-    sub:"Лист, який закінчується побаченням.",
+    title:"Запрошення на побачення",
+    sub:"Майже готове запрошення з вибором вечора.",
+    tone:"романтично",
     data:{
-      introMain:"у мене є план",
-      envelopeHint:"відкрий — там маленька пропозиція",
+      introMain:"у мене є маленький план",
+      introTop:"",
+      envelopeHint:"відкрий — там пропозиція",
+      letterTo:"це запрошення для тебе",
       letterTitle:"Один вечір тільки для нас",
-      letterMessage:"Хочу викрасти тебе на кілька годин і зробити цей вечір нашим.",
+      letterMessage:"Хочу забрати тебе з усіх справ хоча б на кілька годин. Без поспіху, без зайвого шуму — просто зробити вечір, який буде нашим.",
+      letterSign:"Я все організую.",
       choiceTitle:"Обирай наш вечір",
-      choices:["Вечеря","Кіно","Прогулянка","Сюрприз"]
-    }
-  },
-  {
-    id:"sorry",
-    icon:"○",
-    title:"Вибачення",
-    sub:"Спокійний спосіб сказати важливе.",
-    data:{
-      introMain:"це важливо",
-      envelopeHint:"прочитай, будь ласка",
-      letterTitle:"Я хочу сказати це правильно",
-      letterMessage:"Мені важливо не просто вибачитися, а показати, що я почув тебе.",
-      choiceTitle:"Що зробимо далі?",
-      choices:["Поговоримо","Побудемо разом","Прогуляємось","Дай мені трохи часу"]
-    }
+      choices:[
+        {emoji:"🍰",title:"Сніданок у ліжко",subtitle:"для найкрасивішої"},
+        {emoji:"🎡",title:"Парк і солодка вата",subtitle:"як малі"},
+        {emoji:"🎵",title:"Плейлист і дорога",subtitle:"увесь день"},
+        {emoji:"🕯️",title:"Вечеря при свічках",subtitle:"вдома, удвох"}
+      ],
+      finalTitle:"Домовились",
+      finalDate:"",
+      finalTime:"",
+      finalNote:"Я вже передчуваю цей вечір."
+    },
+    greetings:[
+      {label:"Класичне",title:"Один вечір тільки для нас",message:"Є одна річ, яку я дуже хочу найближчим часом: провести вечір тільки з тобою. Обери варіант нижче — усе інше я беру на себе."},
+      {label:"Грайливе",title:"У мене є змова",message:"План простий: я краду тебе на кілька годин, ми забуваємо про всі справи й робимо щось приємне. Тобі лишається тільки обрати сценарій."},
+      {label:"Спокійне",title:"Побудьмо удвох",message:"Хочу трохи сповільнитися й побути з тобою без зайвих планів навколо. Обери, який вечір зараз звучить найкраще."}
+    ]
   },
   {
     id:"anniversary",
     icon:"∞",
     title:"Річниця",
-    sub:"Маленька цифрова листівка про вас двох.",
+    sub:"Теплий лист про ваші спільні дні.",
+    tone:"тепло",
     data:{
-      introMain:"ще один наш рік",
+      introMain:"ще одна наша дата",
+      introTop:"",
       envelopeHint:"відкрий нашу маленьку історію",
+      letterTo:"це для нас",
       letterTitle:"Я б обрав нас ще раз",
-      letterMessage:"Дякую за всі прості дні, з яких складається щось дуже велике.",
+      letterMessage:"Мені подобається думати не тільки про великі моменти, а й про всі звичайні дні між ними. Саме з них і склалося наше «ми». Дякую за сміх, підтримку, маленькі звички й за те, що поруч із тобою багато речей мають більше сенсу.",
+      letterSign:"І я все ще обираю нас.",
       choiceTitle:"Як відсвяткуємо?",
-      choices:["Вечеря","Подорож","Домашній вечір","Сюрприз"]
-    }
+      choices:[
+        {emoji:"🍷",title:"Вечеря",subtitle:"гарно вдягнемось"},
+        {emoji:"🚗",title:"Маленька подорож",subtitle:"кудись без плану"},
+        {emoji:"🏠",title:"Домашній вечір",subtitle:"тільки ми"},
+        {emoji:"🎁",title:"Сюрприз",subtitle:"нічого не питай"}
+      ],
+      finalTitle:"Ще одна наша історія",
+      finalDate:"",
+      finalTime:"",
+      finalNote:"І нехай попереду буде ще багато таких дат."
+    },
+    greetings:[
+      {label:"Щиро",title:"Я б обрав нас ще раз",message:"Якби мені знову довелося пройти весь шлях до цього дня, я б усе одно хотів прийти саме до тебе. Дякую за наше «ми»."},
+      {label:"Про будні",title:"За всі наші звичайні дні",message:"Я люблю не тільки наші великі моменти. Я люблю наші ранки, переписки, жарти, мовчання і все те просте, з чого насправді складається близькість."},
+      {label:"Коротко",title:"Ще один рік із тобою",message:"І це все ще одна з моїх улюблених історій. Дякую, що ми продовжуємо писати її разом."}
+    ]
   },
   {
     id:"missyou",
     icon:"☾",
     title:"Сумую",
-    sub:"Коли хочеться бути трохи ближче.",
+    sub:"Коли хочеться стати трохи ближче на відстані.",
+    tone:"тихо",
     data:{
-      introMain:"трохи сумую",
+      introMain:"сьогодні тебе трохи не вистачає",
+      introTop:"",
       envelopeHint:"це тобі від мене",
+      letterTo:"хотів залишити це тобі",
       letterTitle:"Хотів бути поруч",
-      letterMessage:"Поки не можу обійняти тебе наживо, залишу хоча б ці слова.",
+      letterMessage:"Є дні, коли відстань відчувається сильніше. Сьогодні саме такий. Я б краще просто був поруч, але поки залишу тобі ці слова: я думаю про тебе й дуже хочу скоріше побачити.",
+      letterSign:"До зустрічі.",
       choiceTitle:"Коли побачимось?",
-      choices:["Сьогодні","Завтра","На вихідних","Якнайшвидше"]
-    }
+      choices:[
+        {emoji:"🌆",title:"Сьогодні",subtitle:"хоч на годинку"},
+        {emoji:"☀️",title:"Завтра",subtitle:"знайдемо час"},
+        {emoji:"🗓️",title:"На вихідних",subtitle:"без поспіху"},
+        {emoji:"❤️",title:"Якнайшвидше",subtitle:"це правильна відповідь"}
+      ],
+      finalTitle:"Тоді домовились",
+      finalDate:"",
+      finalTime:"",
+      finalNote:"Я вже рахую дні."
+    },
+    greetings:[
+      {label:"Тихе",title:"Тебе сьогодні не вистачає",message:"Я просто хотів сказати, що сьогодні особливо сумую за тобою. Нічого складного — просто хочу скоріше бути поруч."},
+      {label:"Тепле",title:"Хотів бути ближче",message:"Якби можна було зараз скоротити відстань одним рухом, я б уже був поруч. Тому поки надсилаю тобі цей маленький лист."},
+      {label:"Коротке",title:"Сумую",message:"Оце й усе повідомлення. Сумую. І дуже хочу скоріше тебе побачити."}
+    ]
   },
   {
-    id:"justbecause",
-    icon:"☺",
-    title:"Просто так",
-    sub:"Без дати й приводу. Саме тому особливо.",
+    id:"sorry",
+    icon:"○",
+    title:"Вибачення",
+    sub:"Без пафосу — чесно сказати важливе.",
+    tone:"щиро",
     data:{
-      introMain:"без особливого приводу",
-      envelopeHint:"просто відкрий",
-      letterTitle:"Бо ти є",
-      letterMessage:"Сьогодні нічого особливого не сталося. Просто я подумав про тебе.",
-      choiceTitle:"Що зробимо сьогодні?",
-      choices:["Кава","Обійми","Прогулянка","Залишимось вдома"]
-    }
+      introMain:"це важливо для мене",
+      introTop:"",
+      envelopeHint:"прочитай, будь ласка",
+      letterTo:"я хочу сказати це правильно",
+      letterTitle:"Я почув тебе",
+      letterMessage:"Мені важливо не просто сказати «вибач». Я хочу визнати, що міг зробити боляче й що твої почуття для мене важливі. Я не хочу переконувати тебе, що все було не так — хочу краще зрозуміти й зробити інакше.",
+      letterSign:"Я поруч, коли будеш готова.",
+      choiceTitle:"Що тобі зараз ближче?",
+      choices:[
+        {emoji:"💬",title:"Поговорити",subtitle:"спокійно й чесно"},
+        {emoji:"🚶",title:"Прогулятись",subtitle:"без важкої атмосфери"},
+        {emoji:"🤍",title:"Побути разом",subtitle:"без зайвих слів"},
+        {emoji:"⏳",title:"Дати трохи часу",subtitle:"я зрозумію"}
+      ],
+      finalTitle:"Я почув",
+      finalDate:"",
+      finalTime:"",
+      finalNote:"Без тиску. Мені важливо зробити правильно."
+    },
+    greetings:[
+      {label:"Зріле",title:"Я хочу сказати це правильно",message:"Я не хочу виправдовуватися чи сперечатися з тим, що ти відчула. Мені справді шкода. Я хочу зрозуміти, що можу зробити краще."},
+      {label:"Коротке",title:"Пробач",message:"Я був неправий у тому, як це зробив. Мені шкода, що я тебе зачепив. Твої почуття для мене важливі."},
+      {label:"М'яке",title:"Мені важливо нас не втратити",message:"Я знаю, що одного «вибач» мало. Але хочу почати саме з нього — щиро, без умов і без спроб знецінити те, що сталося."}
+    ]
+  },
+  {
+    id:"support",
+    icon:"☁",
+    title:"Підтримати",
+    sub:"Коли близькій людині важкий день.",
+    tone:"турботливо",
+    data:{
+      introMain:"це тобі на важкий день",
+      introTop:"",
+      envelopeHint:"відкрий, коли стане трохи важко",
+      letterTo:"кілька слів для тебе",
+      letterTitle:"Тобі не потрібно зараз усе вирішувати",
+      letterMessage:"Я знаю, що сьогодні може бути непросто. Не хочу давати порад чи вимагати від тебе бути сильною. Просто хочу нагадати: ти можеш видихнути, зупинитися й знати, що поруч є людина, яка за тебе.",
+      letterSign:"Я поруч.",
+      choiceTitle:"Чого тобі хочеться?",
+      choices:[
+        {emoji:"☕",title:"Чаю й тиші",subtitle:"без розмов"},
+        {emoji:"🫂",title:"Обіймів",subtitle:"багато"},
+        {emoji:"🚶",title:"Прогулянки",subtitle:"перемкнутись"},
+        {emoji:"💬",title:"Поговорити",subtitle:"я послухаю"}
+      ],
+      finalTitle:"Я поруч",
+      finalDate:"",
+      finalTime:"",
+      finalNote:"Ти не мусиш проходити цей день сама."
+    },
+    greetings:[
+      {label:"Без порад",title:"Я поруч",message:"Не буду казати, що все точно буде добре. Просто хочу, щоб ти знала: тобі не потрібно проходити це самій. Я поруч."},
+      {label:"Дуже м'яке",title:"Сьогодні можна просто видихнути",message:"Ти не зобов’язана бути продуктивною, сильною чи веселою. Сьогодні можна просто бути. А я побуду поруч."},
+      {label:"Коротке",title:"Тримайся — але не сама",message:"Якщо сьогодні важко, дай мені хоча б трохи цього тягаря. Я поруч і готовий слухати."}
+    ]
+  },
+  {
+    id:"morning",
+    icon:"☀",
+    title:"Добрий ранок",
+    sub:"Маленьке привітання, яке приємно відкрити зранку.",
+    tone:"легко",
+    data:{
+      introMain:"доброго ранку",
+      introTop:"",
+      envelopeHint:"відкрий перед першою кавою",
+      letterTo:"ранкове тобі",
+      letterTitle:"Нехай день почнеться з усмішки",
+      letterMessage:"Хочу бути однією з перших приємних речей у твоєму сьогоднішньому дні. Нехай усе важливе складається легко, кава буде смачною, а ввечері залишаться сили на щось хороше.",
+      letterSign:"Гарного тобі дня.",
+      choiceTitle:"Що додамо до ранку?",
+      choices:[
+        {emoji:"☕",title:"Кава",subtitle:"обов’язково"},
+        {emoji:"🥐",title:"Сніданок",subtitle:"щось смачне"},
+        {emoji:"🎵",title:"Пісня",subtitle:"для настрою"},
+        {emoji:"💌",title:"Ще одне повідомлення",subtitle:"від мене"}
+      ],
+      finalTitle:"Гарного дня",
+      finalDate:"",
+      finalTime:"",
+      finalNote:"І не забудь сьогодні трохи поберегти себе."
+    },
+    greetings:[
+      {label:"Ніжне",title:"Доброго ранку",message:"Нехай сьогоднішній день буде до тебе добрим. І нехай перша усмішка буде хоча б трішки через мене."},
+      {label:"Грайливе",title:"Офіційно: час прокидатися",message:"Кава сама себе не вип’є, а світ без твоєї усмішки зранку працює трохи гірше. Гарного дня тобі."},
+      {label:"Коротке",title:"Ранкове нагадування",message:"Ти прекрасна. День почався. Я про тебе думаю. Тепер можна вставати."}
+    ]
+  },
+  {
+    id:"birthday",
+    icon:"✧",
+    title:"День народження",
+    sub:"Особисте привітання замість стандартної листівки.",
+    tone:"святково",
+    data:{
+      introMain:"сьогодні твій день",
+      introTop:"",
+      envelopeHint:"відкрий своє маленьке привітання",
+      letterTo:"це тільки для тебе",
+      letterTitle:"З днем народження",
+      letterMessage:"Я хочу побажати тобі не просто «щастя й здоров’я». Хочу, щоб у твоєму році було більше людей, місць і моментів, після яких думаєш: «ось заради цього все й варто». І щоб поруч завжди залишалося місце для спокою, сміху та любові.",
+      letterSign:"Обіймаю й святкую тебе.",
+      choiceTitle:"Як продовжимо свято?",
+      choices:[
+        {emoji:"🎂",title:"Торт",subtitle:"без компромісів"},
+        {emoji:"🥂",title:"Вечеря",subtitle:"гарно й смачно"},
+        {emoji:"🎁",title:"Сюрприз",subtitle:"не підглядай"},
+        {emoji:"🌙",title:"Нічна прогулянка",subtitle:"після всього"}
+      ],
+      finalTitle:"Твій день",
+      finalDate:"",
+      finalTime:"",
+      finalNote:"Нехай він запам’ятається саме хорошим."
+    },
+    greetings:[
+      {label:"Особисте",title:"З днем народження",message:"Бажаю тобі року, у якому буде більше речей, що справді твої: людей, місць, рішень, сміху й тихого щастя. І нехай у всьому цьому буде багато любові."},
+      {label:"Тепле",title:"Сьогодні святкуємо тебе",message:"Я дуже радий, що колись у світі з’явилася саме ти. Нехай цей рік буде до тебе добрим — і нехай у ньому буде багато приводів усміхатися."},
+      {label:"Коротке",title:"Твій новий рік",message:"Бажаю, щоб цей особистий новий рік був сміливим, теплим і дуже твоїм. З днем народження."}
+    ]
   }
-];
+]
 
-function applyPreset(id){
+function applyPreset(id,greetingIndex=0){
   const preset=LETTER_PRESETS.find(x=>x.id===id);
   if(!preset) return;
 
   const d=preset.data;
+  const greeting=(preset.greetings||[])[Math.max(0,Math.min((preset.greetings||[]).length-1,greetingIndex))] || {};
   const set=(field,value)=>{const el=document.getElementById(field);if(el)el.value=value||""};
+
   set("introMain",d.introMain);
+  set("introTop",d.introTop);
   set("envelopeHint",d.envelopeHint);
-  set("letterTitle",d.letterTitle);
-  set("letterMessage",d.letterMessage);
+  set("letterTo",d.letterTo);
+  set("letterTitle",greeting.title || d.letterTitle);
+  set("letterMessage",greeting.message || d.letterMessage);
+  set("letterSign",d.letterSign);
   set("choiceTitle",d.choiceTitle);
-  (d.choices||[]).slice(0,4).forEach((v,i)=>{
-    set(`c${i+1}t`,v);
+
+  (d.choices||[]).slice(0,4).forEach((choice,i)=>{
+    set(`c${i+1}e`,choice.emoji||"❤");
+    set(`c${i+1}t`,choice.title||"");
+    set(`c${i+1}s`,choice.subtitle||"");
   });
+
+  set("finalTitle",d.finalTitle);
+  set("finalDate",d.finalDate);
+  set("finalTime",d.finalTime);
+  set("finalNote",d.finalNote);
+
+  const secret=document.getElementById("useSecret");
+  if(secret) secret.checked=false;
 
   saveDraft();
   mobileWizardState.index=0;
   openMobileCreate({resume:true});
-  showMobileToast(`Шаблон «${preset.title}» застосовано`);
+  showMobileToast(`Сценарій «${preset.title}» готовий`);
 }
-
 
 function haptic(ms=10){
   try{ navigator.vibrate?.(ms); }catch{}
@@ -5154,13 +5847,56 @@ async function hydrateLocalLibrary(){
 function setMobileAppVisibility(app=true){
   const appEl=document.getElementById("mobileApp");
   const wizard=document.getElementById("mobileWizard");
+  const tabbar=document.getElementById("maTabbar");
+  const topbar=document.querySelector(".ma-topbar");
+
   if(app){
     appEl?.classList.remove("hidden");
     wizard?.classList.add("hidden");
+
+    if(appEl){
+      appEl.style.removeProperty("display");
+      appEl.style.removeProperty("visibility");
+      appEl.setAttribute("aria-hidden","false");
+    }
+    if(wizard){
+      wizard.style.removeProperty("display");
+      wizard.setAttribute("aria-hidden","true");
+    }
+    if(tabbar){
+      tabbar.style.removeProperty("display");
+      tabbar.style.removeProperty("visibility");
+      tabbar.style.removeProperty("pointer-events");
+    }
+    if(topbar){
+      topbar.style.removeProperty("display");
+      topbar.style.removeProperty("visibility");
+    }
+
     document.body.classList.remove("mw-keyboard-open","mw-create-active");
   }else{
     appEl?.classList.add("hidden");
     wizard?.classList.remove("hidden");
+
+    if(appEl){
+      appEl.style.setProperty("display","none","important");
+      appEl.style.setProperty("visibility","hidden","important");
+      appEl.setAttribute("aria-hidden","true");
+    }
+    if(wizard){
+      wizard.style.setProperty("display","flex","important");
+      wizard.setAttribute("aria-hidden","false");
+    }
+    if(tabbar){
+      tabbar.style.setProperty("display","none","important");
+      tabbar.style.setProperty("visibility","hidden","important");
+      tabbar.style.setProperty("pointer-events","none","important");
+    }
+    if(topbar){
+      topbar.style.setProperty("display","none","important");
+      topbar.style.setProperty("visibility","hidden","important");
+    }
+
     document.body.classList.add("mw-create-active");
   }
 }
@@ -5524,8 +6260,13 @@ async function renderLetterDetail(id){
   document.body.classList.add("ma-no-tabs");
   document.getElementById("maTopTitle").textContent="Лист";
   document.getElementById("maScreen").innerHTML=`
-    <section>
-      <div class="ma-empty"><div class="ma-empty-mark">L</div>Відкриваю лист…</div>
+    <section class="ma-letter-detail-shell">
+      <div class="ma-detail-loading">
+        <div>
+          <div class="ma-empty-mark">L</div>
+          <div style="margin-top:12px;font:650 15px/1.2 system-ui;color:#49333f">Відкриваю лист…</div>
+        </div>
+      </div>
     </section>`;
   const library=getLocalLibrary();
   let item=library.find(x=>x.id===id) || {id};
@@ -5552,21 +6293,26 @@ async function renderLetterDetail(id){
   const hasKey=!!(item.editKey || localStorage.getItem(`love-letter-edit-${id}`));
 
   document.getElementById("maScreen").innerHTML=`
-    <section>
+    <section class="ma-letter-detail-shell">
       <div class="ma-detail-hero">
-        <div class="ma-detail-cover">${escapeHtml(initial)}</div>
-        <h1>${escapeHtml(recipient)}</h1>
-        <p>${escapeHtml(title)}</p>
-        <div class="ma-detail-status"><span class="ma-detail-status-dot"></span>${hasKey ? "Керування доступне" : "Лише перегляд"}</div>
+        <div class="ma-detail-main">
+          <div class="ma-detail-cover">${escapeHtml(initial)}</div>
+          <div class="ma-detail-copy">
+            <div class="ma-detail-eyebrow">Особистий лист</div>
+            <h1>${escapeHtml(recipient)}</h1>
+            <p>${escapeHtml(title)}</p>
+            <div class="ma-detail-status"><span class="ma-detail-status-dot"></span>${hasKey ? "Можна редагувати" : "Лише перегляд"}</div>
+          </div>
+        </div>
         <div class="ma-detail-actions">
-          <button class="ma-detail-primary" id="maOpenRecipient" type="button">Відкрити</button>
+          <button class="ma-detail-primary" id="maOpenRecipient" type="button">Відкрити лист</button>
           <button class="ma-detail-secondary" id="maShareRecipient" type="button">Поділитися</button>
         </div>
       </div>
 
       <div class="ma-action-list">
         <button class="ma-action-row" id="maEditLetter" type="button" ${hasKey?"":"disabled"}>
-          <span>Редагувати лист</span><span>›</span>
+          <span>Редагувати</span><span>›</span>
         </button>
         <button class="ma-action-row" id="maCopyLink" type="button">
           <span>Копіювати посилання</span><span>↗</span>
@@ -5575,13 +6321,13 @@ async function renderLetterDetail(id){
           <span>Створити копію</span><span>＋</span>
         </button>
         ${hasKey ? `<button class="ma-action-row" id="maRegenerateLink" type="button">
-          <span>Створити нове посилання</span><span>↻</span>
+          <span>Нове посилання</span><span>↻</span>
         </button>` : ""}
         <button class="ma-action-row danger" id="maDeleteLetter" type="button">
-          <span>${hasKey ? "Видалити лист" : "Прибрати з бібліотеки"}</span><span>×</span>
+          <span>${hasKey ? "Видалити лист" : "Прибрати зі списку"}</span><span>×</span>
         </button>
       </div>
-      ${loadError ? `<div class="ma-detail-error">Зараз не вдалося відкрити лист: ${escapeHtml(loadError)}. Локальні дії все одно доступні настільки, наскільки дозволяє збережений ключ.</div>` : ""}
+      ${loadError ? `<div class="ma-detail-error">Зараз не вдалося оновити дані листа. Частина дій може бути тимчасово недоступною.</div>` : ""}
     </section>`;
 
   const recipientUrl=`${location.origin}/l/${id}`;
@@ -5761,27 +6507,50 @@ function renderAppIdeas(){
   document.getElementById("maTopTitle").textContent="Ідеї";
 
   document.getElementById("maScreen").innerHTML=`
-    <section>
-      <h1 class="ma-page-title">З чого почати?</h1>
-      <p class="ma-page-sub">Обери настрій. Це не готовий шаблон “під копірку” — він лише заповнить стартову структуру, яку ти одразу зможеш переписати під себе.</p>
-      <div class="ma-idea-grid">
+    <section class="ideas-page">
+      <div class="ideas-hero">
+        <div class="ma-section-kicker">Готові історії</div>
+        <h1 class="ma-page-title">Обери момент — решта вже майже готова.</h1>
+        <p class="ma-page-sub">Кожен сценарій уже має перший екран, текст листа, варіанти вибору й фінал. Обери лише стиль привітання — потім зміниш будь-яке слово під себе.</p>
+      </div>
+
+      <div class="ideas-scenario-grid">
         ${LETTER_PRESETS.map(p=>`
-          <button class="ma-idea-card" type="button" data-preset-id="${p.id}">
-            <div class="ma-idea-icon">${p.icon}</div>
-            <div>
-              <div class="ma-idea-title">${escapeHtml(p.title)}</div>
-              <div class="ma-idea-sub">${escapeHtml(p.sub)}</div>
+          <article class="ideas-scenario-card">
+            <div class="ideas-card-head">
+              <div class="ideas-card-icon">${p.icon}</div>
+              <div class="ideas-card-copy">
+                <div class="ideas-card-tone">${escapeHtml(p.tone||"")}</div>
+                <h2>${escapeHtml(p.title)}</h2>
+                <p>${escapeHtml(p.sub)}</p>
+              </div>
             </div>
-            <div class="ma-idea-arrow">›</div>
-          </button>`).join("")}
+
+            <div class="ideas-preview">
+              <div class="ideas-preview-label">Готовий початок</div>
+              <div class="ideas-preview-title">${escapeHtml(p.data.letterTitle)}</div>
+              <div class="ideas-preview-body">${escapeHtml(p.data.letterMessage)}</div>
+            </div>
+
+            <div class="ideas-greetings">
+              <div class="ideas-greetings-label">Обери варіант привітання</div>
+              ${(p.greetings||[]).map((g,i)=>`
+                <button class="ideas-greeting-option" type="button" data-idea-id="${p.id}" data-greeting-index="${i}">
+                  <span>
+                    <strong>${escapeHtml(g.label)}</strong>
+                    <small>${escapeHtml(g.title)}</small>
+                  </span>
+                  <span class="ideas-use">Використати</span>
+                </button>`).join("")}
+            </div>
+          </article>`).join("")}
       </div>
     </section>`;
 
-  document.querySelectorAll("[data-preset-id]").forEach(btn=>{
-    btn.addEventListener("click",()=>applyPreset(btn.dataset.presetId));
+  document.querySelectorAll("[data-idea-id]").forEach(btn=>{
+    btn.addEventListener("click",()=>applyPreset(btn.dataset.ideaId,Number(btn.dataset.greetingIndex||0)));
   });
 }
-
 function renderAppSettings(){
   setMobileAppVisibility(true);
   document.body.classList.add("ma-no-tabs");
@@ -5927,8 +6696,12 @@ function renderAppSettings(){
 
 function openMobileCreate({resume=false}={}){
   haptic(8);
-  document.body.classList.add("ma-no-tabs");
+  document.body.classList.add("ma-no-tabs","mw-create-active");
   setMobileAppVisibility(false);
+
+  // Hard guarantee: no product tabbar is allowed inside the story wizard.
+  const tabbar=document.getElementById("maTabbar");
+  if(tabbar) tabbar.style.setProperty("display","none","important");
 
   if(!resume){
     clearDraft();
@@ -6447,25 +7220,20 @@ function renderMobileVisualDetails(){
     return;
   }
 
+  const portraitName=(document.getElementById("recipient")?.value || "").trim() || "Love";
   host.innerHTML = `
     <div class="mw-soft-card">
-      <label class="mw-label">Фото для аналізу</label>
+      <label class="mw-label">Фото для портрета</label>
       <input class="mw-input" id="mwWordPhotoInput" type="file" accept="image/*" style="padding-top:13px" />
-      <div class="mw-field" style="margin-top:14px">
-        <label class="mw-label" for="mwWordList">Слова портрета</label>
-        <input class="mw-input" id="mwWordList" placeholder="кохаю, разом, назавжди, ми" />
+      <div class="mw-name-portrait-note">
+        <span class="mw-name-portrait-mark">Aa</span>
+        <div>
+          <strong>Портрет буде складено тільки з імені «${escapeHtml(portraitName)}»</strong>
+          <span>Ім’я береться з першого кроку. Оригінал фото не зберігається.</span>
+        </div>
       </div>
-      <div class="mw-helper">Оригінал фото не зберігається — лишається тільки готовий ефект.</div>
       <div id="mwWordPreview" class="mw-word-preview"></div>
     </div>`;
-
-  const legacyWords = document.getElementById("wordPortraitWords");
-  if(legacyWords) document.getElementById("mwWordList").value = legacyWords.value || "";
-
-  document.getElementById("mwWordList")?.addEventListener("input", e=>{
-    if(legacyWords) legacyWords.value = e.target.value;
-    renderMobilePreview();
-  });
 
   document.getElementById("mwWordPhotoInput")?.addEventListener("change", async e=>{
     const file = e.target.files?.[0];
@@ -6834,7 +7602,7 @@ function unpackPortraitLevels(portrait){
 
 async function createWordPortrait(file, wordsText){
   const img = new Image();
-  const url = посилання.createObjectпосилання(file);
+  const url = URL.createObjectURL(file);
   try{
     img.src = url;
     await img.decode();
@@ -6873,9 +7641,10 @@ async function createWordPortrait(file, wordsText){
       const darkness = Math.pow(1-n,.82);
       levels[i] = Math.max(0,Math.min(15,Math.round(darkness*15)));
     }
-    return {v:1,w,h,tones:packPortraitLevels(levels),words:splitPortraitWords(wordsText)};
+    const recipientName=(document.getElementById("recipient")?.value || "").trim() || "Love";
+    return {v:2,w,h,tones:packPortraitLevels(levels),words:[recipientName]};
   }finally{
-    посилання.revokeObjectпосилання(url);
+    URL.revokeObjectURL(url);
   }
 }
 
@@ -6947,7 +7716,7 @@ function gatherData(){
     letterSign: $("#letterSign").value.trim(),
     showPhoto: $("#showPhoto").checked,
     mediaMode: getMediaMode(),
-    portraitWords: $("#portraitWords")?.value.trim() || "",
+    portraitWords: recipient,
     portraitData: getMediaMode() === "portrait" ? state.portraitData : null,
     photoData: getMediaMode() === "photo" ? (state.photoData || "") : "",
     choiceTitle: $("#choiceTitle").value.trim() || "Що будемо робити?",
@@ -7123,7 +7892,7 @@ function prevStep(){
 
 async function compressImage(file){
   const img = new Image();
-  const url = посилання.createObjectпосилання(file);
+  const url = URL.createObjectURL(file);
   img.src = url;
   await img.decode();
   const maxSide = 540;
@@ -7135,7 +7904,7 @@ async function compressImage(file){
   const ctx = canvas.getContext("2d");
   ctx.drawImage(img, 0, 0, w, h);
   const data = canvas.toDataпосилання("image/jpeg", 0.62);
-  посилання.revokeObjectпосилання(url);
+  URL.revokeObjectURL(url);
   return data;
 }
 
@@ -7250,7 +8019,12 @@ function mountStory(payload){
   view.innerHTML = `
     <div class="shell" style="padding-bottom:18px">
       <header class="topbar">
-        <div class="brand"><div class="seal" id="hiddenEditSeal">L</div><div>Love Letter</div></div>
+        <div class="brand recipient-brand">
+          <button class="recipient-logo" id="hiddenEditSeal" type="button" aria-label="Love Letter">
+            <img src="/brand/logo-icon.png?v=110" alt="">
+          </button>
+          <img class="recipient-wordmark" src="/brand/logo-wordmark.png?v=110" alt="Love Letter">
+        </div>
         <div class="recipient-mode-badge">для отримувача</div>
       </header>
       <div class="phone" style="max-width:430px;margin:0 auto">
@@ -7854,7 +8628,7 @@ function populateEditorFromPayload(d){
   set("letterMessage", d.letterMessage);
   set("letterSign", d.letterSign);
   set("showPhoto", d.showPhoto !== false);
-  set("portraitWords", d.portraitWords || d.portraitData?.words?.join(", ") || "кохаю, разом, назавжди, ти, ми");
+  set("portraitWords", d.recipient || "");
   setMediaMode(d.mediaMode || (d.portraitData ? "portrait" : d.photoData ? "photo" : "none"));
   set("choiceTitle", d.choiceTitle);
 
@@ -8077,8 +8851,11 @@ function attachListenersImpl(){
 
   $$("#recipient, #introMain, #introTop, #envelopeHint, #secretQuestion, #secretAnswer, #letterTo, #letterTitle, #letterMessage, #letterSign, #portraitWords, #choiceTitle, #finalCaption, #finalTitle, #finalDate, #finalTime, #finalNote, #finalChoiceIndex, #showPhoto, #useSecret, #c1e, #c1t, #c1s, #c2e, #c2t, #c2s, #c3e, #c3t, #c3s, #c4e, #c4t, #c4s").forEach(el=>{
     el.addEventListener("input", () => {
-      if(el.id === "recipient" && !$("#letterTo").dataset.touched){
-        $("#letterTo").value = `это тебе, ${$("#recipient").value.trim() || 'тебе'}`;
+      if(el.id === "recipient"){
+        if(!$("#letterTo").dataset.touched){
+          $("#letterTo").value = `це тобі, ${$("#recipient").value.trim() || 'тобі'}`;
+        }
+        if($("#portraitWords")) $("#portraitWords").value = $("#recipient").value.trim();
       }
       renderPhonePreview();
     });
@@ -8091,7 +8868,7 @@ function attachListenersImpl(){
       updateMediaModeUI();
       if(getMediaMode()==="portrait" && state.lastImageFile){
         try{
-          state.portraitData=await createWordPortrait(state.lastImageFile,$("#portraitWords")?.value||"");
+          state.portraitData=await createWordPortrait(state.lastImageFile,$("#recipient")?.value||"");
           state.photoData="";
           $("#localPortraitPreviewWrap")?.classList.remove("hidden");
           renderWordPortrait($("#localPortraitPreview"),state.portraitData);
@@ -8107,15 +8884,6 @@ function attachListenersImpl(){
     });
   });
 
-  $("#portraitWords")?.addEventListener("change", async()=>{
-    if(getMediaMode()==="portrait" && state.lastImageFile){
-      try{
-        state.portraitData=await createWordPortrait(state.lastImageFile,$("#portraitWords").value);
-        renderWordPortrait($("#localPortraitPreview"),state.portraitData);
-        saveDraft(); renderPhonePreview();
-      }catch{}
-    }
-  });
 
   $("#photoInput").addEventListener("change", async(e)=>{
     const file=e.target.files?.[0];
@@ -8126,7 +8894,7 @@ function attachListenersImpl(){
     try{
       if(getMediaMode()==="portrait"){
         if(status) status.textContent="Створюю портрет локально…";
-        state.portraitData=await createWordPortrait(file,$("#portraitWords")?.value||"");
+        state.portraitData=await createWordPortrait(file,$("#recipient")?.value||"");
         state.photoData="";
         $("#localPortraitPreviewWrap")?.classList.remove("hidden");
         renderWordPortrait($("#localPortraitPreview"),state.portraitData);
@@ -8242,7 +9010,7 @@ initPWA();
     document.getElementById("storyView").innerHTML = `
       <div class="viewer-loading" style="min-height:100svh;display:grid;place-items:center;text-align:center;padding:24px">
         <div>
-          <div class="seal" style="margin:0 auto 14px">L</div>
+          <img src="/brand/logo-icon.png?v=110" alt="Love Letter" style="width:58px;height:58px;border-radius:18px;margin:0 auto 14px;object-fit:cover">
           <div style="font-family:'Cormorant Garamond';font-size:34px">Відкриваємо лист…</div>
         </div>
       </div>`;
