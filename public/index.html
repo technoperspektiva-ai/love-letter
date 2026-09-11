@@ -6141,6 +6141,612 @@ body:not(.preview-scroll-lock){
   }
 }
 
+
+/* ===============================================================
+   Love Letter 1.14 — writing assist + letter typography
+   =============================================================== */
+.mw-letter-assist{
+  margin:0 0 16px;
+  border-radius:18px;
+  overflow:hidden;
+  background:#f7f1ee;
+  box-shadow:inset 0 0 0 1px rgba(74,34,52,.05);
+}
+.mw-letter-assist summary{
+  min-height:52px;
+  padding:0 14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  list-style:none;
+  cursor:pointer;
+  color:#4a3340;
+  font:700 13px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+}
+.mw-letter-assist summary::-webkit-details-marker{display:none}
+.mw-letter-assist summary small{
+  padding:6px 8px;
+  border-radius:999px;
+  background:#eee4e8;
+  color:#765566;
+  font:650 10px/1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+}
+.mw-letter-suggestion-grid{
+  padding:0 10px 10px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+}
+.mw-letter-suggestion{
+  min-height:58px;
+  padding:9px 10px;
+  border:0;
+  border-radius:14px;
+  text-align:left;
+  background:#fff;
+  color:#3f2b35;
+  box-shadow:inset 0 0 0 1px rgba(74,34,52,.045);
+}
+.mw-letter-suggestion strong{
+  display:block;
+  color:#5b3347;
+  font:700 12px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+}
+.mw-letter-suggestion span{
+  display:block;
+  margin-top:4px;
+  color:#95808a;
+  font:400 10.5px/1.25 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+}
+.mw-letter-suggestion:active{transform:scale(.985)}
+
+.mw-letter-font-block{
+  margin-top:16px;
+  padding-top:16px;
+  border-top:1px solid rgba(74,34,52,.06);
+}
+.mw-letter-font-head strong{
+  display:block;
+  color:#4c3440;
+  font:700 12px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+}
+.mw-letter-font-head span{
+  display:block;
+  margin-top:4px;
+  color:#9a848e;
+  font:400 11px/1.35 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+}
+.mw-letter-font-grid{
+  margin-top:10px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+.mw-letter-font{
+  min-height:66px;
+  padding:9px;
+  border:1px solid #eadfe3;
+  border-radius:15px;
+  display:grid;
+  grid-template-columns:40px minmax(0,1fr);
+  align-items:center;
+  gap:9px;
+  text-align:left;
+  background:#fff;
+  color:#3d2a34;
+}
+.mw-letter-font.is-active{
+  border-color:#9c657c;
+  background:#fff8fa;
+  box-shadow:0 0 0 3px rgba(111,51,76,.06);
+}
+.mw-letter-font-sample{
+  width:40px;height:40px;border-radius:12px;
+  display:grid;place-items:center;
+  background:#f5edef;
+  color:#5b3347;
+  font-size:18px;
+}
+.mw-letter-font strong{
+  display:block;
+  font:700 11.5px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+}
+.mw-letter-font small{
+  display:block;
+  margin-top:3px;
+  color:#9a858e;
+  font:400 9.5px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+}
+
+/* System-safe font choices: no external font dependency. */
+.font-classic,
+.paper.letter-font-classic .title,
+.paper.letter-font-classic .msg{
+  font-family:Georgia,"Times New Roman",serif !important;
+}
+.paper.letter-font-classic .to,
+.paper.letter-font-classic .sign{
+  font-family:Georgia,"Times New Roman",serif !important;
+  font-style:italic;
+}
+
+.font-editorial,
+.paper.letter-font-editorial .title,
+.paper.letter-font-editorial .msg,
+.paper.letter-font-editorial .to,
+.paper.letter-font-editorial .sign{
+  font-family:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif !important;
+}
+.paper.letter-font-editorial .title{letter-spacing:-.025em}
+
+.font-romantic,
+.paper.letter-font-romantic .title,
+.paper.letter-font-romantic .to,
+.paper.letter-font-romantic .sign{
+  font-family:"Baskerville","Baskerville Old Face","Iowan Old Style",Georgia,serif !important;
+}
+.paper.letter-font-romantic .msg{
+  font-family:"Baskerville","Iowan Old Style",Georgia,serif !important;
+  line-height:1.62 !important;
+}
+
+.font-handwritten,
+.paper.letter-font-handwritten .to,
+.paper.letter-font-handwritten .title,
+.paper.letter-font-handwritten .sign{
+  font-family:"Snell Roundhand","Apple Chancery","Segoe Script","Bradley Hand",cursive !important;
+}
+.paper.letter-font-handwritten .msg{
+  font-family:Georgia,"Times New Roman",serif !important;
+}
+.paper.letter-font-handwritten .title{font-weight:600 !important}
+
+@media(max-width:420px){
+  .mw-letter-suggestion-grid,
+  .mw-letter-font-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+
+/* ===============================================================
+   Love Letter 1.14.1 — clean brand header
+   =============================================================== */
+
+/* Old desktop brand text created a duplicate "Love Letter" over the new logo. */
+.ma-topbar::after{
+  content:none !important;
+  display:none !important;
+}
+
+/* No secondary title beside / over the logo. */
+.ma-top-title{
+  display:none !important;
+}
+
+/* Main app header: logo + actions only. */
+.ma-topbar{
+  grid-template-columns:minmax(0,1fr) auto !important;
+  gap:12px !important;
+  align-items:center !important;
+}
+
+.ma-main-logo{
+  grid-column:1 !important;
+  width:auto !important;
+  max-width:178px !important;
+  height:48px !important;
+  padding:0 !important;
+  margin:0 !important;
+  border:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  overflow:visible !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+}
+.ma-main-logo img{
+  display:block !important;
+  width:auto !important;
+  max-width:178px !important;
+  height:44px !important;
+  object-fit:contain !important;
+  object-position:left center !important;
+  background:transparent !important;
+}
+
+.ma-icon-btn{
+  grid-column:2 !important;
+  justify-self:end !important;
+}
+
+/* Wizard header: one logo only. */
+.mw-brand{
+  min-width:0 !important;
+  width:auto !important;
+  display:flex !important;
+  align-items:center !important;
+}
+.mw-main-logo{
+  display:block !important;
+  width:auto !important;
+  max-width:176px !important;
+  height:46px !important;
+  object-fit:contain !important;
+  object-position:left center !important;
+}
+
+/* Recipient brand: one clean logo, no second text layer. */
+.recipient-brand{
+  min-width:0 !important;
+  width:auto !important;
+}
+.recipient-main-logo{
+  width:auto !important;
+  max-width:176px !important;
+  height:44px !important;
+  padding:0 !important;
+  border:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+}
+.recipient-main-logo img{
+  display:block !important;
+  width:auto !important;
+  max-width:176px !important;
+  height:44px !important;
+  object-fit:contain !important;
+}
+
+/* Settings brand uses the exact same asset scale language. */
+.ma-settings-main-logo{
+  display:block !important;
+  width:auto !important;
+  max-width:230px !important;
+  height:68px !important;
+  object-fit:contain !important;
+  object-position:left center !important;
+}
+
+/* Mobile compact sizing */
+@media (max-width:900px){
+  .ma-topbar{
+    min-height:58px !important;
+    padding:8px 16px !important;
+  }
+  .ma-main-logo{
+    max-width:158px !important;
+    height:42px !important;
+  }
+  .ma-main-logo img{
+    max-width:158px !important;
+    height:40px !important;
+  }
+  .mw-main-logo{
+    max-width:154px !important;
+    height:40px !important;
+  }
+  .recipient-main-logo,
+  .recipient-main-logo img{
+    max-width:154px !important;
+    height:40px !important;
+  }
+}
+
+/* Desktop sidebar header */
+@media (min-width:901px){
+  .ma-topbar{
+    width:220px !important;
+    padding:18px 14px 12px !important;
+  }
+  .ma-main-logo{
+    max-width:164px !important;
+  }
+  .ma-main-logo img{
+    max-width:164px !important;
+  }
+}
+
+
+/* ===============================================================
+   Love Letter 1.15 — media isolation + recipient layout system
+   =============================================================== */
+
+/* ---------------- Recipient flow layout ---------------- */
+#storyView{
+  --story-pad-x:clamp(18px,5vw,26px);
+  --story-width:390px;
+}
+
+#storyView #storyStage{
+  width:100%;
+  min-height:100%;
+}
+
+#storyView .stage-center{
+  width:min(100%,var(--story-width)) !important;
+  min-height:100% !important;
+  margin:0 auto !important;
+  padding:
+    clamp(24px,6vh,52px)
+    var(--story-pad-x)
+    calc(28px + env(safe-area-inset-bottom)) !important;
+  box-sizing:border-box !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+}
+
+/* UI typography is deliberately sans. Serif/script only belongs to the actual letter. */
+#storyView .light-title,
+#storyView .qmark,
+#storyView .recipient-choice-shell h4{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Helvetica,Arial,sans-serif !important;
+  font-weight:740 !important;
+  letter-spacing:-.045em !important;
+  text-wrap:balance !important;
+}
+
+#storyView .light-title{
+  max-width:330px !important;
+  margin:8px auto 0 !important;
+  color:#fff8fb !important;
+  font-size:clamp(38px,11vw,52px) !important;
+  line-height:.96 !important;
+}
+
+#storyView .light-sub{
+  max-width:310px !important;
+  margin:0 auto !important;
+  color:#ddbccc !important;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif !important;
+  font-style:normal !important;
+  font-size:15px !important;
+  line-height:1.4 !important;
+  font-weight:600 !important;
+}
+
+#storyView .qmark{
+  max-width:330px !important;
+  margin:0 auto 14px !important;
+  color:#fff8fb !important;
+  font-size:clamp(34px,9.5vw,46px) !important;
+  line-height:.98 !important;
+}
+
+#storyView .preview-note{
+  max-width:310px !important;
+  margin:18px auto 0 !important;
+  color:#dbbdca !important;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif !important;
+  font-style:normal !important;
+  font-size:14px !important;
+  line-height:1.4 !important;
+  font-weight:550 !important;
+}
+
+#storyView .pale-input{
+  width:min(100%,310px) !important;
+  height:52px !important;
+  margin:10px auto 0 !important;
+  padding:0 15px !important;
+  border-radius:16px !important;
+  font:600 16px/1 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif !important;
+}
+
+#storyView .big-button{
+  width:min(100%,310px) !important;
+  min-height:52px !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+  border-radius:16px !important;
+  font:700 15px/1 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif !important;
+}
+
+/* Step-specific spacing */
+#storyStage[data-story-step="0"] .stage-center{
+  justify-content:center !important;
+}
+#storyStage[data-story-step="0"] .big-button{
+  margin-top:12px !important;
+}
+
+#storyStage[data-story-step="1"] .stage-center{
+  justify-content:center !important;
+}
+#storyStage[data-story-step="1"] .big-button{
+  margin-top:24px !important;
+}
+
+#storyStage[data-story-step="2"] .stage-center{
+  justify-content:center !important;
+}
+#storyStage[data-story-step="2"] .envelope-button{
+  margin:0 auto !important;
+}
+
+/* Letter is the ONLY place selected decorative typography lives. */
+#storyView .letter-story-screen{
+  width:100% !important;
+  max-width:430px !important;
+  height:auto !important;
+  min-height:100% !important;
+  margin:0 auto !important;
+  padding:14px 14px calc(18px + env(safe-area-inset-bottom)) !important;
+  box-sizing:border-box !important;
+  display:flex !important;
+  flex-direction:column !important;
+  gap:12px !important;
+}
+
+#storyView .letter-story-scroll{
+  width:100% !important;
+  min-height:0 !important;
+  padding:0 !important;
+  overflow:visible !important;
+}
+
+#storyView .letter-story-action{
+  width:100% !important;
+  padding:0 !important;
+}
+
+#storyView .paper{
+  width:100% !important;
+  max-width:390px !important;
+  margin:0 auto !important;
+  box-sizing:border-box !important;
+}
+
+/* Choice screen uses clean UI typography and consistent grid. */
+#storyView .recipient-choice-shell{
+  width:min(100%,390px) !important;
+  min-height:100% !important;
+  margin:0 auto !important;
+  padding:
+    clamp(28px,6vh,46px)
+    var(--story-pad-x)
+    calc(28px + env(safe-area-inset-bottom)) !important;
+  box-sizing:border-box !important;
+  display:flex !important;
+  flex-direction:column !important;
+  justify-content:center !important;
+}
+
+#storyView .recipient-choice-kicker{
+  margin:0 auto !important;
+  text-align:center !important;
+}
+
+#storyView .recipient-choice-shell h4{
+  max-width:335px !important;
+  margin:8px auto 0 !important;
+  color:#fff8fb !important;
+  font-size:clamp(31px,8.5vw,40px) !important;
+  line-height:1 !important;
+}
+
+#storyView .recipient-choice-shell>p{
+  max-width:300px !important;
+  margin:10px auto 20px !important;
+  font-size:13px !important;
+  line-height:1.45 !important;
+}
+
+#storyView .recipient-choice-list{
+  width:100% !important;
+  display:grid !important;
+  gap:8px !important;
+}
+
+#storyView .recipient-choice-card{
+  width:100% !important;
+  min-height:68px !important;
+  padding:10px 12px !important;
+  border-radius:18px !important;
+  grid-template-columns:42px minmax(0,1fr) 18px !important;
+  gap:10px !important;
+}
+
+#storyView .recipient-choice-card .emo{
+  width:42px !important;
+  height:42px !important;
+  border-radius:13px !important;
+}
+
+#storyView .recipient-choice-card .main{
+  font-size:14px !important;
+  line-height:1.22 !important;
+}
+#storyView .recipient-choice-card .sub{
+  font-size:11px !important;
+  line-height:1.3 !important;
+}
+
+/* Final screen */
+#storyView .recipient-final-shell{
+  width:min(100%,390px) !important;
+  min-height:100% !important;
+  justify-content:center !important;
+  padding:
+    24px
+    var(--story-pad-x)
+    calc(28px + env(safe-area-inset-bottom)) !important;
+  box-sizing:border-box !important;
+}
+
+#storyView .recipient-final-card{
+  width:100% !important;
+  box-sizing:border-box !important;
+}
+
+/* Eliminate stale decorative typography declarations in story UI. */
+#storyView .choice-screen h4,
+#storyView .final-card .line1{
+  text-shadow:none !important;
+}
+
+/* Media is opt-in: no stale canvas/image should appear for none mode. */
+#storyView [data-media-mode="none"] .letter-photo,
+#storyView [data-media-mode="none"] .final-photo{
+  display:none !important;
+}
+
+/* Responsive: avoid accidental content clipping on shorter iPhones. */
+@media(max-width:600px){
+  #storyView .phone-stage{
+    height:auto !important;
+    min-height:calc(100dvh - 54px - env(safe-area-inset-top)) !important;
+    overflow:visible !important;
+  }
+
+  #storyView .phone{
+    min-height:calc(100dvh - 54px - env(safe-area-inset-top)) !important;
+    height:auto !important;
+  }
+
+  #storyView .stage-center,
+  #storyView .recipient-choice-shell,
+  #storyView .recipient-final-shell{
+    min-height:calc(100dvh - 76px - env(safe-area-inset-top)) !important;
+  }
+}
+
+/* Letter font stacks — consistent and intentional. */
+.paper.letter-font-classic .title,
+.paper.letter-font-classic .msg,
+.paper.letter-font-classic .to,
+.paper.letter-font-classic .sign{
+  font-family:Georgia,"Times New Roman",serif !important;
+}
+
+.paper.letter-font-editorial .title,
+.paper.letter-font-editorial .msg,
+.paper.letter-font-editorial .to,
+.paper.letter-font-editorial .sign{
+  font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif !important;
+}
+
+.paper.letter-font-romantic .title,
+.paper.letter-font-romantic .msg,
+.paper.letter-font-romantic .to,
+.paper.letter-font-romantic .sign{
+  font-family:Baskerville,"Baskerville Old Face","Iowan Old Style",Georgia,serif !important;
+}
+
+.paper.letter-font-handwritten .title,
+.paper.letter-font-handwritten .to,
+.paper.letter-font-handwritten .sign{
+  font-family:"Snell Roundhand","Apple Chancery","Segoe Script","Bradley Hand",cursive !important;
+}
+.paper.letter-font-handwritten .msg{
+  font-family:Baskerville,"Iowan Old Style",Georgia,serif !important;
+}
+
 </style>
 </head>
 <body>
@@ -6151,7 +6757,7 @@ body:not(.preview-scroll-lock){
 <div id="creatorView">
   <div id="mobileApp" class="mobile-app hidden">
     <header class="ma-topbar">
-      <button class="ma-main-logo" id="maHomeLogo" type="button" aria-label="Love Letter"><img src="/brand/logo-main.png?v=113" alt="Love Letter"></button>
+      <button class="ma-main-logo" id="maHomeLogo" type="button" aria-label="Love Letter"><img src="/brand/logo-main.png?v=1141" alt="Love Letter"></button>
       <div class="ma-top-title" id="maTopTitle">Love Letter</div>
       <button class="ma-icon-btn" id="maSettingsBtn" type="button" aria-label="Налаштування">•••</button>
     </header>
@@ -6174,7 +6780,7 @@ body:not(.preview-scroll-lock){
   <div id="mobileWizard" class="mobile-wizard hidden">
     <header class="mw-top">
       <div class="mw-brand">
-        <img class="mw-main-logo" src="/brand/logo-main.png?v=113" alt="Love Letter">
+        <img class="mw-main-logo" src="/brand/logo-main.png?v=1141" alt="Love Letter">
       </div>
       <button type="button" class="mw-preview-btn" id="mwPreviewBtn">Перегляд</button>
     </header>
@@ -6262,7 +6868,7 @@ body:not(.preview-scroll-lock){
               <label>Звернення у верхній частині листа<input id="letterTo" maxlength="100" value="цей лист адресовано, Настюші"></label>
               <label>Заголовок листа<input id="letterTitle" maxlength="120" value="Настя, з днем народження!"></label>
               <label>Текст листа<textarea id="letterMessage" maxlength="2500" placeholder="Напиши лист..."></textarea></label>
-              <label>Підпис унизу<input id="letterSign" maxlength="80" placeholder="Люблю тебе."></label>
+              <label>Підпис унизу<input id="letterSign" maxlength="80" placeholder="Люблю тебе."></label><input id="letterFont" type="hidden" value="classic">
             </div>
 
             <div class="step hidden" data-step="3">
@@ -6272,7 +6878,7 @@ body:not(.preview-scroll-lock){
 
               <div class="media-mode-grid" role="radiogroup" aria-label="Тип зображення">
                 <label class="media-mode-card">
-                  <input type="radio" name="mediaMode" value="portrait" checked>
+                  <input type="radio" name="mediaMode" value="portrait">
                   <span class="media-mode-icon">Aa</span>
                   <span><b>Портрет зі слів</b><small>≈ 1–3 КБ у листі</small></span>
                 </label>
@@ -6282,7 +6888,7 @@ body:not(.preview-scroll-lock){
                   <span><b>Звичайне фото</b><small>стискається локально</small></span>
                 </label>
                 <label class="media-mode-card">
-                  <input type="radio" name="mediaMode" value="none">
+                  <input type="radio" name="mediaMode" value="none" checked>
                   <span class="media-mode-icon">—</span>
                   <span><b>Без зображення</b><small>тільки лист</small></span>
                 </label>
@@ -6308,7 +6914,7 @@ body:not(.preview-scroll-lock){
                 </div>
 
                 <div class="switch">
-                  <input type="checkbox" id="showPhoto" checked>
+                  <input type="checkbox" id="showPhoto">
                   <label for="showPhoto" style="margin:0">Показувати зображення в листі</label>
                 </div>
                 <button class="btn ghost slim add-top" type="button" id="removePhoto">Очистити зображення</button>
@@ -6785,6 +7391,15 @@ function applyChoiceSuggestion(suggestion){
 function applyPreset(id,greetingIndex=0){
   const preset=LETTER_PRESETS.find(x=>x.id===id);
   if(!preset) return;
+
+  // A scenario is a fresh story. Never carry an image/portrait from another letter.
+  state.photoData="";
+  state.portraitData=null;
+  state.lastImageFile=null;
+  setMediaMode("none");
+  if(document.getElementById("showPhoto")) document.getElementById("showPhoto").checked=false;
+  const photoInput=document.getElementById("photoInput");
+  if(photoInput) photoInput.value="";
 
   const d=preset.data;
   const greeting=(preset.greetings||[])[Math.max(0,Math.min((preset.greetings||[]).length-1,greetingIndex))] || {};
@@ -7657,7 +8272,7 @@ function renderAppSettings(){
     <section class="ma-settings-shell">
       <div class="ma-settings-hero">
         <div class="ma-settings-brand">
-          <img class="ma-settings-main-logo" src="/brand/logo-main.png?v=113" alt="Love Letter">
+          <img class="ma-settings-main-logo" src="/brand/logo-main.png?v=1141" alt="Love Letter">
         </div>
         <div class="ma-settings-kicker">Твій простір</div>
         <h2>Налаштуй Love Letter красиво й спокійно.</h2>
@@ -7801,9 +8416,14 @@ function openMobileCreate({resume=false}={}){
     state.step=0;
     state.photoData="";
     state.portraitData=null;
+    state.lastImageFile=null;
     state.editingId="";
     state.editKey="";
     mobileWizardState.index=0;
+    setMediaMode("none");
+    if(document.getElementById("showPhoto")) document.getElementById("showPhoto").checked=false;
+    const photoInput=document.getElementById("photoInput");
+    if(photoInput) photoInput.value="";
     // Reset legacy fields to their HTML defaults by reloading only if there is stale content.
     document.getElementById("recipient") && (document.getElementById("recipient").value="");
     document.getElementById("introMain") && (document.getElementById("introMain").value="тобі лист");
@@ -8026,6 +8646,114 @@ function playStepConfirm(){
 }
 
 
+
+const LETTER_TEXT_SUGGESTIONS = [
+  {
+    id:"gentle",
+    label:"Ніжно",
+    title:"Для тебе",
+    sign:"Обіймаю.",
+    message:"{name}, іноді не потрібно чекати особливого дня, щоб сказати щось важливе. Мені просто дуже тепло від того, що ти є в моєму житті. У звичайних розмовах, випадкових усмішках і маленьких моментах ти робиш мої дні світлішими."
+  },
+  {
+    id:"poetic",
+    label:"Поетично",
+    title:"Трохи світла для тебе",
+    sign:"Твій.",
+    message:"{name}, нехай цей лист буде маленьким світлом між нашими днями. Є люди, про яких думаєш не голосно — просто вони тихо живуть десь усередині, як музика, яку не хочеться вимикати. Для мене ти саме така."
+  },
+  {
+    id:"warm",
+    label:"Тепло",
+    title:"Бо поруч із тобою добре",
+    sign:"З теплом.",
+    message:"{name}, я люблю те просте відчуття, яке з’являється поруч із тобою: ніби нікуди не треба поспішати й нічого не треба доводити. Просто хочеться залишитися в цьому моменті ще трохи."
+  },
+  {
+    id:"short",
+    label:"Коротко",
+    title:"Просто одна думка",
+    sign:"Твій.",
+    message:"{name}, сьогодні я подумав про тебе й усміхнувся. Вирішив, що це вже достатня причина написати тобі цей маленький лист."
+  },
+  {
+    id:"deep",
+    label:"Глибше",
+    title:"Те, що не завжди кажу вголос",
+    sign:"Поруч.",
+    message:"{name}, я не завжди вмію вчасно говорити про те, що відчуваю. Але мені важливо, щоб ти знала: твоє місце в моєму житті значно більше, ніж можуть пояснити кілька звичайних фраз."
+  },
+  {
+    id:"lyrical",
+    label:"Лірично",
+    title:"Між рядками",
+    sign:"До тебе.",
+    message:"{name}, у кожного дня є своя тиша, свій вечір і своя думка, до якої повертаєшся. Моя часто веде до тебе. Можливо, саме тому навіть звичайні речі поруч із тобою запам’ятовуються трохи довше."
+  },
+  {
+    id:"playful",
+    label:"Грайливо",
+    title:"Офіційне повідомлення",
+    sign:"Той, хто це все придумав.",
+    message:"{name}, офіційно повідомляю: ти підозріло часто з’являєшся в моїх думках. Розслідування показало, що це мені подобається, тому справу вирішено не закривати."
+  },
+  {
+    id:"promise",
+    label:"Про нас",
+    title:"Я хочу берегти це",
+    sign:"Твій.",
+    message:"{name}, мені подобається те, що поступово виростає між нами — без поспіху, але по-справжньому. Я хочу берегти наші розмови, наші звички, наші дурні жарти й усе те, що з часом стає словом «ми»."
+  }
+];
+
+const LETTER_FONT_OPTIONS = [
+  {id:"classic",label:"Класика",sample:"Aa",desc:"Елегантний книжковий"},
+  {id:"editorial",label:"Редакційний",sample:"Aa",desc:"Стриманий і сучасний"},
+  {id:"romantic",label:"Романтичний",sample:"Aa",desc:"М’який і теплий"},
+  {id:"handwritten",label:"Рукописний",sample:"Aa",desc:"Наче особистий запис"}
+];
+
+function currentRecipientName(){
+  return (document.getElementById("recipient")?.value || "").trim() || "ти";
+}
+
+function applyLetterSuggestion(id){
+  const item=LETTER_TEXT_SUGGESTIONS.find(x=>x.id===id);
+  if(!item) return;
+  const name=currentRecipientName();
+  const replaceName=(value)=>String(value||"").replaceAll("{name}",name);
+
+  const title=document.getElementById("mwLetterTitle");
+  const message=document.getElementById("mwLetterMessage");
+  const sign=document.getElementById("mwLetterSign");
+
+  if(title) title.value=replaceName(item.title);
+  if(message) message.value=replaceName(item.message);
+  if(sign) sign.value=replaceName(item.sign);
+
+  [title,message,sign].forEach(el=>{if(el)el.dataset.userEdited="1"});
+  syncMobileToLegacy();
+  renderPhonePreview();
+  renderMobilePreview();
+  saveDraft();
+  showMobileToast(`Варіант «${item.label}» підставлено`);
+}
+
+function setLetterFont(fontId){
+  const allowed=new Set(LETTER_FONT_OPTIONS.map(x=>x.id));
+  const value=allowed.has(fontId)?fontId:"classic";
+  const legacy=document.getElementById("letterFont");
+  if(legacy) legacy.value=value;
+
+  document.querySelectorAll("[data-letter-font]").forEach(btn=>{
+    btn.classList.toggle("is-active",btn.dataset.letterFont===value);
+  });
+
+  renderPhonePreview();
+  renderMobilePreview();
+  saveDraft();
+}
+
 const MOBILE_WIZARD_STEPS = [
   {
     key:"basic",
@@ -8077,19 +8805,55 @@ const MOBILE_WIZARD_STEPS = [
     kicker:"Сам лист",
     title:"Скажи те, заради чого все це.",
     render:()=>`
-      <div class="mw-screen">
-        <p class="mw-copy mw-emotional">Не намагайся написати ідеально. Найкраще працює те, що звучить як ти.</p>
+      <div class="mw-screen mw-letter-editor">
+        <p class="mw-copy mw-emotional">Можеш написати сам або взяти готову основу й змінити кілька слів під себе.</p>
+
+        <details class="mw-letter-assist" open>
+          <summary>
+            <span>Готові варіанти тексту</span>
+            <small>8 настроїв</small>
+          </summary>
+          <div class="mw-letter-suggestion-grid">
+            ${LETTER_TEXT_SUGGESTIONS.map(item=>`
+              <button class="mw-letter-suggestion" type="button" data-letter-suggestion="${item.id}">
+                <strong>${item.label}</strong>
+                <span>${escapeHtml(item.title)}</span>
+              </button>`).join("")}
+          </div>
+        </details>
+
         <div class="mw-field">
           <label class="mw-label" for="mwLetterTitle">Короткий заголовок</label>
           <input class="mw-input" id="mwLetterTitle" maxlength="100" placeholder="Для тебе" />
         </div>
-        <div class="mw-field" style="margin-top:16px">
+
+        <div class="mw-field">
           <label class="mw-label" for="mwLetterMessage">Текст листа</label>
           <textarea class="mw-textarea" id="mwLetterMessage" placeholder="Напиши тут те, що хочеш сказати…"></textarea>
         </div>
-        <div class="mw-field" style="margin-top:16px">
+
+        <div class="mw-field">
           <label class="mw-label" for="mwLetterSign">Підпис</label>
           <input class="mw-input" id="mwLetterSign" maxlength="80" placeholder="Твій..." />
+        </div>
+
+        <div class="mw-letter-font-block">
+          <div class="mw-letter-font-head">
+            <div>
+              <strong>Стиль листа</strong>
+              <span>Змінює шрифт самого листа, не інтерфейсу.</span>
+            </div>
+          </div>
+          <div class="mw-letter-font-grid">
+            ${LETTER_FONT_OPTIONS.map(font=>`
+              <button class="mw-letter-font" type="button" data-letter-font="${font.id}">
+                <span class="mw-letter-font-sample font-${font.id}">${font.sample}</span>
+                <span>
+                  <strong>${font.label}</strong>
+                  <small>${font.desc}</small>
+                </span>
+              </button>`).join("")}
+          </div>
         </div>
       </div>`
   },
@@ -8451,6 +9215,24 @@ function bindMobileScene(){
     });
   });
 
+  document.querySelectorAll("[data-letter-suggestion]").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      applyLetterSuggestion(btn.dataset.letterSuggestion);
+      haptic(6);
+    });
+  });
+
+  document.querySelectorAll("[data-letter-font]").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      setLetterFont(btn.dataset.letterFont);
+      haptic(5);
+    });
+  });
+
+  if(MOBILE_WIZARD_STEPS[mobileWizardState.index]?.key==="letter"){
+    setLetterFont(document.getElementById("letterFont")?.value || "classic");
+  }
+
   if(MOBILE_WIZARD_STEPS[mobileWizardState.index].key==="secret"){
     renderMobileSecretFields();
   }
@@ -8693,11 +9475,11 @@ function getChoices(){
 function normalizeText(s){ return String(s || "").trim().replace(/\s+/g," ").toLowerCase(); }
 
 function getMediaMode(){
-  return document.querySelector('input[name="mediaMode"]:checked')?.value || "portrait";
+  return document.querySelector('input[name="mediaMode"]:checked')?.value || "none";
 }
 
 function setMediaMode(mode){
-  const value = ["portrait","photo","none"].includes(mode) ? mode : "portrait";
+  const value = ["portrait","photo","none"].includes(mode) ? mode : "none";
   const radio = document.querySelector(`input[name="mediaMode"][value="${value}"]`);
   if(radio) radio.checked = true;
   updateMediaModeUI();
@@ -8904,11 +9686,12 @@ function gatherData(){
     letterTitle: $("#letterTitle").value.trim() || "Для тебе",
     letterMessage: $("#letterMessage").value,
     letterSign: $("#letterSign").value.trim(),
-    showPhoto: $("#showPhoto").checked,
+    letterFont: ($("#letterFont")?.value || "classic"),
+    showPhoto: getMediaMode() !== "none" && $("#showPhoto").checked,
     mediaMode: getMediaMode(),
     portraitWords: recipient,
-    portraitData: getMediaMode() === "portrait" ? state.portraitData : null,
-    photoData: getMediaMode() === "photo" ? (state.photoData || "") : "",
+    portraitData: getMediaMode() === "portrait" && state.portraitData ? state.portraitData : null,
+    photoData: getMediaMode() === "photo" && state.photoData ? state.photoData : "",
     choiceTitle: $("#choiceTitle").value.trim() || "Що будемо робити?",
     choices: getChoices(),
     finalCaption: $("#finalCaption").value.trim() || "думаю про тебе щодня",
@@ -8983,7 +9766,7 @@ function previewLetter(d, animated = false){
   const density = letterDensityClass(d);
   return `
     <div class="letter-frame">
-      <article class="paper ${density} ${animated ? "letter-enter" : ""}">
+      <article class="paper ${density} letter-font-${escapeHtml(d.letterFont || "classic")} ${animated ? "letter-enter" : ""}">
         <div class="to">${escapeHtml(d.letterTo)}</div>
         <div class="title">${escapeHtml(d.letterTitle)}</div>
         <div class="paper-divider"><span>♡</span></div>
@@ -9210,7 +9993,7 @@ function mountStory(payload){
       <header class="topbar">
         <div class="brand recipient-brand">
           <button class="recipient-main-logo" id="hiddenEditSeal" type="button" aria-label="Love Letter">
-            <img src="/brand/logo-main.png?v=113" alt="Love Letter">
+            <img src="/brand/logo-main.png?v=1141" alt="Love Letter">
           </button>
         </div>
         <div class="recipient-mode-badge">для отримувача</div>
@@ -9468,6 +10251,7 @@ function renderStory(){
   const d = state.storyPayload;
   const root = $("#storyStage");
   if(!root || !d) return;
+  root.dataset.storyStep=String(state.storyStep);
 
   if(state.storyStep === 0){
     root.innerHTML = `
@@ -9644,14 +10428,14 @@ function renderStory(){
             files: [file]
           });
         }else{
-          const url = посилання.createObjectпосилання(blob);
+          const url = URL.createObjectURL(blob);
           const a = document.createElement("a");
           a.href = url;
           a.download = "love-letter-choice.png";
           document.body.appendChild(a);
           a.click();
           a.remove();
-          setTimeout(()=>посилання.revokeObjectпосилання(url), 3000);
+          setTimeout(()=>URL.revokeObjectURL(url), 3000);
           status.textContent = "Скрін збережено як PNG — можеш надіслати його.";
         }
       }catch(e){
@@ -9746,7 +10530,7 @@ function loadDraft(){
       }
     }
 
-    setMediaMode(f.mediaMode || (state.portraitData ? "portrait" : state.photoData ? "photo" : "portrait"));
+    setMediaMode(f.mediaMode || (state.portraitData ? "portrait" : state.photoData ? "photo" : "none"));
     if(state.photoData || state.portraitData){
       $("#showPhoto").checked = f.showPhoto !== false;
     }
@@ -9836,6 +10620,7 @@ function populateEditorFromPayload(d){
   set("letterTitle", d.letterTitle);
   set("letterMessage", d.letterMessage);
   set("letterSign", d.letterSign);
+  set("letterFont", d.letterFont || "classic");
   set("showPhoto", d.showPhoto !== false);
   set("portraitWords", d.recipient || "");
   setMediaMode(d.mediaMode || (d.portraitData ? "portrait" : d.photoData ? "photo" : "none"));
