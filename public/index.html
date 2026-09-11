@@ -284,6 +284,15 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
 .hearts span:nth-child(4){left:74%;bottom:28%;animation-delay:1.1s}
 .hearts span:nth-child(5){left:82%;bottom:46%;animation-delay:1.6s}
 @keyframes floatUp{50%{transform:translateY(-24px) scale(1.06)}}
+.final-photo{
+ width:100%;
+ max-width:250px;
+ margin:0 auto 14px;
+ border-radius:24px;
+ overflow:hidden;
+ box-shadow:0 18px 34px rgba(0,0,0,.24);
+ border:1px solid rgba(255,255,255,.2);
+}
 .final-card{
  width:100%;max-width:340px;margin:18px auto 0;background:rgba(36,17,31,.6);
  border:1px solid rgba(255,208,224,.18);border-radius:26px;padding:20px 18px;backdrop-filter:blur(10px)
@@ -292,29 +301,46 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
  display:flex;
  align-items:baseline;
  justify-content:center;
- gap:10px;
+ gap:8px;
  white-space:nowrap;
  text-align:center;
+ flex-wrap:nowrap;
 }
 .final-card .line1{
- font-family:"Cormorant Garamond";
- font-size:36px;
- line-height:1.02;
+ font-family:"Cormorant Garamond", Georgia, serif;
+ font-weight:600;
+ font-size:34px;
+ line-height:1.05;
+ letter-spacing:.01em;
 }
 .final-card .time{
- font-family:"Cormorant Garamond";
- font-size:28px;
- line-height:1.02;
- color:#fff3f7;
+ font-family:Inter, system-ui, sans-serif;
+ font-weight:600;
+ font-size:18px;
+ line-height:1.2;
+ color:#ffe8f0;
+ opacity:.95;
 }
-.final-card .line2{margin-top:10px;color:#ffe6ee}
+.final-card .line2{
+ margin-top:12px;
+ color:#ffe6ee;
+ font-family:Inter, system-ui, sans-serif;
+ font-size:16px;
+ font-weight:700;
+}
 .final-card .time2{
  margin-top:10px;
- font-family:"Cormorant Garamond";
- font-size:25px;
+ font-family:"Cormorant Garamond", Georgia, serif;
+ font-size:24px;
  color:#fff0f6;
 }
-.final-card .note{color:#efcad9;margin-top:8px}
+.final-card .note{
+ color:#efcad9;
+ margin-top:10px;
+ font-family:Inter, system-ui, sans-serif;
+ font-size:14px;
+ line-height:1.35;
+}
 .sharebox{margin-top:14px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);padding:8px;border-radius:18px}
 .sharebox input{margin:0;background:rgba(255,255,255,.94)}
 .mini-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
@@ -349,10 +375,11 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
 }
 @media (max-width: 600px){
 
- .final-card .topline{gap:8px}
- .final-card .line1{font-size:32px}
- .final-card .time{font-size:24px}
- .final-card .time2{font-size:22px}
+ .final-photo{max-width:220px}
+ .final-card .topline{gap:7px}
+ .final-card .line1{font-size:30px}
+ .final-card .time{font-size:17px}
+ .final-card .time2{font-size:21px}
 
  .topbar{gap:10px;align-items:flex-start}
  .top-actions{gap:7px;flex-wrap:wrap;justify-content:flex-end}
@@ -654,7 +681,7 @@ function validateStep(){
     if(!d.secretQuestion) return "Заповни питання для секретного слова.";
     if(!d.secretAnswer) return "Заповни правильну відповідь.";
   }
-  if(state.step === 2 && !d.letterMessage.trim()) return "Лист пустое — добавь текст.";
+  if(state.step === 2 && !d.letterMessage.trim()) return "Лист порожній — додай текст.";
   return "";
 }
 
@@ -729,7 +756,8 @@ function previewChoice(d){
 function previewFinal(d){
   const choice = (d.choices || [])[d.finalChoiceIndex] || {emoji:"❤", title:"Виходимо", subtitle:""};
   return `
-    <div class="stage-center centered" style="justify-content:flex-start;padding-top:38px">
+    <div class="stage-center centered" style="justify-content:flex-start;padding-top:32px">
+      ${d.photoData ? `<div class="final-photo"><img src="${d.photoData}" alt="Фото"></div>` : ``}
       <div style="font-family:'Marck Script';font-size:28px;color:#ffd6e4;max-width:320px">${escapeHtml(d.finalCaption)}</div>
       <div class="final-card">
         <div class="topline">
@@ -981,47 +1009,75 @@ async function buildChoiceShareImage(d){
   ctx.lineWidth = 2;
   ctx.stroke();
 
+  if(d.photoData){
+    try{
+      const img = await new Promise((resolve, reject)=>{
+        const i = new Image();
+        i.onload = ()=>resolve(i);
+        i.onerror = reject;
+        i.src = d.photoData;
+      });
+
+      const px = 390, py = 250, pw = 300, ph = 300, pr = 34;
+      ctx.save();
+      roundRect(ctx, px, py, pw, ph, pr);
+      ctx.clip();
+      const scale = Math.max(pw / img.width, ph / img.height);
+      const dw = img.width * scale;
+      const dh = img.height * scale;
+      const dx = px + (pw - dw) / 2;
+      const dy = py + (ph - dh) / 2;
+      ctx.drawImage(img, dx, dy, dw, dh);
+      ctx.restore();
+
+      ctx.strokeStyle = "rgba(255,255,255,.22)";
+      ctx.lineWidth = 2;
+      roundRect(ctx, px, py, pw, ph, pr);
+      ctx.stroke();
+    }catch{}
+  }
+
   ctx.fillStyle = "#fff4f7";
-  ctx.font = '600 70px "Cormorant Garamond", serif';
+  ctx.font = '600 62px "Cormorant Garamond", serif';
   const topTitle = d.finalTitle || "Виходимо";
   const topDate = d.finalDate || "";
-  const topGap = 20;
+  const topGap = 18;
   const titleW = ctx.measureText(topTitle).width;
-  ctx.font = '600 40px "Cormorant Garamond", serif';
+  ctx.font = '600 30px Inter, sans-serif';
   const dateW = topDate ? ctx.measureText(topDate).width : 0;
   const totalW = titleW + (topDate ? topGap + dateW : 0);
   let startX = 540 - totalW / 2;
 
-  ctx.font = '600 70px "Cormorant Garamond", serif';
+  ctx.font = '600 62px "Cormorant Garamond", serif';
   ctx.textAlign = "left";
-  ctx.fillText(topTitle, startX, 520);
+  ctx.fillText(topTitle, startX, 640);
   if(topDate){
     startX += titleW + topGap;
-    ctx.font = '600 40px "Cormorant Garamond", serif';
-    ctx.fillText(topDate, startX, 516);
+    ctx.font = '600 30px Inter, sans-serif';
+    ctx.fillText(topDate, startX, 635);
   }
   ctx.textAlign = "center";
 
-  ctx.font = '68px sans-serif';
-  ctx.fillText(choice.emoji || "❤", 540, 635);
+  ctx.font = '60px sans-serif';
+  ctx.fillText(choice.emoji || "❤", 540, 740);
 
-  ctx.font = '700 44px Inter, sans-serif';
-  wrapCanvasText(ctx, choice.title || "Наш вибір", 540, 730, 700, 56);
+  ctx.font = '700 42px Inter, sans-serif';
+  wrapCanvasText(ctx, choice.title || "Наш вибір", 540, 810, 700, 54);
 
   if(d.finalTime){
     ctx.fillStyle = "#fff3f7";
-    ctx.font = '600 42px "Cormorant Garamond", serif';
-    wrapCanvasText(ctx, d.finalTime, 540, 820, 720, 50);
+    ctx.font = '600 38px "Cormorant Garamond", serif';
+    wrapCanvasText(ctx, d.finalTime, 540, 885, 720, 46);
   }
 
   ctx.fillStyle = "#f0c7d7";
   ctx.font = '34px Inter, sans-serif';
-  wrapCanvasText(ctx, choice.subtitle || "", 540, 895, 700, 46);
+  wrapCanvasText(ctx, choice.subtitle || "", 540, 950, 700, 44);
 
   if(d.finalNote){
     ctx.fillStyle = "#efcad9";
     ctx.font = '32px Inter, sans-serif';
-    wrapCanvasText(ctx, d.finalNote, 540, 980, 720, 44);
+    wrapCanvasText(ctx, d.finalNote, 540, 1030, 720, 42);
   }
 
   ctx.fillStyle = "#ffd8e5";
@@ -1152,8 +1208,8 @@ function renderStory(){
   if(state.storyStep === 5){
     const choice = (d.choices || [])[d.finalChoiceIndex] || {emoji:"❤", title:"Виходимо", subtitle:""};
     root.innerHTML = `
-      <div class="stage-center centered" style="justify-content:flex-start;padding-top:34px">
-        ${d.showPhoto && d.photoData ? `<div style="width:100%;max-width:310px;margin-bottom:14px;border-radius:24px;overflow:hidden;box-shadow:0 18px 34px rgba(0,0,0,.24)"><img src="${d.photoData}" alt="Фото"></div>` : ``}
+      <div class="stage-center centered" style="justify-content:flex-start;padding-top:30px">
+        ${d.photoData ? `<div class="final-photo"><img src="${d.photoData}" alt="Фото"></div>` : ``}
         <div style="font-family:'Marck Script';font-size:28px;color:#ffd6e4;max-width:320px">${escapeHtml(d.finalCaption)}</div>
         <div class="final-card">
           <div class="topline">
