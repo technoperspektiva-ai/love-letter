@@ -1,12 +1,12 @@
-# Love Letter 1.15.3 — Desktop Background Continuity
+# Love Letter 1.15.4 — Recipient Cream Desktop
 
-Виправлено desktop background:
-- фон тепер малюється fixed canvas на весь viewport;
-- `.mobile-app` більше не відповідає за розмір фону;
-- `creatorView` та main content мають `height:auto` + `min-height:100dvh`;
-- sidebar отримав окрему напівпрозору surface;
-- main content займає всю область праворуч від sidebar;
-- на коротких сторінках унизу більше не має з'являтися інший фон;
-- recipient story не успадковує desktop creator background.
+Це виправляє неправильне трактування попереднього запиту.
 
-Також збережено 1.15.2 fix: світлий recipient topbar для нормального контрасту логотипа.
+- кольори creator/dashboard повернені до стану 1.15.2;
+- кремовий фон застосовано саме до сторінки отримувача;
+- на desktop recipient story тепер стоїть на warm ivory canvas;
+- сам емоційний story-card з burgundy стилем збережений;
+- recipient topbar лишається кремовим для читабельності логотипа;
+- desktop story centered і має нормальну shadow/surface композицію.
+
+Cache: love-letter-1.15.4

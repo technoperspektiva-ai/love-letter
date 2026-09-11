@@ -6918,106 +6918,71 @@ body.story-open #storyView img{
 
 
 /* ===============================================================
-   Love Letter 1.15.3 — desktop background continuity
+   Love Letter 1.15.4 — recipient desktop cream canvas
+   Creator/dashboard colors are intentionally left unchanged.
    =============================================================== */
 
+/* Recipient page gets the warm cream product canvas on desktop.
+   The actual story card can keep its burgundy emotional surface. */
 @media (min-width:901px){
-  html,
-  body{
-    width:100% !important;
-    min-width:100% !important;
-    min-height:100% !important;
-    height:auto !important;
-    background:#f8f4ef !important;
+  body.story-open,
+  body.story-open .app,
+  .app.story-open{
+    background:#f8f3ed !important;
   }
 
-  body{
-    position:relative !important;
-    overflow-x:hidden !important;
-  }
-
-  /* One fixed canvas behind the whole desktop app.
-     It no longer depends on the height/width of .mobile-app. */
-  body::before{
+  body.story-open::before{
     content:"";
     position:fixed;
-    z-index:-2;
     inset:0;
+    z-index:-2;
     pointer-events:none;
     background:
-      radial-gradient(circle at 72% -8%,rgba(112,58,81,.065),transparent 30%),
-      radial-gradient(circle at 8% 68%,rgba(177,111,137,.045),transparent 32%),
-      linear-gradient(180deg,#fcf9f5 0%,#f7f2ed 52%,#f9f5f1 100%);
+      radial-gradient(circle at 72% 8%,rgba(115,61,83,.055),transparent 28%),
+      radial-gradient(circle at 15% 78%,rgba(194,139,156,.04),transparent 30%),
+      linear-gradient(180deg,#fcf8f3 0%,#f7f1eb 100%);
   }
 
-  #creatorView{
-    width:100% !important;
-    min-height:100dvh !important;
-    height:auto !important;
+  #storyView{
     background:transparent !important;
-    overflow:visible !important;
   }
 
-  .mobile-app{
-    width:100% !important;
-    min-width:100% !important;
+  #storyView > .shell{
+    width:min(100%,1120px) !important;
     min-height:100dvh !important;
-    height:auto !important;
+    margin:0 auto !important;
+    padding:28px 34px 42px !important;
+    box-sizing:border-box !important;
     background:transparent !important;
-    overflow:visible !important;
   }
 
-  /* Sidebar gets its own subtle surface instead of relying on the canvas. */
-  .ma-topbar,
-  .ma-tabbar{
-    background:rgba(250,247,243,.90) !important;
-    backdrop-filter:blur(18px) saturate(1.03) !important;
-    -webkit-backdrop-filter:blur(18px) saturate(1.03) !important;
+  /* The emotional story itself sits as a centered product surface. */
+  #storyView .phone{
+    width:min(100%,760px) !important;
+    min-height:720px !important;
+    margin:0 auto !important;
+    border-radius:30px !important;
+    overflow:hidden !important;
+    box-shadow:
+      0 28px 70px rgba(64,31,47,.16),
+      0 0 0 1px rgba(74,34,52,.06) !important;
   }
 
-  .ma-topbar{
-    border-right:1px solid rgba(74,34,52,.045) !important;
+  #storyView .topbar{
+    border-radius:30px 30px 0 0 !important;
   }
 
-  .ma-tabbar{
-    border-right:1px solid rgba(74,34,52,.045) !important;
-  }
-
-  /* Main content owns the entire area to the right of the sidebar. */
-  .ma-screen{
-    width:calc(100% - 220px) !important;
-    min-width:0 !important;
-    min-height:100dvh !important;
-    height:auto !important;
-    margin-left:220px !important;
-    background:transparent !important;
-    overflow:visible !important;
-  }
-
-  .ma-screen > section{
-    max-width:1180px !important;
-    width:100% !important;
-  }
-
-  /* Never let a shorter page leave a differently colored block below it. */
-  .home-dashboard,
-  .ma-letter-detail-shell,
-  .ideas-page,
-  .ma-settings-shell{
-    min-height:calc(100dvh - 108px) !important;
+  #storyView .phone-stage{
+    min-height:650px !important;
   }
 }
 
-/* Extra-wide screens should still look like one continuous product canvas. */
-@media (min-width:1500px){
-  .ma-screen > section{
-    max-width:1280px !important;
+/* Mobile recipient stays full-screen and keeps the same warm ivory header. */
+@media (max-width:900px){
+  body.story-open,
+  body.story-open .app{
+    background:#f8f3ed !important;
   }
-}
-
-/* Story page keeps its own recipient theme; do not inherit desktop creator canvas. */
-body.story-open::before{
-  display:none !important;
 }
 
 </style>

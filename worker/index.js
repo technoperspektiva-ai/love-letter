@@ -73,7 +73,7 @@ async function health(env) {
       ok: true,
       db: true,
       stories: Number(row?.count || 0),
-      version: "1.15.3"
+      version: "1.15.4"
     });
   } catch (error) {
     return json({
