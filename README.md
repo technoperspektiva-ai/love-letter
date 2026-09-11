@@ -318,3 +318,31 @@ Cloudflare Static Assets за замовчуванням канонізує `/in
 - Word portrait та existing business logic залишені й синхронізуються через legacy fields.
 - Desktop layout не змінювався.
 - `/api/health` -> `version: "v25"`.
+
+
+# Love Letter 1.0
+
+Це вже не просто mobile editor.
+
+## Product shell
+- Home з останніми листами і чернеткою.
+- Локальна Library.
+- Letter Detail з open/share/edit/regenerate/delete.
+- Settings / install / privacy / local storage.
+- Ready screen після створення листа.
+- PWA shortcuts: «Новий лист» та «Мої листи».
+- Авторські edit keys залишаються тільки у localStorage.
+
+## Create
+- Story-like wizard з progressive disclosure.
+- Fullscreen preview.
+- Word portrait / photo / no-image.
+- Existing D1 business logic не переписано.
+- Після створення користувач не викидається одразу у recipient mode —
+  він бачить продуктову success-сцену.
+
+## Existing letters
+При першому запуску 1.0 застосунок знаходить локальні `love-letter-edit-*`
+ключі старих листів, читає відповідні payload із D1 і додає їх у Library.
+
+`/api/health` -> `version: "1.0"`

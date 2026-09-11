@@ -1897,6 +1897,248 @@ input:focus,textarea:focus,select:focus{border-color:#cc6d91;box-shadow:0 0 0 4p
   }
 }
 
+
+/* ===============================================================
+   Love Letter 1.0 — product shell
+   =============================================================== */
+.mobile-app{display:none}
+
+@media (max-width:900px){
+  .mobile-app{
+    min-height:100dvh;
+    display:flex;
+    flex-direction:column;
+    background:
+      radial-gradient(circle at 50% -10%,rgba(113,53,78,.055),transparent 34%),
+      linear-gradient(180deg,#fcfaf6 0%,#f8f4f0 100%);
+    color:#261b22;
+    padding-top:env(safe-area-inset-top);
+  }
+  .mobile-app.hidden{display:none!important}
+
+  .ma-topbar{
+    min-height:58px;
+    padding:8px 20px;
+    display:grid;
+    grid-template-columns:42px 1fr 42px;
+    align-items:center;
+    gap:8px;
+  }
+  .ma-avatar,.ma-icon-btn{
+    width:38px;height:38px;border:0;display:grid;place-items:center;
+    border-radius:50%;
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+  }
+  .ma-avatar{
+    color:white;background:#4b2335;font:650 20px/1 Georgia,serif;
+    box-shadow:0 6px 18px rgba(75,35,53,.13);
+  }
+  .ma-icon-btn{
+    justify-self:end;background:rgba(71,47,58,.06);color:#59424d;
+    font-size:16px;font-weight:700;letter-spacing:1px;
+  }
+  .ma-top-title{
+    text-align:center;font:650 15px/1.1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+    letter-spacing:-.01em;color:#35242d;
+  }
+
+  .ma-screen{
+    flex:1;min-height:0;
+    padding:12px 20px calc(104px + env(safe-area-inset-bottom));
+    overflow-y:auto;overflow-x:hidden;
+    -webkit-overflow-scrolling:touch;
+  }
+  .ma-section-kicker{
+    color:#967d89;font:650 13px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+    margin-bottom:7px;
+  }
+  .ma-hero-title{
+    margin:0;max-width:340px;
+    font:680 clamp(32px,9vw,40px)/.98 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+    letter-spacing:-.045em;color:#241921;text-wrap:balance;
+  }
+  .ma-hero-copy{
+    margin:14px 0 0;max-width:335px;
+    color:#786570;font:400 16px/1.48 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+  }
+
+  .ma-primary-card{
+    margin-top:24px;padding:20px;border-radius:26px;
+    background:#4a2234;color:white;
+    box-shadow:0 18px 44px rgba(74,34,52,.13);
+    position:relative;overflow:hidden;
+  }
+  .ma-primary-card:after{
+    content:"";position:absolute;width:180px;height:180px;border-radius:50%;
+    right:-76px;top:-94px;background:rgba(255,255,255,.07);
+  }
+  .ma-primary-card .ey{
+    font:650 12px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+    color:#ddc1cd;text-transform:uppercase;letter-spacing:.08em;
+  }
+  .ma-primary-card h2{
+    margin:8px 0 7px;font:600 28px/1.03 Georgia,"Times New Roman",serif;
+    letter-spacing:-.025em;color:#fff9fb;
+  }
+  .ma-primary-card p{
+    margin:0;max-width:275px;color:#e8d7df;font:400 14px/1.45 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+  }
+  .ma-primary-cta{
+    margin-top:18px;min-height:48px;padding:0 17px;border:0;border-radius:15px;
+    background:#fff9fb;color:#4c2336;font:680 16px/1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+  }
+
+  .ma-row-head{
+    margin-top:30px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  }
+  .ma-row-head h3{
+    margin:0;font:680 19px/1.1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+    letter-spacing:-.025em;color:#30212a;
+  }
+  .ma-link-btn{
+    border:0;background:transparent;color:#7a4058;padding:5px 0;
+    font:650 13px/1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+  }
+
+  .ma-letter-list{display:grid;gap:10px}
+  .ma-letter-card{
+    width:100%;border:0;text-align:left;padding:14px;border-radius:20px;background:#fff;
+    display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:12px;align-items:center;
+    box-shadow:inset 0 0 0 1px rgba(66,42,53,.055),0 4px 16px rgba(57,32,44,.025);
+    color:#2f2229;
+  }
+  .ma-letter-cover{
+    width:52px;height:60px;border-radius:15px;display:grid;place-items:center;
+    background:linear-gradient(155deg,#73405a,#3d1e2d);color:#fff5f8;
+    font:600 24px/1 Georgia,serif;box-shadow:0 8px 18px rgba(68,31,48,.10);
+  }
+  .ma-letter-title{
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+    font:680 15px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+  }
+  .ma-letter-meta{
+    margin-top:4px;color:#9a8790;
+    font:400 12px/1.3 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+  }
+  .ma-chevron{color:#b2a1a8;font-size:22px;padding-left:4px}
+
+  .ma-empty{
+    padding:24px 18px;border-radius:22px;background:#f1ebe7;text-align:center;
+    color:#806d77;font:400 14px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+  }
+  .ma-empty-mark{
+    width:48px;height:48px;margin:0 auto 12px;display:grid;place-items:center;border-radius:16px;
+    background:#fff;color:#704058;font:600 22px/1 Georgia,serif;
+  }
+
+  .ma-tabbar{
+    position:fixed;z-index:90;left:14px;right:14px;bottom:max(10px,env(safe-area-inset-bottom));
+    min-height:64px;padding:7px 12px;display:grid;grid-template-columns:1fr 76px 1fr;align-items:center;
+    border-radius:22px;background:rgba(255,252,249,.88);
+    box-shadow:0 16px 44px rgba(46,25,36,.13),inset 0 0 0 1px rgba(70,40,54,.06);
+    backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+  }
+  .ma-tab{
+    min-height:50px;border:0;background:transparent;color:#9b8790;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+    font:600 10px/1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+  }
+  .ma-tab.is-active{color:#50283b}
+  .ma-tab-icon{font-size:20px;line-height:1}
+  .ma-tab-create{position:relative}
+  .ma-plus{
+    width:52px;height:52px;border-radius:18px;display:grid;place-items:center;
+    background:#4a2234;color:#fff;font-size:28px;font-weight:300;line-height:1;
+    box-shadow:0 10px 24px rgba(74,34,52,.18);
+  }
+  .ma-tab-create:active .ma-plus{transform:scale(.97)}
+
+  .ma-page-title{
+    margin:4px 0 6px;font:680 32px/1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+    letter-spacing:-.04em;color:#241920;
+  }
+  .ma-page-sub{
+    margin:0 0 22px;color:#826f79;font:400 15px/1.45 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+  }
+
+  .ma-setting-list{display:grid;gap:10px}
+  .ma-setting-card{
+    padding:16px;border-radius:20px;background:#fff;
+    box-shadow:inset 0 0 0 1px rgba(65,42,53,.055);
+  }
+  .ma-setting-row{display:flex;align-items:center;justify-content:space-between;gap:14px}
+  .ma-setting-title{font:650 15px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;color:#382731}
+  .ma-setting-sub{margin-top:5px;color:#99858f;font:400 13px/1.4 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif}
+  .ma-small-btn{
+    min-height:38px;padding:0 13px;border:0;border-radius:13px;background:#f1e8ec;color:#674052;
+    font:650 13px/1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;white-space:nowrap;
+  }
+
+  .ma-detail-hero{
+    padding:22px 18px;border-radius:28px;background:#4a2234;color:white;text-align:center;
+    box-shadow:0 18px 46px rgba(74,34,52,.13);
+  }
+  .ma-detail-cover{
+    width:78px;height:92px;margin:0 auto 16px;border-radius:23px;display:grid;place-items:center;
+    background:linear-gradient(150deg,#81516a,#321724);color:#fff5f8;font:600 34px/1 Georgia,serif;
+    border:1px solid rgba(255,255,255,.12);box-shadow:0 14px 28px rgba(0,0,0,.16);
+  }
+  .ma-detail-hero h1{
+    margin:0;font:600 30px/1.02 Georgia,"Times New Roman",serif;letter-spacing:-.025em;color:#fff9fb;text-wrap:balance;
+  }
+  .ma-detail-hero p{
+    margin:8px 0 0;color:#dbc5cf;font:400 13px/1.4 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+  }
+  .ma-detail-actions{margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  .ma-detail-actions button{
+    min-height:48px;border:0;border-radius:15px;font:650 14px/1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+  }
+  .ma-detail-primary{background:#fff9fb;color:#4a2234}
+  .ma-detail-secondary{background:rgba(255,255,255,.10);color:#fff}
+
+  .ma-action-list{margin-top:18px;display:grid;gap:8px}
+  .ma-action-row{
+    width:100%;min-height:54px;padding:0 15px;border:0;border-radius:16px;background:#fff;color:#3a2932;
+    display:flex;align-items:center;justify-content:space-between;gap:14px;text-align:left;
+    font:600 14px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+    box-shadow:inset 0 0 0 1px rgba(66,42,53,.055);
+  }
+  .ma-action-row.danger{color:#9a3551}
+
+  .ma-ready{
+    min-height:calc(100dvh - 140px);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+    padding:20px 0;
+  }
+  .ma-ready-seal{
+    width:84px;height:84px;border-radius:50%;display:grid;place-items:center;background:#4a2234;color:white;
+    font:600 38px/1 Georgia,serif;box-shadow:0 18px 44px rgba(74,34,52,.17);
+    animation:readyPop .42s cubic-bezier(.2,.8,.2,1) both;
+  }
+  @keyframes readyPop{from{opacity:0;transform:scale(.82) translateY(8px)}to{opacity:1;transform:scale(1) translateY(0)}}
+  .ma-ready h1{
+    margin:24px 0 9px;font:680 34px/.98 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+    letter-spacing:-.045em;color:#241920;text-wrap:balance;
+  }
+  .ma-ready p{
+    margin:0;max-width:310px;color:#806c76;font:400 15px/1.48 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+  }
+  .ma-ready-actions{width:100%;margin-top:26px;display:grid;gap:9px}
+  .ma-ready-actions button{
+    min-height:52px;border:0;border-radius:16px;font:650 16px/1 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+  }
+  .ma-ready-main{background:#4a2234;color:#fff}
+  .ma-ready-soft{background:#eee6e9;color:#5c3e4c}
+
+  .ma-toast{
+    position:fixed;z-index:200;left:50%;bottom:96px;transform:translateX(-50%);
+    max-width:calc(100vw - 32px);padding:11px 14px;border-radius:14px;background:rgba(39,24,32,.92);color:#fff;
+    font:550 13px/1.35 system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;
+    box-shadow:0 12px 30px rgba(0,0,0,.18);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  }
+
+  body.ma-no-tabs .ma-tabbar{display:none}
+}
+
 </style>
 </head>
 <body>
@@ -1905,6 +2147,25 @@ input:focus,textarea:focus,select:focus{border-color:#cc6d91;box-shadow:0 0 0 4p
   <div class="stars"></div>
   
 <div id="creatorView">
+  <div id="mobileApp" class="mobile-app hidden">
+    <header class="ma-topbar">
+      <button class="ma-avatar" id="maHomeLogo" type="button" aria-label="Love Letter">L</button>
+      <div class="ma-top-title" id="maTopTitle">Love Letter</div>
+      <button class="ma-icon-btn" id="maSettingsBtn" type="button" aria-label="Налаштування">•••</button>
+    </header>
+    <main class="ma-screen" id="maScreen"></main>
+    <nav class="ma-tabbar" id="maTabbar" aria-label="Основна навігація">
+      <button class="ma-tab is-active" data-app-route="home" type="button">
+        <span class="ma-tab-icon">⌂</span><span>Головна</span>
+      </button>
+      <button class="ma-tab ma-tab-create" data-app-route="create" type="button" aria-label="Новий лист">
+        <span class="ma-plus">＋</span>
+      </button>
+      <button class="ma-tab" data-app-route="library" type="button">
+        <span class="ma-tab-icon">▤</span><span>Листи</span>
+      </button>
+    </nav>
+  </div>
   <div id="mobileWizard" class="mobile-wizard hidden">
     <header class="mw-top">
       <div class="mw-brand">
@@ -2172,6 +2433,489 @@ input:focus,textarea:focus,select:focus{border-color:#cc6d91;box-shadow:0 0 0 4p
 </div>
 
 <script>
+
+
+const LETTER_LIBRARY_KEY = "love-letter-library-v1";
+
+function haptic(ms=10){
+  try{ navigator.vibrate?.(ms); }catch{}
+}
+
+function getLocalLibrary(){
+  try{
+    const value = JSON.parse(localStorage.getItem(LETTER_LIBRARY_KEY) || "[]");
+    return Array.isArray(value) ? value : [];
+  }catch{ return []; }
+}
+
+function saveLocalLibrary(items){
+  try{ localStorage.setItem(LETTER_LIBRARY_KEY, JSON.stringify(items.slice(0,100))); }catch{}
+}
+
+function upsertLocalLetter({id, editKey="", payload=null, createdAt=Date.now()}){
+  if(!id) return;
+  const items = getLocalLibrary();
+  const existing = items.find(x=>x.id===id) || {};
+  const recipient = payload?.recipient || existing.recipient || "Особистий лист";
+  const title = payload?.letterTitle || existing.title || "Твій лист";
+  const item = {
+    ...existing,
+    id,
+    editKey: editKey || existing.editKey || localStorage.getItem(`love-letter-edit-${id}`) || "",
+    recipient,
+    title,
+    createdAt: existing.createdAt || createdAt,
+    updatedAt: Date.now()
+  };
+  const next = [item, ...items.filter(x=>x.id!==id)].sort((a,b)=>(b.updatedAt||0)-(a.updatedAt||0));
+  saveLocalLibrary(next);
+}
+
+function removeLocalLetter(id){
+  saveLocalLibrary(getLocalLibrary().filter(x=>x.id!==id));
+}
+
+function formatLocalDate(ts){
+  if(!ts) return "щойно";
+  try{
+    return new Intl.DateTimeFormat("uk-UA",{day:"numeric",month:"short"}).format(new Date(ts));
+  }catch{ return ""; }
+}
+
+function showMobileToast(message){
+  document.querySelector(".ma-toast")?.remove();
+  const el=document.createElement("div");
+  el.className="ma-toast";
+  el.textContent=message;
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(),2200);
+}
+
+async function hydrateLocalLibrary(){
+  if(!isMobileWizard()) return;
+  const known = new Map(getLocalLibrary().map(x=>[x.id,x]));
+  const discovered = [];
+
+  try{
+    for(let i=0;i<localStorage.length;i++){
+      const key = localStorage.key(i) || "";
+      if(!key.startsWith("love-letter-edit-")) continue;
+      const id = key.slice("love-letter-edit-".length);
+      if(!/^[A-Za-z0-9_-]{4,32}$/.test(id)) continue;
+      if(!known.has(id)){
+        discovered.push({id, editKey:localStorage.getItem(key)||""});
+      }
+    }
+  }catch{}
+
+  for(const item of discovered.slice(0,20)){
+    try{
+      const r=await fetch(`/api/story/${encodeURIComponent(item.id)}`,{cache:"no-store"});
+      const data=await r.json();
+      if(r.ok && data?.payload){
+        upsertLocalLetter({id:item.id,editKey:item.editKey,payload:data.payload});
+      }
+    }catch{}
+  }
+}
+
+function setMobileAppVisibility(app=true){
+  const appEl=document.getElementById("mobileApp");
+  const wizard=document.getElementById("mobileWizard");
+  if(app){
+    appEl?.classList.remove("hidden");
+    wizard?.classList.add("hidden");
+    document.body.classList.remove("mw-keyboard-open");
+  }else{
+    appEl?.classList.add("hidden");
+    wizard?.classList.remove("hidden");
+  }
+}
+
+function setMobileAppRoute(route, replace=false){
+  const hash = route==="home" ? "#home" : `#${route}`;
+  if(replace) history.replaceState(null,"",hash);
+  else location.hash=hash;
+}
+
+function setTab(route){
+  document.querySelectorAll(".ma-tab").forEach(btn=>{
+    btn.classList.toggle("is-active", btn.dataset.appRoute===route);
+  });
+}
+
+function appLetterCard(item){
+  const initial=(item.recipient||"L").trim().slice(0,1).toUpperCase() || "L";
+  return `
+    <button class="ma-letter-card" type="button" data-letter-id="${escapeHtml(item.id)}">
+      <div class="ma-letter-cover">${escapeHtml(initial)}</div>
+      <div style="min-width:0">
+        <div class="ma-letter-title">${escapeHtml(item.recipient || "Особистий лист")}</div>
+        <div class="ma-letter-meta">${escapeHtml(item.title || "Твій лист")} · ${formatLocalDate(item.updatedAt||item.createdAt)}</div>
+      </div>
+      <div class="ma-chevron">›</div>
+    </button>`;
+}
+
+function renderAppHome(){
+  setMobileAppVisibility(true);
+  document.body.classList.remove("ma-no-tabs");
+  setTab("home");
+  document.getElementById("maTopTitle").textContent="Love Letter";
+
+  const library=getLocalLibrary();
+  const recent=library.slice(0,3);
+  const draftExists=!!localStorage.getItem(DRAFT_KEY);
+
+  document.getElementById("maScreen").innerHTML=`
+    <section>
+      <div class="ma-section-kicker">${isStandaloneApp() ? "Твій простір" : "Love Letter"}</div>
+      <h1 class="ma-hero-title">Створи те, що хочеться зберегти.</h1>
+      <p class="ma-hero-copy">Особистий лист, маленька історія, конверт, фото або портрет зі слів — усе в одному приватному посиланні.</p>
+
+      <div class="ma-primary-card">
+        <div class="ey">${draftExists ? "Чернетка збережена" : "Новий лист"}</div>
+        <h2>${draftExists ? "Продовжити свою історію" : "Почати з одного імені"}</h2>
+        <p>${draftExists ? "Твої зміни залишилися на цьому пристрої." : "Без реєстрації, шаблонів і зайвих налаштувань."}</p>
+        <button class="ma-primary-cta" id="maStartBtn" type="button">${draftExists ? "Продовжити" : "Створити лист"}</button>
+      </div>
+
+      <div class="ma-row-head">
+        <h3>Останні листи</h3>
+        ${library.length ? '<button class="ma-link-btn" id="maSeeAllBtn" type="button">Усі</button>' : ''}
+      </div>
+      <div class="ma-letter-list">
+        ${recent.length ? recent.map(appLetterCard).join("") : `
+          <div class="ma-empty">
+            <div class="ma-empty-mark">L</div>
+            Тут з’являться листи, створені на цьому пристрої.
+          </div>`}
+      </div>
+    </section>`;
+
+  document.getElementById("maStartBtn")?.addEventListener("click",()=>openMobileCreate({resume:draftExists}));
+  document.getElementById("maSeeAllBtn")?.addEventListener("click",()=>setMobileAppRoute("library"));
+  bindLetterCards();
+}
+
+function renderAppLibrary(){
+  setMobileAppVisibility(true);
+  document.body.classList.remove("ma-no-tabs");
+  setTab("library");
+  document.getElementById("maTopTitle").textContent="Твої листи";
+  const library=getLocalLibrary();
+
+  document.getElementById("maScreen").innerHTML=`
+    <section>
+      <h1 class="ma-page-title">Листи</h1>
+      <p class="ma-page-sub">Тут зберігаються листи, створені в цьому браузері. Приватні ключі не покидають твій пристрій.</p>
+      <div class="ma-letter-list">
+        ${library.length ? library.map(appLetterCard).join("") : `
+          <div class="ma-empty">
+            <div class="ma-empty-mark">L</div>
+            Ще немає жодного листа.<br>Створи перший — це займе кілька хвилин.
+          </div>`}
+      </div>
+    </section>`;
+  bindLetterCards();
+}
+
+function bindLetterCards(){
+  document.querySelectorAll("[data-letter-id]").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      haptic(7);
+      setMobileAppRoute(`letter=${encodeURIComponent(btn.dataset.letterId)}`);
+    });
+  });
+}
+
+async function renderLetterDetail(id){
+  setMobileAppVisibility(true);
+  document.body.classList.add("ma-no-tabs");
+  document.getElementById("maTopTitle").textContent="Лист";
+  const library=getLocalLibrary();
+  let item=library.find(x=>x.id===id) || {id};
+  let payload=null;
+  try{
+    const r=await fetch(`/api/story/${encodeURIComponent(id)}`,{cache:"no-store"});
+    const data=await r.json();
+    if(r.ok && data?.payload){
+      payload=data.payload;
+      upsertLocalLetter({id,editKey:item.editKey||"",payload});
+      item=getLocalLibrary().find(x=>x.id===id)||item;
+    }
+  }catch{}
+
+  const recipient=payload?.recipient || item.recipient || "Особистий лист";
+  const title=payload?.letterTitle || item.title || "Твій лист";
+  const initial=recipient.trim().slice(0,1).toUpperCase()||"L";
+  const hasKey=!!(item.editKey || localStorage.getItem(`love-letter-edit-${id}`));
+
+  document.getElementById("maScreen").innerHTML=`
+    <section>
+      <div class="ma-detail-hero">
+        <div class="ma-detail-cover">${escapeHtml(initial)}</div>
+        <h1>${escapeHtml(recipient)}</h1>
+        <p>${escapeHtml(title)}</p>
+        <div class="ma-detail-actions">
+          <button class="ma-detail-primary" id="maOpenRecipient" type="button">Відкрити</button>
+          <button class="ma-detail-secondary" id="maShareRecipient" type="button">Поділитися</button>
+        </div>
+      </div>
+
+      <div class="ma-action-list">
+        <button class="ma-action-row" id="maEditLetter" type="button" ${hasKey?"":"disabled"}>
+          <span>Редагувати лист</span><span>›</span>
+        </button>
+        <button class="ma-action-row" id="maCopyLink" type="button">
+          <span>Копіювати посилання</span><span>↗</span>
+        </button>
+        ${hasKey ? `<button class="ma-action-row" id="maRegenerateLink" type="button">
+          <span>Створити нове посилання</span><span>↻</span>
+        </button>
+        <button class="ma-action-row danger" id="maDeleteLetter" type="button">
+          <span>Видалити лист</span><span>×</span>
+        </button>` : ""}
+      </div>
+    </section>`;
+
+  const recipientUrl=`${location.origin}/l/${id}`;
+  document.getElementById("maOpenRecipient")?.addEventListener("click",()=>location.assign(recipientUrl));
+  document.getElementById("maCopyLink")?.addEventListener("click",async()=>{
+    await navigator.clipboard.writeText(recipientUrl);
+    showMobileToast("Посилання скопійовано");
+  });
+  document.getElementById("maShareRecipient")?.addEventListener("click",async()=>{
+    if(navigator.share){
+      try{await navigator.share({title:"Love Letter",url:recipientUrl});}catch{}
+    }else{
+      await navigator.clipboard.writeText(recipientUrl);
+      showMobileToast("Посилання скопійовано");
+    }
+  });
+  document.getElementById("maEditLetter")?.addEventListener("click",()=>openExistingLetterInWizard(id));
+  document.getElementById("maRegenerateLink")?.addEventListener("click",()=>regenerateFromApp(id));
+  document.getElementById("maDeleteLetter")?.addEventListener("click",()=>deleteFromApp(id));
+}
+
+async function openExistingLetterInWizard(id){
+  const item=getLocalLibrary().find(x=>x.id===id)||{};
+  const key=item.editKey || localStorage.getItem(`love-letter-edit-${id}`) || "";
+  if(!key){ showMobileToast("На цьому пристрої немає ключа редагування"); return; }
+
+  try{
+    const r=await fetch(`/api/story/${encodeURIComponent(id)}`,{cache:"no-store"});
+    const data=await r.json();
+    if(!r.ok || !data?.payload) throw new Error("Лист не знайдено");
+    state.editingId=id;
+    state.editKey=key;
+    populateEditorFromPayload(data.payload);
+    mobileWizardState.index=0;
+    setMobileAppVisibility(false);
+    document.body.classList.add("ma-no-tabs");
+    history.replaceState(null,"","#create");
+    renderMobileWizard();
+  }catch(e){ showMobileToast(e?.message||"Не вдалося відкрити лист"); }
+}
+
+async function regenerateFromApp(id){
+  const item=getLocalLibrary().find(x=>x.id===id)||{};
+  const key=item.editKey || localStorage.getItem(`love-letter-edit-${id}`) || "";
+  if(!key) return;
+  if(!confirm("Створити нове посилання? Старе перестане працювати.")) return;
+
+  try{
+    const r=await fetch(`/api/story/${encodeURIComponent(id)}/regenerate`,{
+      method:"POST",headers:{"x-edit-token":key}
+    });
+    const data=await r.json();
+    if(!r.ok) throw new Error(data.error||"Не вдалося");
+    const oldItem=getLocalLibrary().find(x=>x.id===id)||{};
+    removeLocalLetter(id);
+    try{
+      localStorage.removeItem(`love-letter-edit-${id}`);
+      localStorage.setItem(`love-letter-edit-${data.id}`,key);
+    }catch{}
+    upsertLocalLetter({id:data.id,editKey:key,payload:{
+      recipient:oldItem.recipient,title:oldItem.title,letterTitle:oldItem.title
+    }});
+    showMobileToast("Нове посилання готове");
+    setMobileAppRoute(`letter=${encodeURIComponent(data.id)}`,true);
+    renderLetterDetail(data.id);
+  }catch(e){ showMobileToast(e?.message||"Не вдалося створити URL"); }
+}
+
+async function deleteFromApp(id){
+  const item=getLocalLibrary().find(x=>x.id===id)||{};
+  const key=item.editKey || localStorage.getItem(`love-letter-edit-${id}`) || "";
+  if(!key) return;
+  if(!confirm("Видалити цей лист назавжди?")) return;
+
+  try{
+    const r=await fetch(`/api/story/${encodeURIComponent(id)}`,{
+      method:"DELETE",headers:{"x-edit-token":key}
+    });
+    if(!r.ok) throw new Error("Не вдалося видалити");
+    removeLocalLetter(id);
+    try{localStorage.removeItem(`love-letter-edit-${id}`)}catch{}
+    showMobileToast("Лист видалено");
+    setMobileAppRoute("library",true);
+    renderAppLibrary();
+  }catch(e){ showMobileToast(e?.message||"Не вдалося видалити"); }
+}
+
+function renderAppSettings(){
+  setMobileAppVisibility(true);
+  document.body.classList.add("ma-no-tabs");
+  document.getElementById("maTopTitle").textContent="Налаштування";
+  const library=getLocalLibrary();
+  const installed=isStandaloneApp();
+
+  document.getElementById("maScreen").innerHTML=`
+    <section>
+      <h1 class="ma-page-title">Налаштування</h1>
+      <p class="ma-page-sub">Love Letter зберігає приватні ключі та чернетки локально на цьому пристрої.</p>
+
+      <div class="ma-setting-list">
+        <div class="ma-setting-card">
+          <div class="ma-setting-row">
+            <div>
+              <div class="ma-setting-title">${installed ? "Застосунок встановлено" : "Встановити Love Letter"}</div>
+              <div class="ma-setting-sub">${installed ? "Працює у standalone режимі." : "Додай на домашній екран для повноцінного app experience."}</div>
+            </div>
+            ${installed ? "" : '<button class="ma-small-btn" id="maInstallBtn" type="button">Встановити</button>'}
+          </div>
+        </div>
+
+        <div class="ma-setting-card">
+          <div class="ma-setting-title">Приватність</div>
+          <div class="ma-setting-sub">Оригінал фото для word portrait обробляється локально. D1 отримує лише компактні дані портрета або стиснуте фото, якщо ти сам обрав режим фото.</div>
+        </div>
+
+        <div class="ma-setting-card">
+          <div class="ma-setting-row">
+            <div>
+              <div class="ma-setting-title">Локальна бібліотека</div>
+              <div class="ma-setting-sub">${library.length} ${library.length===1?"лист":"листів"} на цьому пристрої.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ma-setting-card">
+          <div class="ma-setting-row">
+            <div>
+              <div class="ma-setting-title">Чернетка</div>
+              <div class="ma-setting-sub">${localStorage.getItem(DRAFT_KEY) ? "Є незавершений лист." : "Немає активної чернетки."}</div>
+            </div>
+            ${localStorage.getItem(DRAFT_KEY) ? '<button class="ma-small-btn" id="maClearDraftBtn" type="button">Очистити</button>' : ''}
+          </div>
+        </div>
+      </div>
+    </section>`;
+
+  document.getElementById("maInstallBtn")?.addEventListener("click",async()=>{
+    if(deferredInstallPrompt){
+      deferredInstallPrompt.prompt();
+      try{await deferredInstallPrompt.userChoice}catch{}
+      deferredInstallPrompt=null;
+    }else{
+      const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
+      showMobileToast(isIOS ? "Safari → Поділитися → На початковий екран" : "Відкрий меню браузера → Встановити застосунок");
+    }
+  });
+  document.getElementById("maClearDraftBtn")?.addEventListener("click",()=>{
+    clearDraft();showMobileToast("Чернетку очищено");renderAppSettings();
+  });
+}
+
+function openMobileCreate({resume=false}={}){
+  haptic(8);
+  document.body.classList.add("ma-no-tabs");
+  setMobileAppVisibility(false);
+
+  if(!resume){
+    clearDraft();
+    state.step=0;
+    state.photoData="";
+    state.portraitData=null;
+    state.editingId="";
+    state.editKey="";
+    mobileWizardState.index=0;
+    // Reset legacy fields to their HTML defaults by reloading only if there is stale content.
+    document.getElementById("recipient") && (document.getElementById("recipient").value="");
+    document.getElementById("introMain") && (document.getElementById("introMain").value="тобі лист");
+    document.getElementById("introTop") && (document.getElementById("introTop").value="");
+    document.getElementById("letterTitle") && (document.getElementById("letterTitle").value="");
+    document.getElementById("letterMessage") && (document.getElementById("letterMessage").value="");
+    document.getElementById("letterSign") && (document.getElementById("letterSign").value="");
+  }
+
+  history.replaceState(null,"","#create");
+  renderMobileWizard();
+}
+
+function showMobileReady(link,id){
+  setMobileAppVisibility(true);
+  document.body.classList.add("ma-no-tabs");
+  document.getElementById("maTopTitle").textContent="Готово";
+  const payload=gatherData();
+  upsertLocalLetter({id,editKey:state.editKey,payload});
+  const initial=(payload.recipient||"L").slice(0,1).toUpperCase();
+
+  document.getElementById("maScreen").innerHTML=`
+    <div class="ma-ready">
+      <div class="ma-ready-seal">${escapeHtml(initial)}</div>
+      <h1>Твій лист готовий.</h1>
+      <p>Він уже живе за приватним посиланням. Можеш переглянути його або одразу поділитися.</p>
+      <div class="ma-ready-actions">
+        <button class="ma-ready-main" id="maReadyShare" type="button">Поділитися листом</button>
+        <button class="ma-ready-soft" id="maReadyOpen" type="button">Переглянути як отримувач</button>
+        <button class="ma-ready-soft" id="maReadyHome" type="button">На головну</button>
+      </div>
+    </div>`;
+
+  document.getElementById("maReadyShare")?.addEventListener("click",async()=>{
+    if(navigator.share){
+      try{await navigator.share({title:"Love Letter",url:link})}catch{}
+    }else{
+      await navigator.clipboard.writeText(link);
+      showMobileToast("Посилання скопійовано");
+    }
+  });
+  document.getElementById("maReadyOpen")?.addEventListener("click",()=>location.assign(link));
+  document.getElementById("maReadyHome")?.addEventListener("click",()=>{
+    history.replaceState(null,"","#home");renderAppHome();
+  });
+}
+
+function handleMobileAppRoute(){
+  if(!isMobileWizard() || location.pathname!=="/") return;
+  const route=(location.hash||"#home").slice(1);
+  if(route==="create"){ openMobileCreate({resume:true}); return; }
+  if(route==="library"){ renderAppLibrary(); return; }
+  if(route==="settings"){ renderAppSettings(); return; }
+  if(route.startsWith("letter=")){
+    renderLetterDetail(decodeURIComponent(route.slice(7)));return;
+  }
+  renderAppHome();
+}
+
+async function initMobileApp(){
+  if(!isMobileWizard() || location.pathname!=="/") return;
+  await hydrateLocalLibrary();
+  document.getElementById("maHomeLogo")?.addEventListener("click",()=>setMobileAppRoute("home"));
+  document.getElementById("maSettingsBtn")?.addEventListener("click",()=>setMobileAppRoute("settings"));
+  document.querySelectorAll("[data-app-route]").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      const route=btn.dataset.appRoute;
+      if(route==="create") openMobileCreate();
+      else setMobileAppRoute(route);
+    });
+  });
+  window.addEventListener("hashchange",handleMobileAppRoute);
+  handleMobileAppRoute();
+}
+
 
 const MOBILE_WIZARD_STEPS = [
   {
@@ -2518,7 +3262,7 @@ function renderMobileWizard(){
 
   const back = document.getElementById("mwBackBtn");
   const next = document.getElementById("mwNextBtn");
-  if(back) back.disabled = mobileWizardState.index===0;
+  if(back){ back.disabled = false; back.textContent = mobileWizardState.index===0 ? "Закрити" : "Назад"; }
   if(next){
     next.textContent = mobileWizardState.index===MOBILE_WIZARD_STEPS.length-1
       ? "Створити лист"
@@ -2578,7 +3322,8 @@ async function mobileWizardNext(){
     const result = await makeShareLink();
     const link = result.link;
     if(link){
-      location.assign(link);
+      haptic(18);
+      showMobileReady(link, state.editingId);
       return;
     }
   }catch(e){
@@ -2590,7 +3335,11 @@ async function mobileWizardNext(){
 }
 
 function mobileWizardBack(){
-  if(mobileWizardState.index===0) return;
+  if(mobileWizardState.index===0){
+    history.replaceState(null,"","#home");
+    renderAppHome();
+    return;
+  }
   syncMobileToLegacy();
   mobileWizardState.index--;
   renderMobileWizard();
@@ -3105,6 +3854,11 @@ async function makeShareLink(){
       throw new Error(data.message || "Не вдалося оновити лист.");
     }
 
+    upsertLocalLetter({
+      id: state.editingId,
+      editKey: state.editKey,
+      payload
+    });
     return {
       link: `${location.origin}${data.path}`,
       editLink: ""
@@ -3152,6 +3906,12 @@ async function makeShareLink(){
       localStorage.setItem(`love-letter-edit-${state.editingId}`, state.editKey);
     }catch{}
   }
+
+  upsertLocalLetter({
+    id: state.editingId,
+    editKey: state.editKey,
+    payload
+  });
 
   return {
     link: `${location.origin}${data.path}`,
@@ -4226,7 +4986,18 @@ initPWA();
 
 window.addEventListener("load", ()=>{
   if(isMobileWizard()){
-    setTimeout(initMobileWizard, 60);
+    // Recipient routes stay recipient-only. Product shell exists on root.
+    if(location.pathname === "/"){
+      setTimeout(()=>{
+        // install wizard listeners once, but keep wizard hidden until create route
+        document.getElementById("mwNextBtn")?.addEventListener("click", mobileWizardNext);
+        document.getElementById("mwBackBtn")?.addEventListener("click", mobileWizardBack);
+        document.getElementById("mwPreviewBtn")?.addEventListener("click", openMobilePreview);
+        document.getElementById("mwPreviewClose")?.addEventListener("click", closeMobilePreview);
+        setupVisualViewportHandling();
+        initMobileApp();
+      },80);
+    }
   }
 });
 </script>
