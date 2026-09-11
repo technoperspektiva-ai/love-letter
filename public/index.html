@@ -154,14 +154,17 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
  linear-gradient(155deg,transparent 49%, #e7d8dd 50%),
  linear-gradient(205deg,transparent 49%, #efe4e8 50%);z-index:3}
 .preview-env .wax{
- position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:4;
- width:62px;height:62px;border-radius:50%;display:grid;place-items:center;
+ position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);z-index:4;
+ width:58px;height:58px;border-radius:50%;display:grid;place-items:center;
  background:linear-gradient(145deg,#ff709a,#b63761);box-shadow:inset -4px -5px 8px #7d2445;
  font-family:"Cormorant Garamond";font-size:32px;font-weight:700;color:#ffd8e6
 }
 .preview-env .recipient{
- position:absolute;left:50%;bottom:18px;transform:translateX(-50%);z-index:4;
- color:#6b5362;font-family:"Marck Script";font-size:34px;white-space:nowrap
+ position:absolute;left:50%;bottom:10px;transform:translateX(-50%);z-index:5;
+ width:78%;text-align:center;
+ color:#654b5a;font-family:"Marck Script";font-size:25px;line-height:1;
+ white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+ text-shadow:0 1px 0 rgba(255,255,255,.7)
 }
 .preview-note{font-family:"Marck Script";font-size:31px;color:#ffd0df}
 
@@ -214,6 +217,9 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
  .preview{position:relative;top:auto;min-height:0}
 }
 @media (max-width: 600px){
+
+ .preview-env .recipient{font-size:21px;bottom:8px;width:82%}
+ .preview-env .wax{width:52px;height:52px;font-size:27px;top:43%}
  .hero{padding-top:18px}
  .hero p{font-size:15px}
  .demo-card{display:none}
