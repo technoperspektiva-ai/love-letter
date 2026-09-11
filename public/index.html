@@ -697,10 +697,10 @@ textarea{min-height:120px;resize:vertical;line-height:1.65}
 }
 
 
-.edit-link-wrap .field-note:first-child,
-.edit-link-wrap .sharebox,
-.edit-link-wrap #copyEditLink,
-.edit-link-wrap #openEditLink{
+.посилання для редагування-wrap .field-note:first-child,
+.посилання для редагування-wrap .sharebox,
+.посилання для редагування-wrap #copyEditLink,
+.посилання для редагування-wrap #openEditLink{
   display:none !important;
 }
 
@@ -3919,6 +3919,252 @@ input:focus,textarea:focus,select:focus{border-color:#cc6d91;box-shadow:0 0 0 4p
   .home-draft-panel{min-height:136px}
 }
 
+
+/* ===============================================================
+   Love Letter 1.7 — mobile home polish
+   =============================================================== */
+@media (max-width:900px){
+  .ma-screen{
+    padding:6px 16px calc(98px + env(safe-area-inset-bottom)) !important;
+  }
+
+  .home-dashboard{
+    min-height:100%;
+  }
+
+  .home-topline{
+    margin-bottom:14px !important;
+  }
+  .home-eyebrow{
+    margin-bottom:5px !important;
+    font-size:11px !important;
+    letter-spacing:.06em !important;
+  }
+  .home-topline h1{
+    max-width:330px !important;
+    font-size:clamp(31px,8.6vw,38px) !important;
+    line-height:.98 !important;
+    letter-spacing:-.045em !important;
+  }
+  .home-topline p{
+    max-width:330px !important;
+    margin-top:10px !important;
+    color:#76636d !important;
+    font-size:14px !important;
+    line-height:1.48 !important;
+  }
+
+  .home-create-main{
+    width:100% !important;
+    min-height:52px !important;
+    margin-top:18px !important;
+    padding:0 16px !important;
+    justify-content:center !important;
+    border-radius:17px !important;
+    box-shadow:0 8px 18px rgba(74,34,52,.12) !important;
+  }
+  .home-create-plus{
+    width:30px !important;
+    height:30px !important;
+  }
+
+  .home-grid{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:10px !important;
+  }
+  .home-main-column,
+  .home-side-column{
+    display:grid !important;
+    gap:10px !important;
+  }
+
+  /* show useful state earlier, not a huge empty hero */
+  .home-side-column{
+    order:-1;
+  }
+  .home-stats-panel{
+    order:-3;
+  }
+  .home-draft-panel{
+    order:-2;
+  }
+
+  .home-panel{
+    padding:14px !important;
+    border-radius:19px !important;
+    background:#fff !important;
+    box-shadow:
+      inset 0 0 0 1px rgba(66,42,53,.055),
+      0 5px 18px rgba(62,34,47,.025) !important;
+  }
+  .home-panel-head{
+    margin-bottom:10px !important;
+  }
+  .home-panel h2{
+    font-size:17px !important;
+  }
+  .home-panel-kicker{
+    font-size:10px !important;
+  }
+
+  .home-stats-panel{
+    padding:12px !important;
+  }
+  .home-stats{
+    gap:6px !important;
+    margin-top:7px !important;
+  }
+  .home-stat{
+    padding:10px 8px !important;
+    border-radius:14px !important;
+    background:#f6f1ee !important;
+  }
+  .home-stat strong{
+    font-size:18px !important;
+  }
+  .home-stat span{
+    margin-top:4px !important;
+    font-size:10px !important;
+  }
+
+  .home-draft-panel{
+    min-height:0 !important;
+    padding:14px !important;
+  }
+  .home-draft-panel .home-panel-head{
+    margin:0 !important;
+  }
+  .draft-visual{
+    display:none !important;
+  }
+  .home-soft-btn{
+    min-height:36px !important;
+    padding:0 12px !important;
+    border-radius:999px !important;
+  }
+
+  .home-recent-list{
+    gap:6px !important;
+  }
+  .home-recent-list .ma-letter-row{
+    grid-template-columns:minmax(0,1fr) 36px !important;
+    gap:4px !important;
+  }
+  .home-recent-list .ma-letter-card{
+    min-height:64px !important;
+    padding:8px 10px !important;
+    border-radius:15px !important;
+    background:#faf7f4 !important;
+  }
+  .home-recent-list .ma-letter-cover{
+    width:42px !important;
+    height:46px !important;
+    border-radius:13px !important;
+    font-size:18px !important;
+  }
+  .home-recent-list .ma-letter-title{
+    font-size:13px !important;
+  }
+  .home-recent-list .ma-letter-meta{
+    font-size:10.5px !important;
+  }
+  .ma-letter-more{
+    width:36px !important;
+    min-width:36px !important;
+  }
+
+  .home-empty-state{
+    min-height:92px !important;
+    padding:14px !important;
+    border-radius:16px !important;
+  }
+  .home-empty-icon{
+    width:40px !important;
+    height:40px !important;
+  }
+
+  .home-idea-list{
+    display:grid !important;
+    grid-template-columns:1fr 1fr !important;
+    gap:7px !important;
+  }
+  .home-idea{
+    min-height:92px !important;
+    padding:10px !important;
+    grid-template-columns:34px minmax(0,1fr) !important;
+    grid-template-rows:auto auto !important;
+    align-content:start !important;
+    border-radius:16px !important;
+    background:#f8f3f0 !important;
+  }
+  .home-idea-icon{
+    width:34px !important;
+    height:34px !important;
+    font-size:14px !important;
+  }
+  .home-idea-copy strong{
+    font-size:12px !important;
+  }
+  .home-idea-copy small{
+    grid-column:1 / -1;
+    white-space:normal !important;
+    display:-webkit-box !important;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    font-size:10px !important;
+  }
+  .home-idea-arrow{
+    display:none !important;
+  }
+
+  /* technical/status card is not useful on Home */
+  .home-status-panel{
+    display:none !important;
+  }
+
+  .home-text-btn{
+    min-height:32px !important;
+    padding:0 10px !important;
+  }
+
+  /* top bar more app-like */
+  .ma-topbar{
+    min-height:52px !important;
+    padding:7px 16px !important;
+  }
+  .ma-avatar{
+    width:34px !important;
+    height:34px !important;
+    font-size:18px !important;
+  }
+  .ma-icon-btn{
+    width:34px !important;
+    height:34px !important;
+  }
+
+  /* bottom nav compact and balanced */
+  .ma-tabbar{
+    left:10px !important;
+    right:10px !important;
+    min-height:60px !important;
+    padding:5px 6px !important;
+    border-radius:20px !important;
+  }
+  .ma-tab{
+    min-height:46px !important;
+    font-size:9.5px !important;
+  }
+  .ma-tab-icon{
+    font-size:18px !important;
+  }
+  .ma-plus{
+    width:42px !important;
+    height:42px !important;
+    font-size:24px !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -4047,7 +4293,7 @@ input:focus,textarea:focus,select:focus{border-color:#cc6d91;box-shadow:0 0 0 4p
             <div class="step hidden" data-step="3">
               <div class="step-kicker">Візуальний момент</div>
               <h2>Портрет або фото</h2>
-              <p class="subtitle">Портрет зі слів створюється прямо у твоєму браузері. Оригінальне фото не завантажується в D1.</p>
+              <p class="subtitle">Портрет зі слів створюється прямо на твоєму пристрої. Оригінальне фото не зберігається.</p>
 
               <div class="media-mode-grid" role="radiogroup" aria-label="Тип зображення">
                 <label class="media-mode-card">
@@ -4078,7 +4324,7 @@ input:focus,textarea:focus,select:focus{border-color:#cc6d91;box-shadow:0 0 0 4p
                 </label>
                 <div class="privacy-note" id="mediaPrivacyNote">
                   <span class="privacy-dot"></span>
-                  <div><b>Обробка на пристрої</b><small>Фото читається Canvas-ом локально. У режимі портрета оригінал нікуди не надсилається.</small></div>
+                  <div><b>Обробка на пристрої</b><small>Фото читається -ом локально. У режимі портрета оригінал нікуди не надсилається.</small></div>
                 </div>
 
                 <div class="local-portrait-preview hidden" id="localPortraitPreviewWrap">
@@ -4164,7 +4410,7 @@ input:focus,textarea:focus,select:focus{border-color:#cc6d91;box-shadow:0 0 0 4p
                 <button class="btn ghost slim" type="button" id="openLink">Відкрити лист як отримувач</button>
               </div>
               <button class="private-edit-toggle hidden" type="button" id="privateEditToggle">Керування листом</button>
-              <div class="edit-link-wrap hidden" style="margin-top:10px">
+              <div class="посилання для редагування-wrap hidden" style="margin-top:10px">
                 <div class="field-note"><b>Приватне службове посилання.</b> Не надсилай його отримувачу:</div>
                 <div class="sharebox"><input id="editLinkBox" readonly></div>
                 <div class="mini-actions">
@@ -4172,15 +4418,15 @@ input:focus,textarea:focus,select:focus{border-color:#cc6d91;box-shadow:0 0 0 4p
                   <button class="btn ghost slim" type="button" id="openEditLink">Редагувати зараз</button>
                 </div>
                 <div class="url-control-box">
-                  <div class="field-note"><b>Керування посиланням</b><br>Можна перевипустити URL або повністю видалити лист.</div>
+                  <div class="field-note"><b>Керування посиланням</b><br>Можна перевипустити посилання або повністю видалити лист.</div>
                   <div class="mini-actions">
-                    <button class="btn ghost slim" type="button" id="regenerateUrlBtn">Створити новий URL</button>
+                    <button class="btn ghost slim" type="button" id="regenerateUrlBtn">Створити новий посилання</button>
                     <button class="btn danger slim" type="button" id="deleteStoryBtn">Видалити лист</button>
                   </div>
                   <div id="urlControlStatus" class="field-note"></div>
                 </div>
               </div>
-              <div class="muted" style="margin-top:12px">Лист зберігається у Cloudflare D1, а отримувач отримує коротке посилання виду /l/Ab3Xy9Qk.</div>
+              <div class="muted" style="margin-top:12px">Після створення ти отримаєш коротке посилання, яке можна одразу надіслати.</div>
             </div>
 
             <div class="actions">
@@ -4564,21 +4810,7 @@ function renderAppHome(){
           </section>
 
           <section class="home-panel home-status-panel">
-            <div class="home-status-row">
-              <div class="home-status-icon">${installed ? "✓" : "↗"}</div>
-              <div>
-                <strong>${installed ? "Застосунок встановлено" : "Можна встановити як застосунок"}</strong>
-                <span>${installed ? "Standalone PWA активний." : "Швидкий запуск із домашнього екрана."}</span>
-              </div>
-              ${installed ? "" : '<button class="home-mini-btn" id="homeInstallBtn" type="button">Встановити</button>'}
-            </div>
-            <div class="home-status-row">
-              <div class="home-status-icon">⌁</div>
-              <div>
-                <strong>Приватна обробка</strong>
-                <span>Word portrait створюється локально у твоєму браузері.</span>
-              </div>
-            </div>
+            
           </section>
         </aside>
       </div>
@@ -4756,12 +4988,12 @@ function requestDeleteLetter(id){
   const key=letterEditKey(id);
   openAppSheet(`
     <div class="app-sheet-head">
-      <div class="app-sheet-kicker">${key?"Незворотна дія":"Локальна бібліотека"}</div>
+      <div class="app-sheet-kicker">${key?"Незворотна дія":"Мої листи"}</div>
       <div class="app-sheet-title">${key?"Видалити цей лист?":"Прибрати лист з цього пристрою?"}</div>
       <div class="app-sheet-copy">${
         key
-        ? "Посилання отримувача перестане працювати, а запис буде видалений із D1. Відновити його не можна."
-        : "Приватного ключа редагування на цьому пристрої немає, тому серверний лист ми не чіпаємо — лише прибираємо його з локальної бібліотеки."
+        ? "Посилання отримувача перестане працювати, а запис буде видалений із сховище. Відновити його не можна."
+        : "На цьому пристрої немає доступу до редагування. Можна лише прибрати лист зі списку."
       }</div>
     </div>
     <div class="app-sheet-actions">
@@ -4856,7 +5088,7 @@ async function renderLetterDetail(id){
           <span>${hasKey ? "Видалити лист" : "Прибрати з бібліотеки"}</span><span>×</span>
         </button>
       </div>
-      ${loadError ? `<div class="ma-detail-error">Серверний лист зараз не вдалося прочитати: ${escapeHtml(loadError)}. Локальні дії все одно доступні настільки, наскільки дозволяє збережений ключ.</div>` : ""}
+      ${loadError ? `<div class="ma-detail-error">Зараз не вдалося відкрити лист: ${escapeHtml(loadError)}. Локальні дії все одно доступні настільки, наскільки дозволяє збережений ключ.</div>` : ""}
     </section>`;
 
   const recipientUrl=`${location.origin}/l/${id}`;
@@ -4921,7 +5153,7 @@ async function regenerateFromApp(id,{confirmed=false}={}){
     openAppSheet(`
       <div class="app-sheet-head">
         <div class="app-sheet-kicker">Нове посилання</div>
-        <div class="app-sheet-title">Перевипустити URL?</div>
+        <div class="app-sheet-title">Перевипустити посилання?</div>
         <div class="app-sheet-copy">Поточне посилання отримувача одразу перестане працювати. Сам лист залишиться тим самим.</div>
       </div>
       <div class="app-sheet-actions">
@@ -4951,13 +5183,13 @@ async function regenerateFromApp(id,{confirmed=false}={}){
     showMobileToast("Нове посилання готове");
     setMobileAppRoute(`letter=${encodeURIComponent(data.id)}`,true);
     renderLetterDetail(data.id);
-  }catch(e){ showMobileToast(e?.message||"Не вдалося створити URL"); }
+  }catch(e){ showMobileToast(e?.message||"Не вдалося створити посилання"); }
 }
 
 async function deleteFromApp(id,{skipConfirm=false}={}){
   const key=letterEditKey(id);
 
-  // No edit key: we cannot truthfully claim server deletion.
+  // No доступ до редагування: we cannot truthfully claim сервіс deletion.
   // Still allow the user to remove stale/shared items from their own Library.
   if(!key){
     removeLocalLetter(id);
@@ -4984,7 +5216,7 @@ async function deleteFromApp(id,{skipConfirm=false}={}){
     let data={};
     try{data=await r.json()}catch{}
 
-    // 404 means the server copy is already gone; clean local state too.
+    // 404 means the сервіс copy is already gone; clean local state too.
     if(r.status===404 || (r.ok && data?.ok)){
       removeLocalLetter(id);
       try{localStorage.removeItem(`love-letter-edit-${id}`)}catch{}
@@ -5001,8 +5233,8 @@ async function deleteFromApp(id,{skipConfirm=false}={}){
       openAppSheet(`
         <div class="app-sheet-head">
           <div class="app-sheet-kicker">Ключ не підходить</div>
-          <div class="app-sheet-title">Не вдалося видалити лист із сервера</div>
-          <div class="app-sheet-copy">На цьому пристрої збережений ключ редагування, але сервер його не прийняв. Серверний лист залишиться активним.</div>
+          <div class="app-sheet-title">Не вдалося видалити лист</div>
+          <div class="app-sheet-copy">Не вдалося підтвердити право на редагування. Лист залишиться активним.</div>
           <div class="ma-danger-note">Код: ${escapeHtml(code||String(r.status))}</div>
         </div>
         <div class="app-sheet-actions">
@@ -5082,16 +5314,16 @@ function renderAppSettings(){
 
         <div class="ma-setting-card">
           <div class="ma-setting-title">Приватність</div>
-          <div class="ma-setting-sub">Оригінал фото для word portrait обробляється локально. D1 отримує лише компактні дані портрета або стиснуте фото, якщо ти сам обрав режим фото.</div>
+          <div class="ma-setting-sub">Оригінал фото для word portrait обробляється локально. сховище отримує лише компактні дані портрета або стиснуте фото, якщо ти сам обрав режим фото.</div>
         </div>
 
         <div class="ma-setting-card">
           <div class="ma-setting-row">
             <div>
-              <div class="ma-setting-title">Локальна бібліотека</div>
+              <div class="ma-setting-title">Мої листи</div>
               <div class="ma-setting-sub">${library.length} ${library.length===1?"лист":"листів"} на цьому пристрої.</div>
             </div>
-            ${library.length ? '<button class="ma-small-btn" id="maClearLibraryBtn" type="button">Очистити локально</button>' : ''}
+            ${library.length ? '<button class="ma-small-btn" id="maClearLibraryBtn" type="button">Очистити список</button>' : ''}
           </div>
         </div>
 
@@ -5123,12 +5355,12 @@ function renderAppSettings(){
   document.getElementById("maClearLibraryBtn")?.addEventListener("click",()=>{
     openAppSheet(`
       <div class="app-sheet-head">
-        <div class="app-sheet-kicker">Локальні дані</div>
+        <div class="app-sheet-kicker">Мої дані</div>
         <div class="app-sheet-title">Очистити список листів на цьому пристрої?</div>
         <div class="app-sheet-copy">Серверні листи та їхні посилання залишаться активними. Це видалить лише локальний список у застосунку.</div>
       </div>
       <div class="app-sheet-actions">
-        <button class="app-sheet-action danger" id="confirmClearLibrary" type="button">Очистити локальну бібліотеку</button>
+        <button class="app-sheet-action danger" id="confirmClearLibrary" type="button">Очистити список листів</button>
         <button class="app-sheet-action cancel" id="cancelClearLibrary" type="button">Скасувати</button>
       </div>`);
     document.getElementById("confirmClearLibrary")?.addEventListener("click",()=>{
@@ -5445,7 +5677,7 @@ const MOBILE_WIZARD_STEPS = [
             <div class="mw-option-icon">✦</div>
             <div class="mw-option-copy">
               <div class="mw-option-title">Портрет зі слів</div>
-              <div class="mw-option-sub">Локальна обробка. Оригінал фото не йде в D1.</div>
+              <div class="mw-option-sub">Локальна обробка. Оригінал фото не йде в сховище.</div>
             </div>
           </button>
           <button class="mw-option" data-visual="photo">
@@ -5998,7 +6230,7 @@ function updateMediaModeUI(){
   if(note){
     const small = note.querySelector("small");
     if(small) small.textContent = mode === "portrait"
-      ? "Фото читається Canvas-ом локально. У D1 потрапляє лише компактна карта світла й тіней — не оригінал."
+      ? "Фото читається -ом локально. У сховище потрапляє лише компактна карта світла й тіней — не оригінал."
       : mode === "photo"
         ? "Фото стискається у браузері перед збереженням. На сервер йде лише зменшена копія."
         : "Зображення не буде додане до листа.";
@@ -6050,7 +6282,7 @@ function unpackPortraitLevels(portrait){
 
 async function createWordPortrait(file, wordsText){
   const img = new Image();
-  const url = URL.createObjectURL(file);
+  const url = посилання.createObjectпосилання(file);
   try{
     img.src = url;
     await img.decode();
@@ -6091,7 +6323,7 @@ async function createWordPortrait(file, wordsText){
     }
     return {v:1,w,h,tones:packPortraitLevels(levels),words:splitPortraitWords(wordsText)};
   }finally{
-    URL.revokeObjectURL(url);
+    посилання.revokeObjectпосилання(url);
   }
 }
 
@@ -6339,7 +6571,7 @@ function prevStep(){
 
 async function compressImage(file){
   const img = new Image();
-  const url = URL.createObjectURL(file);
+  const url = посилання.createObjectпосилання(file);
   img.src = url;
   await img.decode();
   const maxSide = 540;
@@ -6350,8 +6582,8 @@ async function compressImage(file){
   canvas.width = w; canvas.height = h;
   const ctx = canvas.getContext("2d");
   ctx.drawImage(img, 0, 0, w, h);
-  const data = canvas.toDataURL("image/jpeg", 0.62);
-  URL.revokeObjectURL(url);
+  const data = canvas.toDataпосилання("image/jpeg", 0.62);
+  посилання.revokeObjectпосилання(url);
   return data;
 }
 
@@ -6408,15 +6640,15 @@ async function makeShareLink(){
   if(!response.ok || !data.path){
     throw new Error(
       data.message ||
-      "Коротке посилання не створено: серверне сховище ще не підключено."
+      "Не вдалося створити посилання. Спробуй ще раз трохи пізніше."
     );
   }
 
   state.editingId = data.id || "";
   state.editKey = data.editKey || "";
 
-  // Не показуємо отримувачу URL, доки сервер не підтвердить,
-  // що щойно створений лист реально читається назад з D1.
+  // Не показуємо отримувачу посилання, доки сервер не підтвердить,
+  // що щойно створений лист реально читається назад з сховище.
   if(state.editingId){
     const verify = await fetch(`/api/story/${encodeURIComponent(state.editingId)}`, {
       cache: "no-store"
@@ -6480,7 +6712,7 @@ function mountStory(payload){
 
   // Прихований вхід у редагування для автора:
   // три швидкі кліки/тапи по іконці "L".
-  // Працює тільки якщо edit-key вже збережений у цьому браузері.
+  // Працює тільки якщо доступ до редагування вже збережений у цьому браузері.
   const hiddenPath = location.pathname.length > 1
     ? location.pathname.replace(/\/+$/, "")
     : location.pathname;
@@ -6550,7 +6782,7 @@ async function openHiddenEditor(storyId, editKey){
     const gen = $("#generateLink");
     if(gen) gen.textContent = "Зберегти зміни";
 
-    // Приватні URL не показуємо. Керування листом доступне тільки після прихованого входу.
+    // Приватні посилання не показуємо. Керування листом доступне тільки після прихованого входу.
     $("#privateEditToggle")?.classList.remove("hidden");
 
     window.scrollTo({top:0, behavior:"smooth"});
@@ -6590,7 +6822,7 @@ async function buildChoiceShareImage(d){
 
   ctx.fillStyle = "#ffd5e2";
   ctx.font = '52px "Marck Script", cursive';
-  wrapCanvasText(ctx, d.finalCaption || "наш маленький план", 540, 200, 820, 62);
+  wrapText(ctx, d.finalCaption || "наш маленький план", 540, 200, 820, 62);
 
   roundRect(ctx, 120, 390, 840, 610, 42);
   ctx.fillStyle = "rgba(45,18,34,.76)";
@@ -6601,11 +6833,11 @@ async function buildChoiceShareImage(d){
 
   if(d.portraitData && (d.mediaMode === "portrait" || !d.mediaMode)){
     try{
-      const portraitCanvas=document.createElement("canvas");
-      renderWordPortrait(portraitCanvas,d.portraitData);
+      const portrait=document.createElement("canvas");
+      renderWordPortrait(portrait,d.portraitData);
       const px=420, py=240, pw=240, ph=300, pr=28;
       ctx.save(); roundRect(ctx,px,py,pw,ph,pr); ctx.clip();
-      ctx.drawImage(portraitCanvas,px,py,pw,ph); ctx.restore();
+      ctx.drawImage(portrait,px,py,pw,ph); ctx.restore();
       ctx.strokeStyle="rgba(255,255,255,.22)"; ctx.lineWidth=2;
       roundRect(ctx,px,py,pw,ph,pr); ctx.stroke();
     }catch{}
@@ -6662,27 +6894,27 @@ async function buildChoiceShareImage(d){
   ctx.fillText(choice.emoji || "❤", 540, 740);
 
   ctx.font = '700 42px Inter, sans-serif';
-  wrapCanvasText(ctx, choice.title || "Наш вибір", 540, 810, 700, 54);
+  wrapText(ctx, choice.title || "Наш вибір", 540, 810, 700, 54);
 
   if(d.finalTime){
     ctx.fillStyle = "#fff3f7";
     ctx.font = '600 38px "Cormorant Garamond", serif';
-    wrapCanvasText(ctx, d.finalTime, 540, 885, 720, 46);
+    wrapText(ctx, d.finalTime, 540, 885, 720, 46);
   }
 
   ctx.fillStyle = "#f0c7d7";
   ctx.font = '34px Inter, sans-serif';
-  wrapCanvasText(ctx, choice.subtitle || "", 540, 950, 700, 44);
+  wrapText(ctx, choice.subtitle || "", 540, 950, 700, 44);
 
   if(d.finalNote){
     ctx.fillStyle = "#efcad9";
     ctx.font = '32px Inter, sans-serif';
-    wrapCanvasText(ctx, d.finalNote, 540, 1030, 720, 42);
+    wrapText(ctx, d.finalNote, 540, 1030, 720, 42);
   }
 
   ctx.fillStyle = "#ffd8e5";
   ctx.font = '46px "Marck Script", cursive';
-  wrapCanvasText(ctx, d.recipient ? `для ${d.recipient}` : "для тебе", 540, 1160, 760, 54);
+  wrapText(ctx, d.recipient ? `для ${d.recipient}` : "для тебе", 540, 1160, 760, 54);
 
   ctx.fillStyle = "rgba(255,255,255,.55)";
   ctx.font = '24px Inter, sans-serif';
@@ -6701,7 +6933,7 @@ function roundRect(ctx,x,y,w,h,r){
   ctx.closePath();
 }
 
-function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight){
+function wrapText(ctx, text, x, y, maxWidth, lineHeight){
   const words = String(text || "").split(/\s+/).filter(Boolean);
   let line = "";
   let yy = y;
@@ -6877,14 +7109,14 @@ function renderStory(){
             files: [file]
           });
         }else{
-          const url = URL.createObjectURL(blob);
+          const url = посилання.createObjectпосилання(blob);
           const a = document.createElement("a");
           a.href = url;
           a.download = "love-letter-choice.png";
           document.body.appendChild(a);
           a.click();
           a.remove();
-          setTimeout(()=>URL.revokeObjectURL(url), 3000);
+          setTimeout(()=>посилання.revokeObjectпосилання(url), 3000);
           status.textContent = "Скрін збережено як PNG — можеш надіслати його.";
         }
       }catch(e){
@@ -7137,10 +7369,10 @@ function attachListenersImpl(){
       const editBox = $("#editLinkBox");
       if(editBox) editBox.value = "";
       $("#privateEditToggle")?.classList.toggle("hidden", !state.editingId);
-      document.querySelector(".edit-link-wrap")?.classList.add("hidden");
+      document.querySelector(".посилання для редагування-wrap")?.classList.add("hidden");
       showError("");
       const storageStatus = $("#storageStatus");
-      if(storageStatus) storageStatus.textContent = "✓ Лист записаний у D1 і успішно прочитаний назад сервером.";
+      if(storageStatus) storageStatus.textContent = "✓ Лист записаний у сховище і успішно прочитаний назад сервером.";
       $("#generateLink").textContent = "Коротке посилання готове ✓";
       saveDraft();
     }catch(e){
@@ -7158,7 +7390,7 @@ function attachListenersImpl(){
         const result = await makeShareLink();
         $("#shareLink").value = result.link;
       }
-      const recipientUrl = new URL($("#shareLink").value, location.origin);
+      const recipientUrl = new посилання($("#shareLink").value, location.origin);
       if(!/^\/l\/[A-Za-z0-9_-]{4,32}$/.test(recipientUrl.pathname.replace(/\/+$/, ""))){
         throw new Error("Некоректне посилання отримувача.");
       }
@@ -7176,9 +7408,9 @@ function attachListenersImpl(){
         $("#shareLink").value = link;
       }
 
-      // Переходимо саме на recipient URL у цій вкладці.
+      // Переходимо саме на recipient посилання у цій вкладці.
       // Це прибирає поведінку pop-up/new-tab, яка на телефоні могла не спрацювати.
-      const u = new URL(link, location.origin);
+      const u = new посилання(link, location.origin);
       if(!/^\/l\/[A-Za-z0-9_-]{4,32}$/.test(u.pathname.replace(/\/+$/, ""))){
         throw new Error("Некоректне посилання отримувача.");
       }
@@ -7190,7 +7422,7 @@ function attachListenersImpl(){
     if(!link) return;
     await navigator.clipboard.writeText(link);
     $("#copyEditLink").textContent = "Скопійовано";
-    setTimeout(()=>$("#copyEditLink").textContent = "Копіювати edit-link", 1400);
+    setTimeout(()=>$("#copyEditLink").textContent = "Копіювати посилання для редагування", 1400);
   };
   $("#openEditLink").onclick = ()=>{
     const link = $("#editLinkBox").value;
@@ -7198,7 +7430,7 @@ function attachListenersImpl(){
   };
 
   $("#privateEditToggle").onclick = ()=>{
-    const wrap = document.querySelector(".edit-link-wrap");
+    const wrap = document.querySelector(".посилання для редагування-wrap");
     if(!wrap) return;
     const willShow = wrap.classList.contains("hidden");
     wrap.classList.toggle("hidden", !willShow);
@@ -7210,23 +7442,23 @@ function attachListenersImpl(){
   $("#regenerateUrlBtn").onclick = async()=>{
     const status = $("#urlControlStatus");
     if(!state.editingId || !state.editKey){
-      status.textContent = "Спочатку створи лист або відкрий його через edit-link.";
+      status.textContent = "Спочатку створи лист або відкрий його через посилання для редагування.";
       return;
     }
 
-    const ok = confirm("Створити новий короткий URL? Старе посилання для отримувача одразу перестане працювати.");
+    const ok = confirm("Створити новий короткий посилання? Старе посилання для отримувача одразу перестане працювати.");
     if(!ok) return;
 
     try{
       $("#regenerateUrlBtn").disabled = true;
-      status.textContent = "Створюю новий URL…";
+      status.textContent = "Створюю новий посилання…";
 
       const r = await fetch(`/api/story/${encodeURIComponent(state.editingId)}/regenerate`, {
         method: "POST",
         headers: { "x-edit-token": state.editKey }
       });
       const data = await r.json();
-      if(!r.ok) throw new Error(data.error || "Не вдалося створити новий URL.");
+      if(!r.ok) throw new Error(data.error || "Не вдалося створити новий посилання.");
 
       try{
         localStorage.removeItem(`love-letter-edit-${state.editingId}`);
@@ -7244,10 +7476,10 @@ function attachListenersImpl(){
       $("#editLinkBox").value = editLink;
       $("#privateEditToggle")?.classList.remove("hidden");
 
-      status.textContent = "Новий URL готовий. Старе посилання більше не працює.";
-      // Не переводимо сторінку автора на /edit: recipient URL має лишатися окремим і очевидним.
+      status.textContent = "Новий посилання готовий. Старе посилання більше не працює.";
+      // Не переводимо сторінку автора на /edit: recipient посилання має лишатися окремим і очевидним.
     }catch(e){
-      status.textContent = e.message || "Не вдалося перевипустити URL.";
+      status.textContent = e.message || "Не вдалося перевипустити посилання.";
     }finally{
       $("#regenerateUrlBtn").disabled = false;
     }
@@ -7430,7 +7662,7 @@ async function initPWA(){
     ,6200);
   });
 
-  window.addEventListener("offline",()=>showAppToast("Офлайн: редактор і чернетка працюють локально. Для створення нового URL потрібен інтернет."));
+  window.addEventListener("offline",()=>showAppToast("Офлайн: редактор і чернетка працюють локально. Для створення нового посилання потрібен інтернет."));
   window.addEventListener("online",()=>showAppToast("З’єднання відновлено ✓",2200));
 }
 
@@ -7448,7 +7680,7 @@ initPWA();
     state.editKey = "";
     state.storyPayload = null;
 
-    // Normalize URL without changing the route itself.
+    // Normalize посилання without changing the route itself.
     if(location.pathname !== cleanPath || location.search || location.hash){
       history.replaceState(null, "", cleanPath);
     }
@@ -7476,10 +7708,10 @@ initPWA();
 
   const editMatch = cleanPath.match(/^\/edit\/([A-Za-z0-9_-]{4,32})$/);
   if(editMatch){
-    // Legacy private links are accepted only to recover the local edit key.
-    // Then the URL is immediately normalized to the normal recipient route.
+    // Legacy private links are accepted only to recover the local доступ до редагування.
+    // Then the посилання is immediately normalized to the normal recipient route.
     const id = editMatch[1];
-    const hashParams = new URLSearchParams(location.hash.replace(/^#/,""));
+    const hashParams = new посиланняSearchParams(location.hash.replace(/^#/,""));
     const key = hashParams.get("key") || "";
     if(key){
       try{ localStorage.setItem(`love-letter-edit-${id}`, key); }catch{}

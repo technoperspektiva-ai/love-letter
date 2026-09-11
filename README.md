@@ -563,3 +563,15 @@ Settings / Letter Detail / Create states.
 - cache bumped до `love-letter-1.6`, щоб старий Service Worker CSS не маскував зміни.
 
 `/api/health` -> `version: "1.6"`
+
+
+# Love Letter 1.7 — Clean language + mobile home
+
+- прибрано технічну мову з user-facing інтерфейсу;
+- Home на телефоні ущільнений і більше не виглядає як landing page;
+- статистика, чернетка, останні листи та ідеї зібрані ближче до першого екрану;
+- технічний status block прибрано з Home;
+- bottom navigation і top bar стали компактнішими;
+- old cache bumped to 1.7.
+
+`/api/health` -> `version: "1.7"`
