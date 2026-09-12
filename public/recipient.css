@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 /* Love Letter 2.1.5 — recipient full rebuild aligned with built-in preview/demo.
    This stylesheet is intentionally scoped to #storyView and loads after main + magic.css.
@@ -665,7 +664,8 @@ body.story-open .developer-credit-footer{display:none!important}
     animation:none!important;transition:none!important;scroll-behavior:auto!important;
   }
 }
-=======
+
+/* Current isolated recipient markup supersedes the legacy selectors above. */
 /* Recipient-only layout. No creator phone mockup or nested scrolling. */
 body.story-open { touch-action: auto !important; }
 body.story-open #storyView.rs-view { min-height:0 !important; color:#60394b; background:transparent !important; }
@@ -738,4 +738,3 @@ body.story-open .developer-credit-footer { padding-bottom:calc(20px + env(safe-a
 @media (hover:hover) { .rs-choice:hover { transform:translateY(-3px); box-shadow:0 10px 25px #74355214; } }
 @keyframes rs-appear { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:none; } }
 @media (prefers-reduced-motion:reduce) { .rs-content * { animation:none !important; transition:none !important; } }
->>>>>>> 0d54dfb (Isolate responsive recipient flow from legacy phone layout)

@@ -229,7 +229,7 @@ async function regenerateStoryUrl(request, id, env) {
 }
 
 
-const recipientDemoHead = `<link rel="stylesheet" href="/recipient.css?v=2150">`;
+const recipientDemoHead = `<link rel="stylesheet" href="/recipient.css?v=2160">`;
 
 const developerCreditStyles = `<style id="developer-credit-styles">
   .developer-credit-footer{padding:12px max(16px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));text-align:center}

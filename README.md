@@ -1,33 +1,21 @@
-# Love Letter 2.1.4 — Demo Recipient Fixed
+# Love Letter 2.1 — Cross-platform Stabilized Redesign
 
-Це виправлення зроблено після перевірки реальних mobile screenshots.
+Built from the uploaded 1.15.5 stable base rather than the broken 2.0 branch.
 
-## Що було зламано в 2.1.3
-1. У старого `.preview-env .recipient` залишалися `transform: translateX(-50%)`
-   і `width:78%`. Через це псевдо-текст `Для тебе` фізично вилітав ліворуч.
-2. `.phone-stage` продовжував мати старий burgundy background, а 2.1.3
-   зробив intro-текст темним — через це він майже зникав.
-3. Надто широкий reset анімацій прибрав відчуття Demo.
+Highlights:
+- reference-aligned burgundy/ivory visual system without replacing backend/business logic;
+- desktop home, library, ideas and settings polished as one ecosystem;
+- recent-letter cards behave like real envelopes with hover/open affordance;
+- mobile wizard gets quick recipient/contact presets plus manual recipient entry;
+- existing scenarios, writing suggestions, font selector, media modes, word portrait, short links, edit/copy/delete and D1 flow preserved;
+- recipient screen keeps cream paper / burgundy mood;
+- iPhone/Android safe-area, keyboard and scrolling rules consolidated;
+- media remains explicit-only (no stale portrait auto-attachment).
 
-## 2.1.4
-- кожен recipient step живе всередині cream Demo card;
-- burgundy використовується як theatre background, а не як фон під темний текст;
-- `Для тебе` повністю reset: left/right/width/transform/overflow;
-- конверт відтворює Demo geometry;
-- повернуто safe animation: card fade+scale, text fade, envelope breathe,
-  wax glow, flap opening і envelope exit;
-- actual letter залишається current-main `previewLetter()`, тільки стабільно
-  оформлений cream paper;
-- усі тексти у normal flow і не можуть вилітати за paper/card.
+Version 2.1.0.
 
-Overlay поверх current main:
-- public/recipient-demo.css
-- public/recipient-demo.js
-- worker/index.js
+## Creation and motion update
 
-<<<<<<< HEAD
-/api/health → version 2.1.4
-=======
 The home screen now leads with a live envelope, an interactive letter example,
 and three starters: love, gratitude, and support. New letters use three steps:
 recipient, message, and review. Secret words, imagery, opening text, choices,
@@ -69,4 +57,34 @@ After verification and a successful Git push, stop the local server and remove
 `test-results/`, `.wrangler/`, and `node_modules/` if no further local work is needed.
 Keep source files, `package-lock.json`, and `.git`. Removing `.wrangler/` removes
 the local test database, not the deployed database.
->>>>>>> 0d54dfb (Isolate responsive recipient flow from legacy phone layout)
+
+## Previous recipient overlay notes (before isolated layout)
+
+# Love Letter 2.1.4 — Demo Recipient Fixed
+
+Це виправлення зроблено після перевірки реальних mobile screenshots.
+
+## Що було зламано в 2.1.3
+1. У старого `.preview-env .recipient` залишалися `transform: translateX(-50%)`
+   і `width:78%`. Через це псевдо-текст `Для тебе` фізично вилітав ліворуч.
+2. `.phone-stage` продовжував мати старий burgundy background, а 2.1.3
+   зробив intro-текст темним — через це він майже зникав.
+3. Надто широкий reset анімацій прибрав відчуття Demo.
+
+## 2.1.4
+- кожен recipient step живе всередині cream Demo card;
+- burgundy використовується як theatre background, а не як фон під темний текст;
+- `Для тебе` повністю reset: left/right/width/transform/overflow;
+- конверт відтворює Demo geometry;
+- повернуто safe animation: card fade+scale, text fade, envelope breathe,
+  wax glow, flap opening і envelope exit;
+- actual letter залишається current-main `previewLetter()`, тільки стабільно
+  оформлений cream paper;
+- усі тексти у normal flow і не можуть вилітати за paper/card.
+
+Overlay поверх current main:
+- public/recipient-demo.css
+- public/recipient-demo.js
+- worker/index.js
+
+/api/health → version 2.1.4
