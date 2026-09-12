@@ -73,7 +73,7 @@ async function health(env) {
       ok: true,
       db: true,
       stories: Number(row?.count || 0),
-      version: "2.1.4"
+      version: "2.1.5"
     });
   } catch (error) {
     return json({
@@ -229,8 +229,7 @@ async function regenerateStoryUrl(request, id, env) {
 }
 
 
-const recipientDemoHead = `<link rel="stylesheet" href="/recipient-demo.css?v=2140">
-<script defer src="/recipient-demo.js?v=2140"></script>`;
+const recipientDemoHead = `<link rel="stylesheet" href="/recipient.css?v=2150">`;
 
 const developerCreditStyles = `<style id="developer-credit-styles">
   .developer-credit-footer{padding:12px max(16px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));text-align:center}

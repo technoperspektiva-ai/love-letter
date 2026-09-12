@@ -1,5 +1,5 @@
-const CACHE="love-letter-2.2";
-const CORE=["/","/magic.css?v=3","/magic.js?v=3","/manifest.webmanifest","/icons/icon-192.png","/icons/icon-512.png","/icons/icon-maskable-512.png","/icons/apple-touch-icon.png"];
+const CACHE="love-letter-2.3-recipient-215";
+const CORE=["/","/magic.css?v=3","/magic.js?v=3","/recipient.css?v=2150","/manifest.webmanifest","/icons/icon-192.png","/icons/icon-512.png","/icons/icon-maskable-512.png","/icons/apple-touch-icon.png"];
 
 self.addEventListener("install",event=>{
   event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE)).then(()=>self.skipWaiting()));
@@ -52,7 +52,13 @@ self.addEventListener("fetch",event=>{
     event.respondWith(networkFirst(request));
     return;
   }
-  if(url.pathname.startsWith("/icons/") || url.pathname==="/manifest.webmanifest" || url.pathname==="/magic.css" || url.pathname==="/magic.js"){
+  if(
+    url.pathname.startsWith("/icons/") ||
+    url.pathname==="/manifest.webmanifest" ||
+    url.pathname==="/magic.css" ||
+    url.pathname==="/magic.js" ||
+    url.pathname==="/recipient.css"
+  ){
     event.respondWith(cacheFirst(request));
   }
 });
