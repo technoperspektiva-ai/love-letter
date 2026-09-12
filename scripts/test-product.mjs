@@ -102,13 +102,13 @@ try {
     await recipient.locator('#toEnvelopeBtn').click();
     await recipient.locator('#envBtn').click();
     await recipient.locator('#toChoicesBtn').waitFor();
-    assert.match(await recipient.locator('#storyStage .msg').textContent(),/Ти робиш цей світ/);
+    assert.match(await recipient.locator('#storyStage .rs-message').textContent(),/Ти робиш цей світ/);
     await noOverflow(recipient);
     await recipient.screenshot({path:`test-results/recipient-${width}.png`,fullPage:true,animations:'disabled'});
     await recipient.locator('#toChoicesBtn').click();
-    await recipient.locator('.recipient-choice-card').first().click();
-    await recipient.locator('.recipient-final-card').waitFor();
-    assert.equal(await recipient.locator('.recipient-final-time').count(),0,'no stale sample time');
+    await recipient.locator('.rs-choice').first().click();
+    await recipient.locator('.rs-final-card').waitFor();
+    assert.equal(await recipient.locator('.rs-final-time').count(),0,'no stale sample time');
     await noOverflow(recipient);
     if(width===390){
       await recipient.goto(base+created.editPath);

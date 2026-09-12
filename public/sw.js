@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 const CACHE="love-letter-2.3-recipient-215";
 const CORE=["/","/magic.css?v=3","/magic.js?v=3","/recipient.css?v=2150","/manifest.webmanifest","/icons/icon-192.png","/icons/icon-512.png","/icons/icon-maskable-512.png","/icons/apple-touch-icon.png"];
+=======
+const CACHE="love-letter-2.3";
+const CORE=["/","/recipient.css?v=1","/magic.css?v=3","/magic.js?v=3","/manifest.webmanifest","/icons/icon-192.png","/icons/icon-512.png","/icons/icon-maskable-512.png","/icons/apple-touch-icon.png"];
+>>>>>>> 0d54dfb (Isolate responsive recipient flow from legacy phone layout)
 
 self.addEventListener("install",event=>{
   event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE)).then(()=>self.skipWaiting()));
@@ -52,6 +57,7 @@ self.addEventListener("fetch",event=>{
     event.respondWith(networkFirst(request));
     return;
   }
+<<<<<<< HEAD
   if(
     url.pathname.startsWith("/icons/") ||
     url.pathname==="/manifest.webmanifest" ||
@@ -59,6 +65,9 @@ self.addEventListener("fetch",event=>{
     url.pathname==="/magic.js" ||
     url.pathname==="/recipient.css"
   ){
+=======
+  if(url.pathname.startsWith("/icons/") || url.pathname==="/manifest.webmanifest" || url.pathname==="/recipient.css" || url.pathname==="/magic.css" || url.pathname==="/magic.js"){
+>>>>>>> 0d54dfb (Isolate responsive recipient flow from legacy phone layout)
     event.respondWith(cacheFirst(request));
   }
 });

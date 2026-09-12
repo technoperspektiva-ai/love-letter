@@ -7209,6 +7209,7 @@ body.story-open .app{background:transparent!important}
 </style>
 <link rel="stylesheet" href="/magic.css?v=3">
 <script src="/magic.js?v=3" defer></script>
+<link rel="stylesheet" href="/recipient.css?v=1">
 </head>
 <body>
 <div class="app">
@@ -10532,6 +10533,7 @@ function formatRecipientName(d){
 }
 
 function mountStory(payload){
+  payload={...payload,choices:Array.isArray(payload.choices)?payload.choices.filter(c=>c && typeof c==="object"):[]};
   document.body.classList.add("story-open");
   document.querySelector(".app")?.classList.add("story-open");
   restorePageScroll();
@@ -10539,22 +10541,21 @@ function mountStory(payload){
   $("#creatorView").classList.add("hidden");
   const view = $("#storyView");
   view.classList.remove("hidden");
+  view.classList.add("rs-view");
   view.innerHTML = `
-    <div class="shell" style="padding-bottom:18px">
-      <header class="topbar">
-        <div class="brand recipient-brand">
-          <button class="recipient-main-logo" id="hiddenEditSeal" type="button" aria-label="Love Letter">
-            <img src="/brand/logo-main.png?v=1141" alt="Love Letter">
-          </button>
-        </div>
-        <div class="recipient-mode-badge">для отримувача</div>
+    <div class="rs-shell">
+      <header class="rs-header">
+        <button class="rs-logo" id="hiddenEditSeal" type="button" aria-label="Love Letter"><img src="/brand/logo-main.png?v=1141" alt="Love Letter"></button>
+        <span class="rs-badge">Для ${escapeHtml(payload.recipient || "тебе")}</span>
       </header>
-      <div class="phone" style="max-width:430px;margin:0 auto">
-        <div class="phone-bar"><span>Love Letter</span><span>${escapeHtml(payload.recipient || "для тебе")}</span><span>♡</span></div>
-        <div class="phone-stage" id="storyStage"></div>
-      </div>
-    </div>
-  `;
+      <div class="rs-toolbar"><button class="rs-back" id="rsBack" type="button" hidden>← Назад</button></div>
+      <main class="rs-content" id="storyStage" tabindex="-1" aria-label="Лист для тебе"></main>
+    </div>`;
+  document.getElementById("rsBack").onclick=()=>{
+    state.storyStep=Math.max(1,state.storyStep-1);
+    if(state.storyStep===4 && !state.storyPayload.choices.length) state.storyStep=3;
+    renderStory();
+  };
   state.storyStep = payload.useSecret ? 0 : 1;
   renderStory();
 
@@ -10801,21 +10802,41 @@ function wrapText(ctx, text, x, y, maxWidth, lineHeight){
   if(line) ctx.fillText(line, x, yy);
 }
 
+function recipientLetterMarkup(d){
+  const font=["classic","editorial","romantic","handwritten"].includes(d.letterFont)?d.letterFont:"classic";
+  return `<article class="rs-paper" data-font="${font}">
+    <p class="rs-to">${escapeHtml(d.letterTo || d.recipient || "Для тебе")}</p>
+    <h2 class="rs-paper-title">${escapeHtml(d.letterTitle || "Для тебе")}</h2>
+    <div class="rs-divider" aria-hidden="true">— ♡ —</div>
+    <div class="rs-message">${escapeHtml(d.letterMessage)}</div>
+    ${mediaMarkup(d,"letter")}
+    ${d.letterSign?`<p class="rs-sign">${escapeHtml(d.letterSign)}</p>`:""}
+  </article>`;
+}
+
 function renderStory(){
   const d = state.storyPayload;
   const root = $("#storyStage");
   if(!root || !d) return;
   root.dataset.storyStep=String(state.storyStep);
+  const back=document.getElementById("rsBack");
+  if(back) back.hidden=state.storyStep<=1;
+  queueMicrotask(()=>{
+    if(!root.isConnected) return;
+    root.focus({preventScroll:true});
+    window.scrollTo({top:0,left:0,behavior:"instant"});
+  });
 
   if(state.storyStep === 0){
     root.innerHTML = `
-      <div class="stage-center centered">
-        <h2 class="qmark">Ця емоція<br>закрита словом</h2>
-        <div class="light-sub" style="font-size:28px">${escapeHtml(d.secretQuestion || "Де ми познайомилися?")}</div>
-        <input class="pale-input" id="secretInput" placeholder="слово">
-        <button class="big-button" id="secretOpenBtn">Відкрити</button>
-        <div class="muted" id="secretError" style="margin-top:12px;color:#ffd2df"></div>
+      <div class="rs-moment">
+        <h2 class="rs-heading">Ця емоція<br>закрита словом</h2>
+        <div class="rs-eyebrow" >${escapeHtml(d.secretQuestion || "Де ми познайомилися?")}</div>
+        <input class="rs-input" id="secretInput" aria-label="Секретне слово" placeholder="Секретне слово" autocomplete="off" enterkeyhint="go">
+        <button class="rs-button" id="secretOpenBtn">Відкрити</button>
+        <div class="rs-error" id="secretError" role="status"></div>
       </div>`;
+    $("#secretInput").addEventListener("keydown",event=>{if(event.key==="Enter") $("#secretOpenBtn").click();});
     $("#secretOpenBtn").onclick = ()=>{
       const val = normalizeText($("#secretInput").value);
       if(val === normalizeText(d.secretAnswer)){
@@ -10830,35 +10851,29 @@ function renderStory(){
 
   if(state.storyStep === 1){
     root.innerHTML = `
-      <div class="stage-center centered">
-        <div class="light-sub">${escapeHtml(formatRecipientName(d))}</div>
-        <h2 class="light-title">${escapeHtml(d.introMain || "тобі лист")}</h2>
-        <button class="big-button" id="toEnvelopeBtn" style="max-width:220px;margin-top:28px">Далі</button>
+      <div class="rs-moment">
+        <div class="rs-eyebrow">${escapeHtml(formatRecipientName(d))}</div>
+        <h2 class="rs-heading">${escapeHtml(d.introMain || "тобі лист")}</h2>
+        <button class="rs-button" id="toEnvelopeBtn">Далі</button>
       </div>`;
+    $("#toEnvelopeBtn").textContent="До конверта →";
     $("#toEnvelopeBtn").onclick = ()=>{ state.storyStep = 2; renderStory(); };
     return;
   }
 
   if(state.storyStep === 2){
     root.innerHTML = `
-      <div class="stage-center centered envelope-stage">
-        <button type="button" id="envBtn" class="envelope-button" aria-label="Відкрити конверт">
-          <div class="preview-env recipient-envelope">
-            <div class="letter-peek">
-              <span>для тебе</span>
-            </div>
-            <div class="flap"></div>
-            <div class="front"></div>
-            <div class="wax">${escapeHtml((d.recipient || "L").slice(0,1).toUpperCase())}</div>
-            <div class="recipient">${escapeHtml(d.recipient || "для тебе")}</div>
-          </div>
+      <div class="rs-moment">
+        <div class="rs-eyebrow">${escapeHtml(d.recipient || "Для тебе")}, всередині — дещо особливе</div>
+        <button type="button" id="envBtn" class="rs-envelope-button" aria-label="Відкрити конверт">
+          <span class="rs-envelope" aria-hidden="true"><span class="rs-envelope-paper">Кілька слів.<br>Тільки для тебе.</span><span class="rs-envelope-flap"></span><span class="rs-envelope-front"></span><span class="rs-seal">${escapeHtml(Array.from(d.recipient || "L")[0])}</span></span>
         </button>
-        <div class="preview-note" id="envelopeNote">${escapeHtml(d.envelopeHint || "відкрий, це тобі")}</div>
+        <p class="rs-description" id="envelopeNote">${escapeHtml(d.envelopeHint || "Торкнись конверта, щоб відкрити")}</p>
       </div>`;
 
     $("#envBtn").onclick = ()=>{
       const btn = $("#envBtn");
-      const envelope = btn?.querySelector(".recipient-envelope");
+      const envelope = btn?.querySelector(".rs-envelope");
       if(!btn || !envelope || btn.dataset.opening === "1") return;
 
       btn.dataset.opening = "1";
@@ -10870,48 +10885,49 @@ function renderStory(){
       if(note) note.textContent = "відкриваємо…";
 
       setTimeout(()=>{
+        if(state.storyStep!==2 || !btn.isConnected) return;
         state.storyStep = 3;
         renderStory();
-      }, window.LetterMagic?.reduced() ? 0 : 1050);
+      }, matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 750);
     };
     return;
   }
 
   if(state.storyStep === 3){
     root.innerHTML = `
-      <div class="letter-story-screen">
-        <div class="letter-story-scroll">
-          ${previewLetter(d, true)}
+      <div class="rs-reading">
+        <div class="rs-paper-wrap">
+          ${recipientLetterMarkup(d)}
         </div>
-        <div class="letter-story-action">
-          <button class="big-button" id="toChoicesBtn">${escapeHtml(d.choiceTitle || "Що будемо робити?")}</button>
+        <div class="rs-actions">
+          <button class="rs-button" id="toChoicesBtn">${escapeHtml(d.choiceTitle || "Що будемо робити?")}</button>
         </div>
       </div>`;
     hydrateWordPortraits(root, d);
-    $("#toChoicesBtn").onclick = ()=>{ state.storyStep = 4; renderStory(); };
+    $("#toChoicesBtn").onclick = ()=>{ state.storyStep = d.choices.length ? 4 : 5; renderStory(); };
     return;
   }
 
   if(state.storyStep === 4){
     root.innerHTML = `
-      <div class="recipient-choice-shell">
-        <div class="recipient-choice-kicker">Останній маленький вибір</div>
-        <h4>${escapeHtml(d.choiceTitle || "Що будемо робити?")}</h4>
-        <p>Обери один варіант — він одразу з’явиться у фіналі.</p>
-        <div class="recipient-choice-list">
+      <div class="rs-choices">
+        <div class="rs-eyebrow">Останній маленький вибір</div>
+        <h2 class="rs-heading">${escapeHtml(d.choiceTitle || "Що будемо робити?")}</h2>
+        <p class="rs-description">Обери один варіант — він одразу з’явиться у фіналі.</p>
+        <div class="rs-choice-list">
           ${(d.choices || []).map((c, idx)=>`
-            <button class="choice-card recipient-choice-card" data-idx="${idx}">
-              <div class="emo">${escapeHtml(c.emoji)}</div>
-              <div class="recipient-choice-copy">
-                <div class="main">${escapeHtml(c.title)}</div>
-                ${c.subtitle ? `<div class="sub">${escapeHtml(c.subtitle)}</div>` : ""}
+            <button class="rs-choice" data-idx="${idx}">
+              <div class="rs-emoji">${escapeHtml(c.emoji)}</div>
+              <div class="rs-choice-copy">
+                <div class="rs-choice-title">${escapeHtml(c.title)}</div>
+                ${c.subtitle ? `<div class="rs-choice-sub">${escapeHtml(c.subtitle)}</div>` : ""}
               </div>
-              <div class="recipient-choice-arrow">›</div>
+              <div class="rs-choice-arrow">›</div>
             </button>
           `).join("")}
         </div>
       </div>`;
-    $$(".choice-card", root).forEach(btn=>{
+    $(".rs-choice", root).forEach(btn=>{
       btn.onclick = ()=>{
         d.finalChoiceIndex = +btn.dataset.idx;
         state.storyStep = 5;
@@ -10922,42 +10938,42 @@ function renderStory(){
   }
 
   if(state.storyStep === 5){
-    const choice = (d.choices || [])[d.finalChoiceIndex] || {emoji:"❤", title:"Виходимо", subtitle:""};
+    const choice = (d.choices || [])[d.finalChoiceIndex] || {emoji:"♡", title:"Дякую, що прочитали", subtitle:""};
     root.innerHTML = `
-      <div class="recipient-final-shell">
+      <div class="rs-final">
         ${mediaMarkup(d, "final")}
-        ${d.finalCaption ? `<div class="recipient-final-caption">${escapeHtml(d.finalCaption)}</div>` : ""}
-        <div class="final-card recipient-final-card">
-          <div class="recipient-final-heading">
-            <div class="line1">${escapeHtml(d.finalTitle || "Домовились")}</div>
-            ${d.finalDate ? `<div class="time">${escapeHtml(d.finalDate)}</div>` : ``}
+        ${d.finalCaption ? `<div class="rs-eyebrow">${escapeHtml(d.finalCaption)}</div>` : ""}
+        <div class="rs-final-card">
+          <div class="rs-final-heading">
+            <div class="rs-final-title">${escapeHtml(d.finalTitle || "Домовились")}</div>
+            ${d.finalDate ? `<div class="rs-final-date">${escapeHtml(d.finalDate)}</div>` : ``}
           </div>
 
-          <div class="recipient-selected-choice">
-            <span class="recipient-selected-emoji">${escapeHtml(choice.emoji)}</span>
+          <div class="rs-selected">
+            <span class="rs-emoji">${escapeHtml(choice.emoji)}</span>
             <span>
               <strong>${escapeHtml(choice.title)}</strong>
               ${choice.subtitle ? `<small>${escapeHtml(choice.subtitle)}</small>` : ""}
             </span>
           </div>
 
-          ${d.finalTime ? `<div class="recipient-final-time">${escapeHtml(d.finalTime)}</div>` : ``}
-          ${d.finalNote ? `<div class="recipient-final-note">${escapeHtml(d.finalNote)}</div>` : ``}
+          ${d.finalTime ? `<div class="rs-final-time">${escapeHtml(d.finalTime)}</div>` : ``}
+          ${d.finalNote ? `<div class="rs-final-note">${escapeHtml(d.finalNote)}</div>` : ``}
         </div>
 
-        <div class="recipient-share-zone">
-          <div class="recipient-share-ready">
+        <div class="rs-share">
+          <div class="rs-share-note">
             <span>✓</span>
             <div>
               <strong>Вибір уже враховано</strong>
-              <small>У картинку для поширення підставлено «${escapeHtml(choice.title)}».</small>
+              <small>Надішли відповідь автору: «${escapeHtml(choice.title)}».</small>
             </div>
           </div>
-          <button class="big-button recipient-share-button" id="recipientShareBtn">Поділитися вибором</button>
-          <div id="recipientShareStatus" class="recipient-share-status"></div>
+          <button class="rs-button" id="recipientShareBtn">Поділитися вибором</button>
+          <div class="rs-error" id="recipientShareStatus" role="status" class="recipient-share-status"></div>
         </div>
 
-        <button class="recipient-restart" id="restartBtn">Переглянути ще раз</button>
+        <button class="rs-restart" id="restartBtn">Переглянути ще раз</button>
       </div>`;
 
     hydrateWordPortraits(root, d);
