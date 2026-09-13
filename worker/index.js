@@ -73,7 +73,7 @@ async function health(env) {
       ok: true,
       db: true,
       stories: Number(row?.count || 0),
-      version: "2.1.5"
+      version: "2.2.0"
     });
   } catch (error) {
     return json({
@@ -229,16 +229,9 @@ async function regenerateStoryUrl(request, id, env) {
 }
 
 
-const recipientDemoHead = `<link rel="stylesheet" href="/recipient.css?v=2160">`;
+const recipientHead = `<link rel="stylesheet" href="/recipient.css?v=2.2.0">`;
 
-const developerCreditStyles = `<style id="developer-credit-styles">
-  .developer-credit-footer{padding:12px max(16px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));text-align:center}
-  .developer-credit{display:inline-flex;align-items:center;justify-content:center;min-height:44px;max-width:100%;padding:8px 12px;border:0;border-radius:8px;background:transparent;color:#8b7481;font:400 11px/1.5 system-ui,sans-serif;letter-spacing:.02em;cursor:pointer}
-  .developer-credit:focus-visible{outline:2px solid #a46ac4;outline-offset:2px}
-  .developer-credit:is(:hover,:active,:focus) span{color:#b85b9c}
-  @media(max-width:900px){.developer-credit-footer{padding-bottom:calc(120px + env(safe-area-inset-bottom,0px))}}
-  @media(min-width:901px){body:not(.story-open):not(.mw-create-active) .developer-credit-footer{margin-left:220px}}
-</style>`;
+const developerCreditStyles = `<style id="developer-credit-styles">/* Credit rules live in app.css. */</style>`;
 
 const developerCredit = `<footer class="developer-credit-footer"><button class="developer-credit" type="button" onclick="this.focus()"><span>Developed by Hodynnyk 2026</span></button></footer>`;
 
@@ -251,7 +244,7 @@ async function serveAssets(request, env) {
   return new HTMLRewriter()
     .on("head", { element: element => {
       element.append(developerCreditStyles,{html:true});
-      element.append(recipientDemoHead,{html:true});
+      element.append(recipientHead,{html:true});
     }})
     .on("body", { element: element => element.append(developerCredit,{html:true}) })
     .transform(response);

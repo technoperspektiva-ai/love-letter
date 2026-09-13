@@ -1,5 +1,5 @@
-const CACHE="love-letter-2.3-recipient-216";
-const CORE=["/","/magic.css?v=3","/magic.js?v=3","/recipient.css?v=2160","/manifest.webmanifest","/icons/icon-192.png","/icons/icon-512.png","/icons/icon-maskable-512.png","/icons/apple-touch-icon.png"];
+const CACHE="love-letter-2.2.0";
+const CORE=["/","/legacy.css?v=2.2.0","/app.css?v=2.2.0","/magic.css?v=2.2.0","/magic.js?v=2.2.0","/recipient.css?v=2.2.0","/manifest.webmanifest?v=2.2.0","/brand/logo-main.png?v=2.2.0","/icons/icon-192.png?v=2.2.0","/icons/icon-512.png?v=2.2.0","/icons/icon-maskable-512.png?v=2.2.0","/icons/apple-touch-icon.png?v=2.2.0"];
 
 self.addEventListener("install",event=>{
   event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE)).then(()=>self.skipWaiting()));
@@ -57,7 +57,7 @@ self.addEventListener("fetch",event=>{
     url.pathname==="/manifest.webmanifest" ||
     url.pathname==="/magic.css" ||
     url.pathname==="/magic.js" ||
-    url.pathname==="/recipient.css"
+    url.pathname==="/recipient.css" || url.pathname==="/app.css" || url.pathname==="/legacy.css" || url.pathname.startsWith("/brand/")
   ){
     event.respondWith(cacheFirst(request));
   }

@@ -1,5 +1,4 @@
 /* Love Letter: a warm, tactile motion system, built with CSS and small DOM bursts. */
-:root { --magic-ink:#572039; --magic-muted:#896c7c; --magic-pink:#e3a5bc; }
 .magic-home { max-width:1240px; margin:auto; color:var(--magic-ink); }
 .magic-home button, .magic-dialog button, .magic-review button { font-family:inherit; }
 .magic-home button:focus-visible, .magic-dialog button:focus-visible, .magic-review button:focus-visible,
@@ -9,7 +8,7 @@
 .magic-eyebrow { display:block; font:600 10px/1.7 system-ui,sans-serif; letter-spacing:.17em; color:#9c647b; }
 .magic-hero-copy { position:relative; z-index:2; animation:magic-arrive 850ms both; }
 .magic-hero h1 { margin:22px 0; color:#532039; font:500 clamp(48px,5.1vw,76px)/.99 Georgia,serif; letter-spacing:-.055em; }
-.magic-hero h1 em { display:inline-block; font-weight:400; color:#ac557c; background:linear-gradient(110deg,#9b416c 10%,#d78daa 40%,#955c9e 65%,#9b416c 90%); background-size:220% auto; background-clip:text; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:magic-ink 7s ease-in-out infinite alternate; padding:0 8px 10px 0; }
+.magic-hero h1 em { display:inline-block; font-weight:400; color:var(--rose); padding:0 8px 10px 0; }
 .magic-hero-copy>p { max-width:360px; color:#846a76; font-size:14px; line-height:1.85; }
 .magic-hero-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:28px; align-items:center; }
 .magic-primary { position:relative; overflow:hidden; display:inline-flex; align-items:center; justify-content:center; gap:24px; min-height:54px; padding:16px 25px; border:1px solid #7c3556; border-radius:18px; background:linear-gradient(120deg,#833554,#561a37); color:#fff4f8; font-size:14px; font-weight:650; box-shadow:0 12px 28px #75355125; cursor:pointer; transition:transform 220ms,box-shadow 220ms; }
@@ -58,8 +57,7 @@
 .magic-particles i { position:absolute; width:6px; height:6px; background:var(--spark); clip-path:polygon(50% 0,62% 36%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%); animation:magic-spark 1s cubic-bezier(.12,.65,.35,1) both; }
 .magic-save-status { text-align:center; font:11px/1.6 system-ui,sans-serif; color:#907383; margin:16px 0 0; }
 .magic-return-review { display:block; min-height:44px; margin:12px auto; padding:10px 15px; border:0; background:none; color:#8d4c70; font-size:12px; cursor:pointer; }
-.magic-review-paper { margin:20px 0; }.magic-review-paper .paper { box-shadow:0 12px 40px #6b304410; }
-.magic-review .letter-frame { width:100%; max-width:100%; }.magic-review .paper { width:100%; max-width:100%; }
+.magic-review-paper { margin:20px 0; }
 .magic-review>.magic-secondary { display:flex; margin:0 auto 12px; }
 .magic-customize { border-top:1px solid #ebdde2; margin-top:24px; padding-top:18px; }
 .magic-customize summary { cursor:pointer; font-size:13px; color:#713e58; min-height:44px; padding:8px 0; }
@@ -69,27 +67,16 @@
 .magic-font-options .mw-letter-font-head { display:none; }
 .magic-customize-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; padding-top:12px; }
 .magic-customize-grid button { min-height:48px; padding:10px; border:1px solid #e6d9e0; border-radius:12px; background:#fffaf8; color:#84546e; font-size:12px; cursor:pointer; }
-.magic-link-note { font:11px/1.7 system-ui,sans-serif!important; color:#967d89!important; max-width:450px; margin:20px auto!important; }
+.magic-link-note { font:11px/1.7 system-ui,sans-serif; color:#967d89; max-width:450px; margin:20px auto; }
 .magic-dialog { width:min(580px,calc(100% - 28px)); max-height:calc(100dvh - 40px); padding:46px 28px 28px; border:1px solid #ead6dd; border-radius:28px; color:#67344b; background:radial-gradient(ellipse at 50% 15%,#f7e1e6,transparent 70%),#fff8f1; box-shadow:0 30px 100px #33112650; text-align:center; overflow:auto; }
 .magic-dialog[open] { animation:magic-arrive 400ms both; }.magic-dialog::backdrop { background:#27132175; backdrop-filter:blur(7px); }
 .magic-dialog-close { position:absolute; right:12px; top:8px; width:44px; height:44px; border:0; border-radius:50%; color:#916779; background:transparent; font:28px Georgia,serif; cursor:pointer; }
-.magic-dialog-stage { padding:30px 0 0; }.magic-dialog .letter-frame { width:100%; max-width:100%; }.magic-dialog .paper { width:100%; max-width:100%; text-align:left; }
-.magic-dialog .paper .msg { white-space:pre-wrap; }.magic-dialog .letter-enter { animation:magic-paper 900ms cubic-bezier(.16,1,.3,1) both; }
+.magic-dialog-stage { padding:30px 0 0; }
 .magic-demo-envelope { position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; width:min(300px,100%); min-height:210px; padding:25px; margin:50px auto 65px; border:1px solid #ddb0bc; border-radius:12px; background:linear-gradient(150deg,#efcad0,#e2b0bd); color:#865168; box-shadow:0 20px 35px #73394822; cursor:pointer; transform:rotate(-4deg); transition:transform 600ms,opacity 600ms; }
 .magic-demo-envelope::before { content:""; position:absolute; inset:0; background:#e7b9c4; clip-path:polygon(0 0,100% 0,50% 55%); border-radius:12px; transform-origin:top; transition:transform 500ms; }
 .magic-demo-envelope>span { z-index:1; display:grid; place-items:center; width:54px; height:54px; border-radius:50%; color:#f4d4b0; background:#8a3d5e; font-size:27px; box-shadow:0 4px 10px #70294b30; }
 .magic-demo-envelope strong { margin-top:20px; font:italic 20px Georgia,serif; z-index:1; }.magic-demo-envelope small { position:absolute; bottom:-35px; font:11px system-ui,sans-serif; }
 .magic-demo-envelope.is-opening::before { transform:rotateX(180deg); }.magic-demo-envelope.is-opening { transform:translateY(35px) scale(1.06); opacity:0; }
-#storyStage .stage-center>h2 { animation:magic-arrive 900ms both; }
-#storyStage .stage-center>.light-sub { animation:magic-arrive 700ms both; }
-#storyStage .recipient-envelope { filter:drop-shadow(0 0 25px #e4aac225); }
-#storyStage .recipient-envelope:not(.is-opening) .wax { animation:magic-seal-glow 4s ease-in-out infinite; }
-#storyStage .letter-enter { animation:magic-paper 1000ms cubic-bezier(.16,1,.3,1) both; }
-#storyStage .letter-enter .title { animation:magic-arrive 700ms 100ms backwards; }
-#storyStage .letter-enter .msg { animation:magic-arrive 700ms 180ms backwards; }
-#storyStage .letter-enter .sign { animation:magic-arrive 700ms 280ms backwards; }
-#storyStage .recipient-choice-card { animation:magic-arrive 650ms both; }
-#storyStage .recipient-choice-card:nth-child(2) { animation-delay:80ms; }#storyStage .recipient-choice-card:nth-child(3) { animation-delay:160ms; }#storyStage .recipient-choice-card:nth-child(4) { animation-delay:240ms; }
 .ma-ready-stage { animation:magic-arrive 950ms both; }.ma-ready-wax { animation:magic-seal-glow 4s ease-in-out infinite; }
 body:not(.mw-create-active) .developer-credit-footer { padding-top:4px; }
 @media (hover:hover) and (pointer:fine) {
@@ -99,10 +86,10 @@ body:not(.mw-create-active) .developer-credit-footer { padding-top:4px; }
   .magic-art:hover .magic-envelope-note { translate:0 -12px; }
 }
 .magic-primary:active,.magic-occasion:active { transform:scale(.98); }
-@media (min-width:901px) { #maScreen:has(.magic-home) { padding-top:10px!important; padding-bottom:20px!important; } }
-@media (max-width:1100px) and (min-width:901px) { .magic-hero { padding:25px 8px; }.magic-envelope { scale:.8; }.magic-orbit { scale:.8; }.magic-hero h1 { font-size:52px; }.magic-art { height:410px; } }
-@media (max-width:900px) {
-  #maScreen:has(.magic-home) { padding-top:4px!important; padding-bottom:16px!important; }
+@media (min-width:1000px) { #maScreen:has(.magic-home) { padding-top:10px; padding-bottom:20px; } }
+@media (max-width:1100px) and (min-width:1000px) { .magic-hero { padding:25px 8px; }.magic-envelope { scale:.8; }.magic-orbit { scale:.8; }.magic-hero h1 { font-size:52px; }.magic-art { height:410px; } }
+@media (max-width:999px) {
+  #maScreen:has(.magic-home) { padding-top:4px; padding-bottom:16px; }
   .magic-hero { grid-template-columns:1fr; padding:26px 10px 0; gap:0; min-height:0; }
   .magic-hero-copy { text-align:center; }.magic-hero .magic-eyebrow { font-size:8px; letter-spacing:.14em; }
   .magic-hero h1 { font-size:clamp(47px,11vw,68px); line-height:1.02; margin:19px 0 13px; }

@@ -5,7 +5,7 @@
   let layer;
   let observer;
 
-  function burst(target, count = 10) {
+  function burst(target, count = 4) {
     if (motion.matches || document.hidden || !target) return;
     const box = target.getBoundingClientRect();
     if (!layer?.isConnected) {
@@ -15,12 +15,12 @@
       document.body.append(layer);
     }
     // A hard cap keeps repeated taps inexpensive on mobile devices.
-    count = Math.min(count, 60 - layer.childElementCount);
+    count = Math.min(count, 8, 18 - layer.childElementCount);
     for (let i = 0; i < count; i++) {
       const particle = document.createElement('i');
       const angle = Math.random() * Math.PI * 2;
-      const distance = 35 + Math.random() * (count > 15 ? 190 : 65);
-      particle.style.cssText = `left:${box.x + box.width / 2}px;top:${box.y + box.height / 2}px;--dx:${Math.cos(angle) * distance}px;--dy:${Math.sin(angle) * distance - 40}px;--spin:${Math.random() * 240}deg;--spark:${['#edb88c', '#dd8aaf', '#bba5ee', '#f6dca7'][i % 4]};animation-duration:${650 + Math.random() * 450}ms`;
+      const distance = 20 + Math.random() * 45;
+      particle.style.cssText = `left:${box.x + box.width / 2}px;top:${box.y + box.height / 2}px;--dx:${Math.cos(angle) * distance}px;--dy:${Math.sin(angle) * distance - 40}px;--spin:${Math.random() * 240}deg;--spark:${['#edb88c', '#dd8aaf', '#fff5dc', '#f6dca7'][i % 4]};animation-duration:${650 + Math.random() * 450}ms`;
       layer.append(particle);
       particle.addEventListener('animationend', () => particle.remove(), { once: true });
       setTimeout(() => particle.remove(), 1300);
@@ -37,7 +37,7 @@
         observer.unobserve(entry.target);
       });
     }, { threshold: 0.08 });
-    root.querySelectorAll('.magic-occasion, .magic-section-heading, .magic-draft, .home-letter-card, .magic-review-paper').forEach((el, i) => {
+    root.querySelectorAll('.magic-occasion, .magic-section-heading, .magic-draft, .ma-letter-card, .magic-review-paper').forEach((el, i) => {
       el.style.setProperty('--reveal-delay', `${Math.min(i % 3, 2) * 80}ms`);
       observer.observe(el);
     });
@@ -100,14 +100,16 @@
 
   window.LetterMagic = {
     reduced: () => motion.matches, burst, reveal, demo, preview,
-    celebrate: () => requestAnimationFrame(() => burst(document.querySelector('.ma-ready-wax'), 38))
+    celebrate: () => requestAnimationFrame(() => burst(document.querySelector('.ma-ready-wax'), 6))
   };
 
   document.addEventListener('click', event => {
-    const button = event.target.closest?.('.magic-primary, .magic-occasion, .mw-contact-card, #mwNextBtn, .recipient-choice-card');
+    const button = event.target.closest?.('.magic-primary, .magic-occasion, .mw-contact-card, #mwNextBtn, .rs-choice');
     if (button && !button.disabled) burst(button);
   }, true);
 
+  const offline=document.createElement('div');offline.className='offline-status';offline.setAttribute('role','status');offline.textContent='Ти офлайн. Пиши далі — чернетка залишиться на цьому пристрої.';document.body.append(offline);
+  const updateOnline=()=>offline.hidden=navigator.onLine;updateOnline();addEventListener('online',updateOnline);addEventListener('offline',updateOnline);
   let frame = 0;
   document.addEventListener('pointermove', event => {
     if (!finePointer.matches || motion.matches) return;
